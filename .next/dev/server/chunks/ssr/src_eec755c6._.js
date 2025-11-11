@@ -19,6 +19,7 @@ function QuickViewModal({ product, isOpen, onClose }) {
     const { addToCart } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCart"])();
     const [selectedImage, setSelectedImage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
     const [quantity, setQuantity] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(1);
+    const [isAdding, setIsAdding] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (product) {
             setSelectedImage(product.image);
@@ -43,35 +44,39 @@ function QuickViewModal({ product, isOpen, onClose }) {
         isOpen,
         onClose
     ]);
-    if (!isOpen || !product) return null;
-    const handleAddToCart = ()=>{
+    const handleAddToCart = async ()=>{
+        setIsAdding(true);
+        // Simulate API call delay
+        await new Promise((resolve)=>setTimeout(resolve, 600));
         for(let i = 0; i < quantity; i++){
             addToCart(product);
         }
+        setIsAdding(false);
         onClose();
     };
+    if (!isOpen || !product) return null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "fixed inset-0 z-50 overflow-hidden",
+        className: "fixed inset-0 z-50 overflow-y-auto",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm",
+                className: "fixed inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity duration-300",
                 onClick: onClose
             }, void 0, false, {
                 fileName: "[project]/src/components/QuickViewModal.js",
-                lineNumber: 47,
+                lineNumber: 55,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex items-center justify-center min-h-screen p-4",
+                className: "flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-fade-in-up",
+                    className: "relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl max-w-6xl w-full mx-auto overflow-hidden transform transition-all duration-300 scale-95 sm:scale-100 group",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: onClose,
-                            className: "absolute top-4 right-4 z-10 w-8 h-8 bg-white/80 dark:bg-slate-700/80 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors",
+                            className: "absolute top-6 right-6 z-20 w-10 h-10 bg-white/90 dark:bg-slate-700/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-slate-600 hover:scale-110 transition-all duration-300 shadow-lg border border-slate-200 dark:border-slate-600",
                             "aria-label": "Close modal",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                className: "w-5 h-5",
+                                className: "w-5 h-5 text-slate-700 dark:text-slate-300",
                                 fill: "none",
                                 stroke: "currentColor",
                                 viewBox: "0 0 24 24",
@@ -82,278 +87,462 @@ function QuickViewModal({ product, isOpen, onClose }) {
                                     d: "M6 18L18 6M6 6l12 12"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                    lineNumber: 62,
+                                    lineNumber: 71,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/QuickViewModal.js",
-                                lineNumber: 61,
+                                lineNumber: 70,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/QuickViewModal.js",
-                            lineNumber: 56,
+                            lineNumber: 65,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 lg:grid-cols-2",
+                            className: "grid grid-cols-1 xl:grid-cols-2 min-h-[600px]",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-6",
+                                    className: "relative p-8 bg-linear-to-br from-slate-50 to-white dark:from-slate-700 dark:to-slate-800",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "relative aspect-square mb-4",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                src: selectedImage,
-                                                alt: product.name,
-                                                fill: true,
-                                                className: "object-cover rounded-xl"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/QuickViewModal.js",
-                                                lineNumber: 70,
-                                                columnNumber: 17
-                                            }, this)
-                                        }, void 0, false, {
+                                            className: "relative aspect-square mb-6 rounded-2xl overflow-hidden group",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                    src: selectedImage,
+                                                    alt: product.name,
+                                                    fill: true,
+                                                    className: "object-cover transition-transform duration-700 group-hover:scale-105",
+                                                    priority: true
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                    lineNumber: 80,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    onClick: ()=>{
+                                                        const currentIndex = product.thumbnails.indexOf(selectedImage);
+                                                        const prevIndex = currentIndex > 0 ? currentIndex - 1 : product.thumbnails.length - 1;
+                                                        setSelectedImage(product.thumbnails[prevIndex]);
+                                                    },
+                                                    className: "absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                        className: "w-5 h-5 text-slate-700 dark:text-slate-300",
+                                                        fill: "none",
+                                                        stroke: "currentColor",
+                                                        viewBox: "0 0 24 24",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                            strokeLinecap: "round",
+                                                            strokeLinejoin: "round",
+                                                            strokeWidth: 2,
+                                                            d: "M15 19l-7-7 7-7"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                            lineNumber: 98,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/QuickViewModal.js",
+                                                        lineNumber: 97,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                    lineNumber: 89,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    onClick: ()=>{
+                                                        const currentIndex = product.thumbnails.indexOf(selectedImage);
+                                                        const nextIndex = currentIndex < product.thumbnails.length - 1 ? currentIndex + 1 : 0;
+                                                        setSelectedImage(product.thumbnails[nextIndex]);
+                                                    },
+                                                    className: "absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                        className: "w-5 h-5 text-slate-700 dark:text-slate-300",
+                                                        fill: "none",
+                                                        stroke: "currentColor",
+                                                        viewBox: "0 0 24 24",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                            strokeLinecap: "round",
+                                                            strokeLinejoin: "round",
+                                                            strokeWidth: 2,
+                                                            d: "M9 5l7 7-7 7"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                            lineNumber: 111,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/QuickViewModal.js",
+                                                        lineNumber: 110,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                    lineNumber: 102,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                            lineNumber: 69,
+                                            lineNumber: 79,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex space-x-2 overflow-x-auto",
+                                            className: "flex justify-center space-x-3 overflow-x-auto py-2",
                                             children: product.thumbnails.map((thumb, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: ()=>setSelectedImage(thumb),
-                                                    className: `shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${selectedImage === thumb ? 'border-blue-500' : 'border-gray-200 dark:border-slate-600 hover:border-gray-300 dark:hover:border-slate-500'}`,
+                                                    className: `shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${selectedImage === thumb ? 'border-blue-500 shadow-lg shadow-blue-500/25 scale-105' : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500'}`,
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                                         src: thumb,
-                                                        alt: `${product.name} ${index + 1}`,
+                                                        alt: `${product.name} view ${index + 1}`,
                                                         width: 64,
                                                         height: 64,
                                                         className: "w-full h-full object-cover"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/QuickViewModal.js",
-                                                        lineNumber: 87,
+                                                        lineNumber: 127,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, index, false, {
                                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 79,
+                                                    lineNumber: 119,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                            lineNumber: 77,
+                                            lineNumber: 117,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                    lineNumber: 68,
+                                    lineNumber: 77,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-6 flex flex-col",
+                                    className: "p-8 flex flex-col justify-between",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex-1",
+                                            className: "space-y-6",
                                             children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                    className: "text-2xl font-bold text-gray-900 dark:text-white mb-2",
-                                                    children: product.name
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 102,
-                                                    columnNumber: 17
-                                                }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center mb-4",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "flex text-yellow-400 mr-2",
-                                                            children: [
-                                                                ...Array(5)
-                                                            ].map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                                    className: "w-4 h-4 fill-current",
-                                                                    viewBox: "0 0 24 24",
-                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                                        d: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/components/QuickViewModal.js",
-                                                                        lineNumber: 109,
-                                                                        columnNumber: 25
-                                                                    }, this)
-                                                                }, i, false, {
-                                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                                    lineNumber: 108,
-                                                                    columnNumber: 23
-                                                                }, this))
+                                                            className: "flex items-start justify-between mb-3",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                className: "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
+                                                                children: product.category
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/QuickViewModal.js",
+                                                                lineNumber: 145,
+                                                                columnNumber: 21
+                                                            }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                                            lineNumber: 106,
+                                                            lineNumber: 144,
                                                             columnNumber: 19
                                                         }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "text-sm text-gray-500 dark:text-gray-400",
-                                                            children: "(4.5)"
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                                                            className: "text-3xl font-bold text-slate-900 dark:text-white mb-3 leading-tight",
+                                                            children: product.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                                            lineNumber: 113,
-                                                            columnNumber: 19
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 105,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4",
-                                                    children: [
-                                                        "$",
-                                                        product.price
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 117,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "mb-4",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "inline-block bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm",
-                                                        children: product.category
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/components/QuickViewModal.js",
-                                                        lineNumber: 123,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 122,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-gray-600 dark:text-gray-300 mb-6 leading-relaxed",
-                                                    children: product.description
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 129,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "mb-6",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
-                                                            children: "Quantity"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/QuickViewModal.js",
-                                                            lineNumber: 135,
+                                                            lineNumber: 150,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "flex items-center space-x-3",
+                                                            className: "flex items-center justify-between mb-4",
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                    onClick: ()=>setQuantity(Math.max(1, quantity - 1)),
-                                                                    className: "w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors",
-                                                                    children: "-"
-                                                                }, void 0, false, {
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "flex items-center space-x-2",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                            className: "flex text-yellow-400",
+                                                                            children: [
+                                                                                ...Array(5)
+                                                                            ].map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                                    className: "w-5 h-5 fill-current",
+                                                                                    viewBox: "0 0 24 24",
+                                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                                        d: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                                                                                    }, void 0, false, {
+                                                                                        fileName: "[project]/src/components/QuickViewModal.js",
+                                                                                        lineNumber: 160,
+                                                                                        columnNumber: 29
+                                                                                    }, this)
+                                                                                }, i, false, {
+                                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                                    lineNumber: 159,
+                                                                                    columnNumber: 27
+                                                                                }, this))
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                                            lineNumber: 157,
+                                                                            columnNumber: 23
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "text-sm text-slate-500 dark:text-slate-400",
+                                                                            children: "4.8 (128 reviews)"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                                            lineNumber: 164,
+                                                                            columnNumber: 23
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                                                    lineNumber: 139,
+                                                                    lineNumber: 156,
                                                                     columnNumber: 21
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "text-xl font-semibold w-12 text-center",
-                                                                    children: quantity
-                                                                }, void 0, false, {
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "text-4xl font-black text-slate-900 dark:text-white",
+                                                                    children: [
+                                                                        "$",
+                                                                        product.price
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                                                    lineNumber: 145,
-                                                                    columnNumber: 21
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                    onClick: ()=>setQuantity(quantity + 1),
-                                                                    className: "w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors",
-                                                                    children: "+"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/components/QuickViewModal.js",
-                                                                    lineNumber: 146,
+                                                                    lineNumber: 167,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                                            lineNumber: 138,
+                                                            lineNumber: 155,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 134,
+                                                    lineNumber: 143,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                            className: "text-lg font-semibold text-slate-900 dark:text-white mb-3",
+                                                            children: "Description"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                            lineNumber: 175,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                            className: "text-slate-600 dark:text-slate-300 leading-relaxed",
+                                                            children: product.description
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                            lineNumber: 176,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                    lineNumber: 174,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-4",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                            className: "block text-sm font-semibold text-slate-900 dark:text-white mb-3",
+                                                            children: "Quantity"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                            lineNumber: 183,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "flex items-center space-x-4",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                    onClick: ()=>setQuantity(Math.max(1, quantity - 1)),
+                                                                    className: "w-12 h-12 bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 rounded-xl flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-500 transition-colors font-semibold text-slate-700 dark:text-slate-300",
+                                                                    children: "−"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                    lineNumber: 187,
+                                                                    columnNumber: 21
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    className: "text-2xl font-bold text-slate-900 dark:text-white w-16 text-center",
+                                                                    children: quantity
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                    lineNumber: 194,
+                                                                    columnNumber: 21
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                    onClick: ()=>setQuantity(quantity + 1),
+                                                                    className: "w-12 h-12 bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 rounded-xl flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-500 transition-colors font-semibold text-slate-700 dark:text-slate-300",
+                                                                    children: "+"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                    lineNumber: 198,
+                                                                    columnNumber: 21
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "ml-auto text-lg font-semibold text-slate-600 dark:text-slate-400",
+                                                                    children: [
+                                                                        "Total: ",
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "text-blue-600 dark:text-blue-400",
+                                                                            children: [
+                                                                                "$",
+                                                                                (product.price * quantity).toFixed(2)
+                                                                            ]
+                                                                        }, void 0, true, {
+                                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                                            lineNumber: 206,
+                                                                            columnNumber: 30
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                    lineNumber: 205,
+                                                                    columnNumber: 21
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/components/QuickViewModal.js",
+                                                            lineNumber: 186,
+                                                            columnNumber: 19
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                    lineNumber: 182,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                            lineNumber: 101,
+                                            lineNumber: 141,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "space-y-3",
+                                            className: "space-y-4 pt-6",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: handleAddToCart,
-                                                    className: "w-full bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-md hover:shadow-lg transform hover:scale-105",
-                                                    children: [
-                                                        "Add to Cart - $",
-                                                        (product.price * quantity).toFixed(2)
-                                                    ]
-                                                }, void 0, true, {
+                                                    disabled: isAdding,
+                                                    className: `w-full py-4 px-6 rounded-2xl font-bold text-white transition-all duration-300 flex items-center justify-center space-x-3 ${isAdding ? 'bg-green-600 scale-95' : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 hover:scale-105 active:scale-95'} shadow-lg hover:shadow-xl`,
+                                                    children: isAdding ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                className: "w-5 h-5 animate-spin",
+                                                                fill: "none",
+                                                                stroke: "currentColor",
+                                                                viewBox: "0 0 24 24",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round",
+                                                                    strokeWidth: 2,
+                                                                    d: "M5 13l4 4L19 7"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                    lineNumber: 225,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/QuickViewModal.js",
+                                                                lineNumber: 224,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                children: "Added to Cart!"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/QuickViewModal.js",
+                                                                lineNumber: 227,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                className: "w-5 h-5",
+                                                                fill: "none",
+                                                                stroke: "currentColor",
+                                                                viewBox: "0 0 24 24",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round",
+                                                                    strokeWidth: 2,
+                                                                    d: "M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/QuickViewModal.js",
+                                                                    lineNumber: 232,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/QuickViewModal.js",
+                                                                lineNumber: 231,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                children: [
+                                                                    "Add ",
+                                                                    quantity,
+                                                                    " to Cart - $",
+                                                                    (product.price * quantity).toFixed(2)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/QuickViewModal.js",
+                                                                lineNumber: 234,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true)
+                                                }, void 0, false, {
                                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 158,
+                                                    lineNumber: 214,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: onClose,
-                                                    className: "w-full bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 py-3 px-6 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors font-medium",
+                                                    className: "w-full py-3 px-6 border-2 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-2xl font-semibold hover:border-slate-300 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-300",
                                                     children: "Continue Shopping"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                                    lineNumber: 164,
+                                                    lineNumber: 239,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/QuickViewModal.js",
-                                            lineNumber: 157,
+                                            lineNumber: 213,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/QuickViewModal.js",
-                                    lineNumber: 100,
+                                    lineNumber: 140,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/QuickViewModal.js",
-                            lineNumber: 66,
+                            lineNumber: 75,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/QuickViewModal.js",
-                    lineNumber: 54,
+                    lineNumber: 62,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/QuickViewModal.js",
-                lineNumber: 53,
+                lineNumber: 61,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/QuickViewModal.js",
-        lineNumber: 45,
+        lineNumber: 53,
         columnNumber: 5
     }, this);
 }

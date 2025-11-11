@@ -1,7 +1,7 @@
-[00:00:00.701] Server  LOG      ✓ Ready in 438ms
-[00:00:17.616] Server  LOG      ○ Compiling /contact ...
-[00:00:18.801] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:18.983] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:00.774] Server  LOG      ✓ Ready in 493ms
+[00:00:05.263] Server  LOG      ○ Compiling /about ...
+[00:00:06.914] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:07.101] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -19,7 +19,7 @@ It can also happen if the client has a browser extension installed which messes 
         <ReplaySsrOnlyErrors>
         <DevRootHTTPAccessFallbackBoundary>
           <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/contact" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+            <HTTPAccessFallbackErrorBoundary pathname="/about" notFound={<NotAllowedRootHTTPFallbackError>} ...>
               <RedirectBoundary>
                 <RedirectErrorBoundary router={{...}}>
                   <Head>
@@ -37,3 +37,170 @@ It can also happen if the client has a browser extension installed which messes 
                         >
                   ...
 
+[00:01:58.668] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:02:07.403] Server  ERROR    ⨯ ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+
+
+[00:02:07.637] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:09.326] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:09.547] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:10.601] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:10.660] Server  ERROR    ⨯ ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+
+
+[00:02:11.261] Browser ERROR   uncaughtError: Error: ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+
+
+[00:02:11.405] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:11.624] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:13.501] Browser ERROR   ./src/app/shop/page.js:14:3
+Parsing ecmascript source code failed
+  12 |   'use client';
+  13 |
+> 14 |   import { useState, useEffect } from 'react';
+     |   ^^^^^^
+  15 |   import { useSearchParams } from 'next/navigation';
+  16 |   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  17 |   const searchParams = useSearchParams();
+
+'import', and 'export' cannot be used outside of module code
+[00:02:48.562] Server  LOG      ✓ Compiled in 446ms
+[00:02:49.098] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:49.295] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/shop" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.js">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-arp=""
+                        >
+                  ...
+
+[00:02:49.769] Browser WARN    Image with src "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:02:49.819] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:02:50.207] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:02:50.362] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:02:50.368] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:03:09.421] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400" 404
+[00:03:12.523] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:03:12.635] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:03:12.638] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:03:12.991] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:03:16.788] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400" 404

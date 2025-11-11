@@ -20,17 +20,18 @@ var _s = __turbopack_context__.k.signature();
 ;
 function QuickViewModal(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(74);
-    if ($[0] !== "b0816d30c7fb99656c109c0b3f91653d30f6551fba088f3345db8521552eee64") {
-        for(let $i = 0; $i < 74; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(110);
+    if ($[0] !== "d57d80e710b786508874adbe36817aec13391682a7d0bce087a71a3b4d357167") {
+        for(let $i = 0; $i < 110; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "b0816d30c7fb99656c109c0b3f91653d30f6551fba088f3345db8521552eee64";
+        $[0] = "d57d80e710b786508874adbe36817aec13391682a7d0bce087a71a3b4d357167";
     }
     const { product, isOpen, onClose } = t0;
     const { addToCart } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"])();
     const [selectedImage, setSelectedImage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [quantity, setQuantity] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
+    const [isAdding, setIsAdding] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     let t1;
     let t2;
     if ($[1] !== product) {
@@ -88,16 +89,16 @@ function QuickViewModal(t0) {
         t4 = $[7];
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t3, t4);
-    if (!isOpen || !product) {
-        return null;
-    }
     let t5;
     if ($[8] !== addToCart || $[9] !== onClose || $[10] !== product || $[11] !== quantity) {
         t5 = ({
-            "QuickViewModal[handleAddToCart]": ()=>{
+            "QuickViewModal[handleAddToCart]": async ()=>{
+                setIsAdding(true);
+                await new Promise(_temp);
                 for(let i = 0; i < quantity; i++){
                     addToCart(product);
                 }
+                setIsAdding(false);
                 onClose();
             }
         })["QuickViewModal[handleAddToCart]"];
@@ -110,14 +111,17 @@ function QuickViewModal(t0) {
         t5 = $[12];
     }
     const handleAddToCart = t5;
+    if (!isOpen || !product) {
+        return null;
+    }
     let t6;
     if ($[13] !== onClose) {
         t6 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm",
+            className: "fixed inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity duration-300",
             onClick: onClose
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 101,
+            lineNumber: 105,
             columnNumber: 10
         }, this);
         $[13] = onClose;
@@ -128,7 +132,7 @@ function QuickViewModal(t0) {
     let t7;
     if ($[15] === Symbol.for("react.memo_cache_sentinel")) {
         t7 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-            className: "w-5 h-5",
+            className: "w-5 h-5 text-slate-700 dark:text-slate-300",
             fill: "none",
             stroke: "currentColor",
             viewBox: "0 0 24 24",
@@ -139,12 +143,12 @@ function QuickViewModal(t0) {
                 d: "M6 18L18 6M6 6l12 12"
             }, void 0, false, {
                 fileName: "[project]/src/components/QuickViewModal.js",
-                lineNumber: 109,
-                columnNumber: 89
+                lineNumber: 113,
+                columnNumber: 124
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 109,
+            lineNumber: 113,
             columnNumber: 10
         }, this);
         $[15] = t7;
@@ -155,12 +159,12 @@ function QuickViewModal(t0) {
     if ($[16] !== onClose) {
         t8 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
             onClick: onClose,
-            className: "absolute top-4 right-4 z-10 w-8 h-8 bg-white/80 dark:bg-slate-700/80 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-slate-700 transition-colors",
+            className: "absolute top-6 right-6 z-20 w-10 h-10 bg-white/90 dark:bg-slate-700/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-slate-600 hover:scale-110 transition-all duration-300 shadow-lg border border-slate-200 dark:border-slate-600",
             "aria-label": "Close modal",
             children: t7
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 116,
+            lineNumber: 120,
             columnNumber: 10
         }, this);
         $[16] = onClose;
@@ -170,21 +174,15 @@ function QuickViewModal(t0) {
     }
     let t9;
     if ($[18] !== product.name || $[19] !== selectedImage) {
-        t9 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "relative aspect-square mb-4",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                src: selectedImage,
-                alt: product.name,
-                fill: true,
-                className: "object-cover rounded-xl"
-            }, void 0, false, {
-                fileName: "[project]/src/components/QuickViewModal.js",
-                lineNumber: 124,
-                columnNumber: 55
-            }, this)
+        t9 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            src: selectedImage,
+            alt: product.name,
+            fill: true,
+            className: "object-cover transition-transform duration-700 group-hover:scale-105",
+            priority: true
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 124,
+            lineNumber: 128,
             columnNumber: 10
         }, this);
         $[18] = product.name;
@@ -194,430 +192,745 @@ function QuickViewModal(t0) {
         t9 = $[20];
     }
     let t10;
-    if ($[21] !== product.name || $[22] !== product.thumbnails || $[23] !== selectedImage) {
-        let t11;
-        if ($[25] !== product.name || $[26] !== selectedImage) {
-            t11 = ({
+    if ($[21] !== product.thumbnails || $[22] !== selectedImage) {
+        t10 = ({
+            "QuickViewModal[<button>.onClick]": ()=>{
+                const currentIndex = product.thumbnails.indexOf(selectedImage);
+                const prevIndex = currentIndex > 0 ? currentIndex - 1 : product.thumbnails.length - 1;
+                setSelectedImage(product.thumbnails[prevIndex]);
+            }
+        })["QuickViewModal[<button>.onClick]"];
+        $[21] = product.thumbnails;
+        $[22] = selectedImage;
+        $[23] = t10;
+    } else {
+        t10 = $[23];
+    }
+    let t11;
+    if ($[24] === Symbol.for("react.memo_cache_sentinel")) {
+        t11 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+            className: "w-5 h-5 text-slate-700 dark:text-slate-300",
+            fill: "none",
+            stroke: "currentColor",
+            viewBox: "0 0 24 24",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: 2,
+                d: "M15 19l-7-7 7-7"
+            }, void 0, false, {
+                fileName: "[project]/src/components/QuickViewModal.js",
+                lineNumber: 152,
+                columnNumber: 125
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 152,
+            columnNumber: 11
+        }, this);
+        $[24] = t11;
+    } else {
+        t11 = $[24];
+    }
+    let t12;
+    if ($[25] !== t10) {
+        t12 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t10,
+            className: "absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100",
+            children: t11
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 159,
+            columnNumber: 11
+        }, this);
+        $[25] = t10;
+        $[26] = t12;
+    } else {
+        t12 = $[26];
+    }
+    let t13;
+    if ($[27] !== product.thumbnails || $[28] !== selectedImage) {
+        t13 = ({
+            "QuickViewModal[<button>.onClick]": ()=>{
+                const currentIndex_0 = product.thumbnails.indexOf(selectedImage);
+                const nextIndex = currentIndex_0 < product.thumbnails.length - 1 ? currentIndex_0 + 1 : 0;
+                setSelectedImage(product.thumbnails[nextIndex]);
+            }
+        })["QuickViewModal[<button>.onClick]"];
+        $[27] = product.thumbnails;
+        $[28] = selectedImage;
+        $[29] = t13;
+    } else {
+        t13 = $[29];
+    }
+    let t14;
+    if ($[30] === Symbol.for("react.memo_cache_sentinel")) {
+        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+            className: "w-5 h-5 text-slate-700 dark:text-slate-300",
+            fill: "none",
+            stroke: "currentColor",
+            viewBox: "0 0 24 24",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: 2,
+                d: "M9 5l7 7-7 7"
+            }, void 0, false, {
+                fileName: "[project]/src/components/QuickViewModal.js",
+                lineNumber: 182,
+                columnNumber: 125
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 182,
+            columnNumber: 11
+        }, this);
+        $[30] = t14;
+    } else {
+        t14 = $[30];
+    }
+    let t15;
+    if ($[31] !== t13) {
+        t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t13,
+            className: "absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100",
+            children: t14
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 189,
+            columnNumber: 11
+        }, this);
+        $[31] = t13;
+        $[32] = t15;
+    } else {
+        t15 = $[32];
+    }
+    let t16;
+    if ($[33] !== t12 || $[34] !== t15 || $[35] !== t9) {
+        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "relative aspect-square mb-6 rounded-2xl overflow-hidden group",
+            children: [
+                t9,
+                t12,
+                t15
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 197,
+            columnNumber: 11
+        }, this);
+        $[33] = t12;
+        $[34] = t15;
+        $[35] = t9;
+        $[36] = t16;
+    } else {
+        t16 = $[36];
+    }
+    let t17;
+    if ($[37] !== product.name || $[38] !== product.thumbnails || $[39] !== selectedImage) {
+        let t18;
+        if ($[41] !== product.name || $[42] !== selectedImage) {
+            t18 = ({
                 "QuickViewModal[product.thumbnails.map()]": (thumb, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: {
                             "QuickViewModal[product.thumbnails.map() > <button>.onClick]": ()=>setSelectedImage(thumb)
                         }["QuickViewModal[product.thumbnails.map() > <button>.onClick]"],
-                        className: `shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${selectedImage === thumb ? "border-blue-500" : "border-gray-200 dark:border-slate-600 hover:border-gray-300 dark:hover:border-slate-500"}`,
+                        className: `shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${selectedImage === thumb ? "border-blue-500 shadow-lg shadow-blue-500/25 scale-105" : "border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500"}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             src: thumb,
-                            alt: `${product.name} ${index + 1}`,
+                            alt: `${product.name} view ${index + 1}`,
                             width: 64,
                             height: 64,
                             className: "w-full h-full object-cover"
                         }, void 0, false, {
                             fileName: "[project]/src/components/QuickViewModal.js",
-                            lineNumber: 138,
-                            columnNumber: 301
+                            lineNumber: 212,
+                            columnNumber: 368
                         }, this)
                     }, index, false, {
                         fileName: "[project]/src/components/QuickViewModal.js",
-                        lineNumber: 136,
+                        lineNumber: 210,
                         columnNumber: 71
                     }, this)
             })["QuickViewModal[product.thumbnails.map()]"];
-            $[25] = product.name;
-            $[26] = selectedImage;
-            $[27] = t11;
+            $[41] = product.name;
+            $[42] = selectedImage;
+            $[43] = t18;
         } else {
-            t11 = $[27];
+            t18 = $[43];
         }
-        t10 = product.thumbnails.map(t11);
-        $[21] = product.name;
-        $[22] = product.thumbnails;
-        $[23] = selectedImage;
-        $[24] = t10;
+        t17 = product.thumbnails.map(t18);
+        $[37] = product.name;
+        $[38] = product.thumbnails;
+        $[39] = selectedImage;
+        $[40] = t17;
     } else {
-        t10 = $[24];
+        t17 = $[40];
     }
-    let t11;
-    if ($[28] !== t10) {
-        t11 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex space-x-2 overflow-x-auto",
-            children: t10
+    let t18;
+    if ($[44] !== t17) {
+        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex justify-center space-x-3 overflow-x-auto py-2",
+            children: t17
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 156,
+            lineNumber: 230,
             columnNumber: 11
         }, this);
-        $[28] = t10;
-        $[29] = t11;
+        $[44] = t17;
+        $[45] = t18;
     } else {
-        t11 = $[29];
+        t18 = $[45];
     }
-    let t12;
-    if ($[30] !== t11 || $[31] !== t9) {
-        t12 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "p-6",
+    let t19;
+    if ($[46] !== t16 || $[47] !== t18) {
+        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "relative p-8 bg-linear-to-br from-slate-50 to-white dark:from-slate-700 dark:to-slate-800",
             children: [
-                t9,
-                t11
+                t16,
+                t18
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 164,
+            lineNumber: 238,
             columnNumber: 11
         }, this);
-        $[30] = t11;
-        $[31] = t9;
-        $[32] = t12;
+        $[46] = t16;
+        $[47] = t18;
+        $[48] = t19;
     } else {
-        t12 = $[32];
+        t19 = $[48];
     }
-    let t13;
-    if ($[33] !== product.name) {
-        t13 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-            className: "text-2xl font-bold text-gray-900 dark:text-white mb-2",
+    let t20;
+    if ($[49] !== product.category) {
+        t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-start justify-between mb-3",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                className: "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
+                children: product.category
+            }, void 0, false, {
+                fileName: "[project]/src/components/QuickViewModal.js",
+                lineNumber: 247,
+                columnNumber: 66
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 247,
+            columnNumber: 11
+        }, this);
+        $[49] = product.category;
+        $[50] = t20;
+    } else {
+        t20 = $[50];
+    }
+    let t21;
+    if ($[51] !== product.name) {
+        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+            className: "text-3xl font-bold text-slate-900 dark:text-white mb-3 leading-tight",
             children: product.name
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 173,
+            lineNumber: 255,
             columnNumber: 11
         }, this);
-        $[33] = product.name;
-        $[34] = t13;
+        $[51] = product.name;
+        $[52] = t21;
     } else {
-        t13 = $[34];
+        t21 = $[52];
     }
-    let t14;
-    if ($[35] === Symbol.for("react.memo_cache_sentinel")) {
-        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex items-center mb-4",
+    let t22;
+    if ($[53] === Symbol.for("react.memo_cache_sentinel")) {
+        t22 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-center space-x-2",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex text-yellow-400 mr-2",
+                    className: "flex text-yellow-400",
                     children: [
                         ...Array(5)
                     ].map(_QuickViewModalAnonymous)
                 }, void 0, false, {
                     fileName: "[project]/src/components/QuickViewModal.js",
-                    lineNumber: 181,
-                    columnNumber: 51
+                    lineNumber: 263,
+                    columnNumber: 56
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                    className: "text-sm text-gray-500 dark:text-gray-400",
-                    children: "(4.5)"
+                    className: "text-sm text-slate-500 dark:text-slate-400",
+                    children: "4.8 (128 reviews)"
                 }, void 0, false, {
                     fileName: "[project]/src/components/QuickViewModal.js",
-                    lineNumber: 181,
+                    lineNumber: 263,
                     columnNumber: 145
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 181,
+            lineNumber: 263,
             columnNumber: 11
         }, this);
-        $[35] = t14;
+        $[53] = t22;
     } else {
-        t14 = $[35];
+        t22 = $[53];
     }
-    let t15;
-    if ($[36] !== product.price) {
-        t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4",
+    let t23;
+    if ($[54] !== product.price) {
+        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "text-4xl font-black text-slate-900 dark:text-white",
             children: [
                 "$",
                 product.price
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 188,
+            lineNumber: 270,
             columnNumber: 11
         }, this);
-        $[36] = product.price;
-        $[37] = t15;
+        $[54] = product.price;
+        $[55] = t23;
     } else {
-        t15 = $[37];
-    }
-    let t16;
-    if ($[38] !== product.category) {
-        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "mb-4",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                className: "inline-block bg-gray-100 dark:bg-slate-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm",
-                children: product.category
-            }, void 0, false, {
-                fileName: "[project]/src/components/QuickViewModal.js",
-                lineNumber: 196,
-                columnNumber: 33
-            }, this)
-        }, void 0, false, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 196,
-            columnNumber: 11
-        }, this);
-        $[38] = product.category;
-        $[39] = t16;
-    } else {
-        t16 = $[39];
-    }
-    let t17;
-    if ($[40] !== product.description) {
-        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-            className: "text-gray-600 dark:text-gray-300 mb-6 leading-relaxed",
-            children: product.description
-        }, void 0, false, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 204,
-            columnNumber: 11
-        }, this);
-        $[40] = product.description;
-        $[41] = t17;
-    } else {
-        t17 = $[41];
-    }
-    let t18;
-    if ($[42] === Symbol.for("react.memo_cache_sentinel")) {
-        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-            className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
-            children: "Quantity"
-        }, void 0, false, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 212,
-            columnNumber: 11
-        }, this);
-        $[42] = t18;
-    } else {
-        t18 = $[42];
-    }
-    let t19;
-    if ($[43] !== quantity) {
-        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "mb-6",
-            children: [
-                t18,
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center space-x-3",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: {
-                                "QuickViewModal[<button>.onClick]": ()=>setQuantity(Math.max(1, quantity - 1))
-                            }["QuickViewModal[<button>.onClick]"],
-                            className: "w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors",
-                            children: "-"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/QuickViewModal.js",
-                            lineNumber: 219,
-                            columnNumber: 83
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "text-xl font-semibold w-12 text-center",
-                            children: quantity
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/QuickViewModal.js",
-                            lineNumber: 221,
-                            columnNumber: 216
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: {
-                                "QuickViewModal[<button>.onClick]": ()=>setQuantity(quantity + 1)
-                            }["QuickViewModal[<button>.onClick]"],
-                            className: "w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors",
-                            children: "+"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/QuickViewModal.js",
-                            lineNumber: 221,
-                            columnNumber: 290
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/components/QuickViewModal.js",
-                    lineNumber: 219,
-                    columnNumber: 38
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 219,
-            columnNumber: 11
-        }, this);
-        $[43] = quantity;
-        $[44] = t19;
-    } else {
-        t19 = $[44];
-    }
-    let t20;
-    if ($[45] !== t13 || $[46] !== t14 || $[47] !== t15 || $[48] !== t16 || $[49] !== t17 || $[50] !== t19) {
-        t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex-1",
-            children: [
-                t13,
-                t14,
-                t15,
-                t16,
-                t17,
-                t19
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 231,
-            columnNumber: 11
-        }, this);
-        $[45] = t13;
-        $[46] = t14;
-        $[47] = t15;
-        $[48] = t16;
-        $[49] = t17;
-        $[50] = t19;
-        $[51] = t20;
-    } else {
-        t20 = $[51];
-    }
-    const t21 = product.price * quantity;
-    let t22;
-    if ($[52] !== t21) {
-        t22 = t21.toFixed(2);
-        $[52] = t21;
-        $[53] = t22;
-    } else {
-        t22 = $[53];
-    }
-    let t23;
-    if ($[54] !== handleAddToCart || $[55] !== t22) {
-        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            onClick: handleAddToCart,
-            className: "w-full bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-md hover:shadow-lg transform hover:scale-105",
-            children: [
-                "Add to Cart - $",
-                t22
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 253,
-            columnNumber: 11
-        }, this);
-        $[54] = handleAddToCart;
-        $[55] = t22;
-        $[56] = t23;
-    } else {
-        t23 = $[56];
+        t23 = $[55];
     }
     let t24;
-    if ($[57] !== onClose) {
-        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            onClick: onClose,
-            className: "w-full bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 py-3 px-6 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors font-medium",
-            children: "Continue Shopping"
-        }, void 0, false, {
+    if ($[56] !== t22 || $[57] !== t23) {
+        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-center justify-between mb-4",
+            children: [
+                t22,
+                t23
+            ]
+        }, void 0, true, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 262,
+            lineNumber: 278,
             columnNumber: 11
         }, this);
-        $[57] = onClose;
+        $[56] = t22;
+        $[57] = t23;
         $[58] = t24;
     } else {
         t24 = $[58];
     }
     let t25;
-    if ($[59] !== t23 || $[60] !== t24) {
+    if ($[59] !== t20 || $[60] !== t21 || $[61] !== t24) {
         t25 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "space-y-3",
             children: [
-                t23,
+                t20,
+                t21,
                 t24
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 270,
+            lineNumber: 287,
             columnNumber: 11
         }, this);
-        $[59] = t23;
-        $[60] = t24;
-        $[61] = t25;
+        $[59] = t20;
+        $[60] = t21;
+        $[61] = t24;
+        $[62] = t25;
     } else {
-        t25 = $[61];
+        t25 = $[62];
     }
     let t26;
-    if ($[62] !== t20 || $[63] !== t25) {
-        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "p-6 flex flex-col",
-            children: [
-                t20,
-                t25
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 279,
-            columnNumber: 11
-        }, this);
-        $[62] = t20;
-        $[63] = t25;
-        $[64] = t26;
-    } else {
-        t26 = $[64];
-    }
-    let t27;
-    if ($[65] !== t12 || $[66] !== t26) {
-        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "grid grid-cols-1 lg:grid-cols-2",
-            children: [
-                t12,
-                t26
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 288,
-            columnNumber: 11
-        }, this);
-        $[65] = t12;
-        $[66] = t26;
-        $[67] = t27;
-    } else {
-        t27 = $[67];
-    }
-    let t28;
-    if ($[68] !== t27 || $[69] !== t8) {
-        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex items-center justify-center min-h-screen p-4",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-fade-in-up",
-                children: [
-                    t8,
-                    t27
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/QuickViewModal.js",
-                lineNumber: 297,
-                columnNumber: 78
-            }, this)
+    if ($[63] === Symbol.for("react.memo_cache_sentinel")) {
+        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+            className: "text-lg font-semibold text-slate-900 dark:text-white mb-3",
+            children: "Description"
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
             lineNumber: 297,
             columnNumber: 11
         }, this);
-        $[68] = t27;
-        $[69] = t8;
-        $[70] = t28;
+        $[63] = t26;
     } else {
-        t28 = $[70];
+        t26 = $[63];
     }
-    let t29;
-    if ($[71] !== t28 || $[72] !== t6) {
-        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "fixed inset-0 z-50 overflow-hidden",
+    let t27;
+    if ($[64] !== product.description) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
-                t6,
-                t28
+                t26,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "text-slate-600 dark:text-slate-300 leading-relaxed",
+                    children: product.description
+                }, void 0, false, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 304,
+                    columnNumber: 21
+                }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 306,
+            lineNumber: 304,
             columnNumber: 11
         }, this);
-        $[71] = t28;
-        $[72] = t6;
-        $[73] = t29;
+        $[64] = product.description;
+        $[65] = t27;
     } else {
-        t29 = $[73];
+        t27 = $[65];
     }
-    return t29;
+    let t28;
+    if ($[66] === Symbol.for("react.memo_cache_sentinel")) {
+        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+            className: "block text-sm font-semibold text-slate-900 dark:text-white mb-3",
+            children: "Quantity"
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 312,
+            columnNumber: 11
+        }, this);
+        $[66] = t28;
+    } else {
+        t28 = $[66];
+    }
+    let t29;
+    let t30;
+    let t31;
+    if ($[67] !== quantity) {
+        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: {
+                "QuickViewModal[<button>.onClick]": ()=>setQuantity(Math.max(1, quantity - 1))
+            }["QuickViewModal[<button>.onClick]"],
+            className: "w-12 h-12 bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 rounded-xl flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-500 transition-colors font-semibold text-slate-700 dark:text-slate-300",
+            children: "−"
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 321,
+            columnNumber: 11
+        }, this);
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            className: "text-2xl font-bold text-slate-900 dark:text-white w-16 text-center",
+            children: quantity
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 324,
+            columnNumber: 11
+        }, this);
+        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: {
+                "QuickViewModal[<button>.onClick]": ()=>setQuantity(quantity + 1)
+            }["QuickViewModal[<button>.onClick]"],
+            className: "w-12 h-12 bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 rounded-xl flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-500 transition-colors font-semibold text-slate-700 dark:text-slate-300",
+            children: "+"
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 325,
+            columnNumber: 11
+        }, this);
+        $[67] = quantity;
+        $[68] = t29;
+        $[69] = t30;
+        $[70] = t31;
+    } else {
+        t29 = $[68];
+        t30 = $[69];
+        t31 = $[70];
+    }
+    const t32 = product.price * quantity;
+    let t33;
+    if ($[71] !== t32) {
+        t33 = t32.toFixed(2);
+        $[71] = t32;
+        $[72] = t33;
+    } else {
+        t33 = $[72];
+    }
+    let t34;
+    if ($[73] !== t33) {
+        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "ml-auto text-lg font-semibold text-slate-600 dark:text-slate-400",
+            children: [
+                "Total: ",
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    className: "text-blue-600 dark:text-blue-400",
+                    children: [
+                        "$",
+                        t33
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 348,
+                    columnNumber: 100
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 348,
+            columnNumber: 11
+        }, this);
+        $[73] = t33;
+        $[74] = t34;
+    } else {
+        t34 = $[74];
+    }
+    let t35;
+    if ($[75] !== t29 || $[76] !== t30 || $[77] !== t31 || $[78] !== t34) {
+        t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-4",
+            children: [
+                t28,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center space-x-4",
+                    children: [
+                        t29,
+                        t30,
+                        t31,
+                        t34
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 356,
+                    columnNumber: 82
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 356,
+            columnNumber: 11
+        }, this);
+        $[75] = t29;
+        $[76] = t30;
+        $[77] = t31;
+        $[78] = t34;
+        $[79] = t35;
+    } else {
+        t35 = $[79];
+    }
+    let t36;
+    if ($[80] !== t25 || $[81] !== t27 || $[82] !== t35) {
+        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "space-y-6",
+            children: [
+                t25,
+                t27,
+                t35
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 367,
+            columnNumber: 11
+        }, this);
+        $[80] = t25;
+        $[81] = t27;
+        $[82] = t35;
+        $[83] = t36;
+    } else {
+        t36 = $[83];
+    }
+    const t37 = `w-full py-4 px-6 rounded-2xl font-bold text-white transition-all duration-300 flex items-center justify-center space-x-3 ${isAdding ? "bg-green-600 scale-95" : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 hover:scale-105 active:scale-95"} shadow-lg hover:shadow-xl`;
+    let t38;
+    if ($[84] !== isAdding || $[85] !== product.price || $[86] !== quantity) {
+        t38 = isAdding ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                    className: "w-5 h-5 animate-spin",
+                    fill: "none",
+                    stroke: "currentColor",
+                    viewBox: "0 0 24 24",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        strokeWidth: 2,
+                        d: "M5 13l4 4L19 7"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/QuickViewModal.js",
+                        lineNumber: 378,
+                        columnNumber: 116
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 378,
+                    columnNumber: 24
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    children: "Added to Cart!"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 378,
+                    columnNumber: 210
+                }, this)
+            ]
+        }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                    className: "w-5 h-5",
+                    fill: "none",
+                    stroke: "currentColor",
+                    viewBox: "0 0 24 24",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        strokeWidth: 2,
+                        d: "M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/QuickViewModal.js",
+                        lineNumber: 378,
+                        columnNumber: 324
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 378,
+                    columnNumber: 245
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    children: [
+                        "Add ",
+                        quantity,
+                        " to Cart - $",
+                        (product.price * quantity).toFixed(2)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/QuickViewModal.js",
+                    lineNumber: 378,
+                    columnNumber: 430
+                }, this)
+            ]
+        }, void 0, true);
+        $[84] = isAdding;
+        $[85] = product.price;
+        $[86] = quantity;
+        $[87] = t38;
+    } else {
+        t38 = $[87];
+    }
+    let t39;
+    if ($[88] !== handleAddToCart || $[89] !== isAdding || $[90] !== t37 || $[91] !== t38) {
+        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: handleAddToCart,
+            disabled: isAdding,
+            className: t37,
+            children: t38
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 388,
+            columnNumber: 11
+        }, this);
+        $[88] = handleAddToCart;
+        $[89] = isAdding;
+        $[90] = t37;
+        $[91] = t38;
+        $[92] = t39;
+    } else {
+        t39 = $[92];
+    }
+    let t40;
+    if ($[93] !== onClose) {
+        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: onClose,
+            className: "w-full py-3 px-6 border-2 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-2xl font-semibold hover:border-slate-300 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-300",
+            children: "Continue Shopping"
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 399,
+            columnNumber: 11
+        }, this);
+        $[93] = onClose;
+        $[94] = t40;
+    } else {
+        t40 = $[94];
+    }
+    let t41;
+    if ($[95] !== t39 || $[96] !== t40) {
+        t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "space-y-4 pt-6",
+            children: [
+                t39,
+                t40
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 407,
+            columnNumber: 11
+        }, this);
+        $[95] = t39;
+        $[96] = t40;
+        $[97] = t41;
+    } else {
+        t41 = $[97];
+    }
+    let t42;
+    if ($[98] !== t36 || $[99] !== t41) {
+        t42 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "p-8 flex flex-col justify-between",
+            children: [
+                t36,
+                t41
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 416,
+            columnNumber: 11
+        }, this);
+        $[98] = t36;
+        $[99] = t41;
+        $[100] = t42;
+    } else {
+        t42 = $[100];
+    }
+    let t43;
+    if ($[101] !== t19 || $[102] !== t42) {
+        t43 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "grid grid-cols-1 xl:grid-cols-2 min-h-[600px]",
+            children: [
+                t19,
+                t42
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 425,
+            columnNumber: 11
+        }, this);
+        $[101] = t19;
+        $[102] = t42;
+        $[103] = t43;
+    } else {
+        t43 = $[103];
+    }
+    let t44;
+    if ($[104] !== t43 || $[105] !== t8) {
+        t44 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl max-w-6xl w-full mx-auto overflow-hidden transform transition-all duration-300 scale-95 sm:scale-100 group",
+                children: [
+                    t8,
+                    t43
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/QuickViewModal.js",
+                lineNumber: 434,
+                columnNumber: 96
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 434,
+            columnNumber: 11
+        }, this);
+        $[104] = t43;
+        $[105] = t8;
+        $[106] = t44;
+    } else {
+        t44 = $[106];
+    }
+    let t45;
+    if ($[107] !== t44 || $[108] !== t6) {
+        t45 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "fixed inset-0 z-50 overflow-y-auto",
+            children: [
+                t6,
+                t44
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/QuickViewModal.js",
+            lineNumber: 443,
+            columnNumber: 11
+        }, this);
+        $[107] = t44;
+        $[108] = t6;
+        $[109] = t45;
+    } else {
+        t45 = $[109];
+    }
+    return t45;
 }
-_s(QuickViewModal, "ufa+Mr6O3k0BsiOvD0zmU7BH43k=", false, function() {
+_s(QuickViewModal, "X+UVYqGSYDYgvv8edcEGkO8ub2I=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"]
     ];
@@ -625,20 +938,23 @@ _s(QuickViewModal, "ufa+Mr6O3k0BsiOvD0zmU7BH43k=", false, function() {
 _c = QuickViewModal;
 function _QuickViewModalAnonymous(_, i_0) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-        className: "w-4 h-4 fill-current",
+        className: "w-5 h-5 fill-current",
         viewBox: "0 0 24 24",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
             d: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
         }, void 0, false, {
             fileName: "[project]/src/components/QuickViewModal.js",
-            lineNumber: 316,
+            lineNumber: 453,
             columnNumber: 78
         }, this)
     }, i_0, false, {
         fileName: "[project]/src/components/QuickViewModal.js",
-        lineNumber: 316,
+        lineNumber: 453,
         columnNumber: 10
     }, this);
+}
+function _temp(resolve) {
+    return setTimeout(resolve, 600);
 }
 var _c;
 __turbopack_context__.k.register(_c, "QuickViewModal");
