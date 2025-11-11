@@ -26,9 +26,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CartProvider>  {/* ← Move this here, outside of body */}
-          <a href="#main-content" className="skip-link">Skip to main content</a>
-          <ParticleBackground />
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <ParticleBackground />
+        <CartProvider>
           <Navbar />
           <main id="main-content" className="min-h-screen relative z-10">
             {children}

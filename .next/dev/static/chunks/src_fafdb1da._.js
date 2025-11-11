@@ -19,12 +19,12 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 const CartContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])();
 function CartProvider(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(59);
-    if ($[0] !== "c545792715cb54d1981fcae28143c626a159041b9f952eff1b37d5bcb25533dd") {
-        for(let $i = 0; $i < 59; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(39);
+    if ($[0] !== "9aada3c032f2775c5b21ce16e37607c95f8a14570db433b60142598daa9c4e20") {
+        for(let $i = 0; $i < 39; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "c545792715cb54d1981fcae28143c626a159041b9f952eff1b37d5bcb25533dd";
+        $[0] = "9aada3c032f2775c5b21ce16e37607c95f8a14570db433b60142598daa9c4e20";
     }
     const { children } = t0;
     let t1;
@@ -43,34 +43,19 @@ function CartProvider(t0) {
         t2 = $[2];
     }
     const [wishlistItems, setWishlistItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(t2);
-    const [recentlyAdded, setRecentlyAdded] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [darkMode, setDarkMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(_CartProviderUseState);
     let t3;
     let t4;
     if ($[3] === Symbol.for("react.memo_cache_sentinel")) {
         t3 = ({
             "CartProvider[useEffect()]": ()=>{
-                ;
-                try {
-                    const savedCart = localStorage.getItem("shopnow-cart");
-                    const savedWishlist = localStorage.getItem("shopnow-wishlist");
-                    if (savedCart) {
-                        const parsedCart = JSON.parse(savedCart);
-                        if (Array.isArray(parsedCart)) {
-                            setCartItems(parsedCart);
-                        }
-                    }
-                    if (savedWishlist) {
-                        const parsedWishlist = JSON.parse(savedWishlist);
-                        if (Array.isArray(parsedWishlist)) {
-                            setWishlistItems(parsedWishlist);
-                        }
-                    }
-                } catch (t5) {
-                    const error = t5;
-                    console.error("Error loading cart data:", error);
-                    localStorage.removeItem("shopnow-cart");
-                    localStorage.removeItem("shopnow-wishlist");
+                const savedCart = localStorage.getItem("shopnow-cart");
+                if (savedCart) {
+                    setCartItems(JSON.parse(savedCart));
+                }
+                const savedWishlist = localStorage.getItem("shopnow-wishlist");
+                if (savedWishlist) {
+                    setWishlistItems(JSON.parse(savedWishlist));
                 }
             }
         })["CartProvider[useEffect()]"];
@@ -110,18 +95,7 @@ function CartProvider(t0) {
     if ($[8] !== cartItems) {
         t7 = ({
             "CartProvider[useEffect()]": ()=>{
-                const timeoutId = setTimeout({
-                    "CartProvider[useEffect() > setTimeout()]": ()=>{
-                        ;
-                        try {
-                            localStorage.setItem("shopnow-cart", JSON.stringify(cartItems));
-                        } catch (t9) {
-                            const error_0 = t9;
-                            console.error("Error saving cart:", error_0);
-                        }
-                    }
-                }["CartProvider[useEffect() > setTimeout()]"], 100);
-                return ()=>clearTimeout(timeoutId);
+                localStorage.setItem("shopnow-cart", JSON.stringify(cartItems));
             }
         })["CartProvider[useEffect()]"];
         t8 = [
@@ -140,18 +114,7 @@ function CartProvider(t0) {
     if ($[11] !== wishlistItems) {
         t9 = ({
             "CartProvider[useEffect()]": ()=>{
-                const timeoutId_0 = setTimeout({
-                    "CartProvider[useEffect() > setTimeout()]": ()=>{
-                        ;
-                        try {
-                            localStorage.setItem("shopnow-wishlist", JSON.stringify(wishlistItems));
-                        } catch (t11) {
-                            const error_1 = t11;
-                            console.error("Error saving wishlist:", error_1);
-                        }
-                    }
-                }["CartProvider[useEffect() > setTimeout()]"], 100);
-                return ()=>clearTimeout(timeoutId_0);
+                localStorage.setItem("shopnow-wishlist", JSON.stringify(wishlistItems));
             }
         })["CartProvider[useEffect()]"];
         t10 = [
@@ -168,8 +131,7 @@ function CartProvider(t0) {
     let t11;
     if ($[14] === Symbol.for("react.memo_cache_sentinel")) {
         t11 = ({
-            "CartProvider[addToCart]": (product, t12)=>{
-                const quantity = t12 === undefined ? 1 : t12;
+            "CartProvider[addToCart]": (product)=>{
                 setCartItems({
                     "CartProvider[addToCart > setCartItems()]": (prevItems)=>{
                         const existingItem = prevItems.find({
@@ -179,7 +141,7 @@ function CartProvider(t0) {
                             return prevItems.map({
                                 "CartProvider[addToCart > setCartItems() > prevItems.map()]": (item_0)=>item_0.id === product.id ? {
                                         ...item_0,
-                                        quantity: item_0.quantity + quantity
+                                        quantity: item_0.quantity + 1
                                     } : item_0
                             }["CartProvider[addToCart > setCartItems() > prevItems.map()]"]);
                         } else {
@@ -187,17 +149,12 @@ function CartProvider(t0) {
                                 ...prevItems,
                                 {
                                     ...product,
-                                    quantity,
-                                    addedAt: new Date().toISOString()
+                                    quantity: 1
                                 }
                             ];
                         }
                     }
                 }["CartProvider[addToCart > setCartItems()]"]);
-                setRecentlyAdded(product.id);
-                setTimeout({
-                    "CartProvider[addToCart > setTimeout()]": ()=>setRecentlyAdded(null)
-                }["CartProvider[addToCart > setTimeout()]"], 2000);
             }
         })["CartProvider[addToCart]"];
         $[14] = t11;
@@ -224,8 +181,8 @@ function CartProvider(t0) {
     let t13;
     if ($[16] === Symbol.for("react.memo_cache_sentinel")) {
         t13 = ({
-            "CartProvider[updateQuantity]": (productId_0, quantity_0)=>{
-                if (quantity_0 <= 0) {
+            "CartProvider[updateQuantity]": (productId_0, quantity)=>{
+                if (quantity <= 0) {
                     removeFromCart(productId_0);
                     return;
                 }
@@ -233,7 +190,7 @@ function CartProvider(t0) {
                     "CartProvider[updateQuantity > setCartItems()]": (prevItems_1)=>prevItems_1.map({
                             "CartProvider[updateQuantity > setCartItems() > prevItems_1.map()]": (item_2)=>item_2.id === productId_0 ? {
                                     ...item_2,
-                                    quantity: quantity_0
+                                    quantity
                                 } : item_2
                         }["CartProvider[updateQuantity > setCartItems() > prevItems_1.map()]"])
                 }["CartProvider[updateQuantity > setCartItems()]"]);
@@ -245,194 +202,96 @@ function CartProvider(t0) {
     }
     const updateQuantity = t13;
     let t14;
-    if ($[17] === Symbol.for("react.memo_cache_sentinel")) {
+    if ($[17] !== cartItems) {
         t14 = ({
-            "CartProvider[incrementQuantity]": (productId_1)=>{
-                setCartItems({
-                    "CartProvider[incrementQuantity > setCartItems()]": (prevItems_2)=>prevItems_2.map({
-                            "CartProvider[incrementQuantity > setCartItems() > prevItems_2.map()]": (item_3)=>item_3.id === productId_1 ? {
-                                    ...item_3,
-                                    quantity: item_3.quantity + 1
-                                } : item_3
-                        }["CartProvider[incrementQuantity > setCartItems() > prevItems_2.map()]"])
-                }["CartProvider[incrementQuantity > setCartItems()]"]);
-            }
-        })["CartProvider[incrementQuantity]"];
-        $[17] = t14;
-    } else {
-        t14 = $[17];
-    }
-    const incrementQuantity = t14;
-    let t15;
-    if ($[18] === Symbol.for("react.memo_cache_sentinel")) {
-        t15 = ({
-            "CartProvider[decrementQuantity]": (productId_2)=>{
-                setCartItems({
-                    "CartProvider[decrementQuantity > setCartItems()]": (prevItems_3)=>prevItems_3.map({
-                            "CartProvider[decrementQuantity > setCartItems() > prevItems_3.map()]": (item_4)=>item_4.id === productId_2 && item_4.quantity > 1 ? {
-                                    ...item_4,
-                                    quantity: item_4.quantity - 1
-                                } : item_4
-                        }["CartProvider[decrementQuantity > setCartItems() > prevItems_3.map()]"])
-                }["CartProvider[decrementQuantity > setCartItems()]"]);
-            }
-        })["CartProvider[decrementQuantity]"];
-        $[18] = t15;
-    } else {
-        t15 = $[18];
-    }
-    const decrementQuantity = t15;
-    let t16;
-    if ($[19] !== cartItems) {
-        t16 = ({
             "CartProvider[getTotalItems]": ()=>cartItems.reduce(_CartProviderGetTotalItemsCartItemsReduce, 0)
         })["CartProvider[getTotalItems]"];
-        $[19] = cartItems;
-        $[20] = t16;
+        $[17] = cartItems;
+        $[18] = t14;
     } else {
-        t16 = $[20];
+        t14 = $[18];
     }
-    const getTotalItems = t16;
-    let t17;
-    if ($[21] !== cartItems) {
-        t17 = ({
+    const getTotalItems = t14;
+    let t15;
+    if ($[19] !== cartItems) {
+        t15 = ({
             "CartProvider[getTotalPrice]": ()=>cartItems.reduce(_CartProviderGetTotalPriceCartItemsReduce, 0)
         })["CartProvider[getTotalPrice]"];
-        $[21] = cartItems;
-        $[22] = t17;
+        $[19] = cartItems;
+        $[20] = t15;
     } else {
-        t17 = $[22];
+        t15 = $[20];
     }
-    const getTotalPrice = t17;
-    let t18;
-    if ($[23] !== cartItems) {
-        t18 = ({
-            "CartProvider[getItemQuantity]": (productId_3)=>{
-                const item_8 = cartItems.find({
-                    "CartProvider[getItemQuantity > cartItems.find()]": (item_7)=>item_7.id === productId_3
-                }["CartProvider[getItemQuantity > cartItems.find()]"]);
-                return item_8 ? item_8.quantity : 0;
-            }
-        })["CartProvider[getItemQuantity]"];
-        $[23] = cartItems;
-        $[24] = t18;
-    } else {
-        t18 = $[24];
-    }
-    const getItemQuantity = t18;
-    let t19;
-    if ($[25] === Symbol.for("react.memo_cache_sentinel")) {
-        t19 = ({
+    const getTotalPrice = t15;
+    let t16;
+    if ($[21] === Symbol.for("react.memo_cache_sentinel")) {
+        t16 = ({
             "CartProvider[clearCart]": ()=>{
                 setCartItems([]);
             }
         })["CartProvider[clearCart]"];
-        $[25] = t19;
+        $[21] = t16;
     } else {
-        t19 = $[25];
+        t16 = $[21];
     }
-    const clearCart = t19;
-    let t20;
-    if ($[26] !== cartItems || $[27] !== getTotalItems || $[28] !== getTotalPrice) {
-        t20 = ({
-            "CartProvider[getCartSummary]": ()=>{
-                const totalItems = getTotalItems();
-                const totalPrice = getTotalPrice();
-                const uniqueItems = cartItems.length;
-                return {
-                    totalItems,
-                    totalPrice,
-                    uniqueItems,
-                    formattedTotal: `$${totalPrice.toFixed(2)}`
-                };
-            }
-        })["CartProvider[getCartSummary]"];
-        $[26] = cartItems;
-        $[27] = getTotalItems;
-        $[28] = getTotalPrice;
-        $[29] = t20;
-    } else {
-        t20 = $[29];
-    }
-    const getCartSummary = t20;
-    let t21;
-    if ($[30] === Symbol.for("react.memo_cache_sentinel")) {
-        t21 = ({
+    const clearCart = t16;
+    let t17;
+    if ($[22] === Symbol.for("react.memo_cache_sentinel")) {
+        t17 = ({
             "CartProvider[addToWishlist]": (product_0)=>{
                 setWishlistItems({
-                    "CartProvider[addToWishlist > setWishlistItems()]": (prevItems_4)=>{
-                        const existingItem_0 = prevItems_4.find({
-                            "CartProvider[addToWishlist > setWishlistItems() > prevItems_4.find()]": (item_9)=>item_9.id === product_0.id
-                        }["CartProvider[addToWishlist > setWishlistItems() > prevItems_4.find()]"]);
+                    "CartProvider[addToWishlist > setWishlistItems()]": (prevItems_2)=>{
+                        const existingItem_0 = prevItems_2.find({
+                            "CartProvider[addToWishlist > setWishlistItems() > prevItems_2.find()]": (item_5)=>item_5.id === product_0.id
+                        }["CartProvider[addToWishlist > setWishlistItems() > prevItems_2.find()]"]);
                         if (!existingItem_0) {
                             return [
-                                ...prevItems_4,
-                                {
-                                    ...product_0,
-                                    addedAt: new Date().toISOString()
-                                }
+                                ...prevItems_2,
+                                product_0
                             ];
                         }
-                        return prevItems_4;
+                        return prevItems_2;
                     }
                 }["CartProvider[addToWishlist > setWishlistItems()]"]);
             }
         })["CartProvider[addToWishlist]"];
-        $[30] = t21;
+        $[22] = t17;
     } else {
-        t21 = $[30];
+        t17 = $[22];
     }
-    const addToWishlist = t21;
-    let t22;
-    if ($[31] === Symbol.for("react.memo_cache_sentinel")) {
-        t22 = ({
-            "CartProvider[removeFromWishlist]": (productId_4)=>{
+    const addToWishlist = t17;
+    let t18;
+    if ($[23] === Symbol.for("react.memo_cache_sentinel")) {
+        t18 = ({
+            "CartProvider[removeFromWishlist]": (productId_1)=>{
                 setWishlistItems({
-                    "CartProvider[removeFromWishlist > setWishlistItems()]": (prevItems_5)=>prevItems_5.filter({
-                            "CartProvider[removeFromWishlist > setWishlistItems() > prevItems_5.filter()]": (item_10)=>item_10.id !== productId_4
-                        }["CartProvider[removeFromWishlist > setWishlistItems() > prevItems_5.filter()]"])
+                    "CartProvider[removeFromWishlist > setWishlistItems()]": (prevItems_3)=>prevItems_3.filter({
+                            "CartProvider[removeFromWishlist > setWishlistItems() > prevItems_3.filter()]": (item_6)=>item_6.id !== productId_1
+                        }["CartProvider[removeFromWishlist > setWishlistItems() > prevItems_3.filter()]"])
                 }["CartProvider[removeFromWishlist > setWishlistItems()]"]);
             }
         })["CartProvider[removeFromWishlist]"];
-        $[31] = t22;
+        $[23] = t18;
     } else {
-        t22 = $[31];
+        t18 = $[23];
     }
-    const removeFromWishlist = t22;
-    let isInWishlist;
-    let t23;
-    let toggleWishlist;
-    if ($[32] !== wishlistItems) {
-        toggleWishlist = ({
-            "CartProvider[toggleWishlist]": (product_1)=>{
-                if (isInWishlist(product_1.id)) {
-                    removeFromWishlist(product_1.id);
-                } else {
-                    addToWishlist(product_1);
-                }
-            }
-        })["CartProvider[toggleWishlist]"];
-        isInWishlist = ({
-            "CartProvider[isInWishlist]": (productId_5)=>wishlistItems.some({
-                    "CartProvider[isInWishlist > wishlistItems.some()]": (item_11)=>item_11.id === productId_5
+    const removeFromWishlist = t18;
+    let t19;
+    if ($[24] !== wishlistItems) {
+        t19 = ({
+            "CartProvider[isInWishlist]": (productId_2)=>wishlistItems.some({
+                    "CartProvider[isInWishlist > wishlistItems.some()]": (item_7)=>item_7.id === productId_2
                 }["CartProvider[isInWishlist > wishlistItems.some()]"])
         })["CartProvider[isInWishlist]"];
-        t23 = ({
-            "CartProvider[getWishlistCount]": ()=>wishlistItems.length
-        })["CartProvider[getWishlistCount]"];
-        $[32] = wishlistItems;
-        $[33] = isInWishlist;
-        $[34] = t23;
-        $[35] = toggleWishlist;
+        $[24] = wishlistItems;
+        $[25] = t19;
     } else {
-        isInWishlist = $[33];
-        t23 = $[34];
-        toggleWishlist = $[35];
+        t19 = $[25];
     }
-    const getWishlistCount = t23;
-    let t24;
-    if ($[36] !== darkMode) {
-        t24 = ({
+    const isInWishlist = t19;
+    let t20;
+    if ($[26] !== darkMode) {
+        t20 = ({
             "CartProvider[toggleDarkMode]": ()=>{
                 const newDarkMode = !darkMode;
                 setDarkMode(newDarkMode);
@@ -445,131 +304,76 @@ function CartProvider(t0) {
                 }
             }
         })["CartProvider[toggleDarkMode]"];
-        $[36] = darkMode;
-        $[37] = t24;
+        $[26] = darkMode;
+        $[27] = t20;
     } else {
-        t24 = $[37];
+        t20 = $[27];
     }
-    const toggleDarkMode = t24;
-    let t25;
-    if ($[38] === Symbol.for("react.memo_cache_sentinel")) {
-        t25 = ({
-            "CartProvider[setTheme]": (theme)=>{
-                const isDark = theme === "dark";
-                setDarkMode(isDark);
-                if (isDark) {
-                    document.documentElement.classList.add("dark");
-                    localStorage.setItem("shopnow-theme", "dark");
-                } else {
-                    document.documentElement.classList.remove("dark");
-                    localStorage.setItem("shopnow-theme", "light");
-                }
-            }
-        })["CartProvider[setTheme]"];
-        $[38] = t25;
-    } else {
-        t25 = $[38];
-    }
-    const setTheme = t25;
-    let t26;
-    if ($[39] !== getTotalItems || $[40] !== getTotalPrice) {
-        t26 = ({
-            "CartProvider[getCartStats]": ()=>{
-                const totalValue = getTotalPrice();
-                const itemCount = getTotalItems();
-                const averagePrice = itemCount > 0 ? totalValue / itemCount : 0;
-                return {
-                    totalValue,
-                    itemCount,
-                    averagePrice: averagePrice.toFixed(2),
-                    savings: 0
-                };
-            }
-        })["CartProvider[getCartStats]"];
-        $[39] = getTotalItems;
-        $[40] = getTotalPrice;
-        $[41] = t26;
-    } else {
-        t26 = $[41];
-    }
-    const getCartStats = t26;
-    let t27;
-    if ($[42] !== cartItems || $[43] !== darkMode || $[44] !== getCartStats || $[45] !== getCartSummary || $[46] !== getItemQuantity || $[47] !== getTotalItems || $[48] !== getTotalPrice || $[49] !== getWishlistCount || $[50] !== isInWishlist || $[51] !== recentlyAdded || $[52] !== toggleDarkMode || $[53] !== toggleWishlist || $[54] !== wishlistItems) {
-        t27 = {
+    const toggleDarkMode = t20;
+    let t21;
+    if ($[28] !== cartItems || $[29] !== darkMode || $[30] !== getTotalItems || $[31] !== getTotalPrice || $[32] !== isInWishlist || $[33] !== toggleDarkMode || $[34] !== wishlistItems) {
+        t21 = {
             cartItems,
-            wishlistItems,
-            recentlyAdded,
-            darkMode,
             addToCart,
             removeFromCart,
             updateQuantity,
-            incrementQuantity,
-            decrementQuantity,
             getTotalItems,
             getTotalPrice,
-            getItemQuantity,
             clearCart,
-            getCartSummary,
-            getCartStats,
+            wishlistItems,
             addToWishlist,
             removeFromWishlist,
-            toggleWishlist,
             isInWishlist,
-            getWishlistCount,
-            toggleDarkMode,
-            setTheme
+            darkMode,
+            toggleDarkMode
         };
-        $[42] = cartItems;
-        $[43] = darkMode;
-        $[44] = getCartStats;
-        $[45] = getCartSummary;
-        $[46] = getItemQuantity;
-        $[47] = getTotalItems;
-        $[48] = getTotalPrice;
-        $[49] = getWishlistCount;
-        $[50] = isInWishlist;
-        $[51] = recentlyAdded;
-        $[52] = toggleDarkMode;
-        $[53] = toggleWishlist;
-        $[54] = wishlistItems;
-        $[55] = t27;
+        $[28] = cartItems;
+        $[29] = darkMode;
+        $[30] = getTotalItems;
+        $[31] = getTotalPrice;
+        $[32] = isInWishlist;
+        $[33] = toggleDarkMode;
+        $[34] = wishlistItems;
+        $[35] = t21;
     } else {
-        t27 = $[55];
+        t21 = $[35];
     }
-    const value = t27;
-    let t28;
-    if ($[56] !== children || $[57] !== value) {
-        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CartContext.Provider, {
-            value: value,
+    let t22;
+    if ($[36] !== children || $[37] !== t21) {
+        t22 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CartContext.Provider, {
+            value: t21,
             children: children
         }, void 0, false, {
             fileName: "[project]/src/context/CartContext.js",
-            lineNumber: 517,
+            lineNumber: 318,
             columnNumber: 11
         }, this);
-        $[56] = children;
-        $[57] = value;
-        $[58] = t28;
+        $[36] = children;
+        $[37] = t21;
+        $[38] = t22;
     } else {
-        t28 = $[58];
+        t22 = $[38];
     }
-    return t28;
+    return t22;
 }
-_s(CartProvider, "1Q3RUUGQx9PVmrQji4D5ZWajyVw=");
+_s(CartProvider, "aozW77CF6/5EW9dY8IVtgFsh/pw=");
 _c = CartProvider;
-function _CartProviderGetTotalPriceCartItemsReduce(total_0, item_6) {
-    return total_0 + item_6.price * item_6.quantity;
+function _CartProviderGetTotalPriceCartItemsReduce(total_0, item_4) {
+    return total_0 + item_4.price * item_4.quantity;
 }
-function _CartProviderGetTotalItemsCartItemsReduce(total, item_5) {
-    return total + item_5.quantity;
+function _CartProviderGetTotalItemsCartItemsReduce(total, item_3) {
+    return total + item_3.quantity;
 }
 function _CartProviderUseState() {
     if ("TURBOPACK compile-time truthy", 1) {
         const savedTheme = localStorage.getItem("shopnow-theme");
-        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (savedTheme === "dark" || !savedTheme && systemPrefersDark) {
+        if (savedTheme === "dark") {
             document.documentElement.classList.add("dark");
             return true;
+        }
+        if (savedTheme === "light") {
+            document.documentElement.classList.remove("dark");
+            return false;
         }
         document.documentElement.classList.remove("dark");
         return false;
@@ -580,11 +384,11 @@ function _CartProviderUseState() {
 function useCart() {
     _s1();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(1);
-    if ($[0] !== "c545792715cb54d1981fcae28143c626a159041b9f952eff1b37d5bcb25533dd") {
+    if ($[0] !== "9aada3c032f2775c5b21ce16e37607c95f8a14570db433b60142598daa9c4e20") {
         for(let $i = 0; $i < 1; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "c545792715cb54d1981fcae28143c626a159041b9f952eff1b37d5bcb25533dd";
+        $[0] = "9aada3c032f2775c5b21ce16e37607c95f8a14570db433b60142598daa9c4e20";
     }
     const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(CartContext);
     if (!context) {
@@ -610,23 +414,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/compiler-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/CartContext.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
 ;
+;
 function Cart(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(37);
-    if ($[0] !== "a9b9a131868cc08160e9828228f276a0d6e33a476461cab4bd5ac720327a2278") {
-        for(let $i = 0; $i < 37; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(66);
+    if ($[0] !== "036d5a3bb9fd316d6a610c518c9505a7c34b30e7b5ef313af88e5cb1f9a64a7f") {
+        for(let $i = 0; $i < 66; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "a9b9a131868cc08160e9828228f276a0d6e33a476461cab4bd5ac720327a2278";
+        $[0] = "036d5a3bb9fd316d6a610c518c9505a7c34b30e7b5ef313af88e5cb1f9a64a7f";
     }
     const { isOpen, onClose } = t0;
-    const { cartItems, removeFromCart, updateQuantity, getTotalPrice } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"])();
+    const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"])();
+    const [isRemoving, setIsRemoving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     let t1;
     let t2;
     let t3;
@@ -635,49 +442,236 @@ function Cart(t0) {
     let t6;
     let t7;
     let t8;
-    if ($[1] !== cartItems || $[2] !== getTotalPrice || $[3] !== isOpen || $[4] !== onClose || $[5] !== removeFromCart || $[6] !== updateQuantity) {
+    if ($[1] !== cartItems || $[2] !== clearCart || $[3] !== getTotalPrice || $[4] !== isOpen || $[5] !== isRemoving || $[6] !== onClose || $[7] !== removeFromCart || $[8] !== updateQuantity) {
         t8 = Symbol.for("react.early_return_sentinel");
         bb0: {
             const total = getTotalPrice();
+            const itemCount = cartItems.reduce(_CartCartItemsReduce, 0);
             if (!isOpen) {
                 t8 = null;
                 break bb0;
             }
+            let t9;
+            if ($[17] !== removeFromCart) {
+                t9 = ({
+                    "Cart[handleRemove]": async (itemId)=>{
+                        setIsRemoving(itemId);
+                        await new Promise(_temp);
+                        removeFromCart(itemId);
+                        setIsRemoving(null);
+                    }
+                })["Cart[handleRemove]"];
+                $[17] = removeFromCart;
+                $[18] = t9;
+            } else {
+                t9 = $[18];
+            }
+            const handleRemove = t9;
+            let t10;
+            if ($[19] !== handleRemove || $[20] !== updateQuantity) {
+                t10 = ({
+                    "Cart[handleQuantityChange]": (itemId_0, newQuantity)=>{
+                        if (newQuantity <= 0) {
+                            handleRemove(itemId_0);
+                        } else {
+                            updateQuantity(itemId_0, newQuantity);
+                        }
+                    }
+                })["Cart[handleQuantityChange]"];
+                $[19] = handleRemove;
+                $[20] = updateQuantity;
+                $[21] = t10;
+            } else {
+                t10 = $[21];
+            }
+            const handleQuantityChange = t10;
             t6 = "fixed inset-0 z-50 overflow-hidden";
-            if ($[15] !== onClose) {
+            if ($[22] !== onClose) {
                 t7 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "absolute inset-0 bg-black bg-opacity-50",
+                    className: "absolute inset-0 bg-slate-900/70 backdrop-blur-xl transition-opacity duration-300",
                     onClick: onClose
                 }, void 0, false, {
                     fileName: "[project]/src/components/Cart.js",
-                    lineNumber: 42,
+                    lineNumber: 80,
                     columnNumber: 14
                 }, this);
-                $[15] = onClose;
-                $[16] = t7;
+                $[22] = onClose;
+                $[23] = t7;
             } else {
-                t7 = $[16];
+                t7 = $[23];
             }
-            t5 = "absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl";
-            t1 = "flex flex-col h-full";
-            let t9;
-            if ($[17] === Symbol.for("react.memo_cache_sentinel")) {
-                t9 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                    className: "text-lg font-semibold",
-                    children: "Shopping Cart"
+            t5 = "absolute right-0 top-0 h-full w-full max-w-md transform transition-transform duration-300 ease-in-out";
+            t1 = "flex flex-col h-full bg-white dark:bg-slate-800 shadow-2xl border-l border-slate-200 dark:border-slate-700";
+            let t11;
+            if ($[24] === Symbol.for("react.memo_cache_sentinel")) {
+                t11 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        className: "w-5 h-5 text-white",
+                        fill: "none",
+                        stroke: "currentColor",
+                        viewBox: "0 0 24 24",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: 2,
+                            d: "M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Cart.js",
+                            lineNumber: 90,
+                            columnNumber: 188
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Cart.js",
+                        lineNumber: 90,
+                        columnNumber: 98
+                    }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Cart.js",
-                    lineNumber: 52,
-                    columnNumber: 14
+                    lineNumber: 90,
+                    columnNumber: 15
                 }, this);
-                $[17] = t9;
+                $[24] = t11;
             } else {
-                t9 = $[17];
+                t11 = $[24];
             }
-            let t10;
-            if ($[18] === Symbol.for("react.memo_cache_sentinel")) {
-                t10 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                    className: "w-6 h-6",
+            let t12;
+            if ($[25] !== itemCount) {
+                t12 = itemCount > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    className: "absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-bounce",
+                    children: itemCount
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 97,
+                    columnNumber: 32
+                }, this);
+                $[25] = itemCount;
+                $[26] = t12;
+            } else {
+                t12 = $[26];
+            }
+            let t13;
+            if ($[27] !== t12) {
+                t13 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "relative",
+                    children: [
+                        t11,
+                        t12
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 105,
+                    columnNumber: 15
+                }, this);
+                $[27] = t12;
+                $[28] = t13;
+            } else {
+                t13 = $[28];
+            }
+            let t14;
+            if ($[29] === Symbol.for("react.memo_cache_sentinel")) {
+                t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                    className: "text-2xl font-black text-slate-900 dark:text-white",
+                    children: "Your Cart"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 113,
+                    columnNumber: 15
+                }, this);
+                $[29] = t14;
+            } else {
+                t14 = $[29];
+            }
+            const t15 = itemCount === 1 ? "item" : "items";
+            let t16;
+            if ($[30] !== itemCount || $[31] !== t15) {
+                t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    children: [
+                        t14,
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-sm text-slate-600 dark:text-slate-400",
+                            children: [
+                                itemCount,
+                                " ",
+                                t15
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/Cart.js",
+                            lineNumber: 121,
+                            columnNumber: 25
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 121,
+                    columnNumber: 15
+                }, this);
+                $[30] = itemCount;
+                $[31] = t15;
+                $[32] = t16;
+            } else {
+                t16 = $[32];
+            }
+            let t17;
+            if ($[33] !== t13 || $[34] !== t16) {
+                t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center space-x-3",
+                    children: [
+                        t13,
+                        t16
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 130,
+                    columnNumber: 15
+                }, this);
+                $[33] = t13;
+                $[34] = t16;
+                $[35] = t17;
+            } else {
+                t17 = $[35];
+            }
+            let t18;
+            if ($[36] !== cartItems.length || $[37] !== clearCart) {
+                t18 = cartItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    onClick: clearCart,
+                    className: "p-2 text-slate-400 hover:text-red-500 transition-colors duration-200",
+                    title: "Clear cart",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        className: "w-5 h-5",
+                        fill: "none",
+                        stroke: "currentColor",
+                        viewBox: "0 0 24 24",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: 2,
+                            d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Cart.js",
+                            lineNumber: 139,
+                            columnNumber: 246
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Cart.js",
+                        lineNumber: 139,
+                        columnNumber: 167
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 139,
+                    columnNumber: 39
+                }, this);
+                $[36] = cartItems.length;
+                $[37] = clearCart;
+                $[38] = t18;
+            } else {
+                t18 = $[38];
+            }
+            let t19;
+            if ($[39] === Symbol.for("react.memo_cache_sentinel")) {
+                t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                    className: "w-5 h-5 text-slate-700 dark:text-slate-300",
                     fill: "none",
                     stroke: "currentColor",
                     viewBox: "0 0 24 24",
@@ -688,272 +682,567 @@ function Cart(t0) {
                         d: "M6 18L18 6M6 6l12 12"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Cart.js",
-                        lineNumber: 59,
-                        columnNumber: 94
+                        lineNumber: 148,
+                        columnNumber: 129
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Cart.js",
-                    lineNumber: 59,
+                    lineNumber: 148,
                     columnNumber: 15
                 }, this);
-                $[18] = t10;
+                $[39] = t19;
             } else {
-                t10 = $[18];
+                t19 = $[39];
             }
-            if ($[19] !== onClose) {
-                t2 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex items-center justify-between p-4 border-b",
+            let t20;
+            if ($[40] !== onClose) {
+                t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    onClick: onClose,
+                    className: "w-10 h-10 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-600 hover:scale-110 transition-all duration-200",
+                    children: t19
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 155,
+                    columnNumber: 15
+                }, this);
+                $[40] = onClose;
+                $[41] = t20;
+            } else {
+                t20 = $[41];
+            }
+            let t21;
+            if ($[42] !== t18 || $[43] !== t20) {
+                t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center space-x-2",
                     children: [
-                        t9,
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: onClose,
-                            className: "text-gray-400 hover:text-gray-600",
-                            children: t10
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/Cart.js",
-                            lineNumber: 65,
-                            columnNumber: 82
-                        }, this)
+                        t18,
+                        t20
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Cart.js",
-                    lineNumber: 65,
-                    columnNumber: 14
+                    lineNumber: 163,
+                    columnNumber: 15
                 }, this);
-                $[19] = onClose;
-                $[20] = t2;
+                $[42] = t18;
+                $[43] = t20;
+                $[44] = t21;
             } else {
-                t2 = $[20];
+                t21 = $[44];
             }
-            if ($[21] !== cartItems || $[22] !== removeFromCart || $[23] !== updateQuantity) {
-                t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex-1 overflow-y-auto p-4",
-                    children: cartItems.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-center text-gray-500",
-                        children: "Your cart is empty"
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/Cart.js",
-                        lineNumber: 72,
-                        columnNumber: 84
-                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-4",
-                        children: cartItems.map({
-                            "Cart[cartItems.map()]": (item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex items-center space-x-4",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "w-16 h-16 bg-gray-200 rounded-md flex-shrink-0",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                                src: item.image,
-                                                alt: item.name,
-                                                className: "w-full h-full object-cover rounded-md"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Cart.js",
-                                                lineNumber: 73,
-                                                columnNumber: 171
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/Cart.js",
-                                            lineNumber: 73,
-                                            columnNumber: 107
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex-1",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "font-medium",
-                                                    children: item.name
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Cart.js",
-                                                    lineNumber: 73,
-                                                    columnNumber: 291
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-sm text-gray-600",
-                                                    children: [
-                                                        "$",
-                                                        item.price
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/components/Cart.js",
-                                                    lineNumber: 73,
-                                                    columnNumber: 335
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center space-x-2 mt-1",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            onClick: {
-                                                                "Cart[cartItems.map() > <button>.onClick]": ()=>updateQuantity(item.id, item.quantity - 1)
-                                                            }["Cart[cartItems.map() > <button>.onClick]"],
-                                                            className: "w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300",
-                                                            children: "-"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/Cart.js",
-                                                            lineNumber: 73,
-                                                            columnNumber: 439
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "text-sm",
-                                                            children: item.quantity
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/Cart.js",
-                                                            lineNumber: 75,
-                                                            columnNumber: 182
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            onClick: {
-                                                                "Cart[cartItems.map() > <button>.onClick]": ()=>updateQuantity(item.id, item.quantity + 1)
-                                                            }["Cart[cartItems.map() > <button>.onClick]"],
-                                                            className: "w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300",
-                                                            children: "+"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/Cart.js",
-                                                            lineNumber: 75,
-                                                            columnNumber: 230
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/components/Cart.js",
-                                                    lineNumber: 73,
-                                                    columnNumber: 389
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/components/Cart.js",
-                                            lineNumber: 73,
-                                            columnNumber: 267
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "text-right",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "font-semibold",
-                                                    children: [
-                                                        "$",
-                                                        (item.price * item.quantity).toFixed(2)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/components/Cart.js",
-                                                    lineNumber: 77,
-                                                    columnNumber: 222
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    onClick: {
-                                                        "Cart[cartItems.map() > <button>.onClick]": ()=>removeFromCart(item.id)
-                                                    }["Cart[cartItems.map() > <button>.onClick]"],
-                                                    className: "text-red-500 text-sm hover:text-red-700 mt-1",
-                                                    children: "Remove"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Cart.js",
-                                                    lineNumber: 77,
-                                                    columnNumber: 301
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/components/Cart.js",
-                                            lineNumber: 77,
-                                            columnNumber: 194
-                                        }, this)
-                                    ]
-                                }, item.id, true, {
-                                    fileName: "[project]/src/components/Cart.js",
-                                    lineNumber: 73,
-                                    columnNumber: 48
-                                }, this)
-                        }["Cart[cartItems.map()]"])
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/Cart.js",
-                        lineNumber: 72,
-                        columnNumber: 150
-                    }, this)
-                }, void 0, false, {
+            if ($[45] !== t17 || $[46] !== t21) {
+                t2 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800",
+                    children: [
+                        t17,
+                        t21
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/src/components/Cart.js",
-                    lineNumber: 72,
+                    lineNumber: 171,
                     columnNumber: 14
                 }, this);
-                $[21] = cartItems;
-                $[22] = removeFromCart;
-                $[23] = updateQuantity;
-                $[24] = t3;
+                $[45] = t17;
+                $[46] = t21;
+                $[47] = t2;
             } else {
-                t3 = $[24];
+                t2 = $[47];
             }
-            t4 = cartItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "border-t p-4",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex justify-between items-center mb-4",
+            if ($[48] !== cartItems || $[49] !== handleQuantityChange || $[50] !== handleRemove || $[51] !== isRemoving || $[52] !== onClose) {
+                t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex-1 overflow-y-auto",
+                    children: cartItems.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex flex-col items-center justify-center h-full text-center p-8",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-lg font-semibold",
-                                children: "Total:"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "w-24 h-24 mb-6 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                    className: "w-12 h-12 text-slate-400",
+                                    fill: "none",
+                                    stroke: "currentColor",
+                                    viewBox: "0 0 24 24",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                        strokeLinecap: "round",
+                                        strokeLinejoin: "round",
+                                        strokeWidth: 2,
+                                        d: "M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 179,
+                                        columnNumber: 367
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Cart.js",
+                                    lineNumber: 179,
+                                    columnNumber: 271
+                                }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Cart.js",
-                                lineNumber: 88,
-                                columnNumber: 122
+                                lineNumber: 179,
+                                columnNumber: 162
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-lg font-semibold",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-2xl font-bold text-slate-900 dark:text-white mb-3",
+                                children: "Your cart is empty"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 179,
+                                columnNumber: 540
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-slate-600 dark:text-slate-400 mb-6 max-w-sm",
+                                children: "Looks like you haven't added any items to your cart yet. Start shopping to discover amazing products!"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 179,
+                                columnNumber: 634
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: onClose,
+                                className: "inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105",
                                 children: [
-                                    "$",
-                                    total.toFixed(2)
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        className: "w-5 h-5",
+                                        fill: "none",
+                                        stroke: "currentColor",
+                                        viewBox: "0 0 24 24",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                            strokeLinecap: "round",
+                                            strokeLinejoin: "round",
+                                            strokeWidth: 2,
+                                            d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Cart.js",
+                                            lineNumber: 179,
+                                            columnNumber: 1126
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 179,
+                                        columnNumber: 1047
+                                    }, this),
+                                    "Start Shopping"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Cart.js",
-                                lineNumber: 88,
-                                columnNumber: 175
+                                lineNumber: 179,
+                                columnNumber: 803
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Cart.js",
-                        lineNumber: 88,
-                        columnNumber: 66
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors",
-                        children: "Checkout"
+                        lineNumber: 179,
+                        columnNumber: 80
+                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "p-6 space-y-4",
+                        children: cartItems.map({
+                            "Cart[cartItems.map()]": (item_0)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: `bg-white dark:bg-slate-700/50 rounded-2xl p-4 border border-slate-200 dark:border-slate-600 transition-all duration-300 ${isRemoving === item_0.id ? "scale-95 opacity-50" : "hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg"}`,
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex items-center space-x-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                        src: item_0.image,
+                                                        alt: item_0.name,
+                                                        fill: true,
+                                                        className: "object-cover"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/Cart.js",
+                                                        lineNumber: 180,
+                                                        columnNumber: 448
+                                                    }, this),
+                                                    isRemoving === item_0.id && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "absolute inset-0 bg-red-500/20 flex items-center justify-center",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                            className: "w-6 h-6 text-red-500 animate-spin",
+                                                            fill: "none",
+                                                            stroke: "currentColor",
+                                                            viewBox: "0 0 24 24",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                strokeLinecap: "round",
+                                                                strokeLinejoin: "round",
+                                                                strokeWidth: 2,
+                                                                d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/Cart.js",
+                                                                lineNumber: 180,
+                                                                columnNumber: 746
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Cart.js",
+                                                            lineNumber: 180,
+                                                            columnNumber: 641
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/Cart.js",
+                                                        lineNumber: 180,
+                                                        columnNumber: 560
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/Cart.js",
+                                                lineNumber: 180,
+                                                columnNumber: 371
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex-1 min-w-0",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                        className: "font-semibold text-slate-900 dark:text-white truncate mb-1",
+                                                        children: item_0.name
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/Cart.js",
+                                                        lineNumber: 180,
+                                                        columnNumber: 995
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                        className: "text-blue-600 dark:text-blue-400 font-bold text-lg mb-2",
+                                                        children: [
+                                                            "$",
+                                                            item_0.price
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/components/Cart.js",
+                                                        lineNumber: 180,
+                                                        columnNumber: 1088
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "flex items-center justify-between",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "flex items-center space-x-3",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                        onClick: {
+                                                                            "Cart[cartItems.map() > <button>.onClick]": ()=>handleQuantityChange(item_0.id, item_0.quantity - 1)
+                                                                        }["Cart[cartItems.map() > <button>.onClick]"],
+                                                                        className: "w-8 h-8 bg-slate-100 dark:bg-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-500 transition-colors font-semibold text-slate-700 dark:text-slate-300",
+                                                                        children: "−"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/Cart.js",
+                                                                        lineNumber: 180,
+                                                                        columnNumber: 1274
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                        className: "w-8 text-center font-bold text-slate-900 dark:text-white",
+                                                                        children: item_0.quantity
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/Cart.js",
+                                                                        lineNumber: 182,
+                                                                        columnNumber: 287
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                        onClick: {
+                                                                            "Cart[cartItems.map() > <button>.onClick]": ()=>handleQuantityChange(item_0.id, item_0.quantity + 1)
+                                                                        }["Cart[cartItems.map() > <button>.onClick]"],
+                                                                        className: "w-8 h-8 bg-slate-100 dark:bg-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-500 transition-colors font-semibold text-slate-700 dark:text-slate-300",
+                                                                        children: "+"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/Cart.js",
+                                                                        lineNumber: 182,
+                                                                        columnNumber: 386
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/Cart.js",
+                                                                lineNumber: 180,
+                                                                columnNumber: 1229
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "text-right",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        className: "font-bold text-slate-900 dark:text-white text-lg",
+                                                                        children: [
+                                                                            "$",
+                                                                            (item_0.price * item_0.quantity).toFixed(2)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/src/components/Cart.js",
+                                                                        lineNumber: 184,
+                                                                        columnNumber: 321
+                                                                    }, this),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                        onClick: {
+                                                                            "Cart[cartItems.map() > <button>.onClick]": ()=>handleRemove(item_0.id)
+                                                                        }["Cart[cartItems.map() > <button>.onClick]"],
+                                                                        className: "text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1 mt-1",
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                                className: "w-4 h-4",
+                                                                                fill: "none",
+                                                                                stroke: "currentColor",
+                                                                                viewBox: "0 0 24 24",
+                                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                                    strokeLinecap: "round",
+                                                                                    strokeLinejoin: "round",
+                                                                                    strokeWidth: 2,
+                                                                                    d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/src/components/Cart.js",
+                                                                                    lineNumber: 186,
+                                                                                    columnNumber: 275
+                                                                                }, this)
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/Cart.js",
+                                                                                lineNumber: 186,
+                                                                                columnNumber: 196
+                                                                            }, this),
+                                                                            "Remove"
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/src/components/Cart.js",
+                                                                        lineNumber: 184,
+                                                                        columnNumber: 439
+                                                                    }, this)
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/Cart.js",
+                                                                lineNumber: 184,
+                                                                columnNumber: 293
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/components/Cart.js",
+                                                        lineNumber: 180,
+                                                        columnNumber: 1178
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/Cart.js",
+                                                lineNumber: 180,
+                                                columnNumber: 963
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 180,
+                                        columnNumber: 326
+                                    }, this)
+                                }, item_0.id, false, {
+                                    fileName: "[project]/src/components/Cart.js",
+                                    lineNumber: 180,
+                                    columnNumber: 50
+                                }, this)
+                        }["Cart[cartItems.map()]"])
                     }, void 0, false, {
                         fileName: "[project]/src/components/Cart.js",
-                        lineNumber: 88,
-                        columnNumber: 247
+                        lineNumber: 179,
+                        columnNumber: 1281
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Cart.js",
+                    lineNumber: 179,
+                    columnNumber: 14
+                }, this);
+                $[48] = cartItems;
+                $[49] = handleQuantityChange;
+                $[50] = handleRemove;
+                $[51] = isRemoving;
+                $[52] = onClose;
+                $[53] = t3;
+            } else {
+                t3 = $[53];
+            }
+            t4 = cartItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "border-t border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800 p-6 space-y-4",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-3",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex justify-between items-center text-slate-600 dark:text-slate-400",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: "Subtotal"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 197,
+                                        columnNumber: 306
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: [
+                                            "$",
+                                            total.toFixed(2)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 197,
+                                        columnNumber: 327
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 197,
+                                columnNumber: 220
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex justify-between items-center text-slate-600 dark:text-slate-400",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: "Shipping"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 197,
+                                        columnNumber: 451
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-green-600 dark:text-green-400",
+                                        children: "Free"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 197,
+                                        columnNumber: 472
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 197,
+                                columnNumber: 365
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex justify-between items-center text-slate-600 dark:text-slate-400",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: "Tax"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 197,
+                                        columnNumber: 628
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        children: [
+                                            "$",
+                                            (total * 0.1).toFixed(2)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Cart.js",
+                                        lineNumber: 197,
+                                        columnNumber: 644
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 197,
+                                columnNumber: 542
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "border-t border-slate-200 dark:border-slate-600 pt-3",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex justify-between items-center text-xl font-black text-slate-900 dark:text-white",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: "Total"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Cart.js",
+                                            lineNumber: 197,
+                                            columnNumber: 861
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            children: [
+                                                "$",
+                                                (total * 1.1).toFixed(2)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/Cart.js",
+                                            lineNumber: 197,
+                                            columnNumber: 879
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/Cart.js",
+                                    lineNumber: 197,
+                                    columnNumber: 760
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 197,
+                                columnNumber: 690
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/Cart.js",
+                        lineNumber: 197,
+                        columnNumber: 193
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "space-y-3",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                className: "w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl",
+                                children: "Proceed to Checkout"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 197,
+                                columnNumber: 964
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: onClose,
+                                className: "w-full border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 py-3 rounded-xl font-semibold hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all duration-300",
+                                children: "Continue Shopping"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Cart.js",
+                                lineNumber: 197,
+                                columnNumber: 1215
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/Cart.js",
+                        lineNumber: 197,
+                        columnNumber: 937
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex justify-center space-x-6 pt-4",
+                        children: [
+                            "\uD83D\uDD12",
+                            "\uD83D\uDE9A",
+                            "\u21A9\uFE0F"
+                        ].map(_CartAnonymous)
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Cart.js",
+                        lineNumber: 197,
+                        columnNumber: 1529
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Cart.js",
-                lineNumber: 88,
+                lineNumber: 197,
                 columnNumber: 36
             }, this);
         }
         $[1] = cartItems;
-        $[2] = getTotalPrice;
-        $[3] = isOpen;
-        $[4] = onClose;
-        $[5] = removeFromCart;
-        $[6] = updateQuantity;
-        $[7] = t1;
-        $[8] = t2;
-        $[9] = t3;
-        $[10] = t4;
-        $[11] = t5;
-        $[12] = t6;
-        $[13] = t7;
-        $[14] = t8;
+        $[2] = clearCart;
+        $[3] = getTotalPrice;
+        $[4] = isOpen;
+        $[5] = isRemoving;
+        $[6] = onClose;
+        $[7] = removeFromCart;
+        $[8] = updateQuantity;
+        $[9] = t1;
+        $[10] = t2;
+        $[11] = t3;
+        $[12] = t4;
+        $[13] = t5;
+        $[14] = t6;
+        $[15] = t7;
+        $[16] = t8;
     } else {
-        t1 = $[7];
-        t2 = $[8];
-        t3 = $[9];
-        t4 = $[10];
-        t5 = $[11];
-        t6 = $[12];
-        t7 = $[13];
-        t8 = $[14];
+        t1 = $[9];
+        t2 = $[10];
+        t3 = $[11];
+        t4 = $[12];
+        t5 = $[13];
+        t6 = $[14];
+        t7 = $[15];
+        t8 = $[16];
     }
     if (t8 !== Symbol.for("react.early_return_sentinel")) {
         return t8;
     }
     let t9;
-    if ($[25] !== t1 || $[26] !== t2 || $[27] !== t3 || $[28] !== t4) {
+    if ($[54] !== t1 || $[55] !== t2 || $[56] !== t3 || $[57] !== t4) {
         t9 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: t1,
             children: [
@@ -963,35 +1252,35 @@ function Cart(t0) {
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Cart.js",
-            lineNumber: 119,
+            lineNumber: 230,
             columnNumber: 10
         }, this);
-        $[25] = t1;
-        $[26] = t2;
-        $[27] = t3;
-        $[28] = t4;
-        $[29] = t9;
+        $[54] = t1;
+        $[55] = t2;
+        $[56] = t3;
+        $[57] = t4;
+        $[58] = t9;
     } else {
-        t9 = $[29];
+        t9 = $[58];
     }
     let t10;
-    if ($[30] !== t5 || $[31] !== t9) {
+    if ($[59] !== t5 || $[60] !== t9) {
         t10 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: t5,
             children: t9
         }, void 0, false, {
             fileName: "[project]/src/components/Cart.js",
-            lineNumber: 130,
+            lineNumber: 241,
             columnNumber: 11
         }, this);
-        $[30] = t5;
-        $[31] = t9;
-        $[32] = t10;
+        $[59] = t5;
+        $[60] = t9;
+        $[61] = t10;
     } else {
-        t10 = $[32];
+        t10 = $[61];
     }
     let t11;
-    if ($[33] !== t10 || $[34] !== t6 || $[35] !== t7) {
+    if ($[62] !== t10 || $[63] !== t6 || $[64] !== t7) {
         t11 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: t6,
             children: [
@@ -1000,24 +1289,59 @@ function Cart(t0) {
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Cart.js",
-            lineNumber: 139,
+            lineNumber: 250,
             columnNumber: 11
         }, this);
-        $[33] = t10;
-        $[34] = t6;
-        $[35] = t7;
-        $[36] = t11;
+        $[62] = t10;
+        $[63] = t6;
+        $[64] = t7;
+        $[65] = t11;
     } else {
-        t11 = $[36];
+        t11 = $[65];
     }
     return t11;
 }
-_s(Cart, "80hrGnSmewk6YRS4fO+67m2wTQg=", false, function() {
+_s(Cart, "pHlHDKBtDTNdR7hudK+6ZWIScE0=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"]
     ];
 });
 _c = Cart;
+function _CartAnonymous(icon, index) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "flex items-center space-x-1 text-xs text-slate-500 dark:text-slate-400",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                children: icon
+            }, void 0, false, {
+                fileName: "[project]/src/components/Cart.js",
+                lineNumber: 261,
+                columnNumber: 110
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                children: [
+                    icon === "\uD83D\uDD12" && "Secure",
+                    icon === "\uD83D\uDE9A" && "Fast Delivery",
+                    icon === "\u21A9\uFE0F" && "Easy Returns"
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/Cart.js",
+                lineNumber: 261,
+                columnNumber: 129
+            }, this)
+        ]
+    }, index, true, {
+        fileName: "[project]/src/components/Cart.js",
+        lineNumber: 261,
+        columnNumber: 10
+    }, this);
+}
+function _temp(resolve) {
+    return setTimeout(resolve, 300);
+}
+function _CartCartItemsReduce(sum, item) {
+    return sum + item.quantity;
+}
 var _c;
 __turbopack_context__.k.register(_c, "Cart");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -1191,6 +1515,32 @@ const products = [
             "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
             "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400"
         ]
+    },
+    {
+        id: 13,
+        name: "Classic White T-Shirt",
+        price: 19.99,
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+        category: "Men",
+        description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+        thumbnails: [
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+            "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
+            "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400"
+        ]
+    },
+    {
+        id: 14,
+        name: "Classic White T-Shirt",
+        price: 19.99,
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+        category: "Men",
+        description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+        thumbnails: [
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+            "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
+            "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400"
+        ]
     }
 ];
 const categories = [
@@ -1244,12 +1594,12 @@ var _s = __turbopack_context__.k.signature();
 ;
 function Navbar() {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(82);
-    if ($[0] !== "7fe9b0fff5c85400174e014d4d1449475e43a7b5554bc641235dbca70d2d751f") {
-        for(let $i = 0; $i < 82; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(80);
+    if ($[0] !== "901cadadde094a81a185add316fb38e21541d737950ac1c1d28676d981ca3c50") {
+        for(let $i = 0; $i < 80; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "7fe9b0fff5c85400174e014d4d1449475e43a7b5554bc641235dbca70d2d751f";
+        $[0] = "901cadadde094a81a185add316fb38e21541d737950ac1c1d28676d981ca3c50";
     }
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
     const [cartOpen, setCartOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -1493,7 +1843,7 @@ function Navbar() {
                         const isActive = pathname === item.href;
                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             href: item.href,
-                            className: `relative px-6 py-2 transition-all duration-300 font-semibold group ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"}`,
+                            className: `relative px-4 py-2 transition-all duration-300 font-semibold group ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"}`,
                             children: [
                                 item.label,
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2041,119 +2391,69 @@ function Navbar() {
         t37 = $[57];
     }
     let t38;
-    if ($[58] === Symbol.for("react.memo_cache_sentinel")) {
+    if ($[58] !== t28 || $[59] !== t32 || $[60] !== t37) {
         t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 369,
-            columnNumber: 11
-        }, this);
-        $[58] = t38;
-    } else {
-        t38 = $[58];
-    }
-    let t39;
-    if ($[59] === Symbol.for("react.memo_cache_sentinel")) {
-        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            className: "p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group",
-            children: [
-                t38,
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                    className: "w-5 h-5 relative z-10",
-                    fill: "none",
-                    stroke: "currentColor",
-                    viewBox: "0 0 24 24",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                        strokeLinecap: "round",
-                        strokeLinejoin: "round",
-                        strokeWidth: 2,
-                        d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 376,
-                        columnNumber: 415
-                    }, this)
-                }, void 0, false, {
-                    fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 376,
-                    columnNumber: 322
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 376,
-            columnNumber: 11
-        }, this);
-        $[59] = t39;
-    } else {
-        t39 = $[59];
-    }
-    let t40;
-    if ($[60] !== t28 || $[61] !== t32 || $[62] !== t37) {
-        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex items-center space-x-5",
             children: [
                 t28,
                 t29,
                 t32,
-                t37,
-                t39
+                t37
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 383,
+            lineNumber: 369,
             columnNumber: 11
         }, this);
-        $[60] = t28;
-        $[61] = t32;
-        $[62] = t37;
-        $[63] = t40;
+        $[58] = t28;
+        $[59] = t32;
+        $[60] = t37;
+        $[61] = t38;
     } else {
-        t40 = $[63];
+        t38 = $[61];
     }
-    let t41;
-    if ($[64] !== t21 || $[65] !== t40) {
-        t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t39;
+    if ($[62] !== t21 || $[63] !== t38) {
+        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex items-center justify-end space-x-5 shrink-0",
             children: [
                 t21,
-                t40
+                t38
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 393,
+            lineNumber: 379,
             columnNumber: 11
         }, this);
-        $[64] = t21;
-        $[65] = t40;
-        $[66] = t41;
+        $[62] = t21;
+        $[63] = t38;
+        $[64] = t39;
     } else {
-        t41 = $[66];
+        t39 = $[64];
     }
-    let t42;
-    if ($[67] !== t14 || $[68] !== t41) {
-        t42 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t40;
+    if ($[65] !== t14 || $[66] !== t39) {
+        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex justify-between items-center h-16 lg:h-20",
             children: [
                 t12,
                 t14,
-                t41
+                t39
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 402,
+            lineNumber: 388,
             columnNumber: 11
         }, this);
-        $[67] = t14;
-        $[68] = t41;
-        $[69] = t42;
+        $[65] = t14;
+        $[66] = t39;
+        $[67] = t40;
     } else {
-        t42 = $[69];
+        t40 = $[67];
     }
-    let t43;
-    if ($[70] === Symbol.for("react.memo_cache_sentinel")) {
-        t43 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t41;
+    if ($[68] === Symbol.for("react.memo_cache_sentinel")) {
+        t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "lg:hidden border-t border-gray-200/50 dark:border-slate-700/50 py-3",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex justify-center space-x-6",
@@ -2164,7 +2464,7 @@ function Navbar() {
                         children: "Home"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 411,
+                        lineNumber: 397,
                         columnNumber: 143
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2173,8 +2473,17 @@ function Navbar() {
                         children: "Shop"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 411,
+                        lineNumber: 397,
                         columnNumber: 289
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        href: "/about",
+                        className: "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium",
+                        children: "About"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Navbar.js",
+                        lineNumber: 397,
+                        columnNumber: 439
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         href: "/contact",
@@ -2182,100 +2491,100 @@ function Navbar() {
                         children: "Contact"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 411,
-                        columnNumber: 439
+                        lineNumber: 397,
+                        columnNumber: 591
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 411,
+                lineNumber: 397,
                 columnNumber: 96
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 411,
+            lineNumber: 397,
             columnNumber: 11
         }, this);
-        $[70] = t43;
+        $[68] = t41;
     } else {
-        t43 = $[70];
+        t41 = $[68];
     }
-    let t44;
-    if ($[71] !== t42) {
-        t44 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t42;
+    if ($[69] !== t40) {
+        t42 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "mx-auto px-4 sm:px-6 lg:px-8 relative",
             children: [
-                t42,
-                t43
+                t40,
+                t41
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 418,
+            lineNumber: 404,
             columnNumber: 11
         }, this);
-        $[71] = t42;
-        $[72] = t44;
+        $[69] = t40;
+        $[70] = t42;
     } else {
-        t44 = $[72];
+        t42 = $[70];
     }
-    let t45;
-    if ($[73] !== t44 || $[74] !== t9) {
-        t45 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+    let t43;
+    if ($[71] !== t42 || $[72] !== t9) {
+        t43 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
             className: t9,
             children: [
                 t10,
-                t44
+                t42
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 426,
+            lineNumber: 412,
             columnNumber: 11
         }, this);
-        $[73] = t44;
-        $[74] = t9;
-        $[75] = t45;
+        $[71] = t42;
+        $[72] = t9;
+        $[73] = t43;
     } else {
-        t45 = $[75];
+        t43 = $[73];
     }
-    let t46;
-    if ($[76] === Symbol.for("react.memo_cache_sentinel")) {
-        t46 = ({
+    let t44;
+    if ($[74] === Symbol.for("react.memo_cache_sentinel")) {
+        t44 = ({
             "Navbar[<Cart>.onClose]": ()=>setCartOpen(false)
         })["Navbar[<Cart>.onClose]"];
-        $[76] = t46;
+        $[74] = t44;
     } else {
-        t46 = $[76];
+        t44 = $[74];
     }
-    let t47;
-    if ($[77] !== cartOpen) {
-        t47 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Cart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+    let t45;
+    if ($[75] !== cartOpen) {
+        t45 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Cart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
             isOpen: cartOpen,
-            onClose: t46
+            onClose: t44
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 444,
+            lineNumber: 430,
             columnNumber: 11
         }, this);
-        $[77] = cartOpen;
-        $[78] = t47;
+        $[75] = cartOpen;
+        $[76] = t45;
     } else {
-        t47 = $[78];
+        t45 = $[76];
     }
-    let t48;
-    if ($[79] !== t45 || $[80] !== t47) {
-        t48 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+    let t46;
+    if ($[77] !== t43 || $[78] !== t45) {
+        t46 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
             children: [
-                t45,
-                t47
+                t43,
+                t45
             ]
         }, void 0, true);
-        $[79] = t45;
-        $[80] = t47;
-        $[81] = t48;
+        $[77] = t43;
+        $[78] = t45;
+        $[79] = t46;
     } else {
-        t48 = $[81];
+        t46 = $[79];
     }
-    return t48;
+    return t46;
 }
 _s(Navbar, "17tJCxWc/qv0cyT5CW7ww/ctf8A=", false, function() {
     return [

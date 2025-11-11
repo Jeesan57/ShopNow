@@ -82,7 +82,7 @@ export default function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 ">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       {/* Professional Header */}
       <div className="relative bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden">
         {/* Animated background elements */}
@@ -93,19 +93,25 @@ export default function Shop() {
         </div>
 
         {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-6">
+        <div className="relative max-w-7xl mx-auto px-6 py-20">
           <div className="text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-white/90">Premium Collection</span>
+            </div>
 
             {/* Main heading */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-1 mt-2">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6">
               <span className="bg-linear-to-r from-white to-blue-200 bg-clip-text text-transparent">
                 Shop Excellence
               </span>
             </h1>
+
             {/* Subtitle */}
-            <p className="text-xl md:text-md text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
               Discover handpicked products where quality craftsmanship meets timeless design
             </p>
           </div>
@@ -113,13 +119,13 @@ export default function Shop() {
 
         {/* Wave separator */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" className="w-full h-10 fill-white dark:fill-slate-900">
+          <svg viewBox="0 0 1440 120" className="w-full h-16 fill-white dark:fill-slate-900">
             <path d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
           </svg>
         </div>
       </div>
 
-      <div className="max-w-8xl mx-auto px-10 py-10">
+      <div className="max-w-8xl mx-auto px-10 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Professional Sidebar */}
           <div className="lg:w-80 shrink-0">
@@ -154,8 +160,8 @@ export default function Shop() {
                     <button
                       onClick={() => setSelectedCategory('All')}
                       className={`flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === 'All'
-                          ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
-                          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
+                        ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
+                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
                         }`}
                     >
                       <span>All Products</span>
@@ -168,8 +174,8 @@ export default function Shop() {
                           key={category}
                           onClick={() => setSelectedCategory(category)}
                           className={`flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === category
-                              ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
-                              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
+                            ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
+                            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
                             }`}
                         >
                           <span>{category}</span>
@@ -238,9 +244,9 @@ export default function Shop() {
                       {/* Wishlist Button */}
                       <button
                         onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
-                        className={`absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-sm transition-all duration-300 ${isInWishlist(product.id)
-                            ? 'bg-red-500 text-white shadow-lg'
-                            : 'bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 shadow-md'
+                        className={`absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-sm transition-all duration-300 z-10 ${isInWishlist(product.id)
+                          ? 'bg-red-500 text-white shadow-lg'
+                          : 'bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 shadow-md'
                           }`}
                       >
                         <svg className="w-5 h-5" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -298,8 +304,8 @@ export default function Shop() {
                             }, 2000);
                           }}
                           className={`px-4 py-2 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg min-w-[120px] flex items-center justify-center gap-2 ${addedProducts.has(product.id)
-                              ? 'bg-green-600 text-white scale-95'
-                              : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 active:scale-95'
+                            ? 'bg-green-600 text-white scale-95'
+                            : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 active:scale-95'
                             }`}
                         >
                           {addedProducts.has(product.id) ? (
@@ -363,8 +369,8 @@ export default function Shop() {
                         key={pageNumber}
                         onClick={() => paginate(pageNumber)}
                         className={`w-12 h-12 rounded-xl font-semibold transition-all duration-200 ${currentPage === pageNumber
-                            ? 'bg-blue-600 text-white shadow-lg'
-                            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
+                          ? 'bg-blue-600 text-white shadow-lg'
+                          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
                           }`}
                       >
                         {pageNumber}

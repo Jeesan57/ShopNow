@@ -154,7 +154,33 @@ export const products = [
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
       "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400"
     ]
-  }
+  },
+  {
+    id: 13,
+    name: "Classic White T-Shirt",
+    price: 19.99,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+    category: "Men",
+    description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400"
+    ]
+  },
+  {
+    id: 14,
+    name: "Classic White T-Shirt",
+    price: 19.99,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+    category: "Men",
+    description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+    thumbnails: [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400"
+    ]
+  },
 ];
 
 export const categories = ["Men", "Women", "Accessories", "Kids"];
