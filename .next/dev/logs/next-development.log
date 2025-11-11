@@ -1,0 +1,46 @@
+[00:00:00.708] Server  LOG      ✓ Ready in 440ms
+[00:00:09.412] Server  LOG      ○ Compiling /shop ...
+[00:00:10.808] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:11.034] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/shop" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.js">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-arp=""
+                        >
+                  ...
+
+[00:00:11.789] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:00:11.793] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:00:11.799] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:00:11.998] Browser WARN    Image with src "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:00:12.099] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:00:12.496] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400" 404
