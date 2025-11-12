@@ -116,7 +116,7 @@ export default function Cart({ isOpen, onClose }) {
                   >
                     <div className="flex items-center space-x-4">
                       {/* Product Image */}
-                      <div className="relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                      <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -186,7 +186,7 @@ export default function Cart({ isOpen, onClose }) {
 
           {/* Footer */}
           {cartItems.length > 0 && (
-            <div className="border-t border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800 p-6 space-y-4">
+            <div className="border-t border-slate-200 dark:border-slate-700 bg-linear-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800 p-6 space-y-4">
               {/* Order Summary */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-slate-600 dark:text-slate-400">
@@ -211,7 +211,7 @@ export default function Cart({ isOpen, onClose }) {
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                <button className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                <button className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg">
                   Proceed to Checkout
                 </button>
                 <button
