@@ -23,6 +23,7 @@ export default function ShopContent() {
   const [productsPerPage, setProductsPerPage] = useState(12); // Changed to state
   const [addedProducts, setAddedProducts] = useState(new Set());
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
 
   // Handle URL search params
   useEffect(() => {
@@ -58,6 +59,11 @@ export default function ShopContent() {
         filtered = filtered.filter(product => product.category === selectedCategory);
       }
 
+      // Price range filter
+      filtered = filtered.filter(product =>
+        product.price >= priceRange.min && product.price <= priceRange.max
+      );
+
       if (sortBy === 'price-low') {
         filtered = [...filtered].sort((a, b) => a.price - b.price);
       } else if (sortBy === 'price-high') {
@@ -80,7 +86,7 @@ export default function ShopContent() {
     }, 200);
 
     return () => clearTimeout(timer);
-  }, [selectedCategory, sortBy, searchQuery, currentPage, productsPerPage]);
+  }, [selectedCategory, sortBy, searchQuery, currentPage, productsPerPage, priceRange]);
 
   // Update URL with current page
   useEffect(() => {
@@ -326,6 +332,88 @@ export default function ShopContent() {
                     })}
                   </div>
                 </div>
+
+                {/* Price Range */}
+                <div>
+                  <h3 className="font-semibold text-slate-900 dark:text-white mb-4 text-lg">Price Range</h3>
+                  <div className="space-y-4">
+                    {/* Min & Max Inputs */}
+                    <div className="flex gap-3">
+                      <div className="flex-1">
+                        <label className="block text-sm text-slate-600 dark:text-slate-400 mb-1">Min Price</label>
+                        <input
+                          type="number"
+                          value={priceRange.min}
+                          onChange={(e) => {
+                            const value = Math.min(Number(e.target.value), priceRange.max - 1);
+                            setPriceRange(prev => ({ ...prev, min: value }));
+                          }}
+                          className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                          min="0"
+                          max="200"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <label className="block text-sm text-slate-600 dark:text-slate-400 mb-1">Max Price</label>
+                        <input
+                          type="number"
+                          value={priceRange.max}
+                          onChange={(e) => {
+                            const value = Math.max(Number(e.target.value), priceRange.min + 1);
+                            setPriceRange(prev => ({ ...prev, max: value }));
+                          }}
+                          className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                          min="0"
+                          max="200"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Dual-Thumb Range Slider */}
+                    <div className="relative px-2">
+                      <div className="relative h-8 flex items-center">
+                        {/* Track Background */}
+                        <div className="absolute h-2 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+
+                        {/* Filled Track Between Thumbs */}
+                        <div
+                          className="absolute h-2 bg-blue-500 rounded-full"
+                          style={{
+                            left: `${(priceRange.min / 200) * 100}%`,
+                            right: `${100 - (priceRange.max / 200) * 100}%`,
+                          }}
+                        ></div>
+
+                        {/* Min Slider */}
+                        <input
+                          type="range"
+                          min="0"
+                          max="200"
+                          value={priceRange.min}
+                          onChange={(e) => {
+                            const value = Math.min(Number(e.target.value), priceRange.max - 1);
+                            setPriceRange(prev => ({ ...prev, min: value }));
+                          }}
+                          className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
+                        />
+
+                        {/* Max Slider */}
+                        <input
+                          type="range"
+                          min="0"
+                          max="200"
+                          value={priceRange.max}
+                          onChange={(e) => {
+                            const value = Math.max(Number(e.target.value), priceRange.min + 1);
+                            setPriceRange(prev => ({ ...prev, max: value }));
+                          }}
+                          className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
 
                 {/* Sort */}
                 <div>
@@ -662,25 +750,25 @@ export default function ShopContent() {
                   <button
                     onClick={() => setSelectedCategory('All')}
                     className={`flex items-center justify-between w-full text-left p-4 rounded-xl transition-all duration-200 group ${selectedCategory === 'All'
-                        ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
-                        : 'hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
+                      ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                      : 'hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
                       }`}
                   >
                     <div className="flex items-center space-x-3">
                       <div className={`w-3 h-3 rounded-full border-2 transition-all ${selectedCategory === 'All'
-                          ? 'bg-blue-500 border-blue-500'
-                          : 'border-slate-300 dark:border-slate-600 group-hover:border-blue-400'
+                        ? 'bg-blue-500 border-blue-500'
+                        : 'border-slate-300 dark:border-slate-600 group-hover:border-blue-400'
                         }`} />
                       <span className={`font-medium ${selectedCategory === 'All'
-                          ? 'text-blue-700 dark:text-blue-300'
-                          : 'text-slate-700 dark:text-slate-300'
+                        ? 'text-blue-700 dark:text-blue-300'
+                        : 'text-slate-700 dark:text-slate-300'
                         }`}>
                         All Products
                       </span>
                     </div>
                     <span className={`text-sm px-2 py-1 rounded-full min-w-8 text-center ${selectedCategory === 'All'
-                        ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200'
-                        : 'text-slate-500 dark:text-slate-400'
+                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200'
+                      : 'text-slate-500 dark:text-slate-400'
                       }`}>
                       {products.length}
                     </span>
@@ -693,31 +781,172 @@ export default function ShopContent() {
                         key={category}
                         onClick={() => setSelectedCategory(category)}
                         className={`flex items-center justify-between w-full text-left p-4 rounded-xl transition-all duration-200 group ${selectedCategory === category
-                            ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
-                            : 'hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
+                          ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                          : 'hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
                           }`}
                       >
                         <div className="flex items-center space-x-3">
                           <div className={`w-3 h-3 rounded-full border-2 transition-all ${selectedCategory === category
-                              ? 'bg-blue-500 border-blue-500'
-                              : 'border-slate-300 dark:border-slate-600 group-hover:border-blue-400'
+                            ? 'bg-blue-500 border-blue-500'
+                            : 'border-slate-300 dark:border-slate-600 group-hover:border-blue-400'
                             }`} />
                           <span className={`font-medium ${selectedCategory === category
-                              ? 'text-blue-700 dark:text-blue-300'
-                              : 'text-slate-700 dark:text-slate-300'
+                            ? 'text-blue-700 dark:text-blue-300'
+                            : 'text-slate-700 dark:text-slate-300'
                             }`}>
                             {category}
                           </span>
                         </div>
                         <span className={`text-sm px-2 py-1 rounded-full min-w-8 text-center ${selectedCategory === category
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200'
-                            : 'text-slate-500 dark:text-slate-400'
+                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200'
+                          : 'text-slate-500 dark:text-slate-400'
                           }`}>
                           {categoryCount}
                         </span>
                       </button>
                     );
                   })}
+                </div>
+              </div>
+
+              {/* Price Range */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-semibold text-slate-900 dark:text-white text-base">Price Range</h4>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">
+                    ${priceRange.min} - ${priceRange.max}
+                  </span>
+                </div>
+                <div className="space-y-6">
+                  {/* Price Input Fields */}
+                  <div className="flex gap-3">
+                    <div className="flex-1">
+                      <label className="block text-sm text-slate-600 dark:text-slate-400 mb-2">Min Price</label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-slate-400 font-medium">$</span>
+                        <input
+                          type="number"
+                          value={priceRange.min}
+                          onChange={(e) => setPriceRange(prev => ({ ...prev, min: Math.min(Number(e.target.value), prev.max) }))}
+                          className="w-full pl-8 pr-3 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white font-medium"
+                          min="0"
+                          max="200"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <label className="block text-sm text-slate-600 dark:text-slate-400 mb-2">Max Price</label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-slate-400 font-medium">$</span>
+                        <input
+                          type="number"
+                          value={priceRange.max}
+                          onChange={(e) => setPriceRange(prev => ({ ...prev, max: Math.max(Number(e.target.value), prev.min) }))}
+                          className="w-full pl-8 pr-3 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white font-medium"
+                          min="0"
+                          max="200"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Custom Dual Range Slider */}
+                  <div className="relative px-2">
+                    {/* Track Background */}
+                    <div className="relative h-3 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
+                      {/* Active Track */}
+                      <div
+                        className="absolute top-0 h-full bg-linear-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-200"
+                        style={{
+                          left: `${(priceRange.min / 200) * 100}%`,
+                          width: `${((priceRange.max - priceRange.min) / 200) * 100}%`
+                        }}
+                      />
+                      {/* Track Pattern */}
+                      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.1)_50%,transparent_100%)] bg-[length:20px_100%]" />
+                    </div>
+
+                    {/* Min Thumb */}
+                    <div
+                      className="absolute top-1/2 w-6 h-6 bg-white dark:bg-slate-800 border-2 border-blue-500 rounded-full shadow-lg cursor-pointer transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-all duration-200"
+                      style={{ left: `${(priceRange.min / 200) * 100}%` }}
+                      onMouseDown={(e) => {
+                        const startX = e.clientX;
+                        const startValue = priceRange.min;
+
+                        const handleMouseMove = (e) => {
+                          const deltaX = e.clientX - startX;
+                          const deltaValue = (deltaX / 300) * 200;
+                          const newValue = Math.max(0, Math.min(priceRange.max - 1, startValue + deltaValue));
+                          setPriceRange(prev => ({ ...prev, min: Math.round(newValue) }));
+                        };
+
+                        const handleMouseUp = () => {
+                          document.removeEventListener('mousemove', handleMouseMove);
+                          document.removeEventListener('mouseup', handleMouseUp);
+                        };
+
+                        document.addEventListener('mousemove', handleMouseMove);
+                        document.addEventListener('mouseup', handleMouseUp);
+                      }}
+                    >
+                      <div className="absolute inset-0 rounded-full bg-blue-500 opacity-20" />
+                    </div>
+
+                    {/* Max Thumb */}
+                    <div
+                      className="absolute top-1/2 w-6 h-6 bg-white dark:bg-slate-800 border-2 border-blue-500 rounded-full shadow-lg cursor-pointer transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-all duration-200"
+                      style={{ left: `${(priceRange.max / 200) * 100}%` }}
+                      onMouseDown={(e) => {
+                        const startX = e.clientX;
+                        const startValue = priceRange.max;
+
+                        const handleMouseMove = (e) => {
+                          const deltaX = e.clientX - startX;
+                          const deltaValue = (deltaX / 300) * 200;
+                          const newValue = Math.min(200, Math.max(priceRange.min + 1, startValue + deltaValue));
+                          setPriceRange(prev => ({ ...prev, max: Math.round(newValue) }));
+                        };
+
+                        const handleMouseUp = () => {
+                          document.removeEventListener('mousemove', handleMouseMove);
+                          document.removeEventListener('mouseup', handleMouseUp);
+                        };
+
+                        document.addEventListener('mousemove', handleMouseMove);
+                        document.addEventListener('mouseup', handleMouseUp);
+                      }}
+                    >
+                      <div className="absolute inset-0 rounded-full bg-blue-500 opacity-20" />
+                    </div>
+
+                    {/* Value Labels */}
+                    <div className="flex justify-between mt-3 text-sm text-slate-600 dark:text-slate-400">
+                      <span className="font-medium">${priceRange.min}</span>
+                      <span className="font-medium">${priceRange.max}</span>
+                    </div>
+                  </div>
+
+                  {/* Quick Price Presets */}
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { label: 'Under $50', min: 0, max: 50 },
+                      { label: '$50 - $100', min: 50, max: 100 },
+                      { label: '$100 - $150', min: 100, max: 150 },
+                      { label: 'Over $150', min: 150, max: 200 }
+                    ].map((preset) => (
+                      <button
+                        key={preset.label}
+                        onClick={() => setPriceRange({ min: preset.min, max: preset.max })}
+                        className={`px-3 py-2 text-sm rounded-lg border transition-all duration-200 ${priceRange.min === preset.min && priceRange.max === preset.max
+                            ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300'
+                            : 'bg-white dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-blue-400 dark:hover:border-blue-500'
+                          }`}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -762,6 +991,7 @@ export default function ShopContent() {
                   onClick={() => {
                     setSelectedCategory('All');
                     setSortBy('name');
+                    setPriceRange({ min: 0, max: 200 });
                   }}
                   className="flex-1 px-6 py-4 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200 flex items-center justify-center space-x-2"
                 >
