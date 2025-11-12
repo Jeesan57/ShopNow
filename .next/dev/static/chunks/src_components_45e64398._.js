@@ -1087,12 +1087,12 @@ var _s = __turbopack_context__.k.signature();
 ;
 function ShopContent() {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(97);
-    if ($[0] !== "a365c837a8c63cb8a4c70fa3f4a6cc24b0d53229d526d27ab2c6b68e5eab197d") {
-        for(let $i = 0; $i < 97; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(100);
+    if ($[0] !== "e06e21a50285f41572d008ad51852d9de51fb5c1fcdc68f05aa0154bd52a49a0") {
+        for(let $i = 0; $i < 100; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "a365c837a8c63cb8a4c70fa3f4a6cc24b0d53229d526d27ab2c6b68e5eab197d";
+        $[0] = "e06e21a50285f41572d008ad51852d9de51fb5c1fcdc68f05aa0154bd52a49a0";
     }
     const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"])();
     const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"])();
@@ -1542,7 +1542,7 @@ function ShopContent() {
             placeholder: "Search products...",
             value: searchQuery,
             onChange: t22,
-            className: "w-full px-4 py-3 pl-11 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-500"
+            className: "w-full px-4 py-3 pl-11 pr-11 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-500"
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
             lineNumber: 331,
@@ -1580,102 +1580,141 @@ function ShopContent() {
         t24 = $[38];
     }
     let t25;
-    if ($[39] !== t23) {
-        t25 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    if ($[39] !== searchQuery) {
+        t25 = searchQuery && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: {
+                "ShopContent[<button>.onClick]": ()=>setSearchQuery("")
+            }["ShopContent[<button>.onClick]"],
+            className: "absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200",
+            "aria-label": "Clear search",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                fill: "none",
+                stroke: "currentColor",
+                viewBox: "0 0 24 24",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round",
+                    strokeWidth: 2,
+                    d: "M6 18L18 6M6 6l12 12"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 348,
+                    columnNumber: 260
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 348,
+                columnNumber: 201
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 346,
+            columnNumber: 26
+        }, this);
+        $[39] = searchQuery;
+        $[40] = t25;
+    } else {
+        t25 = $[40];
+    }
+    let t26;
+    if ($[41] !== t23 || $[42] !== t25) {
+        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
                 t21,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "relative",
                     children: [
                         t23,
-                        t24
+                        t24,
+                        t25
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 346,
+                    lineNumber: 356,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 346,
+            lineNumber: 356,
             columnNumber: 11
         }, this);
-        $[39] = t23;
-        $[40] = t25;
+        $[41] = t23;
+        $[42] = t25;
+        $[43] = t26;
     } else {
-        t25 = $[40];
+        t26 = $[43];
     }
-    let t26;
-    if ($[41] === Symbol.for("react.memo_cache_sentinel")) {
-        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+    let t27;
+    if ($[44] === Symbol.for("react.memo_cache_sentinel")) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
             className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
             children: "Categories"
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 354,
+            lineNumber: 365,
             columnNumber: 11
         }, this);
-        $[41] = t26;
+        $[44] = t27;
     } else {
-        t26 = $[41];
+        t27 = $[44];
     }
-    let t27;
-    if ($[42] === Symbol.for("react.memo_cache_sentinel")) {
-        t27 = ({
+    let t28;
+    if ($[45] === Symbol.for("react.memo_cache_sentinel")) {
+        t28 = ({
             "ShopContent[<button>.onClick]": ()=>setSelectedCategory("All")
         })["ShopContent[<button>.onClick]"];
-        $[42] = t27;
+        $[45] = t28;
     } else {
-        t27 = $[42];
+        t28 = $[45];
     }
-    const t28 = `flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === "All" ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"}`;
-    let t29;
+    const t29 = `flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === "All" ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"}`;
     let t30;
-    if ($[43] === Symbol.for("react.memo_cache_sentinel")) {
-        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+    let t31;
+    if ($[46] === Symbol.for("react.memo_cache_sentinel")) {
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
             children: "All Products"
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 372,
+            lineNumber: 383,
             columnNumber: 11
         }, this);
-        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
             className: "text-sm opacity-70",
             children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["products"].length
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 373,
+            lineNumber: 384,
             columnNumber: 11
         }, this);
-        $[43] = t29;
-        $[44] = t30;
+        $[46] = t30;
+        $[47] = t31;
     } else {
-        t29 = $[43];
-        t30 = $[44];
+        t30 = $[46];
+        t31 = $[47];
     }
-    let t31;
-    if ($[45] !== t28) {
-        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            onClick: t27,
-            className: t28,
+    let t32;
+    if ($[48] !== t29) {
+        t32 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t28,
+            className: t29,
             children: [
-                t29,
-                t30
+                t30,
+                t31
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 382,
+            lineNumber: 393,
             columnNumber: 11
         }, this);
-        $[45] = t28;
-        $[46] = t31;
+        $[48] = t29;
+        $[49] = t32;
     } else {
-        t31 = $[46];
+        t32 = $[49];
     }
-    let t32;
-    if ($[47] !== selectedCategory) {
-        t32 = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["categories"].map({
+    let t33;
+    if ($[50] !== selectedCategory) {
+        t33 = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["categories"].map({
             "ShopContent[categories.map()]": (category)=>{
                 const categoryCount = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["products"].filter({
                     "ShopContent[categories.map() > products.filter()]": (p)=>p.category === category
@@ -1690,7 +1729,7 @@ function ShopContent() {
                             children: category
                         }, void 0, false, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 397,
+                            lineNumber: 408,
                             columnNumber: 430
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1698,206 +1737,206 @@ function ShopContent() {
                             children: categoryCount
                         }, void 0, false, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 397,
+                            lineNumber: 408,
                             columnNumber: 453
                         }, this)
                     ]
                 }, category, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 395,
+                    lineNumber: 406,
                     columnNumber: 16
                 }, this);
             }
         }["ShopContent[categories.map()]"]);
-        $[47] = selectedCategory;
-        $[48] = t32;
-    } else {
-        t32 = $[48];
-    }
-    let t33;
-    if ($[49] !== t31 || $[50] !== t32) {
-        t33 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            children: [
-                t26,
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-3",
-                    children: [
-                        t31,
-                        t32
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 407,
-                    columnNumber: 21
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 407,
-            columnNumber: 11
-        }, this);
-        $[49] = t31;
-        $[50] = t32;
+        $[50] = selectedCategory;
         $[51] = t33;
     } else {
         t33 = $[51];
     }
     let t34;
-    if ($[52] === Symbol.for("react.memo_cache_sentinel")) {
-        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-            className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
-            children: "Sort By"
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 416,
-            columnNumber: 11
-        }, this);
-        $[52] = t34;
-    } else {
-        t34 = $[52];
-    }
-    let t35;
-    if ($[53] === Symbol.for("react.memo_cache_sentinel")) {
-        t35 = ({
-            "ShopContent[<select>.onChange]": (e_1)=>setSortBy(e_1.target.value)
-        })["ShopContent[<select>.onChange]"];
-        $[53] = t35;
-    } else {
-        t35 = $[53];
-    }
-    let t36;
-    let t37;
-    let t38;
-    let t39;
-    if ($[54] === Symbol.for("react.memo_cache_sentinel")) {
-        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-            value: "name",
-            children: "Name A-Z"
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 435,
-            columnNumber: 11
-        }, this);
-        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-            value: "newest",
-            children: "Newest First"
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 436,
-            columnNumber: 11
-        }, this);
-        t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-            value: "price-low",
-            children: "Price: Low to High"
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 437,
-            columnNumber: 11
-        }, this);
-        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-            value: "price-high",
-            children: "Price: High to Low"
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 438,
-            columnNumber: 11
-        }, this);
-        $[54] = t36;
-        $[55] = t37;
-        $[56] = t38;
-        $[57] = t39;
-    } else {
-        t36 = $[54];
-        t37 = $[55];
-        t38 = $[56];
-        t39 = $[57];
-    }
-    let t40;
-    if ($[58] !== sortBy) {
-        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    if ($[52] !== t32 || $[53] !== t33) {
+        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: [
-                t34,
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                    value: sortBy,
-                    onChange: t35,
-                    className: "w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white",
+                t27,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "space-y-3",
                     children: [
-                        t36,
-                        t37,
-                        t38,
-                        t39
+                        t32,
+                        t33
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 451,
+                    lineNumber: 418,
                     columnNumber: 21
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 451,
+            lineNumber: 418,
             columnNumber: 11
         }, this);
-        $[58] = sortBy;
-        $[59] = t40;
+        $[52] = t32;
+        $[53] = t33;
+        $[54] = t34;
     } else {
-        t40 = $[59];
+        t34 = $[54];
+    }
+    let t35;
+    if ($[55] === Symbol.for("react.memo_cache_sentinel")) {
+        t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+            className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
+            children: "Sort By"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 427,
+            columnNumber: 11
+        }, this);
+        $[55] = t35;
+    } else {
+        t35 = $[55];
+    }
+    let t36;
+    if ($[56] === Symbol.for("react.memo_cache_sentinel")) {
+        t36 = ({
+            "ShopContent[<select>.onChange]": (e_1)=>setSortBy(e_1.target.value)
+        })["ShopContent[<select>.onChange]"];
+        $[56] = t36;
+    } else {
+        t36 = $[56];
+    }
+    let t37;
+    let t38;
+    let t39;
+    let t40;
+    if ($[57] === Symbol.for("react.memo_cache_sentinel")) {
+        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "name",
+            children: "Name A-Z"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 446,
+            columnNumber: 11
+        }, this);
+        t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "newest",
+            children: "Newest First"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 447,
+            columnNumber: 11
+        }, this);
+        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "price-low",
+            children: "Price: Low to High"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 448,
+            columnNumber: 11
+        }, this);
+        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "price-high",
+            children: "Price: High to Low"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 449,
+            columnNumber: 11
+        }, this);
+        $[57] = t37;
+        $[58] = t38;
+        $[59] = t39;
+        $[60] = t40;
+    } else {
+        t37 = $[57];
+        t38 = $[58];
+        t39 = $[59];
+        t40 = $[60];
     }
     let t41;
-    if ($[60] !== t25 || $[61] !== t33 || $[62] !== t40) {
+    if ($[61] !== sortBy) {
         t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: [
+                t35,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                    value: sortBy,
+                    onChange: t36,
+                    className: "w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white",
+                    children: [
+                        t37,
+                        t38,
+                        t39,
+                        t40
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 462,
+                    columnNumber: 21
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 462,
+            columnNumber: 11
+        }, this);
+        $[61] = sortBy;
+        $[62] = t41;
+    } else {
+        t41 = $[62];
+    }
+    let t42;
+    if ($[63] !== t26 || $[64] !== t34 || $[65] !== t41) {
+        t42 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "lg:w-80 shrink-0",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 sticky top-8",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "space-y-8",
                     children: [
-                        t25,
-                        t33,
-                        t40
+                        t26,
+                        t34,
+                        t41
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 459,
+                    lineNumber: 470,
                     columnNumber: 163
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 459,
+                lineNumber: 470,
                 columnNumber: 45
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 459,
+            lineNumber: 470,
             columnNumber: 11
         }, this);
-        $[60] = t25;
-        $[61] = t33;
-        $[62] = t40;
-        $[63] = t41;
+        $[63] = t26;
+        $[64] = t34;
+        $[65] = t41;
+        $[66] = t42;
     } else {
-        t41 = $[63];
+        t42 = $[66];
     }
-    const t42 = "flex-1";
-    const t43 = selectedCategory === "All" ? "All Products" : selectedCategory;
-    let t44;
-    if ($[64] !== t43) {
-        t44 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+    const t43 = "flex-1";
+    const t44 = selectedCategory === "All" ? "All Products" : selectedCategory;
+    let t45;
+    if ($[67] !== t44) {
+        t45 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
             className: "text-2xl font-semibold text-slate-900 dark:text-white",
-            children: t43
+            children: t44
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 471,
+            lineNumber: 482,
             columnNumber: 11
         }, this);
-        $[64] = t43;
-        $[65] = t44;
+        $[67] = t44;
+        $[68] = t45;
     } else {
-        t44 = $[65];
+        t45 = $[68];
     }
-    let t45;
-    if ($[66] !== filteredProducts.length) {
-        t45 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+    let t46;
+    if ($[69] !== filteredProducts.length) {
+        t46 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
             className: "text-slate-600 dark:text-slate-400 mt-1",
             children: [
                 filteredProducts.length,
@@ -1905,41 +1944,41 @@ function ShopContent() {
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 479,
+            lineNumber: 490,
             columnNumber: 11
         }, this);
-        $[66] = filteredProducts.length;
-        $[67] = t45;
-    } else {
-        t45 = $[67];
-    }
-    let t46;
-    if ($[68] !== t44 || $[69] !== t45) {
-        t46 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex items-center justify-between mb-8",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                children: [
-                    t44,
-                    t45
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 487,
-                columnNumber: 67
-            }, this)
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 487,
-            columnNumber: 11
-        }, this);
-        $[68] = t44;
-        $[69] = t45;
+        $[69] = filteredProducts.length;
         $[70] = t46;
     } else {
         t46 = $[70];
     }
-    const t47 = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8";
-    const t48 = isLoading ? Array.from({
+    let t47;
+    if ($[71] !== t45 || $[72] !== t46) {
+        t47 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-center justify-between mb-8",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    t45,
+                    t46
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 498,
+                columnNumber: 67
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 498,
+            columnNumber: 11
+        }, this);
+        $[71] = t45;
+        $[72] = t46;
+        $[73] = t47;
+    } else {
+        t47 = $[73];
+    }
+    const t48 = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8";
+    const t49 = isLoading ? Array.from({
         length: productsPerPage
     }, _ShopContentArrayFrom) : currentProducts.length > 0 ? currentProducts.map({
         "ShopContent[currentProducts.map()]": (product_2)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1958,12 +1997,12 @@ function ShopContent() {
                                     className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 498,
+                                    lineNumber: 509,
                                     columnNumber: 383
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 498,
+                                lineNumber: 509,
                                 columnNumber: 343
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1983,17 +2022,17 @@ function ShopContent() {
                                         d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 500,
+                                        lineNumber: 511,
                                         columnNumber: 489
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 500,
+                                    lineNumber: 511,
                                     columnNumber: 362
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 498,
+                                lineNumber: 509,
                                 columnNumber: 562
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2006,18 +2045,18 @@ function ShopContent() {
                                     children: "Quick View"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 500,
+                                    lineNumber: 511,
                                     columnNumber: 832
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 500,
+                                lineNumber: 511,
                                 columnNumber: 701
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 498,
+                        lineNumber: 509,
                         columnNumber: 276
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2030,12 +2069,12 @@ function ShopContent() {
                                     children: product_2.category
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 502,
+                                    lineNumber: 513,
                                     columnNumber: 370
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 502,
+                                lineNumber: 513,
                                 columnNumber: 348
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2045,12 +2084,12 @@ function ShopContent() {
                                     children: product_2.name
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 502,
+                                    lineNumber: 513,
                                     columnNumber: 593
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 502,
+                                lineNumber: 513,
                                 columnNumber: 553
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2058,7 +2097,7 @@ function ShopContent() {
                                 children: product_2.description
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 502,
+                                lineNumber: 513,
                                 columnNumber: 783
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2072,7 +2111,7 @@ function ShopContent() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 502,
+                                        lineNumber: 513,
                                         columnNumber: 953
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2111,12 +2150,12 @@ function ShopContent() {
                                                         d: "M5 13l4 4L19 7"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/ShopContent.js",
-                                                        lineNumber: 521,
+                                                        lineNumber: 532,
                                                         columnNumber: 550
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/ShopContent.js",
-                                                    lineNumber: 521,
+                                                    lineNumber: 532,
                                                     columnNumber: 456
                                                 }, this),
                                                 "Added!"
@@ -2124,25 +2163,25 @@ function ShopContent() {
                                         }, void 0, true) : "Add to Cart"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 502,
+                                        lineNumber: 513,
                                         columnNumber: 1046
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 502,
+                                lineNumber: 513,
                                 columnNumber: 902
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 502,
+                        lineNumber: 513,
                         columnNumber: 327
                     }, this)
                 ]
             }, product_2.id, true, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 498,
+                lineNumber: 509,
                 columnNumber: 56
             }, this)
     }["ShopContent[currentProducts.map()]"]) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2162,17 +2201,17 @@ function ShopContent() {
                         d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"
                     }, void 0, false, {
                         fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 522,
+                        lineNumber: 533,
                         columnNumber: 308
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 522,
+                    lineNumber: 533,
                     columnNumber: 212
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 522,
+                lineNumber: 533,
                 columnNumber: 95
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -2180,7 +2219,7 @@ function ShopContent() {
                 children: "No products found"
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 522,
+                lineNumber: 533,
                 columnNumber: 477
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2188,7 +2227,7 @@ function ShopContent() {
                 children: "We couldn't find any products matching your criteria. Try adjusting your search or filters."
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 522,
+                lineNumber: 533,
                 columnNumber: 574
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2202,33 +2241,33 @@ function ShopContent() {
                 children: "Clear All Filters"
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 522,
+                lineNumber: 533,
                 columnNumber: 741
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/ShopContent.js",
-        lineNumber: 522,
+        lineNumber: 533,
         columnNumber: 46
     }, this);
-    let t49;
-    if ($[71] !== t48) {
-        t49 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t47,
-            children: t48
+    let t50;
+    if ($[74] !== t49) {
+        t50 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t48,
+            children: t49
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 530,
+            lineNumber: 541,
             columnNumber: 11
         }, this);
-        $[71] = t48;
-        $[72] = t49;
+        $[74] = t49;
+        $[75] = t50;
     } else {
-        t49 = $[72];
+        t50 = $[75];
     }
-    let t50;
-    if ($[73] !== currentPage || $[74] !== filteredProducts.length || $[75] !== generatePaginationRange || $[76] !== indexOfFirstProduct || $[77] !== indexOfLastProduct || $[78] !== paginate || $[79] !== productsPerPage || $[80] !== totalPages_0) {
-        t50 = filteredProducts.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t51;
+    if ($[76] !== currentPage || $[77] !== filteredProducts.length || $[78] !== generatePaginationRange || $[79] !== indexOfFirstProduct || $[80] !== indexOfLastProduct || $[81] !== paginate || $[82] !== productsPerPage || $[83] !== totalPages_0) {
+        t51 = filteredProducts.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "mt-16",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2247,7 +2286,7 @@ function ShopContent() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 538,
+                                    lineNumber: 549,
                                     columnNumber: 241
                                 }, this),
                                 " of",
@@ -2257,7 +2296,7 @@ function ShopContent() {
                                     children: filteredProducts.length
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 538,
+                                    lineNumber: 549,
                                     columnNumber: 435
                                 }, this),
                                 " products",
@@ -2271,7 +2310,7 @@ function ShopContent() {
                                             children: currentPage
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 538,
+                                            lineNumber: 549,
                                             columnNumber: 607
                                         }, this),
                                         " of ",
@@ -2280,19 +2319,19 @@ function ShopContent() {
                                             children: totalPages_0
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 538,
+                                            lineNumber: 549,
                                             columnNumber: 694
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 538,
+                                    lineNumber: 549,
                                     columnNumber: 560
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 538,
+                            lineNumber: 549,
                             columnNumber: 148
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2303,7 +2342,7 @@ function ShopContent() {
                                     children: "Show"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 538,
+                                    lineNumber: 549,
                                     columnNumber: 841
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2322,7 +2361,7 @@ function ShopContent() {
                                             children: "6"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 544,
+                                            lineNumber: 555,
                                             columnNumber: 245
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2330,7 +2369,7 @@ function ShopContent() {
                                             children: "12"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 544,
+                                            lineNumber: 555,
                                             columnNumber: 273
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2338,7 +2377,7 @@ function ShopContent() {
                                             children: "24"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 544,
+                                            lineNumber: 555,
                                             columnNumber: 303
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2346,13 +2385,13 @@ function ShopContent() {
                                             children: "48"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 544,
+                                            lineNumber: 555,
                                             columnNumber: 333
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 538,
+                                    lineNumber: 549,
                                     columnNumber: 922
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2360,19 +2399,19 @@ function ShopContent() {
                                     children: "per page"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 544,
+                                    lineNumber: 555,
                                     columnNumber: 372
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 538,
+                            lineNumber: 549,
                             columnNumber: 792
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 538,
+                    lineNumber: 549,
                     columnNumber: 65
                 }, this),
                 totalPages_0 > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2400,12 +2439,12 @@ function ShopContent() {
                                                 d: "M15 19l-7-7 7-7"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/ShopContent.js",
-                                                lineNumber: 546,
+                                                lineNumber: 557,
                                                 columnNumber: 426
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 546,
+                                            lineNumber: 557,
                                             columnNumber: 342
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2413,7 +2452,7 @@ function ShopContent() {
                                             children: "Previous"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 546,
+                                            lineNumber: 557,
                                             columnNumber: 521
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2421,13 +2460,13 @@ function ShopContent() {
                                             children: "Prev"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 546,
+                                            lineNumber: 557,
                                             columnNumber: 571
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 544,
+                                    lineNumber: 555,
                                     columnNumber: 740
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2440,7 +2479,7 @@ function ShopContent() {
                                                     children: "..."
                                                 }, `ellipsis-${index_0}`, false, {
                                                     fileName: "[project]/src/components/ShopContent.js",
-                                                    lineNumber: 549,
+                                                    lineNumber: 560,
                                                     columnNumber: 26
                                                 }, this);
                                             }
@@ -2452,14 +2491,14 @@ function ShopContent() {
                                                 children: page_0
                                             }, page_0, false, {
                                                 fileName: "[project]/src/components/ShopContent.js",
-                                                lineNumber: 551,
+                                                lineNumber: 562,
                                                 columnNumber: 24
                                             }, this);
                                         }
                                     }["ShopContent[(anonymous)()]"])
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 546,
+                                    lineNumber: 557,
                                     columnNumber: 619
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2474,7 +2513,7 @@ function ShopContent() {
                                             children: "Next"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 557,
+                                            lineNumber: 568,
                                             columnNumber: 353
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2482,7 +2521,7 @@ function ShopContent() {
                                             children: "Next"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 557,
+                                            lineNumber: 568,
                                             columnNumber: 399
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2497,24 +2536,24 @@ function ShopContent() {
                                                 d: "M9 5l7 7-7 7"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/ShopContent.js",
-                                                lineNumber: 557,
+                                                lineNumber: 568,
                                                 columnNumber: 522
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 557,
+                                            lineNumber: 568,
                                             columnNumber: 438
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 555,
+                                    lineNumber: 566,
                                     columnNumber: 52
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 544,
+                            lineNumber: 555,
                             columnNumber: 639
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2525,7 +2564,7 @@ function ShopContent() {
                                     children: "Go to:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 557,
+                                    lineNumber: 568,
                                     columnNumber: 742
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2533,7 +2572,7 @@ function ShopContent() {
                                     children: "Page:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 557,
+                                    lineNumber: 568,
                                     columnNumber: 825
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2555,137 +2594,137 @@ function ShopContent() {
                                     placeholder: "#"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 557,
+                                    lineNumber: 568,
                                     columnNumber: 900
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 557,
+                            lineNumber: 568,
                             columnNumber: 629
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 544,
+                    lineNumber: 555,
                     columnNumber: 473
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 538,
+            lineNumber: 549,
             columnNumber: 42
         }, this);
-        $[73] = currentPage;
-        $[74] = filteredProducts.length;
-        $[75] = generatePaginationRange;
-        $[76] = indexOfFirstProduct;
-        $[77] = indexOfLastProduct;
-        $[78] = paginate;
-        $[79] = productsPerPage;
-        $[80] = totalPages_0;
-        $[81] = t50;
+        $[76] = currentPage;
+        $[77] = filteredProducts.length;
+        $[78] = generatePaginationRange;
+        $[79] = indexOfFirstProduct;
+        $[80] = indexOfLastProduct;
+        $[81] = paginate;
+        $[82] = productsPerPage;
+        $[83] = totalPages_0;
+        $[84] = t51;
     } else {
-        t50 = $[81];
+        t51 = $[84];
     }
-    let t51;
-    if ($[82] !== t46 || $[83] !== t49 || $[84] !== t50) {
-        t51 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t42,
+    let t52;
+    if ($[85] !== t47 || $[86] !== t50 || $[87] !== t51) {
+        t52 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t43,
             children: [
-                t46,
-                t49,
-                t50
+                t47,
+                t50,
+                t51
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 582,
+            lineNumber: 593,
             columnNumber: 11
         }, this);
-        $[82] = t46;
-        $[83] = t49;
-        $[84] = t50;
-        $[85] = t51;
-    } else {
-        t51 = $[85];
-    }
-    let t52;
-    if ($[86] !== t41 || $[87] !== t51) {
-        t52 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t19,
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: t20,
-                children: [
-                    t41,
-                    t51
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 592,
-                columnNumber: 32
-            }, this)
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 592,
-            columnNumber: 11
-        }, this);
-        $[86] = t41;
+        $[85] = t47;
+        $[86] = t50;
         $[87] = t51;
         $[88] = t52;
     } else {
         t52 = $[88];
     }
     let t53;
-    if ($[89] === Symbol.for("react.memo_cache_sentinel")) {
-        t53 = ({
+    if ($[89] !== t42 || $[90] !== t52) {
+        t53 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t19,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: t20,
+                children: [
+                    t42,
+                    t52
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 603,
+                columnNumber: 32
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 603,
+            columnNumber: 11
+        }, this);
+        $[89] = t42;
+        $[90] = t52;
+        $[91] = t53;
+    } else {
+        t53 = $[91];
+    }
+    let t54;
+    if ($[92] === Symbol.for("react.memo_cache_sentinel")) {
+        t54 = ({
             "ShopContent[<QuickViewModal>.onClose]": ()=>{
                 setIsQuickViewOpen(false);
                 setQuickViewProduct(null);
             }
         })["ShopContent[<QuickViewModal>.onClose]"];
-        $[89] = t53;
-    } else {
-        t53 = $[89];
-    }
-    let t54;
-    if ($[90] !== isQuickViewOpen || $[91] !== quickViewProduct) {
-        t54 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$QuickViewModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-            product: quickViewProduct,
-            isOpen: isQuickViewOpen,
-            onClose: t53
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 613,
-            columnNumber: 11
-        }, this);
-        $[90] = isQuickViewOpen;
-        $[91] = quickViewProduct;
         $[92] = t54;
     } else {
         t54 = $[92];
     }
     let t55;
-    if ($[93] !== t18 || $[94] !== t52 || $[95] !== t54) {
-        t55 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    if ($[93] !== isQuickViewOpen || $[94] !== quickViewProduct) {
+        t55 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$QuickViewModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            product: quickViewProduct,
+            isOpen: isQuickViewOpen,
+            onClose: t54
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 624,
+            columnNumber: 11
+        }, this);
+        $[93] = isQuickViewOpen;
+        $[94] = quickViewProduct;
+        $[95] = t55;
+    } else {
+        t55 = $[95];
+    }
+    let t56;
+    if ($[96] !== t18 || $[97] !== t53 || $[98] !== t55) {
+        t56 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: t12,
             children: [
                 t18,
-                t52,
-                t54
+                t53,
+                t55
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 622,
+            lineNumber: 633,
             columnNumber: 11
         }, this);
-        $[93] = t18;
-        $[94] = t52;
-        $[95] = t54;
-        $[96] = t55;
+        $[96] = t18;
+        $[97] = t53;
+        $[98] = t55;
+        $[99] = t56;
     } else {
-        t55 = $[96];
+        t56 = $[99];
     }
-    return t55;
+    return t56;
 }
 _s(ShopContent, "PMkqYufGCTO+Xc7RkmWZAXbq7Cc=", false, function() {
     return [
@@ -2697,7 +2736,7 @@ _c = ShopContent;
 function _ShopContentArrayFrom(_, index) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ProductSkeleton$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, `skeleton-${index}`, false, {
         fileName: "[project]/src/components/ShopContent.js",
-        lineNumber: 633,
+        lineNumber: 644,
         columnNumber: 10
     }, this);
 }

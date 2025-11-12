@@ -1594,15 +1594,15 @@ var _s = __turbopack_context__.k.signature();
 ;
 function Navbar() {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(132);
-    if ($[0] !== "2840799cfea054f90b94b77c32bfb33721f4a50d88cdc1087a9719cc056d0921") {
-        for(let $i = 0; $i < 132; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(148);
+    if ($[0] !== "7c7300bd2b292df1eb7a8b6740f96b2b2e35a6cc0be9644e8ef9f86378fcb443") {
+        for(let $i = 0; $i < 148; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "2840799cfea054f90b94b77c32bfb33721f4a50d88cdc1087a9719cc056d0921";
+        $[0] = "7c7300bd2b292df1eb7a8b6740f96b2b2e35a6cc0be9644e8ef9f86378fcb443";
     }
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const [cartOpen, setCartOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     let t0;
@@ -1695,6 +1695,10 @@ function Navbar() {
                         if (searchRef.current && !searchRef.current.contains(event.target)) {
                             setShowSearchResults(false);
                         }
+                        const mobileSearch = document.querySelector(".mobile-search-container");
+                        if (mobileSearch && !mobileSearch.contains(event.target)) {
+                            setShowSearchResults(false);
+                        }
                     }
                 }["Navbar[useEffect() > handleClickOutside]"];
                 document.addEventListener("mousedown", handleClickOutside);
@@ -1709,24 +1713,48 @@ function Navbar() {
         t8 = $[10];
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t7, t8);
-    const t9 = `backdrop-blur-xl transition-all duration-500 sticky top-0 z-50
-        ${scrolled ? "bg-white/90 dark:bg-slate-900/95 shadow-2xl shadow-blue-500/10 border-b border-gray-200/50 dark:border-slate-700/50" : "bg-white/80 dark:bg-slate-900/90 shadow-lg shadow-blue-500/5 border-b border-gray-200/30 dark:border-slate-700/30"}`;
     let t10;
+    let t9;
     if ($[11] === Symbol.for("react.memo_cache_sentinel")) {
-        t10 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        t9 = ({
+            "Navbar[useEffect()]": ()=>{
+                const handleClickOutside_0 = {
+                    "Navbar[useEffect() > handleClickOutside_0]": (event_0)=>{
+                        if (searchRef.current && !searchRef.current.contains(event_0.target)) {
+                            setShowSearchResults(false);
+                        }
+                    }
+                }["Navbar[useEffect() > handleClickOutside_0]"];
+                document.addEventListener("mousedown", handleClickOutside_0);
+                return ()=>document.removeEventListener("mousedown", handleClickOutside_0);
+            }
+        })["Navbar[useEffect()]"];
+        t10 = [];
+        $[11] = t10;
+        $[12] = t9;
+    } else {
+        t10 = $[11];
+        t9 = $[12];
+    }
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t9, t10);
+    const t11 = `backdrop-blur-xl transition-all duration-500 sticky top-0 z-50
+        ${scrolled ? "bg-white/90 dark:bg-slate-900/95 shadow-2xl shadow-blue-500/10 border-b border-gray-200/50 dark:border-slate-700/50" : "bg-white/80 dark:bg-slate-900/90 shadow-lg shadow-blue-500/5 border-b border-gray-200/30 dark:border-slate-700/30"}`;
+    let t12;
+    if ($[13] === Symbol.for("react.memo_cache_sentinel")) {
+        t12 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "absolute inset-0 bg-linear-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 pointer-events-none"
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 133,
+            lineNumber: 161,
             columnNumber: 11
         }, this);
-        $[11] = t10;
+        $[13] = t12;
     } else {
-        t10 = $[11];
+        t12 = $[13];
     }
-    let t11;
-    if ($[12] === Symbol.for("react.memo_cache_sentinel")) {
-        t11 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t13;
+    if ($[14] === Symbol.for("react.memo_cache_sentinel")) {
+        t13 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "relative",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "w-8 h-8 lg:w-10 lg:h-10 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-500 group-hover:scale-105",
@@ -1736,40 +1764,40 @@ function Navbar() {
                         children: "SN"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 140,
+                        lineNumber: 168,
                         columnNumber: 291
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse-slow"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 140,
+                        lineNumber: 168,
                         columnNumber: 358
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 140,
+                lineNumber: 168,
                 columnNumber: 37
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 140,
+            lineNumber: 168,
             columnNumber: 11
         }, this);
-        $[12] = t11;
+        $[14] = t13;
     } else {
-        t11 = $[12];
+        t13 = $[14];
     }
-    let t12;
-    if ($[13] === Symbol.for("react.memo_cache_sentinel")) {
-        t12 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t14;
+    if ($[15] === Symbol.for("react.memo_cache_sentinel")) {
+        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex items-center shrink-0",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 href: "/",
                 className: "flex items-center space-x-2 lg:space-x-3 group",
                 children: [
-                    t11,
+                    t13,
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex flex-col",
                         children: [
@@ -1778,7 +1806,7 @@ function Navbar() {
                                 children: "ShopNow"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Navbar.js",
-                                lineNumber: 147,
+                                lineNumber: 175,
                                 columnNumber: 165
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1786,33 +1814,33 @@ function Navbar() {
                                 children: "PREMIUM COLLECTION"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Navbar.js",
-                                lineNumber: 147,
+                                lineNumber: 175,
                                 columnNumber: 412
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 147,
+                        lineNumber: 175,
                         columnNumber: 134
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 147,
+                lineNumber: 175,
                 columnNumber: 55
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 147,
+            lineNumber: 175,
             columnNumber: 11
         }, this);
-        $[13] = t12;
+        $[15] = t14;
     } else {
-        t12 = $[13];
+        t14 = $[15];
     }
-    let t13;
-    if ($[14] === Symbol.for("react.memo_cache_sentinel")) {
-        t13 = [
+    let t15;
+    if ($[16] === Symbol.for("react.memo_cache_sentinel")) {
+        t15 = [
             {
                 href: "/",
                 label: "Home"
@@ -1830,17 +1858,17 @@ function Navbar() {
                 label: "Contact"
             }
         ];
-        $[14] = t13;
+        $[16] = t15;
     } else {
-        t13 = $[14];
+        t15 = $[16];
     }
-    let t14;
-    if ($[15] !== pathname) {
-        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t16;
+    if ($[17] !== pathname) {
+        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "hidden lg:flex items-center justify-center flex-1 max-w-2xl mx-8",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex items-center space-x-1",
-                children: t13.map({
+                children: t15.map({
                     "Navbar[(anonymous)()]": (item)=>{
                         const isActive = pathname === item.href;
                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1852,62 +1880,62 @@ function Navbar() {
                                     className: `absolute bottom-0 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 transition-all duration-500 ${isActive ? "w-1/2 left-1/4" : "w-0 left-1/2"}`
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Navbar.js",
-                                    lineNumber: 176,
+                                    lineNumber: 204,
                                     columnNumber: 283
                                 }, this)
                             ]
                         }, item.href, true, {
                             fileName: "[project]/src/components/Navbar.js",
-                            lineNumber: 176,
+                            lineNumber: 204,
                             columnNumber: 20
                         }, this);
                     }
                 }["Navbar[(anonymous)()]"])
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 173,
+                lineNumber: 201,
                 columnNumber: 93
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 173,
+            lineNumber: 201,
             columnNumber: 11
         }, this);
-        $[15] = pathname;
-        $[16] = t14;
+        $[17] = pathname;
+        $[18] = t16;
     } else {
-        t14 = $[16];
+        t16 = $[18];
     }
-    let t15;
-    if ($[17] === Symbol.for("react.memo_cache_sentinel")) {
-        t15 = ({
+    let t17;
+    if ($[19] === Symbol.for("react.memo_cache_sentinel")) {
+        t17 = ({
             "Navbar[<input>.onChange]": (e)=>setSearchQuery(e.target.value)
         })["Navbar[<input>.onChange]"];
-        $[17] = t15;
+        $[19] = t17;
     } else {
-        t15 = $[17];
+        t17 = $[19];
     }
-    let t16;
-    if ($[18] !== searchQuery) {
-        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+    let t18;
+    if ($[20] !== searchQuery) {
+        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
             type: "text",
             placeholder: "Search luxury products...",
             value: searchQuery,
-            onChange: t15,
+            onChange: t17,
             className: "w-64 px-6 py-3 pl-12 text-sm bg-white/80 text-white dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 rounded-2xl focus:outline-none focus:ring-1 transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10"
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 195,
+            lineNumber: 223,
             columnNumber: 11
         }, this);
-        $[18] = searchQuery;
-        $[19] = t16;
+        $[20] = searchQuery;
+        $[21] = t18;
     } else {
-        t16 = $[19];
+        t18 = $[21];
     }
-    let t17;
-    if ($[20] === Symbol.for("react.memo_cache_sentinel")) {
-        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+    let t19;
+    if ($[22] === Symbol.for("react.memo_cache_sentinel")) {
+        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "absolute left-4 top-3 w-5 h-5 text-gray-400 transition-colors",
             fill: "none",
             stroke: "currentColor",
@@ -1919,60 +1947,60 @@ function Navbar() {
                 d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 203,
+                lineNumber: 231,
                 columnNumber: 144
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 203,
+            lineNumber: 231,
             columnNumber: 11
         }, this);
-        $[20] = t17;
+        $[22] = t19;
     } else {
-        t17 = $[20];
+        t19 = $[22];
     }
-    let t18;
-    if ($[21] === Symbol.for("react.memo_cache_sentinel")) {
-        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t20;
+    if ($[23] === Symbol.for("react.memo_cache_sentinel")) {
+        t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "absolute right-4 top-3",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "w-5 h-5 border-2 border-gray-300 dark:border-slate-500 rounded-full group-focus-within:border-blue-500 transition-colors"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 210,
+                lineNumber: 238,
                 columnNumber: 51
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 210,
+            lineNumber: 238,
             columnNumber: 11
         }, this);
-        $[21] = t18;
+        $[23] = t20;
     } else {
-        t18 = $[21];
+        t20 = $[23];
     }
-    let t19;
-    if ($[22] !== t16) {
-        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t21;
+    if ($[24] !== t18) {
+        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "relative group",
             children: [
-                t16,
-                t17,
-                t18
+                t18,
+                t19,
+                t20
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 217,
+            lineNumber: 245,
             columnNumber: 11
         }, this);
-        $[22] = t16;
-        $[23] = t19;
+        $[24] = t18;
+        $[25] = t21;
     } else {
-        t19 = $[23];
+        t21 = $[25];
     }
-    let t20;
-    if ($[24] !== searchQuery || $[25] !== searchResults || $[26] !== showSearchResults) {
-        t20 = showSearchResults && searchResults.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t22;
+    if ($[26] !== searchQuery || $[27] !== searchResults || $[28] !== showSearchResults) {
+        t22 = showSearchResults && searchResults.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "absolute top-full mt-3 w-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border border-gray-200/50 dark:border-slate-700/50 rounded-2xl shadow-2xl shadow-black/20 z-50 max-h-80 overflow-y-auto",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1994,7 +2022,7 @@ function Navbar() {
                                         className: "w-12 h-12 object-cover rounded-lg mr-4 shadow-md group-hover:scale-105 transition-transform duration-300"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Navbar.js",
-                                        lineNumber: 231,
+                                        lineNumber: 259,
                                         columnNumber: 62
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2005,7 +2033,7 @@ function Navbar() {
                                                 children: product_0.name
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Navbar.js",
-                                                lineNumber: 231,
+                                                lineNumber: 259,
                                                 columnNumber: 253
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2016,13 +2044,13 @@ function Navbar() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/Navbar.js",
-                                                lineNumber: 231,
+                                                lineNumber: 259,
                                                 columnNumber: 419
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Navbar.js",
-                                        lineNumber: 231,
+                                        lineNumber: 259,
                                         columnNumber: 229
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2037,24 +2065,24 @@ function Navbar() {
                                             d: "M9 5l7 7-7 7"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Navbar.js",
-                                            lineNumber: 231,
+                                            lineNumber: 259,
                                             columnNumber: 700
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Navbar.js",
-                                        lineNumber: 231,
+                                        lineNumber: 259,
                                         columnNumber: 517
                                     }, this)
                                 ]
                             }, product_0.id, true, {
                                 fileName: "[project]/src/components/Navbar.js",
-                                lineNumber: 226,
+                                lineNumber: 254,
                                 columnNumber: 55
                             }, this)
                     }["Navbar[searchResults.map()]"])
                 }, void 0, false, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 225,
+                    lineNumber: 253,
                     columnNumber: 277
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2069,146 +2097,146 @@ function Navbar() {
                     children: "View all results"
                 }, void 0, false, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 232,
+                    lineNumber: 260,
                     columnNumber: 49
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 225,
+            lineNumber: 253,
             columnNumber: 60
         }, this);
-        $[24] = searchQuery;
-        $[25] = searchResults;
-        $[26] = showSearchResults;
-        $[27] = t20;
+        $[26] = searchQuery;
+        $[27] = searchResults;
+        $[28] = showSearchResults;
+        $[29] = t22;
     } else {
-        t20 = $[27];
+        t22 = $[29];
     }
-    let t21;
-    if ($[28] !== t19 || $[29] !== t20) {
-        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t23;
+    if ($[30] !== t21 || $[31] !== t22) {
+        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "hidden lg:block relative",
             ref: searchRef,
             children: [
-                t19,
-                t20
+                t21,
+                t22
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 247,
+            lineNumber: 275,
             columnNumber: 11
         }, this);
-        $[28] = t19;
-        $[29] = t20;
         $[30] = t21;
+        $[31] = t22;
+        $[32] = t23;
     } else {
-        t21 = $[30];
+        t23 = $[32];
     }
-    const t22 = `relative p-3 rounded-2xl backdrop-blur-sm border transition-all duration-500 hover:scale-110 hover:shadow-lg group hidden lg:flex ${pathname === "/favourites" ? "bg-red-50 dark:bg-red-900/20 border-red-300/50 dark:border-red-600/50 text-red-600 dark:text-red-400 shadow-lg shadow-red-500/20" : "bg-white/80 dark:bg-slate-800/80 border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:shadow-red-500/20"}`;
-    let t23;
-    if ($[31] === Symbol.for("react.memo_cache_sentinel")) {
-        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    const t24 = `relative p-3 rounded-2xl backdrop-blur-sm border transition-all duration-500 hover:scale-110 hover:shadow-lg group hidden lg:flex ${pathname === "/favourites" ? "bg-red-50 dark:bg-red-900/20 border-red-300/50 dark:border-red-600/50 text-red-600 dark:text-red-400 shadow-lg shadow-red-500/20" : "bg-white/80 dark:bg-slate-800/80 border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:shadow-red-500/20"}`;
+    let t25;
+    if ($[33] === Symbol.for("react.memo_cache_sentinel")) {
+        t25 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "absolute inset-0 bg-linear-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 257,
+            lineNumber: 285,
             columnNumber: 11
         }, this);
-        $[31] = t23;
+        $[33] = t25;
     } else {
-        t23 = $[31];
+        t25 = $[33];
     }
-    const t24 = wishlistItems.length > 0 ? "currentColor" : "none";
-    let t25;
-    if ($[32] === Symbol.for("react.memo_cache_sentinel")) {
-        t25 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+    const t26 = wishlistItems.length > 0 ? "currentColor" : "none";
+    let t27;
+    if ($[34] === Symbol.for("react.memo_cache_sentinel")) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
             strokeLinecap: "round",
             strokeLinejoin: "round",
             strokeWidth: 2,
             d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 265,
+            lineNumber: 293,
             columnNumber: 11
         }, this);
-        $[32] = t25;
+        $[34] = t27;
     } else {
-        t25 = $[32];
+        t27 = $[34];
     }
-    let t26;
-    if ($[33] !== t24) {
-        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+    let t28;
+    if ($[35] !== t26) {
+        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-6 h-6 relative z-10",
-            fill: t24,
+            fill: t26,
             stroke: "currentColor",
             viewBox: "0 0 24 24",
-            children: t25
+            children: t27
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 272,
+            lineNumber: 300,
             columnNumber: 11
         }, this);
-        $[33] = t24;
-        $[34] = t26;
+        $[35] = t26;
+        $[36] = t28;
     } else {
-        t26 = $[34];
+        t28 = $[36];
     }
-    let t27;
-    if ($[35] !== mounted || $[36] !== wishlistItems.length) {
-        t27 = mounted && wishlistItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+    let t29;
+    if ($[37] !== mounted || $[38] !== wishlistItems.length) {
+        t29 = mounted && wishlistItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
             className: "absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-pulse",
             children: wishlistItems.length
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 280,
+            lineNumber: 308,
             columnNumber: 50
         }, this);
-        $[35] = mounted;
-        $[36] = wishlistItems.length;
-        $[37] = t27;
+        $[37] = mounted;
+        $[38] = wishlistItems.length;
+        $[39] = t29;
     } else {
-        t27 = $[37];
+        t29 = $[39];
     }
-    let t28;
-    if ($[38] !== t22 || $[39] !== t26 || $[40] !== t27) {
-        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+    let t30;
+    if ($[40] !== t24 || $[41] !== t28 || $[42] !== t29) {
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
             href: "/favourites",
-            className: t22,
+            className: t24,
             "aria-label": "View favourites",
             children: [
-                t23,
-                t26,
-                t27
+                t25,
+                t28,
+                t29
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 289,
+            lineNumber: 317,
             columnNumber: 11
         }, this);
-        $[38] = t22;
-        $[39] = t26;
-        $[40] = t27;
+        $[40] = t24;
         $[41] = t28;
+        $[42] = t29;
+        $[43] = t30;
     } else {
-        t28 = $[41];
+        t30 = $[43];
     }
-    let t29;
-    if ($[42] === Symbol.for("react.memo_cache_sentinel")) {
-        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t31;
+    if ($[44] === Symbol.for("react.memo_cache_sentinel")) {
+        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 299,
+            lineNumber: 327,
             columnNumber: 11
         }, this);
-        $[42] = t29;
+        $[44] = t31;
     } else {
-        t29 = $[42];
+        t31 = $[44];
     }
-    let t30;
-    if ($[43] !== darkMode || $[44] !== mounted) {
-        t30 = mounted && darkMode ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+    let t32;
+    if ($[45] !== darkMode || $[46] !== mounted) {
+        t32 = mounted && darkMode ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-5 h-5 relative z-10",
             fill: "none",
             stroke: "currentColor",
@@ -2220,12 +2248,12 @@ function Navbar() {
                 d: "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 306,
+                lineNumber: 334,
                 columnNumber: 126
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 306,
+            lineNumber: 334,
             columnNumber: 33
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-5 h-5 relative z-10",
@@ -2239,66 +2267,66 @@ function Navbar() {
                 d: "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 306,
+                lineNumber: 334,
                 columnNumber: 451
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 306,
+            lineNumber: 334,
             columnNumber: 358
         }, this);
-        $[43] = darkMode;
-        $[44] = mounted;
-        $[45] = t30;
+        $[45] = darkMode;
+        $[46] = mounted;
+        $[47] = t32;
     } else {
-        t30 = $[45];
+        t32 = $[47];
     }
-    let t31;
-    if ($[46] !== t30 || $[47] !== toggleDarkMode) {
-        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+    let t33;
+    if ($[48] !== t32 || $[49] !== toggleDarkMode) {
+        t33 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
             onClick: toggleDarkMode,
             className: "relative p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex",
             "aria-label": "Toggle dark mode",
             children: [
-                t29,
-                t30
+                t31,
+                t32
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 315,
+            lineNumber: 343,
             columnNumber: 11
         }, this);
-        $[46] = t30;
-        $[47] = toggleDarkMode;
-        $[48] = t31;
-    } else {
-        t31 = $[48];
-    }
-    let t32;
-    if ($[49] === Symbol.for("react.memo_cache_sentinel")) {
-        t32 = ({
-            "Navbar[<button>.onClick]": ()=>setCartOpen(true)
-        })["Navbar[<button>.onClick]"];
-        $[49] = t32;
-    } else {
-        t32 = $[49];
-    }
-    let t33;
-    if ($[50] === Symbol.for("react.memo_cache_sentinel")) {
-        t33 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 333,
-            columnNumber: 11
-        }, this);
+        $[48] = t32;
+        $[49] = toggleDarkMode;
         $[50] = t33;
     } else {
         t33 = $[50];
     }
     let t34;
     if ($[51] === Symbol.for("react.memo_cache_sentinel")) {
-        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+        t34 = ({
+            "Navbar[<button>.onClick]": ()=>setCartOpen(true)
+        })["Navbar[<button>.onClick]"];
+        $[51] = t34;
+    } else {
+        t34 = $[51];
+    }
+    let t35;
+    if ($[52] === Symbol.for("react.memo_cache_sentinel")) {
+        t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 361,
+            columnNumber: 11
+        }, this);
+        $[52] = t35;
+    } else {
+        t35 = $[52];
+    }
+    let t36;
+    if ($[53] === Symbol.for("react.memo_cache_sentinel")) {
+        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-4 h-4 relative z-10",
             fill: "none",
             stroke: "currentColor",
@@ -2310,85 +2338,85 @@ function Navbar() {
                 d: "M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 340,
+                lineNumber: 368,
                 columnNumber: 104
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 340,
+            lineNumber: 368,
             columnNumber: 11
         }, this);
-        $[51] = t34;
+        $[53] = t36;
     } else {
-        t34 = $[51];
+        t36 = $[53];
     }
-    let t35;
-    if ($[52] !== getTotalItems || $[53] !== mounted) {
-        t35 = mounted && getTotalItems() > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+    let t37;
+    if ($[54] !== getTotalItems || $[55] !== mounted) {
+        t37 = mounted && getTotalItems() > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
             className: "absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce",
             children: getTotalItems()
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 347,
+            lineNumber: 375,
             columnNumber: 45
         }, this);
-        $[52] = getTotalItems;
-        $[53] = mounted;
-        $[54] = t35;
+        $[54] = getTotalItems;
+        $[55] = mounted;
+        $[56] = t37;
     } else {
-        t35 = $[54];
+        t37 = $[56];
     }
-    let t36;
-    if ($[55] !== t35) {
-        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            onClick: t32,
+    let t38;
+    if ($[57] !== t37) {
+        t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t34,
             className: "relative p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group",
             "aria-label": "Open shopping cart",
             children: [
-                t33,
-                t34,
-                t35
+                t35,
+                t36,
+                t37
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 356,
+            lineNumber: 384,
             columnNumber: 11
         }, this);
-        $[55] = t35;
-        $[56] = t36;
-    } else {
-        t36 = $[56];
-    }
-    let t37;
-    if ($[57] === Symbol.for("react.memo_cache_sentinel")) {
-        t37 = ({
-            "Navbar[<button>.onClick]": ()=>setMobileMenuOpen(true)
-        })["Navbar[<button>.onClick]"];
         $[57] = t37;
-    } else {
-        t37 = $[57];
-    }
-    let t38;
-    if ($[58] === Symbol.for("react.memo_cache_sentinel")) {
-        t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 373,
-            columnNumber: 11
-        }, this);
         $[58] = t38;
     } else {
         t38 = $[58];
     }
     let t39;
     if ($[59] === Symbol.for("react.memo_cache_sentinel")) {
-        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            onClick: t37,
+        t39 = ({
+            "Navbar[<button>.onClick]": ()=>setMobileMenuOpen(true)
+        })["Navbar[<button>.onClick]"];
+        $[59] = t39;
+    } else {
+        t39 = $[59];
+    }
+    let t40;
+    if ($[60] === Symbol.for("react.memo_cache_sentinel")) {
+        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 401,
+            columnNumber: 11
+        }, this);
+        $[60] = t40;
+    } else {
+        t40 = $[60];
+    }
+    let t41;
+    if ($[61] === Symbol.for("react.memo_cache_sentinel")) {
+        t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t39,
             className: "lg:hidden p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group",
             "aria-label": "Open mobile menu",
             children: [
-                t38,
+                t40,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                     className: "w-4 h-4 relative z-10",
                     fill: "none",
@@ -2401,114 +2429,114 @@ function Navbar() {
                         d: "M4 6h16M4 12h16M4 18h16"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 380,
+                        lineNumber: 408,
                         columnNumber: 469
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 380,
+                    lineNumber: 408,
                     columnNumber: 376
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 380,
+            lineNumber: 408,
             columnNumber: 11
         }, this);
-        $[59] = t39;
+        $[61] = t41;
     } else {
-        t39 = $[59];
-    }
-    let t40;
-    if ($[60] !== t28 || $[61] !== t31 || $[62] !== t36) {
-        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex items-center space-x-5",
-            children: [
-                t28,
-                t31,
-                t36,
-                t39
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 387,
-            columnNumber: 11
-        }, this);
-        $[60] = t28;
-        $[61] = t31;
-        $[62] = t36;
-        $[63] = t40;
-    } else {
-        t40 = $[63];
-    }
-    let t41;
-    if ($[64] !== t21 || $[65] !== t40) {
-        t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex items-center justify-end space-x-5 shrink-0",
-            children: [
-                t21,
-                t40
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 397,
-            columnNumber: 11
-        }, this);
-        $[64] = t21;
-        $[65] = t40;
-        $[66] = t41;
-    } else {
-        t41 = $[66];
+        t41 = $[61];
     }
     let t42;
-    if ($[67] !== t14 || $[68] !== t41) {
+    if ($[62] !== t30 || $[63] !== t33 || $[64] !== t38) {
         t42 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-center space-x-5",
+            children: [
+                t30,
+                t33,
+                t38,
+                t41
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 415,
+            columnNumber: 11
+        }, this);
+        $[62] = t30;
+        $[63] = t33;
+        $[64] = t38;
+        $[65] = t42;
+    } else {
+        t42 = $[65];
+    }
+    let t43;
+    if ($[66] !== t23 || $[67] !== t42) {
+        t43 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-center justify-end space-x-5 shrink-0",
+            children: [
+                t23,
+                t42
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 425,
+            columnNumber: 11
+        }, this);
+        $[66] = t23;
+        $[67] = t42;
+        $[68] = t43;
+    } else {
+        t43 = $[68];
+    }
+    let t44;
+    if ($[69] !== t16 || $[70] !== t43) {
+        t44 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "mx-auto px-4 sm:px-6 lg:px-8 relative",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex justify-between items-center h-16 lg:h-20",
                 children: [
-                    t12,
                     t14,
-                    t41
+                    t16,
+                    t43
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 406,
+                lineNumber: 434,
                 columnNumber: 66
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 406,
+            lineNumber: 434,
             columnNumber: 11
         }, this);
-        $[67] = t14;
-        $[68] = t41;
-        $[69] = t42;
+        $[69] = t16;
+        $[70] = t43;
+        $[71] = t44;
     } else {
-        t42 = $[69];
+        t44 = $[71];
     }
-    const t43 = `fixed inset-0 z-60 lg:hidden transition-opacity duration-300 ${mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`;
-    let t44;
-    if ($[70] === Symbol.for("react.memo_cache_sentinel")) {
-        t44 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    const t45 = `fixed inset-0 z-60 lg:hidden transition-opacity duration-300 ${mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`;
+    let t46;
+    if ($[72] === Symbol.for("react.memo_cache_sentinel")) {
+        t46 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "fixed inset-0 bg-black/50 backdrop-blur-lg",
             onClick: {
                 "Navbar[<div>.onClick]": ()=>setMobileMenuOpen(false)
             }["Navbar[<div>.onClick]"]
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 416,
+            lineNumber: 444,
             columnNumber: 11
         }, this);
-        $[70] = t44;
+        $[72] = t46;
     } else {
-        t44 = $[70];
+        t46 = $[72];
     }
-    const t45 = `fixed left-0 top-0 h-screen w-4/5 bg-white dark:bg-slate-800 shadow-2xl border-r border-gray-200 dark:border-slate-700 transform transition-transform duration-300 z-70 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`;
-    let t46;
-    let t47;
-    if ($[71] === Symbol.for("react.memo_cache_sentinel")) {
-        t46 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    const t47 = `fixed left-0 top-0 h-screen w-4/5 bg-white dark:bg-slate-800 shadow-2xl border-r border-gray-200 dark:border-slate-700 transform transition-transform duration-300 z-70 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`;
+    let t48;
+    let t49;
+    if ($[73] === Symbol.for("react.memo_cache_sentinel")) {
+        t48 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex items-center space-x-3",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2518,12 +2546,12 @@ function Navbar() {
                         children: "SN"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 427,
+                        lineNumber: 455,
                         columnNumber: 194
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 427,
+                    lineNumber: 455,
                     columnNumber: 56
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2531,32 +2559,32 @@ function Navbar() {
                     children: "ShopNow"
                 }, void 0, false, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 427,
+                    lineNumber: 455,
                     columnNumber: 256
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 427,
+            lineNumber: 455,
             columnNumber: 11
         }, this);
-        t47 = ({
+        t49 = ({
             "Navbar[<button>.onClick]": ()=>setMobileMenuOpen(false)
         })["Navbar[<button>.onClick]"];
-        $[71] = t46;
-        $[72] = t47;
+        $[73] = t48;
+        $[74] = t49;
     } else {
-        t46 = $[71];
-        t47 = $[72];
+        t48 = $[73];
+        t49 = $[74];
     }
-    let t48;
-    if ($[73] === Symbol.for("react.memo_cache_sentinel")) {
-        t48 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t50;
+    if ($[75] === Symbol.for("react.memo_cache_sentinel")) {
+        t50 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex items-center justify-between p-6 border-b border-gray-200 dark:border-slate-700",
             children: [
-                t46,
+                t48,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    onClick: t47,
+                    onClick: t49,
                     className: "p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors",
                     "aria-label": "Close menu",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2571,32 +2599,32 @@ function Navbar() {
                             d: "M6 18L18 6M6 6l12 12"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Navbar.js",
-                            lineNumber: 439,
+                            lineNumber: 467,
                             columnNumber: 363
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 439,
+                        lineNumber: 467,
                         columnNumber: 251
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 439,
+                    lineNumber: 467,
                     columnNumber: 118
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 439,
+            lineNumber: 467,
             columnNumber: 11
         }, this);
-        $[73] = t48;
+        $[75] = t50;
     } else {
-        t48 = $[73];
+        t50 = $[75];
     }
-    let t49;
-    if ($[74] === Symbol.for("react.memo_cache_sentinel")) {
-        t49 = [
+    let t51;
+    if ($[76] === Symbol.for("react.memo_cache_sentinel")) {
+        t51 = [
             {
                 href: "/",
                 label: "Home"
@@ -2614,15 +2642,15 @@ function Navbar() {
                 label: "Contact"
             }
         ];
-        $[74] = t49;
+        $[76] = t51;
     } else {
-        t49 = $[74];
+        t51 = $[76];
     }
-    let t50;
-    if ($[75] !== pathname) {
-        t50 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+    let t52;
+    if ($[77] !== pathname) {
+        t52 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
             className: "space-y-6",
-            children: t49.map({
+            children: t51.map({
                 "Navbar[(anonymous)()]": (item_0)=>{
                     const isActive_0 = pathname === item_0.href;
                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2634,51 +2662,51 @@ function Navbar() {
                         children: item_0.label
                     }, item_0.href, false, {
                         fileName: "[project]/src/components/Navbar.js",
-                        lineNumber: 468,
+                        lineNumber: 496,
                         columnNumber: 18
                     }, this);
                 }
             }["Navbar[(anonymous)()]"])
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 465,
+            lineNumber: 493,
             columnNumber: 11
         }, this);
-        $[75] = pathname;
-        $[76] = t50;
+        $[77] = pathname;
+        $[78] = t52;
     } else {
-        t50 = $[76];
+        t52 = $[78];
     }
-    let t51;
-    if ($[77] === Symbol.for("react.memo_cache_sentinel")) {
-        t51 = ({
+    let t53;
+    if ($[79] === Symbol.for("react.memo_cache_sentinel")) {
+        t53 = ({
             "Navbar[<input>.onChange]": (e_0)=>setSearchQuery(e_0.target.value)
         })["Navbar[<input>.onChange]"];
-        $[77] = t51;
+        $[79] = t53;
     } else {
-        t51 = $[77];
+        t53 = $[79];
     }
-    let t52;
-    if ($[78] !== searchQuery) {
-        t52 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+    let t54;
+    if ($[80] !== searchQuery) {
+        t54 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
             type: "text",
             placeholder: "Search products...",
             value: searchQuery,
-            onChange: t51,
-            className: "w-full text-white px-4 py-3 pl-12 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            onChange: t53,
+            className: "w-full px-4 py-3 pl-12 text-sm bg-gray-50 text-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 489,
+            lineNumber: 517,
             columnNumber: 11
         }, this);
-        $[78] = searchQuery;
-        $[79] = t52;
+        $[80] = searchQuery;
+        $[81] = t54;
     } else {
-        t52 = $[79];
+        t54 = $[81];
     }
-    let t53;
-    if ($[80] === Symbol.for("react.memo_cache_sentinel")) {
-        t53 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+    let t55;
+    if ($[82] === Symbol.for("react.memo_cache_sentinel")) {
+        t55 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "absolute left-4 top-3.5 w-4 h-4 text-gray-400",
             fill: "none",
             stroke: "currentColor",
@@ -2690,130 +2718,300 @@ function Navbar() {
                 d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 497,
+                lineNumber: 525,
                 columnNumber: 128
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 497,
+            lineNumber: 525,
             columnNumber: 11
         }, this);
-        $[80] = t53;
+        $[82] = t55;
     } else {
-        t53 = $[80];
+        t55 = $[82];
     }
-    let t54;
-    if ($[81] !== t52) {
-        t54 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "mt-8",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative",
-                children: [
-                    t52,
-                    t53
-                ]
-            }, void 0, true, {
+    let t56;
+    if ($[83] !== router || $[84] !== searchQuery) {
+        t56 = searchQuery.trim() && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: {
+                "Navbar[<button>.onClick]": ()=>{
+                    setMobileMenuOpen(false);
+                    router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+                    setSearchQuery("");
+                }
+            }["Navbar[<button>.onClick]"],
+            className: "absolute right-4 top-3.5 p-1 text-blue-500 hover:text-blue-600 transition-colors",
+            "aria-label": "Search",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                className: "w-4 h-4",
+                fill: "none",
+                stroke: "currentColor",
+                viewBox: "0 0 24 24",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round",
+                    strokeWidth: 2,
+                    d: "M9 5l7 7-7 7"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Navbar.js",
+                    lineNumber: 538,
+                    columnNumber: 228
+                }, this)
+            }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 504,
-                columnNumber: 33
+                lineNumber: 538,
+                columnNumber: 149
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 504,
-            columnNumber: 11
+            lineNumber: 532,
+            columnNumber: 33
         }, this);
-        $[81] = t52;
-        $[82] = t54;
+        $[83] = router;
+        $[84] = searchQuery;
+        $[85] = t56;
     } else {
-        t54 = $[82];
+        t56 = $[85];
     }
-    const t55 = `flex items-center px-4 py-3 rounded-xl transition-all duration-300 font-semibold ${pathname === "/favourites" ? "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400" : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-red-600 dark:hover:text-red-400"}`;
-    let t56;
-    if ($[83] === Symbol.for("react.memo_cache_sentinel")) {
-        t56 = ({
-            "Navbar[<Link>.onClick]": ()=>setMobileMenuOpen(false)
-        })["Navbar[<Link>.onClick]"];
-        $[83] = t56;
-    } else {
-        t56 = $[83];
-    }
-    const t57 = wishlistItems.length > 0 ? "currentColor" : "none";
-    let t58;
-    if ($[84] === Symbol.for("react.memo_cache_sentinel")) {
-        t58 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeWidth: 2,
-            d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 523,
-            columnNumber: 11
-        }, this);
-        $[84] = t58;
-    } else {
-        t58 = $[84];
-    }
-    let t59;
-    if ($[85] !== t57) {
-        t59 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-            className: "w-6 h-6 mr-4",
-            fill: t57,
-            stroke: "currentColor",
-            viewBox: "0 0 24 24",
-            children: t58
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 530,
-            columnNumber: 11
-        }, this);
-        $[85] = t57;
-        $[86] = t59;
-    } else {
-        t59 = $[86];
-    }
-    let t60;
-    if ($[87] !== mounted || $[88] !== wishlistItems.length) {
-        t60 = mounted && wishlistItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-            className: "ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold",
-            children: wishlistItems.length
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 538,
-            columnNumber: 50
-        }, this);
-        $[87] = mounted;
-        $[88] = wishlistItems.length;
-        $[89] = t60;
-    } else {
-        t60 = $[89];
-    }
-    let t61;
-    if ($[90] !== t55 || $[91] !== t59 || $[92] !== t60) {
-        t61 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-            href: "/favourites",
-            className: t55,
-            onClick: t56,
+    let t57;
+    if ($[86] !== t54 || $[87] !== t56) {
+        t57 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "relative",
             children: [
-                t59,
-                "Favourites",
-                t60
+                t54,
+                t55,
+                t56
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
             lineNumber: 547,
             columnNumber: 11
         }, this);
-        $[90] = t55;
-        $[91] = t59;
-        $[92] = t60;
-        $[93] = t61;
+        $[86] = t54;
+        $[87] = t56;
+        $[88] = t57;
     } else {
-        t61 = $[93];
+        t57 = $[88];
     }
+    let t58;
+    if ($[89] !== searchQuery || $[90] !== searchResults) {
+        t58 = searchQuery.length > 0 && searchResults.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "mt-2 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg max-h-60 overflow-y-auto",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "p-2",
+                    children: searchResults.map({
+                        "Navbar[searchResults.map()]": (product_1)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: `/product/${product_1.id}`,
+                                className: "flex items-center p-3 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors rounded-lg group",
+                                onClick: {
+                                    "Navbar[searchResults.map() > <Link>.onClick]": ()=>{
+                                        setSearchQuery("");
+                                        setMobileMenuOpen(false);
+                                    }
+                                }["Navbar[searchResults.map() > <Link>.onClick]"],
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                        src: product_1.image,
+                                        alt: product_1.name,
+                                        className: "w-10 h-10 object-cover rounded-lg mr-3"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Navbar.js",
+                                        lineNumber: 562,
+                                        columnNumber: 62
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex-1 min-w-0",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "font-medium text-gray-900 dark:text-white text-sm truncate",
+                                                children: product_1.name
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Navbar.js",
+                                                lineNumber: 562,
+                                                columnNumber: 195
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "text-blue-600 dark:text-blue-400 font-bold text-xs",
+                                                children: [
+                                                    "$",
+                                                    product_1.price
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/Navbar.js",
+                                                lineNumber: 562,
+                                                columnNumber: 293
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Navbar.js",
+                                        lineNumber: 562,
+                                        columnNumber: 163
+                                    }, this)
+                                ]
+                            }, product_1.id, true, {
+                                fileName: "[project]/src/components/Navbar.js",
+                                lineNumber: 557,
+                                columnNumber: 55
+                            }, this)
+                    }["Navbar[searchResults.map()]"])
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Navbar.js",
+                    lineNumber: 556,
+                    columnNumber: 205
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    href: `/shop?search=${encodeURIComponent(searchQuery)}`,
+                    className: "block p-3 text-center bg-gray-50 dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-medium hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors rounded-b-xl border-t border-gray-200 dark:border-slate-600",
+                    onClick: {
+                        "Navbar[<Link>.onClick]": ()=>{
+                            setSearchQuery("");
+                            setMobileMenuOpen(false);
+                        }
+                    }["Navbar[<Link>.onClick]"],
+                    children: "View all results"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Navbar.js",
+                    lineNumber: 563,
+                    columnNumber: 49
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 556,
+            columnNumber: 65
+        }, this);
+        $[89] = searchQuery;
+        $[90] = searchResults;
+        $[91] = t58;
+    } else {
+        t58 = $[91];
+    }
+    let t59;
+    if ($[92] !== searchQuery.length || $[93] !== searchResults) {
+        t59 = searchQuery.length > 0 && searchResults.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "mt-2 p-3 text-center text-gray-500 dark:text-gray-400 text-sm bg-gray-50 dark:bg-slate-700 rounded-xl",
+            children: "No products found"
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 577,
+            columnNumber: 67
+        }, this);
+        $[92] = searchQuery.length;
+        $[93] = searchResults;
+        $[94] = t59;
+    } else {
+        t59 = $[94];
+    }
+    let t60;
+    if ($[95] !== t57 || $[96] !== t58 || $[97] !== t59) {
+        t60 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "mt-8 mobile-search-container",
+            ref: searchRef,
+            children: [
+                t57,
+                t58,
+                t59
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 586,
+            columnNumber: 11
+        }, this);
+        $[95] = t57;
+        $[96] = t58;
+        $[97] = t59;
+        $[98] = t60;
+    } else {
+        t60 = $[98];
+    }
+    const t61 = `flex items-center px-4 py-3 rounded-xl transition-all duration-300 font-semibold ${pathname === "/favourites" ? "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400" : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-red-600 dark:hover:text-red-400"}`;
     let t62;
-    if ($[94] !== darkMode || $[95] !== mounted) {
-        t62 = mounted && darkMode ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+    if ($[99] === Symbol.for("react.memo_cache_sentinel")) {
+        t62 = ({
+            "Navbar[<Link>.onClick]": ()=>setMobileMenuOpen(false)
+        })["Navbar[<Link>.onClick]"];
+        $[99] = t62;
+    } else {
+        t62 = $[99];
+    }
+    const t63 = wishlistItems.length > 0 ? "currentColor" : "none";
+    let t64;
+    if ($[100] === Symbol.for("react.memo_cache_sentinel")) {
+        t64 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+            strokeLinecap: "round",
+            strokeLinejoin: "round",
+            strokeWidth: 2,
+            d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 607,
+            columnNumber: 11
+        }, this);
+        $[100] = t64;
+    } else {
+        t64 = $[100];
+    }
+    let t65;
+    if ($[101] !== t63) {
+        t65 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+            className: "w-6 h-6 mr-4",
+            fill: t63,
+            stroke: "currentColor",
+            viewBox: "0 0 24 24",
+            children: t64
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 614,
+            columnNumber: 11
+        }, this);
+        $[101] = t63;
+        $[102] = t65;
+    } else {
+        t65 = $[102];
+    }
+    let t66;
+    if ($[103] !== mounted || $[104] !== wishlistItems.length) {
+        t66 = mounted && wishlistItems.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            className: "ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold",
+            children: wishlistItems.length
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 622,
+            columnNumber: 50
+        }, this);
+        $[103] = mounted;
+        $[104] = wishlistItems.length;
+        $[105] = t66;
+    } else {
+        t66 = $[105];
+    }
+    let t67;
+    if ($[106] !== t61 || $[107] !== t65 || $[108] !== t66) {
+        t67 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            href: "/favourites",
+            className: t61,
+            onClick: t62,
+            children: [
+                t65,
+                "Favourites",
+                t66
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 631,
+            columnNumber: 11
+        }, this);
+        $[106] = t61;
+        $[107] = t65;
+        $[108] = t66;
+        $[109] = t67;
+    } else {
+        t67 = $[109];
+    }
+    let t68;
+    if ($[110] !== darkMode || $[111] !== mounted) {
+        t68 = mounted && darkMode ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-6 h-6 mr-4",
             fill: "none",
             stroke: "currentColor",
@@ -2825,12 +3023,12 @@ function Navbar() {
                 d: "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 557,
+                lineNumber: 641,
                 columnNumber: 117
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 557,
+            lineNumber: 641,
             columnNumber: 33
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-6 h-6 mr-4",
@@ -2844,57 +3042,57 @@ function Navbar() {
                 d: "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 557,
+                lineNumber: 641,
                 columnNumber: 433
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 557,
+            lineNumber: 641,
             columnNumber: 349
         }, this);
-        $[94] = darkMode;
-        $[95] = mounted;
-        $[96] = t62;
+        $[110] = darkMode;
+        $[111] = mounted;
+        $[112] = t68;
     } else {
-        t62 = $[96];
+        t68 = $[112];
     }
-    const t63 = darkMode ? "Light Mode" : "Dark Mode";
-    let t64;
-    if ($[97] !== t62 || $[98] !== t63 || $[99] !== toggleDarkMode) {
-        t64 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+    const t69 = darkMode ? "Light Mode" : "Dark Mode";
+    let t70;
+    if ($[113] !== t68 || $[114] !== t69 || $[115] !== toggleDarkMode) {
+        t70 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
             onClick: toggleDarkMode,
             className: "flex items-center w-full px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-semibold",
             children: [
-                t62,
-                t63
+                t68,
+                t69
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 567,
+            lineNumber: 651,
             columnNumber: 11
         }, this);
-        $[97] = t62;
-        $[98] = t63;
-        $[99] = toggleDarkMode;
-        $[100] = t64;
+        $[113] = t68;
+        $[114] = t69;
+        $[115] = toggleDarkMode;
+        $[116] = t70;
     } else {
-        t64 = $[100];
+        t70 = $[116];
     }
-    let t65;
-    if ($[101] === Symbol.for("react.memo_cache_sentinel")) {
-        t65 = ({
+    let t71;
+    if ($[117] === Symbol.for("react.memo_cache_sentinel")) {
+        t71 = ({
             "Navbar[<button>.onClick]": ()=>{
                 setCartOpen(true);
                 setMobileMenuOpen(false);
             }
         })["Navbar[<button>.onClick]"];
-        $[101] = t65;
+        $[117] = t71;
     } else {
-        t65 = $[101];
+        t71 = $[117];
     }
-    let t66;
-    if ($[102] === Symbol.for("react.memo_cache_sentinel")) {
-        t66 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+    let t72;
+    if ($[118] === Symbol.for("react.memo_cache_sentinel")) {
+        t72 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             className: "w-6 h-6 mr-4",
             fill: "none",
             stroke: "currentColor",
@@ -2906,203 +3104,203 @@ function Navbar() {
                 d: "M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3"
             }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.js",
-                lineNumber: 589,
+                lineNumber: 673,
                 columnNumber: 95
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 589,
+            lineNumber: 673,
             columnNumber: 11
         }, this);
-        $[102] = t66;
+        $[118] = t72;
     } else {
-        t66 = $[102];
+        t72 = $[118];
     }
-    let t67;
-    if ($[103] !== getTotalItems || $[104] !== mounted) {
-        t67 = mounted && getTotalItems() > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+    let t73;
+    if ($[119] !== getTotalItems || $[120] !== mounted) {
+        t73 = mounted && getTotalItems() > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
             className: "ml-auto bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold",
             children: getTotalItems()
         }, void 0, false, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 596,
+            lineNumber: 680,
             columnNumber: 45
         }, this);
-        $[103] = getTotalItems;
-        $[104] = mounted;
-        $[105] = t67;
+        $[119] = getTotalItems;
+        $[120] = mounted;
+        $[121] = t73;
     } else {
-        t67 = $[105];
+        t73 = $[121];
     }
-    let t68;
-    if ($[106] !== t67) {
-        t68 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-            onClick: t65,
+    let t74;
+    if ($[122] !== t73) {
+        t74 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t71,
             className: "flex items-center w-full px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-semibold",
             children: [
-                t66,
+                t72,
                 "Cart",
-                t67
+                t73
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 605,
+            lineNumber: 689,
             columnNumber: 11
         }, this);
-        $[106] = t67;
-        $[107] = t68;
+        $[122] = t73;
+        $[123] = t74;
     } else {
-        t68 = $[107];
+        t74 = $[123];
     }
-    let t69;
-    if ($[108] !== t61 || $[109] !== t64 || $[110] !== t68) {
-        t69 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t75;
+    if ($[124] !== t67 || $[125] !== t70 || $[126] !== t74) {
+        t75 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "mt-8 space-y-4",
             children: [
-                t61,
-                t64,
-                t68
+                t67,
+                t70,
+                t74
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 613,
+            lineNumber: 697,
             columnNumber: 11
         }, this);
-        $[108] = t61;
-        $[109] = t64;
-        $[110] = t68;
-        $[111] = t69;
+        $[124] = t67;
+        $[125] = t70;
+        $[126] = t74;
+        $[127] = t75;
     } else {
-        t69 = $[111];
+        t75 = $[127];
     }
-    let t70;
-    if ($[112] !== t50 || $[113] !== t54 || $[114] !== t69) {
-        t70 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t76;
+    if ($[128] !== t52 || $[129] !== t60 || $[130] !== t75) {
+        t76 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex flex-col h-full bg-white dark:bg-slate-800",
             children: [
-                t48,
+                t50,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex-1 px-6 py-8 bg-white dark:bg-slate-800",
                     children: [
-                        t50,
-                        t54,
-                        t69
+                        t52,
+                        t60,
+                        t75
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Navbar.js",
-                    lineNumber: 623,
+                    lineNumber: 707,
                     columnNumber: 81
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 623,
+            lineNumber: 707,
             columnNumber: 11
         }, this);
-        $[112] = t50;
-        $[113] = t54;
-        $[114] = t69;
-        $[115] = t70;
-    } else {
-        t70 = $[115];
-    }
-    let t71;
-    if ($[116] !== t45 || $[117] !== t70) {
-        t71 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t45,
-            children: t70
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 633,
-            columnNumber: 11
-        }, this);
-        $[116] = t45;
-        $[117] = t70;
-        $[118] = t71;
-    } else {
-        t71 = $[118];
-    }
-    let t72;
-    if ($[119] !== t43 || $[120] !== t71) {
-        t72 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t43,
-            children: [
-                t44,
-                t71
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 642,
-            columnNumber: 11
-        }, this);
-        $[119] = t43;
-        $[120] = t71;
-        $[121] = t72;
-    } else {
-        t72 = $[121];
-    }
-    let t73;
-    if ($[122] !== t42 || $[123] !== t72 || $[124] !== t9) {
-        t73 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-            className: t9,
-            children: [
-                t10,
-                t42,
-                t72
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 651,
-            columnNumber: 11
-        }, this);
-        $[122] = t42;
-        $[123] = t72;
-        $[124] = t9;
-        $[125] = t73;
-    } else {
-        t73 = $[125];
-    }
-    let t74;
-    if ($[126] === Symbol.for("react.memo_cache_sentinel")) {
-        t74 = ({
-            "Navbar[<Cart>.onClose]": ()=>setCartOpen(false)
-        })["Navbar[<Cart>.onClose]"];
-        $[126] = t74;
-    } else {
-        t74 = $[126];
-    }
-    let t75;
-    if ($[127] !== cartOpen) {
-        t75 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Cart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-            isOpen: cartOpen,
-            onClose: t74
-        }, void 0, false, {
-            fileName: "[project]/src/components/Navbar.js",
-            lineNumber: 670,
-            columnNumber: 11
-        }, this);
-        $[127] = cartOpen;
-        $[128] = t75;
-    } else {
-        t75 = $[128];
-    }
-    let t76;
-    if ($[129] !== t73 || $[130] !== t75) {
-        t76 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-            children: [
-                t73,
-                t75
-            ]
-        }, void 0, true);
-        $[129] = t73;
+        $[128] = t52;
+        $[129] = t60;
         $[130] = t75;
         $[131] = t76;
     } else {
         t76 = $[131];
     }
-    return t76;
+    let t77;
+    if ($[132] !== t47 || $[133] !== t76) {
+        t77 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t47,
+            children: t76
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 717,
+            columnNumber: 11
+        }, this);
+        $[132] = t47;
+        $[133] = t76;
+        $[134] = t77;
+    } else {
+        t77 = $[134];
+    }
+    let t78;
+    if ($[135] !== t45 || $[136] !== t77) {
+        t78 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t45,
+            children: [
+                t46,
+                t77
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 726,
+            columnNumber: 11
+        }, this);
+        $[135] = t45;
+        $[136] = t77;
+        $[137] = t78;
+    } else {
+        t78 = $[137];
+    }
+    let t79;
+    if ($[138] !== t11 || $[139] !== t44 || $[140] !== t78) {
+        t79 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+            className: t11,
+            children: [
+                t12,
+                t44,
+                t78
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 735,
+            columnNumber: 11
+        }, this);
+        $[138] = t11;
+        $[139] = t44;
+        $[140] = t78;
+        $[141] = t79;
+    } else {
+        t79 = $[141];
+    }
+    let t80;
+    if ($[142] === Symbol.for("react.memo_cache_sentinel")) {
+        t80 = ({
+            "Navbar[<Cart>.onClose]": ()=>setCartOpen(false)
+        })["Navbar[<Cart>.onClose]"];
+        $[142] = t80;
+    } else {
+        t80 = $[142];
+    }
+    let t81;
+    if ($[143] !== cartOpen) {
+        t81 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Cart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            isOpen: cartOpen,
+            onClose: t80
+        }, void 0, false, {
+            fileName: "[project]/src/components/Navbar.js",
+            lineNumber: 754,
+            columnNumber: 11
+        }, this);
+        $[143] = cartOpen;
+        $[144] = t81;
+    } else {
+        t81 = $[144];
+    }
+    let t82;
+    if ($[145] !== t79 || $[146] !== t81) {
+        t82 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                t79,
+                t81
+            ]
+        }, void 0, true);
+        $[145] = t79;
+        $[146] = t81;
+        $[147] = t82;
+    } else {
+        t82 = $[147];
+    }
+    return t82;
 }
-_s(Navbar, "KJgx4FwS/aoq9jdaQZkpXzcnXh4=", false, function() {
+_s(Navbar, "s7nPFKOetonrKcX7R3nDU82RVYs=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],

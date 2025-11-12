@@ -48,7 +48,23 @@ export default function Navbar() {
       setShowSearchResults(false);
     }
   }, [searchQuery]);
+  // Add this to your existing useEffect for closing search results
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearchResults(false);
+      }
 
+      // Also handle mobile sidebar search
+      const mobileSearch = document.querySelector('.mobile-search-container');
+      if (mobileSearch && !mobileSearch.contains(event.target)) {
+        setShowSearchResults(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   // Close search results when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -326,19 +342,86 @@ export default function Navbar() {
                 </nav>
 
                 {/* Mobile Search */}
-                <div className="mt-8">
+                <div className="mt-8 mobile-search-container" ref={searchRef}>
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Search products..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full text-white px-4 py-3 pl-12 text-sm bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 pl-12 text-sm bg-gray-50 text-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                     <svg className="absolute left-4 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
+
+                    {/* Search button that appears when there's text */}
+                    {searchQuery.trim() && (
+                      <button
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+                          setSearchQuery('');
+                        }}
+                        className="absolute right-4 top-3.5 p-1 text-blue-500 hover:text-blue-600 transition-colors"
+                        aria-label="Search"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    )}
                   </div>
+
+                  {/* Mobile Search Results */}
+                  {searchQuery.length > 0 && searchResults.length > 0 && (
+                    <div className="mt-2 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+                      <div className="p-2">
+                        {searchResults.map((product) => (
+                          <Link
+                            key={product.id}
+                            href={`/product/${product.id}`}
+                            className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors rounded-lg group"
+                            onClick={() => {
+                              setSearchQuery('');
+                              setMobileMenuOpen(false);
+                            }}
+                          >
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="w-10 h-10 object-cover rounded-lg mr-3"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium text-gray-900 dark:text-white text-sm truncate">
+                                {product.name}
+                              </div>
+                              <div className="text-blue-600 dark:text-blue-400 font-bold text-xs">
+                                ${product.price}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/shop?search=${encodeURIComponent(searchQuery)}`}
+                        className="block p-3 text-center bg-gray-50 dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-medium hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors rounded-b-xl border-t border-gray-200 dark:border-slate-600"
+                        onClick={() => {
+                          setSearchQuery('');
+                          setMobileMenuOpen(false);
+                        }}
+                      >
+                        View all results
+                      </Link>
+                    </div>
+                  )}
+
+                  {/* No results message */}
+                  {searchQuery.length > 0 && searchResults.length === 0 && (
+                    <div className="mt-2 p-3 text-center text-gray-500 dark:text-gray-400 text-sm bg-gray-50 dark:bg-slate-700 rounded-xl">
+                      No products found
+                    </div>
+                  )}
                 </div>
 
                 {/* Action Items */}
