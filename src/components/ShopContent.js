@@ -117,6 +117,7 @@ export default function ShopContent() {
       });
     });
   };
+  
 
   const handleQuickView = (product) => {
     setQuickViewProduct(product);
