@@ -17,11 +17,11 @@ var _s = __turbopack_context__.k.signature();
 function Contact() {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(48);
-    if ($[0] !== "c12876b686b6e7efba9b47a164007bda5539c39f29fbd1a4e2dc1fcacbb7bcbd") {
+    if ($[0] !== "5c705d2650c49e67482adac7b03f2b10a36aacbdf16cadd1ae51c7ee3d2b6e1f") {
         for(let $i = 0; $i < 48; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "c12876b686b6e7efba9b47a164007bda5539c39f29fbd1a4e2dc1fcacbb7bcbd";
+        $[0] = "5c705d2650c49e67482adac7b03f2b10a36aacbdf16cadd1ae51c7ee3d2b6e1f";
     }
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
@@ -71,22 +71,22 @@ function Contact() {
     let t3;
     if ($[5] === Symbol.for("react.memo_cache_sentinel")) {
         t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-6 py-3 mb-6",
+            className: "inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full px-3 py-1.5 mb-4",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+                    className: "w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"
                 }, void 0, false, {
                     fileName: "[project]/src/app/contact/page.js",
                     lineNumber: 60,
-                    columnNumber: 161
+                    columnNumber: 165
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                    className: "text-sm font-semibold text-blue-700 dark:text-blue-300",
+                    className: "text-[11px] font-semibold text-blue-700 dark:text-blue-300",
                     children: "GET IN TOUCH"
                 }, void 0, false, {
                     fileName: "[project]/src/app/contact/page.js",
                     lineNumber: 60,
-                    columnNumber: 227
+                    columnNumber: 235
                 }, this)
             ]
         }, void 0, true, {
@@ -105,7 +105,7 @@ function Contact() {
             children: [
                 t3,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                    className: "text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6",
+                    className: "text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6",
                     children: [
                         "Let's Talk About",
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -123,7 +123,7 @@ function Contact() {
                     columnNumber: 49
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto",
+                    className: "text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto",
                     children: "Have questions about our products? We're here to help and would love to hear from you."
                 }, void 0, false, {
                     fileName: "[project]/src/app/contact/page.js",
@@ -870,7 +870,7 @@ function Contact() {
     let t28;
     if ($[43] !== t20 || $[44] !== t22 || $[45] !== t24 || $[46] !== t27) {
         t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-linear-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-20",
+            className: "min-h-screen bg-linear-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 py-10",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8",
                 children: [

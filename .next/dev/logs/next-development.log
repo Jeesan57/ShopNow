@@ -37,3 +37,93 @@ It can also happen if the client has a browser extension installed which messes 
                         >
                   ...
 
+[00:02:50.227] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:02:50.231] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:02:50.236] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:02:50.240] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:02:58.941] Server  LOG      ✓ Compiled in 683ms
+[00:03:04.683] Server  LOG      ✓ Compiled in 735ms
+[00:03:07.124] Server  LOG      ✓ Compiled in 397ms
+[00:03:16.455] Server  LOG      ✓ Compiled in 731ms
+[00:03:19.705] Server  LOG      ✓ Compiled in 396ms
+[00:03:22.615] Server  LOG      ✓ Compiled in 738ms
+[00:03:25.714] Server  LOG      ✓ Compiled in 647ms
+[00:03:31.065] Server  LOG      ✓ Compiled in 273ms
+[00:03:40.211] Server  LOG      ✓ Compiled in 772ms
+[00:03:57.660] Server  LOG      ✓ Compiled in 327ms
+[00:04:05.271] Server  LOG      ✓ Compiled in 422ms
+[00:04:45.854] Server  LOG      ✓ Compiled in 683ms
+[00:05:08.691] Server  LOG      ✓ Compiled in 640ms
+[00:05:17.594] Server  LOG      ✓ Compiled in 515ms
+[00:05:25.812] Server  LOG      ✓ Compiled in 396ms
+[00:05:39.073] Server  LOG      ✓ Compiled in 694ms
+[00:05:45.501] Server  LOG      ✓ Compiled in 254ms
+[00:06:52.865] Server  LOG      ✓ Compiled in 145ms
+[00:06:58.859] Server  LOG      ✓ Compiled in 152ms
+[00:07:02.638] Server  LOG      ✓ Compiled in 213ms
+[00:07:05.552] Server  LOG      ✓ Compiled in 102ms
+[00:07:10.744] Server  LOG      ✓ Compiled in 379ms
+[00:07:19.749] Server  LOG      ✓ Compiled in 262ms
+[00:07:22.410] Server  LOG      ✓ Compiled in 114ms
+[00:07:31.846] Server  LOG      ✓ Compiled in 234ms
+[00:07:38.128] Server  LOG      ✓ Compiled in 138ms
+[00:07:42.323] Server  LOG      ✓ Compiled in 141ms
+[00:07:57.532] Server  LOG      ✓ Compiled in 153ms
+[00:08:03.329] Server  LOG      ✓ Compiled in 160ms
+[00:08:08.389] Server  LOG      ✓ Compiled in 275ms
+[00:08:19.452] Server  LOG      ✓ Compiled in 136ms
+[00:08:39.589] Server  LOG      ✓ Compiled in 245ms
+[00:08:49.312] Server  LOG      ✓ Compiled in 103ms
+[00:09:07.417] Server  LOG      ✓ Compiled in 220ms
+[00:09:12.085] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:09:12.131] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:09:12.177] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:09:12.263] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:09:44.522] Server  LOG      ✓ Compiled in 453ms
+[00:09:47.868] Server  LOG      ✓ Compiled in 378ms
+[00:10:02.776] Server  LOG      ✓ Compiled in 293ms
+[00:10:07.731] Server  LOG      ✓ Compiled in 406ms
+[00:10:13.400] Server  LOG      ✓ Compiled in 357ms
+[00:10:22.380] Server  LOG      ✓ Compiled in 611ms
+[00:10:29.255] Server  LOG      ✓ Compiled in 357ms
+[00:11:06.002] Server  LOG      ✓ Compiled in 158ms
+[00:11:12.180] Server  LOG      ✓ Compiled in 189ms
+[00:11:20.607] Server  LOG      ✓ Compiled in 170ms
+[00:12:06.906] Server  LOG      ✓ Compiled in 157ms
+[00:12:14.371] Server  LOG      ✓ Compiled in 263ms
+[00:12:25.745] Server  LOG      ✓ Compiled in 312ms
+[00:12:28.733] Server  LOG      ✓ Compiled in 309ms
+[00:13:12.629] Server  LOG      ✓ Compiled in 180ms
+[00:13:36.640] Server  LOG      ✓ Compiled in 209ms
+[00:13:39.800] Server  LOG      ✓ Compiled in 166ms
+[00:13:58.148] Server  LOG      ✓ Compiled in 261ms
+[00:14:01.448] Server  LOG      ✓ Compiled in 201ms
+[00:14:28.298] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:14:28.303] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:14:28.307] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:14:28.719] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:14:53.389] Server  LOG      ✓ Compiled in 249ms
+[00:15:03.110] Server  LOG      ✓ Compiled in 253ms
+[00:15:05.694] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:15:05.794] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:15:05.828] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:15:05.830] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:15:28.612] Browser WARN    Image with src "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:15:43.665] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:15:45.921] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400" 404
+[00:15:58.270] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:15:59.533] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400" 404
+[00:15:59.726] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400" 404
+[00:16:00.536] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400" 404
+[00:17:55.731] Server  LOG      ✓ Compiled in 657ms
+[00:18:10.448] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400" 404
+[00:18:42.555] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400" 404
+[00:20:49.688] Server  LOG      ✓ Compiled in 412ms
+[00:21:15.737] Server  LOG      ✓ Compiled in 306ms
+[00:22:50.422] Server  LOG      ✓ Compiled in 280ms
+[00:23:15.384] Server  LOG      ✓ Compiled in 357ms
+[00:23:25.563] Server  LOG      ✓ Compiled in 307ms
+[00:23:54.897] Server  LOG      ✓ Compiled in 550ms
+[00:24:01.448] Server  LOG      ✓ Compiled in 376ms
+[00:24:09.688] Server  LOG      ✓ Compiled in 779ms
+[00:25:12.061] Server  LOG      ✓ Compiled in 524ms

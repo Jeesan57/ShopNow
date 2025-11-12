@@ -117,7 +117,7 @@ export default function ShopContent() {
       });
     });
   };
-  
+
 
   const handleQuickView = (product) => {
     setQuickViewProduct(product);
@@ -187,23 +187,17 @@ export default function ShopContent() {
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20">
+        <div className="relative max-w-7xl mx-auto px-6 py-6 ">
           <div className="text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-white/90">Premium Collection</span>
-            </div>
-
             {/* Main heading */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-1">
               <span className="bg-linear-to-r from-white to-blue-200 bg-clip-text text-transparent">
                 Shop Excellence
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="text-md md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-6">
               Discover handpicked products where quality craftsmanship meets timeless design
             </p>
           </div>
@@ -211,7 +205,7 @@ export default function ShopContent() {
 
         {/* Wave separator */}
         <div id="products-section" className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" className="w-full h-16 fill-white dark:fill-slate-900">
+          <svg viewBox="0 0 1440 120" className="w-full h-8 fill-white dark:fill-slate-900">
             <path d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
           </svg>
         </div>
@@ -442,21 +436,23 @@ export default function ShopContent() {
             {/* Professional Pagination */}
             {filteredProducts.length > 0 && (
               <div className="mt-16">
-                {/* Minimal Header */}
+                {/* Minimal Header - Responsive */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-                  <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <div className="text-sm text-slate-600 dark:text-slate-400 text-center sm:text-left">
                     Showing <span className="font-semibold text-slate-900 dark:text-white">
                       {Math.min(indexOfFirstProduct + 1, filteredProducts.length)}-{Math.min(indexOfLastProduct, filteredProducts.length)}
                     </span> of{' '}
                     <span className="font-semibold text-slate-900 dark:text-white">{filteredProducts.length}</span> products
                     {totalPages > 1 && (
-                      <> • Page <span className="font-semibold text-slate-900 dark:text-white">{currentPage}</span> of <span className="font-semibold text-slate-900 dark:text-white">{totalPages}</span></>
+                      <span className="hidden xs:inline">
+                        {' '}• Page <span className="font-semibold text-slate-900 dark:text-white">{currentPage}</span> of <span className="font-semibold text-slate-900 dark:text-white">{totalPages}</span>
+                      </span>
                     )}
                   </div>
 
-                  {/* Working Page Size Selector */}
+                  {/* Working Page Size Selector - Responsive */}
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-slate-600 dark:text-slate-400">Show</span>
+                    <span className="hidden xs:inline text-slate-600 dark:text-slate-400">Show</span>
                     <select
                       value={productsPerPage}
                       onChange={(e) => {
@@ -470,35 +466,36 @@ export default function ShopContent() {
                       <option value="12">12</option>
                       <option value="24">24</option>
                       <option value="48">48</option>
-                    </select>
-                    <span className="text-slate-600 dark:text-slate-400">per page</span>
+                    </select><span className="text-slate-600 dark:text-slate-400">per page</span>
+
                   </div>
                 </div>
 
                 {/* Show pagination controls only when there are multiple pages */}
                 {totalPages > 1 && (
-                  <div className="flex items-center justify-between bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
-                    {/* Navigation Buttons */}
-                    <div className="flex items-center gap-2">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+                    {/* Navigation Buttons - Responsive */}
+                    <div className="flex items-center gap-1 sm:gap-2 order-2 sm:order-1 w-full sm:w-auto justify-center">
                       <button
                         onClick={() => paginate(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className="flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        className="flex items-center px-2 sm:px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
                       >
                         <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                        Previous
+                        <span className="hidden xs:inline">Previous</span>
+                        <span className="xs:hidden">Prev</span>
                       </button>
 
-                      {/* Page Numbers */}
-                      <div className="flex items-center gap-1 mx-2">
+                      {/* Page Numbers - Responsive */}
+                      <div className="flex items-center gap-1 mx-1 sm:mx-2">
                         {generatePaginationRange().map((page, index) => {
                           if (page === '...') {
                             return (
                               <span
                                 key={`ellipsis-${index}`}
-                                className="px-2 py-1 text-slate-400 dark:text-slate-500"
+                                className="px-1 sm:px-2 py-1 text-slate-400 dark:text-slate-500 text-sm"
                               >
                                 ...
                               </span>
@@ -508,9 +505,9 @@ export default function ShopContent() {
                             <button
                               key={page}
                               onClick={() => paginate(page)}
-                              className={`w-10 h-10 rounded-lg font-medium transition-colors ${currentPage === page
-                                ? 'bg-blue-600 text-white shadow-sm'
-                                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
+                              className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-colors text-sm sm:text-base ${currentPage === page
+                                  ? 'bg-blue-600 text-white shadow-sm'
+                                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                                 }`}
                             >
                               {page}
@@ -522,24 +519,26 @@ export default function ShopContent() {
                       <button
                         onClick={() => paginate(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className="flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        className="flex items-center px-2 sm:px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
                       >
-                        Next
+                        <span className="hidden xs:inline">Next</span>
+                        <span className="xs:hidden">Next</span>
                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </button>
                     </div>
 
-                    {/* Quick Jump */}
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="text-slate-600 dark:text-slate-400">Go to:</span>
+                    {/* Quick Jump - Responsive */}
+                    <div className="flex items-center gap-2 text-sm order-1 sm:order-2 mb-4 sm:mb-0 w-full sm:w-auto justify-center">
+                      <span className="text-slate-600 dark:text-slate-400 hidden xs:inline">Go to:</span>
+                      <span className="text-slate-600 dark:text-slate-400 xs:hidden">Page:</span>
                       <input
                         type="number"
                         min="1"
                         max={totalPages}
-                        className="w-16 px-2 py-1 border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
-                        onKeyDown={(e) => { // Changed from onKeyPress to onKeyDown
+                        className="w-12 sm:w-16 px-2 py-1 border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                        onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             const page = parseInt(e.target.value);
                             if (page >= 1 && page <= totalPages) {
@@ -548,6 +547,7 @@ export default function ShopContent() {
                             }
                           }
                         }}
+                        placeholder="#"
                       />
                     </div>
                   </div>
