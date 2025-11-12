@@ -216,7 +216,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                   disabled={isAdding}
                   className={`w-full py-4 px-6 rounded-2xl font-bold text-white transition-all duration-300 flex items-center justify-center space-x-3 ${isAdding
                       ? 'bg-green-600 scale-95'
-                      : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 hover:scale-105 active:scale-95'
+                    : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 hover:scale-101 active:scale-99'
                     } shadow-lg hover:shadow-xl`}
                 >
                   {isAdding ? (
