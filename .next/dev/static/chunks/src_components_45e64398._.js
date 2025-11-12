@@ -1087,12 +1087,12 @@ var _s = __turbopack_context__.k.signature();
 ;
 function ShopContent() {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(107);
-    if ($[0] !== "9aadceedd35ef865524a7113187d5a2a5070748011a21ca6828897a1e97d554b") {
-        for(let $i = 0; $i < 107; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(98);
+    if ($[0] !== "c0204e69736d313e1edee69b12b48ef7164ad3b16d2d507724178d740386e418") {
+        for(let $i = 0; $i < 98; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "9aadceedd35ef865524a7113187d5a2a5070748011a21ca6828897a1e97d554b";
+        $[0] = "c0204e69736d313e1edee69b12b48ef7164ad3b16d2d507724178d740386e418";
     }
     const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"])();
     const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"])();
@@ -1104,6 +1104,7 @@ function ShopContent() {
     const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const [quickViewProduct, setQuickViewProduct] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isQuickViewOpen, setIsQuickViewOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [productsPerPage, setProductsPerPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(12);
     let t0;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
         t0 = new Set();
@@ -1119,11 +1120,18 @@ function ShopContent() {
             "ShopContent[useEffect()]": ()=>{
                 const searchParam = searchParams.get("search");
                 const categoryParam = searchParams.get("category");
+                const pageParam = searchParams.get("page");
                 if (searchParam) {
                     setSearchQuery(searchParam);
                 }
                 if (categoryParam) {
                     setSelectedCategory(categoryParam);
+                }
+                if (pageParam) {
+                    const page = parseInt(pageParam);
+                    if (page > 0) {
+                        setCurrentPage(page);
+                    }
                 }
             }
         })["ShopContent[useEffect()]"];
@@ -1140,7 +1148,7 @@ function ShopContent() {
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t1, t2);
     let t3;
     let t4;
-    if ($[5] !== searchQuery || $[6] !== selectedCategory || $[7] !== sortBy) {
+    if ($[5] !== currentPage || $[6] !== productsPerPage || $[7] !== searchQuery || $[8] !== selectedCategory || $[9] !== sortBy) {
         t3 = ({
             "ShopContent[useEffect()]": ()=>{
                 setIsLoading(true);
@@ -1179,7 +1187,10 @@ function ShopContent() {
                             }
                         }
                         setFilteredProducts(filtered);
-                        setCurrentPage(1);
+                        const totalPages = Math.ceil(filtered.length / productsPerPage);
+                        if (currentPage > totalPages && totalPages > 0) {
+                            setCurrentPage(1);
+                        }
                         setIsLoading(false);
                     }
                 }["ShopContent[useEffect() > setTimeout()]"], 200);
@@ -1189,1213 +1200,1480 @@ function ShopContent() {
         t4 = [
             selectedCategory,
             sortBy,
-            searchQuery
+            searchQuery,
+            currentPage,
+            productsPerPage
         ];
-        $[5] = searchQuery;
-        $[6] = selectedCategory;
-        $[7] = sortBy;
-        $[8] = t3;
-        $[9] = t4;
+        $[5] = currentPage;
+        $[6] = productsPerPage;
+        $[7] = searchQuery;
+        $[8] = selectedCategory;
+        $[9] = sortBy;
+        $[10] = t3;
+        $[11] = t4;
     } else {
-        t3 = $[8];
-        t4 = $[9];
+        t3 = $[10];
+        t4 = $[11];
     }
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t3, t4);
-    const indexOfLastProduct = currentPage * 12;
-    const indexOfFirstProduct = indexOfLastProduct - 12;
-    let paginate;
-    let t10;
-    let t11;
-    let t12;
-    let t13;
     let t5;
     let t6;
+    if ($[12] !== currentPage) {
+        t5 = ({
+            "ShopContent[useEffect()]": ()=>{
+                const url = new URL(window.location);
+                if (currentPage > 1) {
+                    url.searchParams.set("page", currentPage.toString());
+                } else {
+                    url.searchParams.delete("page");
+                }
+                window.history.replaceState({}, "", url);
+            }
+        })["ShopContent[useEffect()]"];
+        t6 = [
+            currentPage
+        ];
+        $[12] = currentPage;
+        $[13] = t5;
+        $[14] = t6;
+    } else {
+        t5 = $[13];
+        t6 = $[14];
+    }
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t5, t6);
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    const totalPages_0 = Math.ceil(filteredProducts.length / productsPerPage);
     let t7;
+    if ($[15] !== totalPages_0) {
+        t7 = ({
+            "ShopContent[paginate]": (pageNumber)=>{
+                if (pageNumber < 1 || pageNumber > totalPages_0) {
+                    return;
+                }
+                setCurrentPage(pageNumber);
+                requestAnimationFrame(_ShopContentPaginateRequestAnimationFrame);
+            }
+        })["ShopContent[paginate]"];
+        $[15] = totalPages_0;
+        $[16] = t7;
+    } else {
+        t7 = $[16];
+    }
+    const paginate = t7;
     let t8;
+    if ($[17] === Symbol.for("react.memo_cache_sentinel")) {
+        t8 = ({
+            "ShopContent[handleQuickView]": (product_1)=>{
+                setQuickViewProduct(product_1);
+                setIsQuickViewOpen(true);
+            }
+        })["ShopContent[handleQuickView]"];
+        $[17] = t8;
+    } else {
+        t8 = $[17];
+    }
+    const handleQuickView = t8;
     let t9;
-    let totalPages;
-    if ($[10] !== addToCart || $[11] !== addToWishlist || $[12] !== addedProducts || $[13] !== filteredProducts || $[14] !== indexOfFirstProduct || $[15] !== indexOfLastProduct || $[16] !== isInWishlist || $[17] !== isLoading || $[18] !== removeFromWishlist || $[19] !== searchQuery || $[20] !== selectedCategory || $[21] !== sortBy) {
-        const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-        totalPages = Math.ceil(filteredProducts.length / 12);
-        let t14;
-        if ($[33] === Symbol.for("react.memo_cache_sentinel")) {
-            t14 = ({
-                "ShopContent[paginate]": (pageNumber)=>setCurrentPage(pageNumber)
-            })["ShopContent[paginate]"];
-            $[33] = t14;
-        } else {
-            t14 = $[33];
-        }
-        paginate = t14;
-        let t15;
-        if ($[34] === Symbol.for("react.memo_cache_sentinel")) {
-            t15 = ({
-                "ShopContent[handleQuickView]": (product_1)=>{
-                    setQuickViewProduct(product_1);
-                    setIsQuickViewOpen(true);
+    if ($[18] !== currentPage || $[19] !== totalPages_0) {
+        t9 = ({
+            "ShopContent[generatePaginationRange]": ()=>{
+                const range = [];
+                const rangeWithDots = [];
+                if (totalPages_0 <= 7) {
+                    for(let i = 1; i <= totalPages_0; i++){
+                        rangeWithDots.push(i);
+                    }
+                    return rangeWithDots;
                 }
-            })["ShopContent[handleQuickView]"];
-            $[34] = t15;
-        } else {
-            t15 = $[34];
-        }
-        const handleQuickView = t15;
-        t12 = "min-h-screen bg-white dark:bg-slate-900";
-        let t16;
-        if ($[35] === Symbol.for("react.memo_cache_sentinel")) {
-            t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 160,
-                columnNumber: 13
-            }, this);
-            $[35] = t16;
-        } else {
-            t16 = $[35];
-        }
-        let t17;
-        if ($[36] === Symbol.for("react.memo_cache_sentinel")) {
-            t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute bottom-1/3 right-1/3 w-24 h-24 bg-purple-500/10 rounded-full blur-3xl animate-pulse",
-                style: {
-                    animationDelay: "2s"
-                }
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 167,
-                columnNumber: 13
-            }, this);
-            $[36] = t17;
-        } else {
-            t17 = $[36];
-        }
-        let t18;
-        let t19;
-        if ($[37] === Symbol.for("react.memo_cache_sentinel")) {
-            t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute inset-0",
-                children: [
-                    t16,
-                    t17,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute top-1/3 right-1/4 w-20 h-20 bg-indigo-500/10 rounded-full blur-3xl animate-pulse",
-                        style: {
-                            animationDelay: "4s"
+                if (currentPage <= 4) {
+                    for(let i_0 = 1; i_0 <= 5; i_0++){
+                        range.push(i_0);
+                    }
+                    range.push("...");
+                    range.push(totalPages_0);
+                } else {
+                    if (currentPage >= totalPages_0 - 3) {
+                        range.push(1);
+                        range.push("...");
+                        for(let i_1 = totalPages_0 - 4; i_1 <= totalPages_0; i_1++){
+                            range.push(i_1);
                         }
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 177,
-                        columnNumber: 57
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 177,
-                columnNumber: 13
-            }, this);
-            t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 180,
-                columnNumber: 13
-            }, this);
-            $[37] = t18;
-            $[38] = t19;
-        } else {
-            t18 = $[37];
-            t19 = $[38];
-        }
-        let t20;
-        if ($[39] === Symbol.for("react.memo_cache_sentinel")) {
-            t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-2 h-2 bg-green-400 rounded-full animate-pulse"
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 189,
-                        columnNumber: 141
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        className: "text-sm font-medium text-white/90",
-                        children: "Premium Collection"
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 189,
-                        columnNumber: 208
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 189,
-                columnNumber: 13
-            }, this);
-            $[39] = t20;
-        } else {
-            t20 = $[39];
-        }
-        let t21;
-        if ($[40] === Symbol.for("react.memo_cache_sentinel")) {
-            t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative max-w-7xl mx-auto px-6 py-20",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "text-center",
-                    children: [
-                        t20,
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                            className: "text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "bg-linear-to-r from-white to-blue-200 bg-clip-text text-transparent",
-                                children: "Shop Excellence"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 196,
-                                columnNumber: 178
-                            }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 196,
-                            columnNumber: 102
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8",
-                            children: "Discover handpicked products where quality craftsmanship meets timeless design"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 196,
-                            columnNumber: 291
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 196,
-                    columnNumber: 68
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 196,
-                columnNumber: 13
-            }, this);
-            $[40] = t21;
-        } else {
-            t21 = $[40];
-        }
-        if ($[41] === Symbol.for("react.memo_cache_sentinel")) {
-            t13 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden",
-                children: [
-                    t18,
-                    t19,
-                    t21,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute bottom-0 left-0 right-0",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                            viewBox: "0 0 1440 120",
-                            className: "w-full h-16 fill-white dark:fill-slate-900",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                d: "M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 202,
-                                columnNumber: 317
-                            }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 202,
-                            columnNumber: 234
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 202,
-                        columnNumber: 184
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 202,
-                columnNumber: 13
-            }, this);
-            $[41] = t13;
-        } else {
-            t13 = $[41];
-        }
-        t11 = "max-w-8xl mx-auto px-10 py-8";
-        t9 = "flex flex-col lg:flex-row gap-8";
-        let t22;
-        if ($[42] === Symbol.for("react.memo_cache_sentinel")) {
-            t22 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
-                children: "Search"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 211,
-                columnNumber: 13
-            }, this);
-            $[42] = t22;
-        } else {
-            t22 = $[42];
-        }
-        let t23;
-        if ($[43] === Symbol.for("react.memo_cache_sentinel")) {
-            t23 = ({
-                "ShopContent[<input>.onChange]": (e)=>setSearchQuery(e.target.value)
-            })["ShopContent[<input>.onChange]"];
-            $[43] = t23;
-        } else {
-            t23 = $[43];
-        }
-        let t24;
-        if ($[44] !== searchQuery) {
-            t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                type: "text",
-                placeholder: "Search products...",
-                value: searchQuery,
-                onChange: t23,
-                className: "w-full px-4 py-3 pl-11 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-500"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 227,
-                columnNumber: 13
-            }, this);
-            $[44] = searchQuery;
-            $[45] = t24;
-        } else {
-            t24 = $[45];
-        }
-        let t25;
-        if ($[46] === Symbol.for("react.memo_cache_sentinel")) {
-            t25 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                className: "absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400",
-                fill: "none",
-                stroke: "currentColor",
-                viewBox: "0 0 24 24",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                    strokeLinecap: "round",
-                    strokeLinejoin: "round",
-                    strokeWidth: 2,
-                    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 235,
-                    columnNumber: 158
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 235,
-                columnNumber: 13
-            }, this);
-            $[46] = t25;
-        } else {
-            t25 = $[46];
-        }
-        let t26;
-        if ($[47] !== t24) {
-            t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                children: [
-                    t22,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "relative",
-                        children: [
-                            t24,
-                            t25
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 242,
-                        columnNumber: 23
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 242,
-                columnNumber: 13
-            }, this);
-            $[47] = t24;
-            $[48] = t26;
-        } else {
-            t26 = $[48];
-        }
-        let t27;
-        if ($[49] === Symbol.for("react.memo_cache_sentinel")) {
-            t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
-                children: "Categories"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 250,
-                columnNumber: 13
-            }, this);
-            $[49] = t27;
-        } else {
-            t27 = $[49];
-        }
-        let t28;
-        if ($[50] === Symbol.for("react.memo_cache_sentinel")) {
-            t28 = ({
-                "ShopContent[<button>.onClick]": ()=>setSelectedCategory("All")
-            })["ShopContent[<button>.onClick]"];
-            $[50] = t28;
-        } else {
-            t28 = $[50];
-        }
-        const t29 = `flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === "All" ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"}`;
-        let t30;
-        let t31;
-        if ($[51] === Symbol.for("react.memo_cache_sentinel")) {
-            t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                children: "All Products"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 268,
-                columnNumber: 13
-            }, this);
-            t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                className: "text-sm opacity-70",
-                children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["products"].length
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 269,
-                columnNumber: 13
-            }, this);
-            $[51] = t30;
-            $[52] = t31;
-        } else {
-            t30 = $[51];
-            t31 = $[52];
-        }
-        let t32;
-        if ($[53] !== t29) {
-            t32 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                onClick: t28,
-                className: t29,
-                children: [
-                    t30,
-                    t31
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 278,
-                columnNumber: 13
-            }, this);
-            $[53] = t29;
-            $[54] = t32;
-        } else {
-            t32 = $[54];
-        }
-        let t33;
-        if ($[55] !== selectedCategory) {
-            t33 = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["categories"].map({
-                "ShopContent[categories.map()]": (category)=>{
-                    const categoryCount = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["products"].filter({
-                        "ShopContent[categories.map() > products.filter()]": (p)=>p.category === category
-                    }["ShopContent[categories.map() > products.filter()]"]).length;
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: {
-                            "ShopContent[categories.map() > <button>.onClick]": ()=>setSelectedCategory(category)
-                        }["ShopContent[categories.map() > <button>.onClick]"],
-                        className: `flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === category ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"}`,
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                children: category
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 293,
-                                columnNumber: 432
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-sm opacity-70",
-                                children: categoryCount
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 293,
-                                columnNumber: 455
-                            }, this)
-                        ]
-                    }, category, true, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 291,
-                        columnNumber: 18
-                    }, this);
+                    } else {
+                        range.push(1);
+                        range.push("...");
+                        range.push(currentPage - 1, currentPage, currentPage + 1);
+                        range.push("...");
+                        range.push(totalPages_0);
+                    }
                 }
-            }["ShopContent[categories.map()]"]);
-            $[55] = selectedCategory;
-            $[56] = t33;
-        } else {
-            t33 = $[56];
-        }
-        let t34;
-        if ($[57] !== t32 || $[58] !== t33) {
-            t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                return range;
+            }
+        })["ShopContent[generatePaginationRange]"];
+        $[18] = currentPage;
+        $[19] = totalPages_0;
+        $[20] = t9;
+    } else {
+        t9 = $[20];
+    }
+    const generatePaginationRange = t9;
+    let t10;
+    if ($[21] !== currentPage || $[22] !== paginate || $[23] !== totalPages_0) {
+        t10 = ({
+            "ShopContent[useEffect()]": ()=>{
+                const handleKeyDown = {
+                    "ShopContent[useEffect() > handleKeyDown]": (e)=>{
+                        if (e.key === "ArrowLeft" && currentPage > 1) {
+                            paginate(currentPage - 1);
+                        } else {
+                            if (e.key === "ArrowRight" && currentPage < totalPages_0) {
+                                paginate(currentPage + 1);
+                            }
+                        }
+                    }
+                }["ShopContent[useEffect() > handleKeyDown]"];
+                window.addEventListener("keydown", handleKeyDown);
+                return ()=>window.removeEventListener("keydown", handleKeyDown);
+            }
+        })["ShopContent[useEffect()]"];
+        $[21] = currentPage;
+        $[22] = paginate;
+        $[23] = totalPages_0;
+        $[24] = t10;
+    } else {
+        t10 = $[24];
+    }
+    let t11;
+    if ($[25] !== currentPage || $[26] !== totalPages_0) {
+        t11 = [
+            currentPage,
+            totalPages_0
+        ];
+        $[25] = currentPage;
+        $[26] = totalPages_0;
+        $[27] = t11;
+    } else {
+        t11 = $[27];
+    }
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(t10, t11);
+    const t12 = "min-h-screen bg-white dark:bg-slate-900";
+    let t13;
+    if ($[28] === Symbol.for("react.memo_cache_sentinel")) {
+        t13 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 270,
+            columnNumber: 11
+        }, this);
+        $[28] = t13;
+    } else {
+        t13 = $[28];
+    }
+    let t14;
+    if ($[29] === Symbol.for("react.memo_cache_sentinel")) {
+        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "absolute bottom-1/3 right-1/3 w-24 h-24 bg-purple-500/10 rounded-full blur-3xl animate-pulse",
+            style: {
+                animationDelay: "2s"
+            }
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 277,
+            columnNumber: 11
+        }, this);
+        $[29] = t14;
+    } else {
+        t14 = $[29];
+    }
+    let t15;
+    let t16;
+    if ($[30] === Symbol.for("react.memo_cache_sentinel")) {
+        t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "absolute inset-0",
+            children: [
+                t13,
+                t14,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "absolute top-1/3 right-1/4 w-20 h-20 bg-indigo-500/10 rounded-full blur-3xl animate-pulse",
+                    style: {
+                        animationDelay: "4s"
+                    }
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 287,
+                    columnNumber: 55
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 287,
+            columnNumber: 11
+        }, this);
+        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 290,
+            columnNumber: 11
+        }, this);
+        $[30] = t15;
+        $[31] = t16;
+    } else {
+        t15 = $[30];
+        t16 = $[31];
+    }
+    let t17;
+    if ($[32] === Symbol.for("react.memo_cache_sentinel")) {
+        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 299,
+                    columnNumber: 139
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    className: "text-sm font-medium text-white/90",
+                    children: "Premium Collection"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 299,
+                    columnNumber: 206
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 299,
+            columnNumber: 11
+        }, this);
+        $[32] = t17;
+    } else {
+        t17 = $[32];
+    }
+    let t18;
+    if ($[33] === Symbol.for("react.memo_cache_sentinel")) {
+        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "relative max-w-7xl mx-auto px-6 py-20",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "text-center",
                 children: [
-                    t27,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-3",
-                        children: [
-                            t32,
-                            t33
-                        ]
-                    }, void 0, true, {
+                    t17,
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        className: "text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "bg-linear-to-r from-white to-blue-200 bg-clip-text text-transparent",
+                            children: "Shop Excellence"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/ShopContent.js",
+                            lineNumber: 306,
+                            columnNumber: 176
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 303,
-                        columnNumber: 23
+                        lineNumber: 306,
+                        columnNumber: 100
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8",
+                        children: "Discover handpicked products where quality craftsmanship meets timeless design"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/ShopContent.js",
+                        lineNumber: 306,
+                        columnNumber: 289
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 303,
-                columnNumber: 13
-            }, this);
-            $[57] = t32;
-            $[58] = t33;
-            $[59] = t34;
-        } else {
-            t34 = $[59];
-        }
-        let t35;
-        if ($[60] === Symbol.for("react.memo_cache_sentinel")) {
-            t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
-                children: "Sort By"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 312,
-                columnNumber: 13
-            }, this);
-            $[60] = t35;
-        } else {
-            t35 = $[60];
-        }
-        let t36;
-        if ($[61] === Symbol.for("react.memo_cache_sentinel")) {
-            t36 = ({
-                "ShopContent[<select>.onChange]": (e_0)=>setSortBy(e_0.target.value)
-            })["ShopContent[<select>.onChange]"];
-            $[61] = t36;
-        } else {
-            t36 = $[61];
-        }
-        let t37;
-        let t38;
-        let t39;
-        let t40;
-        if ($[62] === Symbol.for("react.memo_cache_sentinel")) {
-            t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                value: "name",
-                children: "Name A-Z"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 331,
-                columnNumber: 13
-            }, this);
-            t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                value: "newest",
-                children: "Newest First"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 332,
-                columnNumber: 13
-            }, this);
-            t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                value: "price-low",
-                children: "Price: Low to High"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 333,
-                columnNumber: 13
-            }, this);
-            t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                value: "price-high",
-                children: "Price: High to Low"
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 334,
-                columnNumber: 13
-            }, this);
-            $[62] = t37;
-            $[63] = t38;
-            $[64] = t39;
-            $[65] = t40;
-        } else {
-            t37 = $[62];
-            t38 = $[63];
-            t39 = $[64];
-            t40 = $[65];
-        }
-        let t41;
-        if ($[66] !== sortBy) {
-            t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                children: [
-                    t35,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                        value: sortBy,
-                        onChange: t36,
-                        className: "w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white",
-                        children: [
-                            t37,
-                            t38,
-                            t39,
-                            t40
-                        ]
-                    }, void 0, true, {
+                lineNumber: 306,
+                columnNumber: 66
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 306,
+            columnNumber: 11
+        }, this);
+        $[33] = t18;
+    } else {
+        t18 = $[33];
+    }
+    let t19;
+    if ($[34] === Symbol.for("react.memo_cache_sentinel")) {
+        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "relative bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden",
+            children: [
+                t15,
+                t16,
+                t18,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    id: "products-section",
+                    className: "absolute bottom-0 left-0 right-0",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        viewBox: "0 0 1440 120",
+                        className: "w-full h-16 fill-white dark:fill-slate-900",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                            d: "M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/ShopContent.js",
+                            lineNumber: 313,
+                            columnNumber: 337
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 347,
-                        columnNumber: 23
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 347,
-                columnNumber: 13
-            }, this);
-            $[66] = sortBy;
-            $[67] = t41;
-        } else {
-            t41 = $[67];
-        }
-        if ($[68] !== t26 || $[69] !== t34 || $[70] !== t41) {
-            t10 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "lg:w-80 shrink-0",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 sticky top-8",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-8",
-                        children: [
-                            t26,
-                            t34,
-                            t41
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 354,
-                        columnNumber: 165
+                        lineNumber: 313,
+                        columnNumber: 254
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 354,
-                    columnNumber: 47
+                    lineNumber: 313,
+                    columnNumber: 182
                 }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 313,
+            columnNumber: 11
+        }, this);
+        $[34] = t19;
+    } else {
+        t19 = $[34];
+    }
+    const t20 = "max-w-8xl mx-auto px-10 py-8";
+    const t21 = "flex flex-col lg:flex-row gap-8";
+    let t22;
+    if ($[35] === Symbol.for("react.memo_cache_sentinel")) {
+        t22 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+            className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
+            children: "Search"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 322,
+            columnNumber: 11
+        }, this);
+        $[35] = t22;
+    } else {
+        t22 = $[35];
+    }
+    let t23;
+    if ($[36] === Symbol.for("react.memo_cache_sentinel")) {
+        t23 = ({
+            "ShopContent[<input>.onChange]": (e_0)=>setSearchQuery(e_0.target.value)
+        })["ShopContent[<input>.onChange]"];
+        $[36] = t23;
+    } else {
+        t23 = $[36];
+    }
+    let t24;
+    if ($[37] !== searchQuery) {
+        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+            type: "text",
+            placeholder: "Search products...",
+            value: searchQuery,
+            onChange: t23,
+            className: "w-full px-4 py-3 pl-11 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-500"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 338,
+            columnNumber: 11
+        }, this);
+        $[37] = searchQuery;
+        $[38] = t24;
+    } else {
+        t24 = $[38];
+    }
+    let t25;
+    if ($[39] === Symbol.for("react.memo_cache_sentinel")) {
+        t25 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+            className: "absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400",
+            fill: "none",
+            stroke: "currentColor",
+            viewBox: "0 0 24 24",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: 2,
+                d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 354,
-                columnNumber: 13
-            }, this);
-            $[68] = t26;
-            $[69] = t34;
-            $[70] = t41;
-            $[71] = t10;
-        } else {
-            t10 = $[71];
-        }
-        t7 = "flex-1";
-        const t42 = selectedCategory === "All" ? "All Products" : selectedCategory;
-        let t43;
-        if ($[72] !== t42) {
-            t43 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-2xl font-semibold text-slate-900 dark:text-white",
-                children: t42
-            }, void 0, false, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 366,
-                columnNumber: 13
-            }, this);
-            $[72] = t42;
-            $[73] = t43;
-        } else {
-            t43 = $[73];
-        }
-        let t44;
-        if ($[74] !== filteredProducts.length) {
-            t44 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                className: "text-slate-600 dark:text-slate-400 mt-1",
-                children: [
-                    filteredProducts.length,
-                    " products found"
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 374,
-                columnNumber: 13
-            }, this);
-            $[74] = filteredProducts.length;
-            $[75] = t44;
-        } else {
-            t44 = $[75];
-        }
-        if ($[76] !== t43 || $[77] !== t44) {
-            t8 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex items-center justify-between mb-8",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                lineNumber: 346,
+                columnNumber: 156
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 346,
+            columnNumber: 11
+        }, this);
+        $[39] = t25;
+    } else {
+        t25 = $[39];
+    }
+    let t26;
+    if ($[40] !== t24) {
+        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: [
+                t22,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "relative",
                     children: [
-                        t43,
-                        t44
+                        t24,
+                        t25
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 381,
-                    columnNumber: 68
+                    lineNumber: 353,
+                    columnNumber: 21
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 353,
+            columnNumber: 11
+        }, this);
+        $[40] = t24;
+        $[41] = t26;
+    } else {
+        t26 = $[41];
+    }
+    let t27;
+    if ($[42] === Symbol.for("react.memo_cache_sentinel")) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+            className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
+            children: "Categories"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 361,
+            columnNumber: 11
+        }, this);
+        $[42] = t27;
+    } else {
+        t27 = $[42];
+    }
+    let t28;
+    if ($[43] === Symbol.for("react.memo_cache_sentinel")) {
+        t28 = ({
+            "ShopContent[<button>.onClick]": ()=>setSelectedCategory("All")
+        })["ShopContent[<button>.onClick]"];
+        $[43] = t28;
+    } else {
+        t28 = $[43];
+    }
+    const t29 = `flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === "All" ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"}`;
+    let t30;
+    let t31;
+    if ($[44] === Symbol.for("react.memo_cache_sentinel")) {
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            children: "All Products"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 379,
+            columnNumber: 11
+        }, this);
+        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            className: "text-sm opacity-70",
+            children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["products"].length
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 380,
+            columnNumber: 11
+        }, this);
+        $[44] = t30;
+        $[45] = t31;
+    } else {
+        t30 = $[44];
+        t31 = $[45];
+    }
+    let t32;
+    if ($[46] !== t29) {
+        t32 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+            onClick: t28,
+            className: t29,
+            children: [
+                t30,
+                t31
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 389,
+            columnNumber: 11
+        }, this);
+        $[46] = t29;
+        $[47] = t32;
+    } else {
+        t32 = $[47];
+    }
+    let t33;
+    if ($[48] !== selectedCategory) {
+        t33 = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["categories"].map({
+            "ShopContent[categories.map()]": (category)=>{
+                const categoryCount = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$products$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["products"].filter({
+                    "ShopContent[categories.map() > products.filter()]": (p)=>p.category === category
+                }["ShopContent[categories.map() > products.filter()]"]).length;
+                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    onClick: {
+                        "ShopContent[categories.map() > <button>.onClick]": ()=>setSelectedCategory(category)
+                    }["ShopContent[categories.map() > <button>.onClick]"],
+                    className: `flex items-center justify-between w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${selectedCategory === category ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border border-blue-200 dark:border-blue-800" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent"}`,
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            children: category
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/ShopContent.js",
+                            lineNumber: 404,
+                            columnNumber: 430
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-sm opacity-70",
+                            children: categoryCount
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/ShopContent.js",
+                            lineNumber: 404,
+                            columnNumber: 453
+                        }, this)
+                    ]
+                }, category, true, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 402,
+                    columnNumber: 16
+                }, this);
+            }
+        }["ShopContent[categories.map()]"]);
+        $[48] = selectedCategory;
+        $[49] = t33;
+    } else {
+        t33 = $[49];
+    }
+    let t34;
+    if ($[50] !== t32 || $[51] !== t33) {
+        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: [
+                t27,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "space-y-3",
+                    children: [
+                        t32,
+                        t33
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 414,
+                    columnNumber: 21
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 414,
+            columnNumber: 11
+        }, this);
+        $[50] = t32;
+        $[51] = t33;
+        $[52] = t34;
+    } else {
+        t34 = $[52];
+    }
+    let t35;
+    if ($[53] === Symbol.for("react.memo_cache_sentinel")) {
+        t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+            className: "font-semibold text-slate-900 dark:text-white mb-4 text-lg",
+            children: "Sort By"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 423,
+            columnNumber: 11
+        }, this);
+        $[53] = t35;
+    } else {
+        t35 = $[53];
+    }
+    let t36;
+    if ($[54] === Symbol.for("react.memo_cache_sentinel")) {
+        t36 = ({
+            "ShopContent[<select>.onChange]": (e_1)=>setSortBy(e_1.target.value)
+        })["ShopContent[<select>.onChange]"];
+        $[54] = t36;
+    } else {
+        t36 = $[54];
+    }
+    let t37;
+    let t38;
+    let t39;
+    let t40;
+    if ($[55] === Symbol.for("react.memo_cache_sentinel")) {
+        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "name",
+            children: "Name A-Z"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 442,
+            columnNumber: 11
+        }, this);
+        t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "newest",
+            children: "Newest First"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 443,
+            columnNumber: 11
+        }, this);
+        t39 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "price-low",
+            children: "Price: Low to High"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 444,
+            columnNumber: 11
+        }, this);
+        t40 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+            value: "price-high",
+            children: "Price: High to Low"
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 445,
+            columnNumber: 11
+        }, this);
+        $[55] = t37;
+        $[56] = t38;
+        $[57] = t39;
+        $[58] = t40;
+    } else {
+        t37 = $[55];
+        t38 = $[56];
+        t39 = $[57];
+        t40 = $[58];
+    }
+    let t41;
+    if ($[59] !== sortBy) {
+        t41 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: [
+                t35,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                    value: sortBy,
+                    onChange: t36,
+                    className: "w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white",
+                    children: [
+                        t37,
+                        t38,
+                        t39,
+                        t40
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 458,
+                    columnNumber: 21
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 458,
+            columnNumber: 11
+        }, this);
+        $[59] = sortBy;
+        $[60] = t41;
+    } else {
+        t41 = $[60];
+    }
+    let t42;
+    if ($[61] !== t26 || $[62] !== t34 || $[63] !== t41) {
+        t42 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "lg:w-80 shrink-0",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 sticky top-8",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "space-y-8",
+                    children: [
+                        t26,
+                        t34,
+                        t41
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 466,
+                    columnNumber: 163
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 381,
-                columnNumber: 12
-            }, this);
-            $[76] = t43;
-            $[77] = t44;
-            $[78] = t8;
-        } else {
-            t8 = $[78];
-        }
-        t5 = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8";
-        t6 = isLoading ? Array.from({
-            length: 12
-        }, _ShopContentArrayFrom) : currentProducts.length > 0 ? currentProducts.map({
-            "ShopContent[currentProducts.map()]": (product_2)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-xl",
+                lineNumber: 466,
+                columnNumber: 45
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 466,
+            columnNumber: 11
+        }, this);
+        $[61] = t26;
+        $[62] = t34;
+        $[63] = t41;
+        $[64] = t42;
+    } else {
+        t42 = $[64];
+    }
+    const t43 = "flex-1";
+    const t44 = selectedCategory === "All" ? "All Products" : selectedCategory;
+    let t45;
+    if ($[65] !== t44) {
+        t45 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+            className: "text-2xl font-semibold text-slate-900 dark:text-white",
+            children: t44
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 478,
+            columnNumber: 11
+        }, this);
+        $[65] = t44;
+        $[66] = t45;
+    } else {
+        t45 = $[66];
+    }
+    let t46;
+    if ($[67] !== filteredProducts.length) {
+        t46 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+            className: "text-slate-600 dark:text-slate-400 mt-1",
+            children: [
+                filteredProducts.length,
+                " products found"
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 486,
+            columnNumber: 11
+        }, this);
+        $[67] = filteredProducts.length;
+        $[68] = t46;
+    } else {
+        t46 = $[68];
+    }
+    let t47;
+    if ($[69] !== t45 || $[70] !== t46) {
+        t47 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "flex items-center justify-between mb-8",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    t45,
+                    t46
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 494,
+                columnNumber: 67
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 494,
+            columnNumber: 11
+        }, this);
+        $[69] = t45;
+        $[70] = t46;
+        $[71] = t47;
+    } else {
+        t47 = $[71];
+    }
+    const t48 = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8";
+    const t49 = isLoading ? Array.from({
+        length: productsPerPage
+    }, _ShopContentArrayFrom) : currentProducts.length > 0 ? currentProducts.map({
+        "ShopContent[currentProducts.map()]": (product_2)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-xl",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "relative aspect-4/3 overflow-hidden rounded-t-2xl",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: `/product/${product_2.id}`,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                    src: product_2.image,
+                                    alt: product_2.name,
+                                    width: 400,
+                                    height: 300,
+                                    className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 505,
+                                    columnNumber: 383
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 505,
+                                columnNumber: 343
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: {
+                                    "ShopContent[currentProducts.map() > <button>.onClick]": ()=>isInWishlist(product_2.id) ? removeFromWishlist(product_2.id) : addToWishlist(product_2)
+                                }["ShopContent[currentProducts.map() > <button>.onClick]"],
+                                className: `absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-sm transition-all duration-300 z-10 ${isInWishlist(product_2.id) ? "bg-red-500 text-white shadow-lg" : "bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 shadow-md"}`,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                    className: "w-5 h-5",
+                                    fill: isInWishlist(product_2.id) ? "currentColor" : "none",
+                                    stroke: "currentColor",
+                                    viewBox: "0 0 24 24",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                        strokeLinecap: "round",
+                                        strokeLinejoin: "round",
+                                        strokeWidth: 2,
+                                        d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/ShopContent.js",
+                                        lineNumber: 507,
+                                        columnNumber: 489
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 507,
+                                    columnNumber: 362
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 505,
+                                columnNumber: 562
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-center p-4",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: {
+                                        "ShopContent[currentProducts.map() > <button>.onClick]": ()=>handleQuickView(product_2)
+                                    }["ShopContent[currentProducts.map() > <button>.onClick]"],
+                                    className: "opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 bg-white text-slate-900 px-4 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105",
+                                    children: "Quick View"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 507,
+                                    columnNumber: 832
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 507,
+                                columnNumber: 701
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/ShopContent.js",
+                        lineNumber: 505,
+                        columnNumber: 276
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "p-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "mb-3",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
+                                    children: product_2.category
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 509,
+                                    columnNumber: 370
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 509,
+                                columnNumber: 348
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: `/product/${product_2.id}`,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                    className: "text-xl font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors",
+                                    children: product_2.name
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 509,
+                                    columnNumber: 593
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 509,
+                                columnNumber: 553
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2 leading-relaxed",
+                                children: product_2.description
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 509,
+                                columnNumber: 783
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center justify-between",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-2xl font-bold text-slate-900 dark:text-white",
+                                        children: [
+                                            "$",
+                                            product_2.price
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/ShopContent.js",
+                                        lineNumber: 509,
+                                        columnNumber: 953
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: {
+                                            "ShopContent[currentProducts.map() > <button>.onClick]": (e_2)=>{
+                                                e_2.preventDefault();
+                                                addToCart(product_2);
+                                                setAddedProducts({
+                                                    "ShopContent[currentProducts.map() > <button>.onClick > setAddedProducts()]": (prev)=>new Set(prev).add(product_2.id)
+                                                }["ShopContent[currentProducts.map() > <button>.onClick > setAddedProducts()]"]);
+                                                setTimeout({
+                                                    "ShopContent[currentProducts.map() > <button>.onClick > setTimeout()]": ()=>{
+                                                        setAddedProducts({
+                                                            "ShopContent[currentProducts.map() > <button>.onClick > setTimeout() > setAddedProducts()]": (prev_0)=>{
+                                                                const newSet = new Set(prev_0);
+                                                                newSet.delete(product_2.id);
+                                                                return newSet;
+                                                            }
+                                                        }["ShopContent[currentProducts.map() > <button>.onClick > setTimeout() > setAddedProducts()]"]);
+                                                    }
+                                                }["ShopContent[currentProducts.map() > <button>.onClick > setTimeout()]"], 2000);
+                                            }
+                                        }["ShopContent[currentProducts.map() > <button>.onClick]"],
+                                        className: `px-4 py-2 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg min-w-[120px] flex items-center justify-center gap-2 ${addedProducts.has(product_2.id) ? "bg-green-600 text-white scale-95" : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 active:scale-95"}`,
+                                        children: addedProducts.has(product_2.id) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                    className: "w-4 h-4 animate-bounce",
+                                                    fill: "none",
+                                                    stroke: "currentColor",
+                                                    viewBox: "0 0 24 24",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                        strokeLinecap: "round",
+                                                        strokeLinejoin: "round",
+                                                        strokeWidth: 2,
+                                                        d: "M5 13l4 4L19 7"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/ShopContent.js",
+                                                        lineNumber: 528,
+                                                        columnNumber: 550
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/ShopContent.js",
+                                                    lineNumber: 528,
+                                                    columnNumber: 456
+                                                }, this),
+                                                "Added!"
+                                            ]
+                                        }, void 0, true) : "Add to Cart"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/ShopContent.js",
+                                        lineNumber: 509,
+                                        columnNumber: 1046
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/ShopContent.js",
+                                lineNumber: 509,
+                                columnNumber: 902
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/ShopContent.js",
+                        lineNumber: 509,
+                        columnNumber: 327
+                    }, this)
+                ]
+            }, product_2.id, true, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 505,
+                columnNumber: 56
+            }, this)
+    }["ShopContent[currentProducts.map()]"]) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "col-span-full text-center py-16",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "w-20 h-20 mx-auto mb-6 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                    className: "w-10 h-10 text-slate-400",
+                    fill: "none",
+                    stroke: "currentColor",
+                    viewBox: "0 0 24 24",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        strokeWidth: 2,
+                        d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/ShopContent.js",
+                        lineNumber: 529,
+                        columnNumber: 308
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/components/ShopContent.js",
+                    lineNumber: 529,
+                    columnNumber: 212
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 529,
+                columnNumber: 95
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                className: "text-2xl font-semibold text-slate-900 dark:text-white mb-3",
+                children: "No products found"
+            }, void 0, false, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 529,
+                columnNumber: 477
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                className: "text-slate-600 dark:text-slate-400 mb-6 max-w-md mx-auto",
+                children: "We couldn't find any products matching your criteria. Try adjusting your search or filters."
+            }, void 0, false, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 529,
+                columnNumber: 574
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                onClick: {
+                    "ShopContent[<button>.onClick]": ()=>{
+                        setSearchQuery("");
+                        setSelectedCategory("All");
+                    }
+                }["ShopContent[<button>.onClick]"],
+                className: "bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors",
+                children: "Clear All Filters"
+            }, void 0, false, {
+                fileName: "[project]/src/components/ShopContent.js",
+                lineNumber: 529,
+                columnNumber: 741
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/components/ShopContent.js",
+        lineNumber: 529,
+        columnNumber: 46
+    }, this);
+    let t50;
+    if ($[72] !== t49) {
+        t50 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t48,
+            children: t49
+        }, void 0, false, {
+            fileName: "[project]/src/components/ShopContent.js",
+            lineNumber: 537,
+            columnNumber: 11
+        }, this);
+        $[72] = t49;
+        $[73] = t50;
+    } else {
+        t50 = $[73];
+    }
+    let t51;
+    if ($[74] !== currentPage || $[75] !== filteredProducts.length || $[76] !== generatePaginationRange || $[77] !== indexOfFirstProduct || $[78] !== indexOfLastProduct || $[79] !== paginate || $[80] !== productsPerPage || $[81] !== totalPages_0) {
+        t51 = filteredProducts.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "mt-16",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex flex-col sm:flex-row items-center justify-between gap-4 mb-6",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "relative aspect-4/3 overflow-hidden rounded-t-2xl",
+                            className: "text-sm text-slate-600 dark:text-slate-400",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                    href: `/product/${product_2.id}`,
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                        src: product_2.image,
-                                        alt: product_2.name,
-                                        width: 400,
-                                        height: 300,
-                                        className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 392,
-                                        columnNumber: 385
-                                    }, this)
+                                "Showing ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "font-semibold text-slate-900 dark:text-white",
+                                    children: [
+                                        Math.min(indexOfFirstProduct + 1, filteredProducts.length),
+                                        "-",
+                                        Math.min(indexOfLastProduct, filteredProducts.length)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 545,
+                                    columnNumber: 216
+                                }, this),
+                                " of",
+                                " ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "font-semibold text-slate-900 dark:text-white",
+                                    children: filteredProducts.length
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 392,
-                                    columnNumber: 345
+                                    lineNumber: 545,
+                                    columnNumber: 410
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    onClick: {
-                                        "ShopContent[currentProducts.map() > <button>.onClick]": ()=>isInWishlist(product_2.id) ? removeFromWishlist(product_2.id) : addToWishlist(product_2)
-                                    }["ShopContent[currentProducts.map() > <button>.onClick]"],
-                                    className: `absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-sm transition-all duration-300 z-10 ${isInWishlist(product_2.id) ? "bg-red-500 text-white shadow-lg" : "bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 shadow-md"}`,
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                        className: "w-5 h-5",
-                                        fill: isInWishlist(product_2.id) ? "currentColor" : "none",
-                                        stroke: "currentColor",
-                                        viewBox: "0 0 24 24",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                            strokeLinecap: "round",
-                                            strokeLinejoin: "round",
-                                            strokeWidth: 2,
-                                            d: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                " products",
+                                totalPages_0 > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                    children: [
+                                        " • Page ",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "font-semibold text-slate-900 dark:text-white",
+                                            children: currentPage
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 394,
-                                            columnNumber: 491
+                                            lineNumber: 545,
+                                            columnNumber: 545
+                                        }, this),
+                                        " of ",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "font-semibold text-slate-900 dark:text-white",
+                                            children: totalPages_0
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ShopContent.js",
+                                            lineNumber: 545,
+                                            columnNumber: 632
                                         }, this)
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 394,
-                                        columnNumber: 364
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 392,
-                                    columnNumber: 564
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-center p-4",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        onClick: {
-                                            "ShopContent[currentProducts.map() > <button>.onClick]": ()=>handleQuickView(product_2)
-                                        }["ShopContent[currentProducts.map() > <button>.onClick]"],
-                                        className: "opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 bg-white text-slate-900 px-4 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105",
-                                        children: "Quick View"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 394,
-                                        columnNumber: 834
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 394,
-                                    columnNumber: 703
-                                }, this)
+                                    ]
+                                }, void 0, true)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 392,
-                            columnNumber: 278
+                            lineNumber: 545,
+                            columnNumber: 148
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "p-4",
+                            className: "flex items-center gap-2 text-sm",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "mb-3",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        className: "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
-                                        children: product_2.category
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 396,
-                                        columnNumber: 372
-                                    }, this)
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "text-slate-600 dark:text-slate-400",
+                                    children: "Show"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 396,
-                                    columnNumber: 350
+                                    lineNumber: 545,
+                                    columnNumber: 775
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                    href: `/product/${product_2.id}`,
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "text-xl font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors",
-                                        children: product_2.name
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/ShopContent.js",
-                                        lineNumber: 396,
-                                        columnNumber: 595
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 396,
-                                    columnNumber: 555
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2 leading-relaxed",
-                                    children: product_2.description
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 396,
-                                    columnNumber: 785
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex items-center justify-between",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                    value: productsPerPage,
+                                    onChange: {
+                                        "ShopContent[<select>.onChange]": (e_3)=>{
+                                            const newPerPage = parseInt(e_3.target.value);
+                                            setProductsPerPage(newPerPage);
+                                            setCurrentPage(1);
+                                        }
+                                    }["ShopContent[<select>.onChange]"],
+                                    className: "px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm",
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-2xl font-bold text-slate-900 dark:text-white",
-                                            children: [
-                                                "$",
-                                                product_2.price
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 396,
-                                            columnNumber: 955
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            onClick: {
-                                                "ShopContent[currentProducts.map() > <button>.onClick]": (e_1)=>{
-                                                    e_1.preventDefault();
-                                                    addToCart(product_2);
-                                                    setAddedProducts({
-                                                        "ShopContent[currentProducts.map() > <button>.onClick > setAddedProducts()]": (prev)=>new Set(prev).add(product_2.id)
-                                                    }["ShopContent[currentProducts.map() > <button>.onClick > setAddedProducts()]"]);
-                                                    setTimeout({
-                                                        "ShopContent[currentProducts.map() > <button>.onClick > setTimeout()]": ()=>{
-                                                            setAddedProducts({
-                                                                "ShopContent[currentProducts.map() > <button>.onClick > setTimeout() > setAddedProducts()]": (prev_0)=>{
-                                                                    const newSet = new Set(prev_0);
-                                                                    newSet.delete(product_2.id);
-                                                                    return newSet;
-                                                                }
-                                                            }["ShopContent[currentProducts.map() > <button>.onClick > setTimeout() > setAddedProducts()]"]);
-                                                        }
-                                                    }["ShopContent[currentProducts.map() > <button>.onClick > setTimeout()]"], 2000);
-                                                }
-                                            }["ShopContent[currentProducts.map() > <button>.onClick]"],
-                                            className: `px-4 py-2 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg min-w-[120px] flex items-center justify-center gap-2 ${addedProducts.has(product_2.id) ? "bg-green-600 text-white scale-95" : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 active:scale-95"}`,
-                                            children: addedProducts.has(product_2.id) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                        className: "w-4 h-4 animate-bounce",
-                                                        fill: "none",
-                                                        stroke: "currentColor",
-                                                        viewBox: "0 0 24 24",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                            strokeLinecap: "round",
-                                                            strokeLinejoin: "round",
-                                                            strokeWidth: 2,
-                                                            d: "M5 13l4 4L19 7"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/ShopContent.js",
-                                                            lineNumber: 415,
-                                                            columnNumber: 552
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/components/ShopContent.js",
-                                                        lineNumber: 415,
-                                                        columnNumber: 458
-                                                    }, this),
-                                                    "Added!"
-                                                ]
-                                            }, void 0, true) : "Add to Cart"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                            value: "6",
+                                            children: "6"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/ShopContent.js",
-                                            lineNumber: 396,
-                                            columnNumber: 1048
+                                            lineNumber: 551,
+                                            columnNumber: 245
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                            value: "12",
+                                            children: "12"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ShopContent.js",
+                                            lineNumber: 551,
+                                            columnNumber: 273
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                            value: "24",
+                                            children: "24"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ShopContent.js",
+                                            lineNumber: 551,
+                                            columnNumber: 303
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                            value: "48",
+                                            children: "48"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ShopContent.js",
+                                            lineNumber: 551,
+                                            columnNumber: 333
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 396,
-                                    columnNumber: 904
+                                    lineNumber: 545,
+                                    columnNumber: 839
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "text-slate-600 dark:text-slate-400",
+                                    children: "per page"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 551,
+                                    columnNumber: 372
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 396,
-                            columnNumber: 329
+                            lineNumber: 545,
+                            columnNumber: 726
                         }, this)
                     ]
-                }, product_2.id, true, {
+                }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 392,
-                    columnNumber: 58
-                }, this)
-        }["ShopContent[currentProducts.map()]"]) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "col-span-full text-center py-16",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "w-20 h-20 mx-auto mb-6 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                        className: "w-10 h-10 text-slate-400",
-                        fill: "none",
-                        stroke: "currentColor",
-                        viewBox: "0 0 24 24",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                            strokeLinecap: "round",
-                            strokeLinejoin: "round",
-                            strokeWidth: 2,
-                            d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"
-                        }, void 0, false, {
+                    lineNumber: 545,
+                    columnNumber: 65
+                }, this),
+                totalPages_0 > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center justify-between bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-center gap-2",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: {
+                                        "ShopContent[<button>.onClick]": ()=>paginate(currentPage - 1)
+                                    }["ShopContent[<button>.onClick]"],
+                                    disabled: currentPage === 1,
+                                    className: "flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "w-4 h-4 mr-1",
+                                            fill: "none",
+                                            stroke: "currentColor",
+                                            viewBox: "0 0 24 24",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                strokeLinecap: "round",
+                                                strokeLinejoin: "round",
+                                                strokeWidth: 2,
+                                                d: "M15 19l-7-7 7-7"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/ShopContent.js",
+                                                lineNumber: 553,
+                                                columnNumber: 397
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ShopContent.js",
+                                            lineNumber: 553,
+                                            columnNumber: 313
+                                        }, this),
+                                        "Previous"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 551,
+                                    columnNumber: 653
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex items-center gap-1 mx-2",
+                                    children: generatePaginationRange().map({
+                                        "ShopContent[(anonymous)()]": (page_0, index_0)=>{
+                                            if (page_0 === "...") {
+                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "px-2 py-1 text-slate-400 dark:text-slate-500",
+                                                    children: "..."
+                                                }, `ellipsis-${index_0}`, false, {
+                                                    fileName: "[project]/src/components/ShopContent.js",
+                                                    lineNumber: 556,
+                                                    columnNumber: 26
+                                                }, this);
+                                            }
+                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                onClick: {
+                                                    "ShopContent[(anonymous)() > <button>.onClick]": ()=>paginate(page_0)
+                                                }["ShopContent[(anonymous)() > <button>.onClick]"],
+                                                className: `w-10 h-10 rounded-lg font-medium transition-colors ${currentPage === page_0 ? "bg-blue-600 text-white shadow-sm" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"}`,
+                                                children: page_0
+                                            }, page_0, false, {
+                                                fileName: "[project]/src/components/ShopContent.js",
+                                                lineNumber: 558,
+                                                columnNumber: 24
+                                            }, this);
+                                        }
+                                    }["ShopContent[(anonymous)()]"])
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 553,
+                                    columnNumber: 509
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: {
+                                        "ShopContent[<button>.onClick]": ()=>paginate(currentPage + 1)
+                                    }["ShopContent[<button>.onClick]"],
+                                    disabled: currentPage === totalPages_0,
+                                    className: "flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
+                                    children: [
+                                        "Next",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                            className: "w-4 h-4 ml-1",
+                                            fill: "none",
+                                            stroke: "currentColor",
+                                            viewBox: "0 0 24 24",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                strokeLinecap: "round",
+                                                strokeLinejoin: "round",
+                                                strokeWidth: 2,
+                                                d: "M9 5l7 7-7 7"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/ShopContent.js",
+                                                lineNumber: 564,
+                                                columnNumber: 412
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/ShopContent.js",
+                                            lineNumber: 564,
+                                            columnNumber: 328
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 562,
+                                    columnNumber: 52
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/src/components/ShopContent.js",
-                            lineNumber: 416,
-                            columnNumber: 310
+                            lineNumber: 551,
+                            columnNumber: 612
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-center gap-2 text-sm",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "text-slate-600 dark:text-slate-400",
+                                    children: "Go to:"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 564,
+                                    columnNumber: 568
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "number",
+                                    min: "1",
+                                    max: totalPages_0,
+                                    className: "w-16 px-2 py-1 border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm",
+                                    onKeyDown: {
+                                        "ShopContent[<input>.onKeyDown]": (e_4)=>{
+                                            if (e_4.key === "Enter") {
+                                                const page_1 = parseInt(e_4.target.value);
+                                                if (page_1 >= 1 && page_1 <= totalPages_0) {
+                                                    paginate(page_1);
+                                                    e_4.target.value = "";
+                                                }
+                                            }
+                                        }
+                                    }["ShopContent[<input>.onKeyDown]"]
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/ShopContent.js",
+                                    lineNumber: 564,
+                                    columnNumber: 634
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/ShopContent.js",
+                            lineNumber: 564,
+                            columnNumber: 519
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 416,
-                        columnNumber: 214
-                    }, this)
-                }, void 0, false, {
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 416,
-                    columnNumber: 97
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                    className: "text-2xl font-semibold text-slate-900 dark:text-white mb-3",
-                    children: "No products found"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 416,
-                    columnNumber: 479
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-slate-600 dark:text-slate-400 mb-6 max-w-md mx-auto",
-                    children: "We couldn't find any products matching your criteria. Try adjusting your search or filters."
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 416,
-                    columnNumber: 576
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    onClick: {
-                        "ShopContent[<button>.onClick]": ()=>{
-                            setSearchQuery("");
-                            setSelectedCategory("All");
-                        }
-                    }["ShopContent[<button>.onClick]"],
-                    className: "bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors",
-                    children: "Clear All Filters"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/ShopContent.js",
-                    lineNumber: 416,
-                    columnNumber: 743
+                    lineNumber: 551,
+                    columnNumber: 473
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 416,
-            columnNumber: 48
+            lineNumber: 545,
+            columnNumber: 42
         }, this);
-        $[10] = addToCart;
-        $[11] = addToWishlist;
-        $[12] = addedProducts;
-        $[13] = filteredProducts;
-        $[14] = indexOfFirstProduct;
-        $[15] = indexOfLastProduct;
-        $[16] = isInWishlist;
-        $[17] = isLoading;
-        $[18] = removeFromWishlist;
-        $[19] = searchQuery;
-        $[20] = selectedCategory;
-        $[21] = sortBy;
-        $[22] = paginate;
-        $[23] = t10;
-        $[24] = t11;
-        $[25] = t12;
-        $[26] = t13;
-        $[27] = t5;
-        $[28] = t6;
-        $[29] = t7;
-        $[30] = t8;
-        $[31] = t9;
-        $[32] = totalPages;
+        $[74] = currentPage;
+        $[75] = filteredProducts.length;
+        $[76] = generatePaginationRange;
+        $[77] = indexOfFirstProduct;
+        $[78] = indexOfLastProduct;
+        $[79] = paginate;
+        $[80] = productsPerPage;
+        $[81] = totalPages_0;
+        $[82] = t51;
     } else {
-        paginate = $[22];
-        t10 = $[23];
-        t11 = $[24];
-        t12 = $[25];
-        t13 = $[26];
-        t5 = $[27];
-        t6 = $[28];
-        t7 = $[29];
-        t8 = $[30];
-        t9 = $[31];
-        totalPages = $[32];
+        t51 = $[82];
     }
-    let t14;
-    if ($[79] !== t5 || $[80] !== t6) {
-        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t5,
-            children: t6
-        }, void 0, false, {
+    let t52;
+    if ($[83] !== t47 || $[84] !== t50 || $[85] !== t51) {
+        t52 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t43,
+            children: [
+                t47,
+                t50,
+                t51
+            ]
+        }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 460,
+            lineNumber: 589,
             columnNumber: 11
         }, this);
-        $[79] = t5;
-        $[80] = t6;
-        $[81] = t14;
+        $[83] = t47;
+        $[84] = t50;
+        $[85] = t51;
+        $[86] = t52;
     } else {
-        t14 = $[81];
+        t52 = $[86];
     }
-    let t15;
-    if ($[82] !== currentPage || $[83] !== paginate || $[84] !== totalPages) {
-        t15 = totalPages > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "flex justify-center mt-16",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-                className: "flex items-center space-x-2",
+    let t53;
+    if ($[87] !== t42 || $[88] !== t52) {
+        t53 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: t20,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: t21,
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: {
-                            "ShopContent[<button>.onClick]": ()=>paginate(currentPage - 1)
-                        }["ShopContent[<button>.onClick]"],
-                        disabled: currentPage === 1,
-                        className: "flex items-center px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                className: "w-4 h-4 mr-2",
-                                fill: "none",
-                                stroke: "currentColor",
-                                viewBox: "0 0 24 24",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                    strokeLinecap: "round",
-                                    strokeLinejoin: "round",
-                                    strokeWidth: 2,
-                                    d: "M15 19l-7-7 7-7"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 471,
-                                    columnNumber: 410
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 471,
-                                columnNumber: 326
-                            }, this),
-                            "Previous"
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 469,
-                        columnNumber: 117
-                    }, this),
-                    Array.from({
-                        length: Math.min(5, totalPages)
-                    }, {
-                        "ShopContent[Array.from()]": (__0, i)=>{
-                            const pageNumber_0 = i + 1;
-                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: {
-                                    "ShopContent[Array.from() > <button>.onClick]": ()=>paginate(pageNumber_0)
-                                }["ShopContent[Array.from() > <button>.onClick]"],
-                                className: `w-12 h-12 rounded-xl font-semibold transition-all duration-200 ${currentPage === pageNumber_0 ? "bg-blue-600 text-white shadow-lg" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"}`,
-                                children: pageNumber_0
-                            }, pageNumber_0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 476,
-                                columnNumber: 20
-                            }, this);
-                        }
-                    }["ShopContent[Array.from()]"]),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: {
-                            "ShopContent[<button>.onClick]": ()=>paginate(currentPage + 1)
-                        }["ShopContent[<button>.onClick]"],
-                        disabled: currentPage === totalPages,
-                        className: "flex items-center px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium",
-                        children: [
-                            "Next",
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                className: "w-4 h-4 ml-2",
-                                fill: "none",
-                                stroke: "currentColor",
-                                viewBox: "0 0 24 24",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                    strokeLinecap: "round",
-                                    strokeLinejoin: "round",
-                                    strokeWidth: 2,
-                                    d: "M9 5l7 7-7 7"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/ShopContent.js",
-                                    lineNumber: 482,
-                                    columnNumber: 423
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/ShopContent.js",
-                                lineNumber: 482,
-                                columnNumber: 339
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/ShopContent.js",
-                        lineNumber: 480,
-                        columnNumber: 41
-                    }, this)
+                    t42,
+                    t52
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ShopContent.js",
-                lineNumber: 469,
-                columnNumber: 72
+                lineNumber: 599,
+                columnNumber: 32
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 469,
-            columnNumber: 29
-        }, this);
-        $[82] = currentPage;
-        $[83] = paginate;
-        $[84] = totalPages;
-        $[85] = t15;
-    } else {
-        t15 = $[85];
-    }
-    let t16;
-    if ($[86] !== t14 || $[87] !== t15 || $[88] !== t7 || $[89] !== t8) {
-        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t7,
-            children: [
-                t8,
-                t14,
-                t15
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 492,
+            lineNumber: 599,
             columnNumber: 11
         }, this);
-        $[86] = t14;
-        $[87] = t15;
-        $[88] = t7;
-        $[89] = t8;
-        $[90] = t16;
+        $[87] = t42;
+        $[88] = t52;
+        $[89] = t53;
     } else {
-        t16 = $[90];
+        t53 = $[89];
     }
-    let t17;
-    if ($[91] !== t10 || $[92] !== t16 || $[93] !== t9) {
-        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t9,
-            children: [
-                t10,
-                t16
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 503,
-            columnNumber: 11
-        }, this);
-        $[91] = t10;
-        $[92] = t16;
-        $[93] = t9;
-        $[94] = t17;
-    } else {
-        t17 = $[94];
-    }
-    let t18;
-    if ($[95] !== t11 || $[96] !== t17) {
-        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: t11,
-            children: t17
-        }, void 0, false, {
-            fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 513,
-            columnNumber: 11
-        }, this);
-        $[95] = t11;
-        $[96] = t17;
-        $[97] = t18;
-    } else {
-        t18 = $[97];
-    }
-    let t19;
-    if ($[98] === Symbol.for("react.memo_cache_sentinel")) {
-        t19 = ({
+    let t54;
+    if ($[90] === Symbol.for("react.memo_cache_sentinel")) {
+        t54 = ({
             "ShopContent[<QuickViewModal>.onClose]": ()=>{
                 setIsQuickViewOpen(false);
                 setQuickViewProduct(null);
             }
         })["ShopContent[<QuickViewModal>.onClose]"];
-        $[98] = t19;
+        $[90] = t54;
     } else {
-        t19 = $[98];
+        t54 = $[90];
     }
-    let t20;
-    if ($[99] !== isQuickViewOpen || $[100] !== quickViewProduct) {
-        t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$QuickViewModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+    let t55;
+    if ($[91] !== isQuickViewOpen || $[92] !== quickViewProduct) {
+        t55 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$QuickViewModal$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
             product: quickViewProduct,
             isOpen: isQuickViewOpen,
-            onClose: t19
+            onClose: t54
         }, void 0, false, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 534,
+            lineNumber: 620,
             columnNumber: 11
         }, this);
-        $[99] = isQuickViewOpen;
-        $[100] = quickViewProduct;
-        $[101] = t20;
+        $[91] = isQuickViewOpen;
+        $[92] = quickViewProduct;
+        $[93] = t55;
     } else {
-        t20 = $[101];
+        t55 = $[93];
     }
-    let t21;
-    if ($[102] !== t12 || $[103] !== t13 || $[104] !== t18 || $[105] !== t20) {
-        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    let t56;
+    if ($[94] !== t19 || $[95] !== t53 || $[96] !== t55) {
+        t56 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: t12,
             children: [
-                t13,
-                t18,
-                t20
+                t19,
+                t53,
+                t55
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ShopContent.js",
-            lineNumber: 543,
+            lineNumber: 629,
             columnNumber: 11
         }, this);
-        $[102] = t12;
-        $[103] = t13;
-        $[104] = t18;
-        $[105] = t20;
-        $[106] = t21;
+        $[94] = t19;
+        $[95] = t53;
+        $[96] = t55;
+        $[97] = t56;
     } else {
-        t21 = $[106];
+        t56 = $[97];
     }
-    return t21;
+    return t56;
 }
-_s(ShopContent, "vBEYv6KTfYV9OBmXdYJSUthWbnI=", false, function() {
+_s(ShopContent, "PMkqYufGCTO+Xc7RkmWZAXbq7Cc=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$CartContext$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCart"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"]
@@ -2405,9 +2683,26 @@ _c = ShopContent;
 function _ShopContentArrayFrom(_, index) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ProductSkeleton$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, `skeleton-${index}`, false, {
         fileName: "[project]/src/components/ShopContent.js",
-        lineNumber: 555,
+        lineNumber: 640,
         columnNumber: 10
     }, this);
+}
+function _ShopContentPaginateRequestAnimationFrame() {
+    requestAnimationFrame(_ShopContentPaginateRequestAnimationFrameRequestAnimationFrame);
+}
+function _ShopContentPaginateRequestAnimationFrameRequestAnimationFrame() {
+    const productsSection = document.getElementById("products-section");
+    if (productsSection) {
+        productsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    } else {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 }
 function _ShopContentUseEffectSetTimeoutAnonymous4(a_2, b_2) {
     return a_2.name.localeCompare(b_2.name);

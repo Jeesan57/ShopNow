@@ -10,6 +10,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    turbopack: false,
+  },
 };
 
 // Tailwind CSS configuration for dark mode
