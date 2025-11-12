@@ -22,6 +22,7 @@ export default function ShopContent() {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [productsPerPage, setProductsPerPage] = useState(12); // Changed to state
   const [addedProducts, setAddedProducts] = useState(new Set());
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Handle URL search params
   useEffect(() => {
@@ -212,9 +213,52 @@ export default function ShopContent() {
       </div>
 
       <div className="max-w-8xl mx-auto px-10 py-8">
+        {/* Mobile Search and Filter Bar */}
+        <div className="lg:hidden mb-6">
+          <div className="flex gap-3">
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-3 pl-11 pr-12 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-500"
+              />
+              <svg
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-10 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  aria-label="Clear search"
+                >
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+              <button
+                onClick={() => setShowMobileFilters(true)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                aria-label="Open filters"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Professional Sidebar */}
-          <div className="lg:w-80 shrink-0">
+          <div className="hidden lg:block lg:w-80 shrink-0">
             <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 sticky top-8">
               <div className="space-y-8">
                 {/* Search */}
@@ -568,6 +612,178 @@ export default function ShopContent() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Filter Modal */}
+      {showMobileFilters && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Enhanced Overlay with subtle animation */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-md transition-opacity duration-300"
+            onClick={() => setShowMobileFilters(false)}
+          />
+
+          {/* Enhanced Filters Panel with smooth slide-up */}
+          <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 rounded-t-3xl border border-slate-200 dark:border-slate-700 shadow-2xl transform transition-transform duration-300 max-h-[85vh] overflow-hidden">
+            {/* Elegant Header */}
+            <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-slate-900 dark:bg-white rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white dark:text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Refine Products</h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Adjust your preferences</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors duration-200"
+              >
+                <svg className="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Filters Content with enhanced UX */}
+            <div className="p-6 space-y-8 overflow-y-auto max-h-[60vh]">
+              {/* Categories with visual indicators */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-semibold text-slate-900 dark:text-white text-base">Categories</h4>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">
+                    {categories.length + 1} options
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <button
+                    onClick={() => setSelectedCategory('All')}
+                    className={`flex items-center justify-between w-full text-left p-4 rounded-xl transition-all duration-200 group ${selectedCategory === 'All'
+                        ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                        : 'hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
+                      }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-3 h-3 rounded-full border-2 transition-all ${selectedCategory === 'All'
+                          ? 'bg-blue-500 border-blue-500'
+                          : 'border-slate-300 dark:border-slate-600 group-hover:border-blue-400'
+                        }`} />
+                      <span className={`font-medium ${selectedCategory === 'All'
+                          ? 'text-blue-700 dark:text-blue-300'
+                          : 'text-slate-700 dark:text-slate-300'
+                        }`}>
+                        All Products
+                      </span>
+                    </div>
+                    <span className={`text-sm px-2 py-1 rounded-full min-w-8 text-center ${selectedCategory === 'All'
+                        ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200'
+                        : 'text-slate-500 dark:text-slate-400'
+                      }`}>
+                      {products.length}
+                    </span>
+                  </button>
+
+                  {categories.map((category) => {
+                    const categoryCount = products.filter(p => p.category === category).length;
+                    return (
+                      <button
+                        key={category}
+                        onClick={() => setSelectedCategory(category)}
+                        className={`flex items-center justify-between w-full text-left p-4 rounded-xl transition-all duration-200 group ${selectedCategory === category
+                            ? 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                            : 'hover:bg-slate-50 dark:hover:bg-slate-700 border border-transparent'
+                          }`}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-3 h-3 rounded-full border-2 transition-all ${selectedCategory === category
+                              ? 'bg-blue-500 border-blue-500'
+                              : 'border-slate-300 dark:border-slate-600 group-hover:border-blue-400'
+                            }`} />
+                          <span className={`font-medium ${selectedCategory === category
+                              ? 'text-blue-700 dark:text-blue-300'
+                              : 'text-slate-700 dark:text-slate-300'
+                            }`}>
+                            {category}
+                          </span>
+                        </div>
+                        <span className={`text-sm px-2 py-1 rounded-full min-w-8 text-center ${selectedCategory === category
+                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200'
+                            : 'text-slate-500 dark:text-slate-400'
+                          }`}>
+                          {categoryCount}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Enhanced Sort Section */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-semibold text-slate-900 dark:text-white text-base">Sort By</h4>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">
+                    Order
+                  </span>
+                </div>
+
+                <div className="relative">
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="w-full px-4 py-4 pl-12 pr-10 border border-slate-300 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white appearance-none shadow-sm"
+                  >
+                    <option value="name">Name A-Z</option>
+                    <option value="newest">Newest First</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                  </select>
+                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                    </svg>
+                  </div>
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Enhanced Action Buttons */}
+            <div className="p-6 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800">
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => {
+                    setSelectedCategory('All');
+                    setSortBy('name');
+                  }}
+                  className="flex-1 px-6 py-4 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200 flex items-center justify-center space-x-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span>Reset</span>
+                </button>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Apply Filters</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Quick View Modal */}
       <QuickViewModal
