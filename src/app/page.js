@@ -136,7 +136,7 @@ export default function Home() {
                   )}
                   {category === "Kids" && (
                     <img
-                      src="https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400&h=300&fit=crop"
+                      src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&h=300&q=80"
                       alt="Kids Fashion"
                       className="w-full h-full object-cover"
                     />

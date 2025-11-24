@@ -29,11 +29,11 @@ export const products = [
     id: 3,
     name: "Elegant Black Dress",
     price: 79.99,
-    image: "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400",
+    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     category: "Women",
     description: "A sophisticated black dress suitable for formal occasions or evening wear.",
     thumbnails: [
-      "https://images.unsplash.com/photo-1566479179814-63fc212fb9d7?w=400",
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
       "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400"
     ]
@@ -68,11 +68,11 @@ export const products = [
     id: 6,
     name: "Summer Floral Skirt",
     price: 39.99,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400",
+    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
     category: "Women",
     description: "A light and airy floral skirt perfect for summer outings.",
     thumbnails: [
-      "https://images.unsplash.com/photo-1583496661160-fb5886a6aaaa?w=400",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
       "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400"
     ]
@@ -107,11 +107,11 @@ export const products = [
     id: 9,
     name: "Kids Colorful T-Shirt",
     price: 14.99,
-    image: "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400",
+    image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&q=80",
     category: "Kids",
     description: "Bright and comfortable t-shirt for active kids, made with soft cotton.",
     thumbnails: [
-      "https://images.unsplash.com/photo-1503454532315-69dd2b4c1c3f?w=400",
+      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&q=80",
       "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=400",
       "https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=400"
     ]
@@ -120,25 +120,25 @@ export const products = [
     id: 10,
     name: "Kids Denim Jacket",
     price: 29.99,
-    image: "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400",
+    image: "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80",
     category: "Kids",
     description: "Stylish denim jacket perfect for kids' outdoor adventures.",
     thumbnails: [
-      "https://images.unsplash.com/photo-1604917019118-2042fe6d7c0a?w=400",
-      "https://images.unsplash.com/photo-1594736797933-d0ea3ff8db41?w=400",
-      "https://images.unsplash.com/photo-1588679716590-3a8b38d7d7b9?w=400"
+      "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80"
     ]
   },
   {
     id: 11,
     name: "Kids Sneakers",
     price: 24.99,
-    image: "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400",
+    image: "https://images.unsplash.com/photo-1584735175097-719d848f8449?auto=format&fit=crop&w=400&q=80",
     category: "Kids",
     description: "Comfortable and durable sneakers for active kids.",
     thumbnails: [
-      "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400",
-      "https://images.unsplash.com/photo-1545324412-8187b8f04964?w=400",
+      "https://images.unsplash.com/photo-1584735175097-719d848f8449?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1521093470119-a3acdc43374a?auto=format&fit=crop&w=400&q=80",
       "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=400"
     ]
   },
