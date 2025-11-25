@@ -82,12 +82,12 @@ export default function Navbar() {
     <>
       <nav className={`backdrop-blur-xl transition-all duration-500 sticky top-0 z-50
         ${scrolled
-          ? 'bg-background/90 shadow-2xl shadow-blue-500/10 border-b border-border'
-          : 'bg-background/80 shadow-lg shadow-blue-500/5 border-b border-border/30'
+          ? 'bg-background/90 shadow-2xl shadow-blue-500/10'
+          : 'bg-background/80 shadow-lg shadow-blue-500/5'
         }`}>
 
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 pointer-events-none"></div>
 
         <div className="mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex justify-between items-center h-16 lg:h-20">
@@ -96,7 +96,7 @@ export default function Navbar() {
             <div className="flex items-center shrink-0">
               <Link href="/" className="flex items-center space-x-2 lg:space-x-3 group">
                 <div className="relative">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-500 group-hover:scale-105">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-500 group-hover:scale-105">
                     <span className="text-white font-bold text-xs lg:text-sm">SN</span>
                     {/* Animated ring */}
                     <div className="absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse-slow"></div>
@@ -132,7 +132,7 @@ export default function Navbar() {
                         }`}
                     >
                       {item.label}
-                      <span className={`absolute bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500 ${isActive
+                      <span className={`absolute bottom-0 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 transition-all duration-500 ${isActive
                         ? 'w-1/2 left-1/4'
                         : 'w-0 left-1/2'
                         }`}></span>
@@ -198,7 +198,7 @@ export default function Navbar() {
                     </div>
                     <Link
                       href={`/shop?search=${encodeURIComponent(searchQuery)}`}
-                      className="block p-4 text-center bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-primary font-semibold hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 rounded-b-2xl border-t border-border"
+                      className="block p-4 text-center bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-primary font-semibold hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 rounded-b-2xl border-t border-border"
                       onClick={() => {
                         setSearchQuery('');
                         setShowSearchResults(false);
@@ -222,12 +222,12 @@ export default function Navbar() {
                     }`}
                   aria-label="View favourites"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg className="w-6 h-6 relative z-10" fill={wishlistItems.length > 0 ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                   {mounted && wishlistItems.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-pulse">
+                    <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-pulse">
                       {wishlistItems.length}
                     </span>
                   )}
@@ -240,7 +240,7 @@ export default function Navbar() {
                   className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex"
                   aria-label="Toggle dark mode"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   {mounted && darkMode ? (
                     <svg className="w-6 h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -258,12 +258,12 @@ export default function Navbar() {
                   className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
                   aria-label="Open shopping cart"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg className="w-5 h-5 lg:w-6 lg:h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
                   </svg>
                   {mounted && getTotalItems() > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce">
+                    <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce">
                       {getTotalItems()}
                     </span>
                   )}
@@ -275,7 +275,7 @@ export default function Navbar() {
                   className="lg:hidden p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
                   aria-label="Open mobile menu"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
@@ -300,7 +300,7 @@ export default function Navbar() {
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-border">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg">
+                  <div className="w-8 h-8 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg">
                     <span className="text-white font-bold text-sm">SN</span>
                   </div>
                   {/* Fixed mobile ShopNow text */}

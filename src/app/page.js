@@ -16,85 +16,78 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Enhanced Hero Section */}
-     {/* Enhanced Hero Section - Using CSS Variables */}
-<section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background transition-colors duration-500">
-  {/* Animated gradient orbs */}
-  <div className="absolute inset-0 overflow-hidden">
-    <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
-  </div>
 
-  {/* Grid pattern overlay */}
-  <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[64px_64px]"></div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background transition-colors duration-500">
+        {/* Animated gradient orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
+        </div>
 
-  <div className="relative max-w-6xl mx-auto px-6 text-center">
-    <div className="space-y-8">
-      {/* Badge */}
-      <div className="inline-flex items-center gap-2 glass border-border rounded-full px-6 py-2">
-        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-        <span className="text-sm font-medium text-foreground/80">Trusted by 10,000+ customers worldwide</span>
-      </div>
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[64px_64px]"></div>
 
-      {/* Main heading */}
+        <div className="relative max-w-6xl mx-auto px-6 text-center">
+          <div className="space-y-8">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 glass border-2 border-gray-300 dark:border-border rounded-full px-6 py-2 shadow-sm">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-foreground/80">Trusted by 10,000+ customers worldwide</span>
+            </div>
+
+            {/* Main heading */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight">
-              <span className="bg-gradient-to-r from-slate-900 to-black dark:from-white dark:to-gray-100 bg-clip-text text-transparent">
+              <span className="text-transparent bg-linear-to-r from-blue-700 to-purple-700 dark:from-blue-400 dark:to-purple-400 bg-clip-text [text-shadow:0_2px_20px_rgba(120,119,198,0.3)]">
                 ELEVATE
               </span>
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <span className="text-transparent bg-linear-to-r from-purple-700 to-pink-700 dark:from-purple-400 dark:to-pink-400 bg-clip-text">
                 YOUR STYLE
               </span>
             </h1>
 
-      {/* Subtitle */}
-      <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-        Discover curated collections of premium products designed for the modern lifestyle.
-        Quality meets innovation in every piece.
-      </p>
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Discover curated collections of premium products designed for the modern lifestyle.
+              Quality meets innovation in every piece.
+            </p>
 
-      {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-        <Link
-          href="/shop"
-          className="group relative bg-foreground text-background px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-foreground to-muted-foreground rounded-xl opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
-          <span className="relative">Explore Collection</span>
-          <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-20 blur transition-all duration-300"></div>
-        </Link>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+              <Link
+                href="/shop"
+                className="group relative bg-black border-2 border-border dark:bg-white text-white dark:text-black px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <div className="absolute inset-0 bg-linear-to-r from-slate-900 to-slate-800 dark:from-white dark:to-gray-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative">Explore Collection</span>
+                <div className="absolute -inset-1 rounded-xl bg-linear-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-10 blur transition-all duration-300"></div>
+              </Link>
 
-        <Link
-          href="/about"
-          className="group border-2 border-border text-foreground px-8 py-4 rounded-xl font-bold text-lg hover:border-foreground/40 hover:bg-foreground/5 transition-all duration-300 backdrop-blur-sm"
-        >
-          Our Story
-        </Link>
-      </div>
+              <Link
+                href="/about"
+                className="group border-2 border-border text-foreground px-8 py-4 rounded-xl font-bold text-lg hover:border-foreground/40 hover:bg-foreground/5 hover:scale-105 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
+              >
+                Our Story
+              </Link>
+            </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-8 pt-16 max-w-2xl mx-auto">
-        {[
-          { number: '10K+', label: 'Happy Customers' },
-          { number: '500+', label: 'Premium Products' },
-          { number: '24/7', label: 'Expert Support' }
-        ].map((stat, index) => (
-          <div key={stat.label} className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-foreground mb-2">{stat.number}</div>
-            <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 pt-16 max-w-2xl mx-auto">
+              {[
+                { number: '10K+', label: 'Happy Customers' },
+                { number: '500+', label: 'Premium Products' },
+                { number: '24/7', label: 'Expert Support' }
+              ].map((stat, index) => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-foreground mb-2">{stat.number}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  {/* Scroll indicator */}
-  <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-    <div className="w-6 h-10 border-2 border-border rounded-full flex justify-center">
-      <div className="w-1 h-3 bg-foreground/60 rounded-full mt-2 animate-bounce"></div>
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
       {/* Minimal Categories Section */}
       <section className="py-20 bg-background">
@@ -206,10 +199,12 @@ export default function Home() {
       <section className="py-20 bg-muted/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4">
-              <span className="bg-gradient-to-r from-foreground to-muted bg-clip-text text-transparent">
-                Featured Products
-              </span>
+            <div className="inline-flex items-center gap-2 text-primary text-sm font-semibold uppercase tracking-wider mb-4">
+              <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+              Featured Collection
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Featured Products
             </h2>
             <p className="text-lg text-muted max-w-2xl mx-auto">
               Handpicked selections that combine exceptional quality with timeless design.
