@@ -48,6 +48,7 @@ export default function Navbar() {
       setShowSearchResults(false);
     }
   }, [searchQuery]);
+
   // Add this to your existing useEffect for closing search results
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -65,6 +66,7 @@ export default function Navbar() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
   // Close search results when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -80,31 +82,32 @@ export default function Navbar() {
     <>
       <nav className={`backdrop-blur-xl transition-all duration-500 sticky top-0 z-50
         ${scrolled
-          ? 'bg-white/90 dark:bg-slate-900/95 shadow-2xl shadow-blue-500/10 border-b border-gray-200/50 dark:border-slate-700/50'
-          : 'bg-white/80 dark:bg-slate-900/90 shadow-lg shadow-blue-500/5 border-b border-gray-200/30 dark:border-slate-700/30'
+          ? 'bg-background/90 shadow-2xl shadow-blue-500/10 border-b border-border'
+          : 'bg-background/80 shadow-lg shadow-blue-500/5 border-b border-border/30'
         }`}>
 
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-linear-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 pointer-events-none"></div>
 
         <div className="mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex justify-between items-center h-16 lg:h-20">
 
-            {/* Logo/Brand - LEFT SIDE */}
+            {/* Logo/Brand - LEFT SIDE - FIXED */}
             <div className="flex items-center shrink-0">
               <Link href="/" className="flex items-center space-x-2 lg:space-x-3 group">
                 <div className="relative">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-500 group-hover:scale-105">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-500 group-hover:scale-105">
                     <span className="text-white font-bold text-xs lg:text-sm">SN</span>
                     {/* Animated ring */}
                     <div className="absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse-slow"></div>
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl lg:text-2xl font-black bg-linear-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-200 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500">
+                  {/* Fixed ShopNow text - removed bg-clip-text issue */}
+                  <span className="text-xl lg:text-2xl font-black text-foreground group-hover:text-primary transition-all duration-500">
                     ShopNow
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 font-medium -mt-1">PREMIUM COLLECTION</span>
+                  <span className="text-xs text-muted font-medium -mt-1">PREMIUM COLLECTION</span>
                 </div>
               </Link>
             </div>
@@ -124,12 +127,12 @@ export default function Navbar() {
                       key={item.href}
                       href={item.href}
                       className={`relative px-4 py-2 transition-all duration-300 font-semibold group ${isActive
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                        ? 'text-primary'
+                        : 'text-foreground hover:text-primary'
                         }`}
                     >
                       {item.label}
-                      <span className={`absolute bottom-0 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 transition-all duration-500 ${isActive
+                      <span className={`absolute bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500 ${isActive
                         ? 'w-1/2 left-1/4'
                         : 'w-0 left-1/2'
                         }`}></span>
@@ -150,27 +153,27 @@ export default function Navbar() {
                     placeholder="Search luxury products..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-64 px-6 py-3 pl-12 text-sm bg-white/80 text-white dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 rounded-2xl focus:outline-none focus:ring-1 transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10"
+                    className="w-64 px-6 py-3 pl-12 text-sm bg-card/80 text-foreground backdrop-blur-sm border border-input rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10"
                   />
-                  <svg className="absolute left-4 top-3 w-5 h-5 text-gray-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute left-4 top-3 w-5 h-5 text-muted transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
 
                   {/* Animated search icon */}
                   <div className="absolute right-4 top-3">
-                    <div className="w-5 h-5 border-2 border-gray-300 dark:border-slate-500 rounded-full group-focus-within:border-blue-500 transition-colors"></div>
+                    <div className="w-5 h-5 border-2 border-muted rounded-full group-focus-within:border-primary transition-colors"></div>
                   </div>
                 </div>
 
                 {/* Enhanced Search Results Dropdown */}
                 {showSearchResults && searchResults.length > 0 && (
-                  <div className="absolute top-full mt-3 w-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border border-gray-200/50 dark:border-slate-700/50 rounded-2xl shadow-2xl shadow-black/20 z-50 max-h-80 overflow-y-auto">
+                  <div className="absolute top-full mt-3 w-full bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl shadow-black/20 z-50 max-h-80 overflow-y-auto">
                     <div className="p-2">
                       {searchResults.map((product) => (
                         <Link
                           key={product.id}
                           href={`/product/${product.id}`}
-                          className="flex items-center p-3 hover:bg-gray-50/80 dark:hover:bg-slate-700/80 transition-all duration-300 rounded-xl group border-b border-gray-100/50 dark:border-slate-600/50 last:border-b-0"
+                          className="flex items-center p-3 hover:bg-muted/80 transition-all duration-300 rounded-xl group border-b border-border last:border-b-0"
                           onClick={() => {
                             setSearchQuery('');
                             setShowSearchResults(false);
@@ -182,12 +185,12 @@ export default function Navbar() {
                             className="w-12 h-12 object-cover rounded-lg mr-4 shadow-md group-hover:scale-105 transition-transform duration-300"
                           />
                           <div className="flex-1">
-                            <div className="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <div className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
                               {product.name}
                             </div>
-                            <div className="text-blue-600 dark:text-blue-400 font-bold text-sm">${product.price}</div>
+                            <div className="text-primary font-bold text-sm">${product.price}</div>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-blue-500 transform group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-muted group-hover:text-primary transform group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </Link>
@@ -195,7 +198,7 @@ export default function Navbar() {
                     </div>
                     <Link
                       href={`/shop?search=${encodeURIComponent(searchQuery)}`}
-                      className="block p-4 text-center bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-600 dark:text-blue-400 font-semibold hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 rounded-b-2xl border-t border-gray-200/50 dark:border-slate-600/50"
+                      className="block p-4 text-center bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-primary font-semibold hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 rounded-b-2xl border-t border-border"
                       onClick={() => {
                         setSearchQuery('');
                         setShowSearchResults(false);
@@ -215,16 +218,16 @@ export default function Navbar() {
                   href="/favourites"
                   className={`relative p-3 rounded-2xl backdrop-blur-sm border transition-all duration-500 hover:scale-110 hover:shadow-lg group hidden lg:flex ${pathname === '/favourites'
                     ? 'bg-red-50 dark:bg-red-900/20 border-red-300/50 dark:border-red-600/50 text-red-600 dark:text-red-400 shadow-lg shadow-red-500/20'
-                    : 'bg-white/80 dark:bg-slate-800/80 border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:shadow-red-500/20'
+                    : 'bg-card/80 border-border text-foreground hover:text-red-600 dark:hover:text-red-400 hover:shadow-red-500/20'
                     }`}
                   aria-label="View favourites"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg className="w-6 h-6 relative z-10" fill={wishlistItems.length > 0 ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                   {mounted && wishlistItems.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-pulse">
+                    <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-pulse">
                       {wishlistItems.length}
                     </span>
                   )}
@@ -234,10 +237,10 @@ export default function Navbar() {
                 {/* Enhanced Dark Mode Toggle - Hidden on mobile */}
                 <button
                   onClick={toggleDarkMode}
-                  className="relative p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex"
+                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex"
                   aria-label="Toggle dark mode"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   {mounted && darkMode ? (
                     <svg className="w-6 h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -252,15 +255,15 @@ export default function Navbar() {
                 {/* Enhanced Shopping Cart */}
                 <button
                   onClick={() => setCartOpen(true)}
-                  className="relative p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
+                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
                   aria-label="Open shopping cart"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg className="w-5 h-5 lg:w-6 lg:h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
                   </svg>
                   {mounted && getTotalItems() > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce">
+                    <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce">
                       {getTotalItems()}
                     </span>
                   )}
@@ -269,10 +272,10 @@ export default function Navbar() {
                 {/* Mobile Menu Button */}
                 <button
                   onClick={() => setMobileMenuOpen(true)}
-                  className="lg:hidden p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-slate-600/50 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
+                  className="lg:hidden p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
                   aria-label="Open mobile menu"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
@@ -292,31 +295,32 @@ export default function Navbar() {
           ></div>
 
           {/* Sidebar */}
-          <div className={`fixed left-0 top-0 h-screen w-4/5 bg-white dark:bg-slate-800 shadow-2xl border-r border-gray-200 dark:border-slate-700 transform transition-transform duration-300 z-70 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-            <div className="flex flex-col h-full bg-white dark:bg-slate-800">
+          <div className={`fixed left-0 top-0 h-screen w-4/5 bg-card shadow-2xl border-r border-border transform transition-transform duration-300 z-70 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className="flex flex-col h-full bg-card">
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-slate-700">
+              <div className="flex items-center justify-between p-6 border-b border-border">
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg">
                     <span className="text-white font-bold text-sm">SN</span>
                   </div>
-                  <span className="text-xl font-black bg-linear-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-200 bg-clip-text text-transparent">
+                  {/* Fixed mobile ShopNow text */}
+                  <span className="text-xl font-black text-foreground">
                     ShopNow
                   </span>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                  className="p-2 rounded-lg hover:bg-muted transition-colors"
                   aria-label="Close menu"
                 >
-                  <svg className="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               {/* Navigation Links */}
-              <div className="flex-1 px-6 py-8 bg-white dark:bg-slate-800">
+              <div className="flex-1 px-6 py-8 bg-card">
                 <nav className="space-y-6">
                   {[
                     { href: '/', label: 'Home' },
@@ -331,7 +335,7 @@ export default function Navbar() {
                         href={item.href}
                         className={`block px-4 py-3 rounded-xl transition-all duration-300 font-semibold ${isActive
                           ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400'
+                          : 'text-foreground hover:bg-muted hover:text-primary'
                           }`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -349,9 +353,9 @@ export default function Navbar() {
                       placeholder="Search products..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full px-4 py-3 pl-12 text-sm bg-gray-50 text-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 pl-12 text-sm bg-muted text-foreground border border-input rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
-                    <svg className="absolute left-4 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-3.5 w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
 
@@ -363,7 +367,7 @@ export default function Navbar() {
                           router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
                           setSearchQuery('');
                         }}
-                        className="absolute right-4 top-3.5 p-1 text-blue-500 hover:text-blue-600 transition-colors"
+                        className="absolute right-4 top-3.5 p-1 text-primary hover:text-blue-600 transition-colors"
                         aria-label="Search"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -375,13 +379,13 @@ export default function Navbar() {
 
                   {/* Mobile Search Results */}
                   {searchQuery.length > 0 && searchResults.length > 0 && (
-                    <div className="mt-2 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+                    <div className="mt-2 bg-card border border-border rounded-xl shadow-lg max-h-60 overflow-y-auto">
                       <div className="p-2">
                         {searchResults.map((product) => (
                           <Link
                             key={product.id}
                             href={`/product/${product.id}`}
-                            className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors rounded-lg group"
+                            className="flex items-center p-3 hover:bg-muted transition-colors rounded-lg group"
                             onClick={() => {
                               setSearchQuery('');
                               setMobileMenuOpen(false);
@@ -393,10 +397,10 @@ export default function Navbar() {
                               className="w-10 h-10 object-cover rounded-lg mr-3"
                             />
                             <div className="flex-1 min-w-0">
-                              <div className="font-medium text-gray-900 dark:text-white text-sm truncate">
+                              <div className="font-medium text-foreground text-sm truncate">
                                 {product.name}
                               </div>
-                              <div className="text-blue-600 dark:text-blue-400 font-bold text-xs">
+                              <div className="text-primary font-bold text-xs">
                                 ${product.price}
                               </div>
                             </div>
@@ -405,7 +409,7 @@ export default function Navbar() {
                       </div>
                       <Link
                         href={`/shop?search=${encodeURIComponent(searchQuery)}`}
-                        className="block p-3 text-center bg-gray-50 dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-medium hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors rounded-b-xl border-t border-gray-200 dark:border-slate-600"
+                        className="block p-3 text-center bg-muted text-primary font-medium hover:bg-muted/80 transition-colors rounded-b-xl border-t border-border"
                         onClick={() => {
                           setSearchQuery('');
                           setMobileMenuOpen(false);
@@ -418,7 +422,7 @@ export default function Navbar() {
 
                   {/* No results message */}
                   {searchQuery.length > 0 && searchResults.length === 0 && (
-                    <div className="mt-2 p-3 text-center text-gray-500 dark:text-gray-400 text-sm bg-gray-50 dark:bg-slate-700 rounded-xl">
+                    <div className="mt-2 p-3 text-center text-muted text-sm bg-muted rounded-xl">
                       No products found
                     </div>
                   )}
@@ -431,7 +435,7 @@ export default function Navbar() {
                     href="/favourites"
                     className={`flex items-center px-4 py-3 rounded-xl transition-all duration-300 font-semibold ${pathname === '/favourites'
                       ? 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-red-600 dark:hover:text-red-400'
+                      : 'text-foreground hover:bg-muted hover:text-red-600 dark:hover:text-red-400'
                       }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -449,7 +453,7 @@ export default function Navbar() {
                   {/* Dark Mode Toggle */}
                   <button
                     onClick={toggleDarkMode}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-semibold"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted hover:text-primary transition-all duration-300 font-semibold"
                   >
                     {mounted && darkMode ? (
                       <svg className="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -469,14 +473,14 @@ export default function Navbar() {
                       setCartOpen(true);
                       setMobileMenuOpen(false);
                     }}
-                    className="flex items-center w-full px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-semibold"
+                    className="flex items-center w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted hover:text-primary transition-all duration-300 font-semibold"
                   >
                     <svg className="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
                     </svg>
                     Cart
                     {mounted && getTotalItems() > 0 && (
-                      <span className="ml-auto bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                      <span className="ml-auto bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                         {getTotalItems()}
                       </span>
                     )}

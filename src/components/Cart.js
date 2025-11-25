@@ -40,7 +40,7 @@ export default function Cart({ isOpen, onClose }) {
         <div className="flex flex-col h-full bg-white dark:bg-slate-800 shadow-2xl border-l border-slate-200 dark:border-slate-700">
 
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800">
+          <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 bg-linear-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800">
             <div className="flex items-center space-x-3">
               <div className="relative">
                 <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">

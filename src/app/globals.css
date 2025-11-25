@@ -6,8 +6,21 @@
   --primary: #3b82f6;
   --secondary: #8b5cf6;
   --accent: #f59e0b;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #3b82f6;
+  --radius: 0.5rem;
+
+  /* Glassmorphism */
   --glass: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
 }
 
 /* Dark mode variables */
@@ -17,21 +30,20 @@
   --primary: #60a5fa;
   --secondary: #a78bfa;
   --accent: #fbbf24;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
+  --border: #334155;
+  --input: #334155;
+  --ring: #60a5fa;
+
+  /* Glassmorphism */
   --glass: rgba(15, 23, 42, 0.8);
   --glass-border: rgba(255, 255, 255, 0.1);
-}
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a;
-    --foreground: #f1f5f9;
-    --primary: #60a5fa;
-    --secondary: #a78bfa;
-    --accent: #fbbf24;
-    --glass: rgba(15, 23, 42, 0.8);
-    --glass-border: rgba(255, 255, 255, 0.1);
-  }
+  --glass-shadow: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -39,9 +51,103 @@
 }
 
 body {
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes using CSS variables */
+.bg-background {
+  background-color: var(--background);
+}
+
+.bg-foreground {
+  background-color: var(--foreground);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-muted {
+  background-color: var(--muted);
+}
+
+.bg-card {
+  background-color: var(--card);
+}
+
+.bg-popover {
+  background-color: var(--popover);
+}
+
+.text-foreground {
+  color: var(--foreground);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.text-card {
+  color: var(--card-foreground);
+}
+
+.text-popover {
+  color: var(--popover-foreground);
+}
+
+.border-border {
+  border-color: var(--border);
+}
+
+.border-input {
+  border-color: var(--input);
+}
+
+.ring-ring {
+  --tw-ring-color: var(--ring);
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Custom animations */
