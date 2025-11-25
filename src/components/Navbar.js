@@ -80,14 +80,8 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`backdrop-blur-xl transition-all duration-500 sticky top-0 z-50
-        ${scrolled
-          ? 'bg-background/90 shadow-2xl shadow-blue-500/10'
-          : 'bg-background/80 shadow-lg shadow-blue-500/5'
-        }`}>
-
-        {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-linear-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 pointer-events-none"></div>
+      <nav className={`bg-background transition-all duration-500 sticky top-0 z-50
+          ${scrolled ? 'shadow-lg' : 'shadow-sm'}`}>
 
         <div className="mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex justify-between items-center h-16 lg:h-20">
@@ -167,7 +161,7 @@ export default function Navbar() {
 
                 {/* Enhanced Search Results Dropdown */}
                 {showSearchResults && searchResults.length > 0 && (
-                  <div className="absolute top-full mt-3 w-full bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl shadow-black/20 z-50 max-h-80 overflow-y-auto">
+                  <div className="absolute top-full mt-3 w-full bg-card border border-border rounded-2xl shadow-2xl shadow-black/20 z-50 max-h-80 overflow-y-auto">
                     <div className="p-2">
                       {searchResults.map((product) => (
                         <Link
@@ -196,6 +190,7 @@ export default function Navbar() {
                         </Link>
                       ))}
                     </div>
+
                     <Link
                       href={`/shop?search=${encodeURIComponent(searchQuery)}`}
                       className="block p-4 text-center bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-primary font-semibold hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 rounded-b-2xl border-t border-border"
@@ -208,6 +203,7 @@ export default function Navbar() {
                     </Link>
                   </div>
                 )}
+
               </div>
 
               {/* Action Buttons */}
@@ -216,7 +212,7 @@ export default function Navbar() {
                 {/* Favourites - Hidden on mobile */}
                 <Link
                   href="/favourites"
-                  className={`relative p-3 rounded-2xl backdrop-blur-sm border transition-all duration-500 hover:scale-110 hover:shadow-lg group hidden lg:flex ${pathname === '/favourites'
+                  className={`relative p-3 rounded-2xl backdrop-blur-sm border border-input transition-all duration-500 hover:scale-110 hover:shadow-lg group hidden lg:flex ${pathname === '/favourites'
                     ? 'bg-red-50 dark:bg-red-900/20 border-red-300/50 dark:border-red-600/50 text-red-600 dark:text-red-400 shadow-lg shadow-red-500/20'
                     : 'bg-card/80 border-border text-foreground hover:text-red-600 dark:hover:text-red-400 hover:shadow-red-500/20'
                     }`}
@@ -237,7 +233,7 @@ export default function Navbar() {
                 {/* Enhanced Dark Mode Toggle - Hidden on mobile */}
                 <button
                   onClick={toggleDarkMode}
-                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex"
+                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-input text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex"
                   aria-label="Toggle dark mode"
                 >
                   <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -255,7 +251,7 @@ export default function Navbar() {
                 {/* Enhanced Shopping Cart */}
                 <button
                   onClick={() => setCartOpen(true)}
-                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
+                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-input text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
                   aria-label="Open shopping cart"
                 >
                   <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
