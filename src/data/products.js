@@ -5,7 +5,7 @@ export const products = [
     price: 19.99,
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
     category: "Men",
-    description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+    description: "A comfortable and versatile white t-shirt perfect for everyday wear. Made from premium cotton fabric, it offers a soft and breathable feel. Ideal for casual outings or layering under jackets.",
     thumbnails: [
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
       "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
