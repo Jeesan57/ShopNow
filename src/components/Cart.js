@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
+import { FiShoppingCart, FiTrash2, FiX, FiSearch } from 'react-icons/fi';
 
 export default function Cart({ isOpen, onClose }) {
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
@@ -44,9 +45,7 @@ export default function Cart({ isOpen, onClose }) {
             <div className="flex items-center space-x-3">
               <div className="relative">
                 <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
-                  </svg>
+                  <FiShoppingCart className="w-5 h-5 text-white" />
                 </div>
                 {itemCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-bounce">
@@ -67,18 +66,14 @@ export default function Cart({ isOpen, onClose }) {
                   className="p-2 text-muted-foreground hover:text-red-500 transition-colors duration-200"
                   title="Clear cart"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
+                  <FiTrash2 className="w-5 h-5" />
                 </button>
               )}
               <button
                 onClick={onClose}
                 className="w-10 h-10 bg-card border border-border rounded-xl flex items-center justify-center hover:bg-muted hover:scale-110 transition-all duration-200"
               >
-                <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <FiX className="w-5 h-5 text-foreground" />
               </button>
             </div>
           </div>
@@ -88,9 +83,7 @@ export default function Cart({ isOpen, onClose }) {
             {cartItems.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center p-8">
                 <div className="w-24 h-24 mb-6 bg-muted rounded-full flex items-center justify-center">
-                  <svg className="w-12 h-12 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
-                  </svg>
+                  <FiShoppingCart className="w-12 h-12 text-muted-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-3">Your cart is empty</h3>
                 <p className="text-muted-foreground mb-6 max-w-sm">
@@ -100,9 +93,7 @@ export default function Cart({ isOpen, onClose }) {
                   onClick={onClose}
                   className="inline-flex items-center gap-2 bg-slate-900 dark:bg-white border border-border text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
+                  <FiSearch className="w-5 h-5" />
                   Start Shopping
                 </button>
               </div>
@@ -125,9 +116,7 @@ export default function Cart({ isOpen, onClose }) {
                         />
                         {isRemoving === item.id && (
                           <div className="absolute inset-0 bg-red-500/20 flex items-center justify-center">
-                            <svg className="w-6 h-6 text-red-500 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
+                            <FiTrash2 className="w-6 h-6 text-red-500 animate-spin" />
                           </div>
                         )}
                       </div>
@@ -169,9 +158,7 @@ export default function Cart({ isOpen, onClose }) {
                               onClick={() => handleRemove(item.id)}
                               className="text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1 mt-1"
                             >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
+                              <FiTrash2 className="w-4 h-4" />
                               Remove
                             </button>
                           </div>

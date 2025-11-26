@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { products, categories } from '../data/products';
 import { useCart } from '../context/CartContext';
 import QuickViewModal from '../components/QuickViewModal';
+import { FiChevronRight, FiHeart } from 'react-icons/fi';
 
 export default function Home() {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
@@ -177,14 +178,7 @@ export default function Home() {
                     <span className="text-primary text-sm font-medium">
                       Shop Now
                     </span>
-                    <svg
-                      className="w-4 h-4 text-primary transform group-hover:translate-x-1 transition-transform duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <FiChevronRight className="w-4 h-4 text-primary transform group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>
               </Link>
@@ -198,9 +192,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Browse All Categories
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <FiChevronRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -247,9 +239,7 @@ export default function Home() {
                       : 'bg-card/90 text-muted hover:bg-card hover:shadow-lg'
                       }`}
                   >
-                    <svg className="w-6 h-6" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
+                    <FiHeart className="w-6 h-6" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
                   </button>
                 </div>
 
@@ -298,9 +288,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 border-2 border-border text-foreground px-8 py-4 rounded-xl font-bold hover:border-foreground/50 hover:bg-muted transition-all duration-300"
             >
               View All Products
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <FiChevronRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

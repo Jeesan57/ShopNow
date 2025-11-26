@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Cart from './Cart';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
+import { FiSearch, FiChevronRight, FiHeart, FiSun, FiMoon, FiShoppingCart, FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -149,9 +150,7 @@ export default function Navbar() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-64 px-6 py-3 pl-12 text-sm bg-card/80 text-foreground backdrop-blur-sm border border-input rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10"
                   />
-                  <svg className="absolute left-4 top-3 w-5 h-5 text-muted transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
+                  <FiSearch className="absolute left-4 top-3 w-5 h-5 text-muted transition-colors" />
 
                   {/* Animated search icon */}
                   <div className="absolute right-4 top-3">
@@ -184,9 +183,7 @@ export default function Navbar() {
                             </div>
                             <div className="text-primary font-bold text-sm">${product.price}</div>
                           </div>
-                          <svg className="w-4 h-4 text-muted group-hover:text-primary transform group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
+                          <FiChevronRight className="w-4 h-4 text-muted group-hover:text-primary transform group-hover:translate-x-1 transition-all duration-300" />
                         </Link>
                       ))}
                     </div>
@@ -219,9 +216,7 @@ export default function Navbar() {
                   aria-label="View favourites"
                 >
                   <div className="absolute inset-0 bg-linear-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-6 h-6 relative z-10" fill={wishlistItems.length > 0 ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
+                  <FiHeart className="w-6 h-6 relative z-10" fill={wishlistItems.length > 0 ? 'currentColor' : 'none'} />
                   {mounted && wishlistItems.length > 0 && (
                     <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-pulse">
                       {wishlistItems.length}
@@ -238,13 +233,9 @@ export default function Navbar() {
                 >
                   <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   {mounted && darkMode ? (
-                    <svg className="w-6 h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+                    <FiSun className="w-6 h-6 relative z-10" />
                   ) : (
-                    <svg className="w-6 h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
+                    <FiMoon className="w-6 h-6 relative z-10" />
                   )}
                 </button>
 
@@ -255,9 +246,7 @@ export default function Navbar() {
                   aria-label="Open shopping cart"
                 >
                   <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-5 h-5 lg:w-6 lg:h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
-                  </svg>
+                  <FiShoppingCart className="w-5 h-5 lg:w-6 lg:h-6 relative z-10" />
                   {mounted && getTotalItems() > 0 && (
                     <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce">
                       {getTotalItems()}
@@ -272,9 +261,7 @@ export default function Navbar() {
                   aria-label="Open mobile menu"
                 >
                   <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
+                  <FiMenu className="w-5 h-5 relative z-10" />
                 </button>
               </div>
             </div>
@@ -309,9 +296,7 @@ export default function Navbar() {
                   className="p-2 rounded-lg hover:bg-muted transition-colors"
                   aria-label="Close menu"
                 >
-                  <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <FiX className="w-6 h-6 text-foreground" />
                 </button>
               </div>
 
@@ -351,9 +336,7 @@ export default function Navbar() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full px-4 py-3 pl-12 text-sm bg-muted text-foreground border border-input rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
-                    <svg className="absolute left-4 top-3.5 w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+                    <FiSearch className="absolute left-4 top-3.5 w-4 h-4 text-muted" />
 
                     {/* Search button that appears when there's text */}
                     {searchQuery.trim() && (
@@ -366,9 +349,7 @@ export default function Navbar() {
                         className="absolute right-4 top-3.5 p-1 text-primary hover:text-blue-600 transition-colors"
                         aria-label="Search"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                        <FiArrowRight className="w-4 h-4" />
                       </button>
                     )}
                   </div>
@@ -435,9 +416,7 @@ export default function Navbar() {
                       }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <svg className="w-6 h-6 mr-4" fill={wishlistItems.length > 0 ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
+                    <FiHeart className="w-6 h-6 mr-4" fill={wishlistItems.length > 0 ? 'currentColor' : 'none'} />
                     Favourites
                     {mounted && wishlistItems.length > 0 && (
                       <span className="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
@@ -452,13 +431,9 @@ export default function Navbar() {
                     className="flex items-center w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted hover:text-primary transition-all duration-300 font-semibold"
                   >
                     {mounted && darkMode ? (
-                      <svg className="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
+                      <FiSun className="w-6 h-6 mr-4" />
                     ) : (
-                      <svg className="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                      </svg>
+                      <FiMoon className="w-6 h-6 mr-4" />
                     )}
                     {darkMode ? 'Light Mode' : 'Dark Mode'}
                   </button>
@@ -471,9 +446,7 @@ export default function Navbar() {
                     }}
                     className="flex items-center w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted hover:text-primary transition-all duration-300 font-semibold"
                   >
-                    <svg className="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
-                    </svg>
+                    <FiShoppingCart className="w-6 h-6 mr-4" />
                     Cart
                     {mounted && getTotalItems() > 0 && (
                       <span className="ml-auto bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">

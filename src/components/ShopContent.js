@@ -8,6 +8,7 @@ import { products, categories } from '../data/products';
 import { useCart } from '../context/CartContext';
 import ProductSkeleton from './ProductSkeleton';
 import QuickViewModal from './QuickViewModal';
+import { FiSearch, FiX, FiFilter, FiHeart, FiCheck, FiPackage, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export default function ShopContent() {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
@@ -229,23 +230,14 @@ export default function ShopContent() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-3 pl-11 pr-12 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground placeholder-muted-foreground"
               />
-              <svg
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
                   className="absolute right-10 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground hover:text-foreground"
                   aria-label="Clear search"
                 >
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <FiX />
                 </button>
               )}
               <button
@@ -253,9 +245,7 @@ export default function ShopContent() {
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground"
                 aria-label="Open filters"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                </svg>
+                <FiFilter className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -277,23 +267,14 @@ export default function ShopContent() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full px-4 py-3 pl-11 pr-11 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground placeholder-muted-foreground"
                     />
-                    <svg
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+                    <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery('')}
                         className="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground hover:text-foreground"
                         aria-label="Clear search"
                       >
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <FiX />
                       </button>
                     )}
                   </div>
@@ -476,9 +457,7 @@ export default function ShopContent() {
                           : 'bg-card/90 hover:bg-card hover:shadow-md'
                           }`}
                       >
-                        <svg className="w-6 h-6 text-white" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
+                        <FiHeart className="w-6 h-6 text-white" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
                       </button>
 
                       {/* Quick View Overlay */}
@@ -537,9 +516,7 @@ export default function ShopContent() {
                         >
                           {addedProducts.has(product.id) ? (
                             <>
-                              <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                              </svg>
+                              <FiCheck className="w-4 h-4 animate-bounce" />
                               Added!
                             </>
                           ) : (
@@ -553,9 +530,7 @@ export default function ShopContent() {
               ) : (
                 <div className="col-span-full text-center py-16">
                   <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">
-                    <svg className="w-10 h-10 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4" />
-                    </svg>
+                    <FiPackage className="w-10 h-10 text-muted-foreground" />
                   </div>
                   <h3 className="text-2xl font-semibold text-foreground mb-3">No products found</h3>
                   <p className="text-muted-foreground mb-6 max-w-md mx-auto">
@@ -622,9 +597,7 @@ export default function ShopContent() {
                         disabled={currentPage === 1}
                         className="flex items-center px-2 sm:px-3 py-2 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
                       >
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
+                        <FiChevronLeft className="w-4 h-4 mr-1" />
                         <span className="hidden xs:inline">Previous</span>
                         <span className="xs:hidden">Prev</span>
                       </button>
@@ -664,9 +637,7 @@ export default function ShopContent() {
                       >
                         <span className="hidden xs:inline">Next</span>
                         <span className="xs:hidden">Next</span>
-                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                        <FiChevronRight className="w-4 h-4 ml-1" />
                       </button>
                     </div>
 
