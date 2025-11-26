@@ -116,9 +116,9 @@ export default function Home() {
               </div>
 
               {/* Enhanced Gradient Overlay for Better Text Visibility */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/40 to-black/30"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/30"></div>
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black/40"></div>
             </div>
           ))}
         </div>
@@ -159,11 +159,11 @@ export default function Home() {
 
             {/* Main Heading */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              <span className="text-transparent bg-gradient-to-r from-white to-gray-200 bg-clip-text drop-shadow-2xl">
+              <span className="text-transparent bg-linear-to-r from-white to-gray-200 bg-clip-text drop-shadow-2xl">
                 {slides[currentSlide].title.split(' ')[0]}
               </span>
               <br />
-              <span className="text-transparent bg-gradient-to-r from-gray-200 to-gray-300 bg-clip-text drop-shadow-2xl">
+              <span className="text-transparent bg-linear-to-r from-gray-200 to-gray-300 bg-clip-text drop-shadow-2xl">
                 {slides[currentSlide].title.split(' ').slice(1).join(' ')}
               </span>
             </h1>
@@ -440,7 +440,7 @@ export default function Home() {
           setQuickViewProduct(null);
         }}
       />
-      
+
     </div>
   );
 }
