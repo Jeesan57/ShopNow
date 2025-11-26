@@ -440,17 +440,7 @@ export default function Home() {
           setQuickViewProduct(null);
         }}
       />
-
-      {/* Add custom animations to your global CSS */}
-      <style jsx global>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.05; }
-          50% { opacity: 0.1; }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-      `}</style>
+      
     </div>
   );
 }
