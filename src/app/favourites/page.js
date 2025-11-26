@@ -22,14 +22,14 @@ export default function Favourites() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-gray-100 dark:border-slate-800">
+      <div className="border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900 dark:text-white">My Favourites</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">
+              <h1 className="text-3xl font-bold text-foreground">My Favourites</h1>
+              <p className="text-muted-foreground mt-2">
                 {wishlistItems.length} favourite {wishlistItems.length === 1 ? 'item' : 'items'}
               </p>
             </div>
@@ -37,7 +37,7 @@ export default function Favourites() {
             {wishlistItems.length > 0 && (
               <Link
                 href="/shop"
-                className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                className="text-primary hover:text-primary/80 font-medium"
               >
                 Continue Shopping →
               </Link>
@@ -58,7 +58,7 @@ export default function Favourites() {
             {wishlistItems.map((product) => (
               <div
                 key={product.id}
-                className="group bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300"
+                className="group bg-card rounded-lg border border-border hover:border-primary transition-all duration-300"
               >
                 <div className="relative aspect-square overflow-hidden rounded-t-lg">
                   <Link href={`/product/${product.id}`}>
@@ -83,28 +83,28 @@ export default function Favourites() {
 
                 <div className="p-4">
                   <div className="mb-2">
-                    <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
+                    <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
                       {product.category}
                     </span>
                   </div>
 
                   <Link href={`/product/${product.id}`}>
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h3 className="font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                       {product.name}
                     </h3>
                   </Link>
 
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+                  <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                     {product.description}
                   </p>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-slate-900 dark:text-white">
+                    <span className="text-lg font-bold text-foreground">
                       ${product.price}
                     </span>
                     <button
                       onClick={() => addToCart(product)}
-                      className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors"
+                      className="bg-slate-900 dark:bg-white border border-border text-white dark:text-slate-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors"
                     >
                       Add to Cart
                     </button>
@@ -115,16 +115,16 @@ export default function Favourites() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 h-16 mx-auto mb-4 bg-muted rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">No favourites yet</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">Start adding items to your favourites by clicking the heart icon on products.</p>
+            <h3 className="text-xl font-semibold text-foreground mb-2">No favourites yet</h3>
+            <p className="text-muted-foreground mb-6">Start adding items to your favourites by clicking the heart icon on products.</p>
             <Link
               href="/shop"
-              className="inline-flex items-center px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center border border-border px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors"
             >
               Browse Products
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
