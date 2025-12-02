@@ -429,13 +429,14 @@ export default function Navbar() {
                   <button
                     onClick={toggleDarkMode}
                     className="flex items-center w-full px-4 py-3 rounded-xl text-foreground hover:bg-muted hover:text-primary transition-all duration-300 font-semibold"
+                    suppressHydrationWarning
                   >
                     {mounted && darkMode ? (
                       <FiSun className="w-6 h-6 mr-4" />
                     ) : (
                       <FiMoon className="w-6 h-6 mr-4" />
                     )}
-                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                    {mounted ? (darkMode ? 'Light Mode' : 'Dark Mode') : 'Dark Mode'}
                   </button>
 
                   {/* Shopping Cart */}

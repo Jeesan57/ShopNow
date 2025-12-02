@@ -57,33 +57,37 @@ export function CartProvider({ children }) {
     localStorage.setItem('shopnow-wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems]);
 
-  const addToCart = (product) => {
+  const addToCart = (product, size) => {
+    if (!size) {
+      console.error('Size is required to add to cart');
+      return;
+    }
     setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
+      const existingItem = prevItems.find(item => item.id === product.id && item.size === size);
       if (existingItem) {
         return prevItems.map(item =>
-          item.id === product.id
+          item.id === product.id && item.size === size
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevItems, { ...product, quantity: 1 }];
+        return [...prevItems, { ...product, size, quantity: 1 }];
       }
     });
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+  const removeFromCart = (productId, size) => {
+    setCartItems(prevItems => prevItems.filter(item => !(item.id === productId && item.size === size)));
   };
 
-  const updateQuantity = (productId, quantity) => {
+  const updateQuantity = (productId, size, quantity) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(productId, size);
       return;
     }
     setCartItems(prevItems =>
       prevItems.map(item =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === productId && item.size === size ? { ...item, quantity } : item
       )
     );
   };

@@ -13,18 +13,19 @@ export default function Cart({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleRemove = async (itemId) => {
-    setIsRemoving(itemId);
+  const handleRemove = async (itemId, size) => {
+    const key = `${itemId}-${size}`;
+    setIsRemoving(key);
     await new Promise(resolve => setTimeout(resolve, 300));
-    removeFromCart(itemId);
+    removeFromCart(itemId, size);
     setIsRemoving(null);
   };
 
-  const handleQuantityChange = (itemId, newQuantity) => {
+  const handleQuantityChange = (itemId, size, newQuantity) => {
     if (newQuantity <= 0) {
-      handleRemove(itemId);
+      handleRemove(itemId, size);
     } else {
-      updateQuantity(itemId, newQuantity);
+      updateQuantity(itemId, size, newQuantity);
     }
   };
 
@@ -101,8 +102,8 @@ export default function Cart({ isOpen, onClose }) {
               <div className="p-6 space-y-4">
                 {cartItems.map((item) => (
                   <div
-                    key={item.id}
-                    className={`bg-card rounded-2xl p-4 border border-border transition-all duration-300 ${isRemoving === item.id ? 'scale-95 opacity-50' : 'hover:border-primary hover:shadow-lg'
+                    key={`${item.id}-${item.size}`}
+                    className={`bg-card rounded-2xl p-4 border border-border transition-all duration-300 ${isRemoving === `${item.id}-${item.size}` ? 'scale-95 opacity-50' : 'hover:border-primary hover:shadow-lg'
                       }`}
                   >
                     <div className="flex items-center space-x-4">
@@ -126,6 +127,9 @@ export default function Cart({ isOpen, onClose }) {
                         <h3 className="font-semibold text-foreground truncate mb-1">
                           {item.name}
                         </h3>
+                        <p className="text-sm text-muted-foreground mb-1">
+                          Size: {item.size}
+                        </p>
                         <p className="text-primary font-bold text-lg mb-2">
                           ${item.price}
                         </p>
@@ -134,7 +138,7 @@ export default function Cart({ isOpen, onClose }) {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3">
                             <button
-                              onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                              onClick={() => handleQuantityChange(item.id, item.size, item.quantity - 1)}
                               className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-muted/80 transition-colors font-semibold text-foreground"
                             >
                               −
@@ -143,7 +147,7 @@ export default function Cart({ isOpen, onClose }) {
                               {item.quantity}
                             </span>
                             <button
-                              onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                              onClick={() => handleQuantityChange(item.id, item.size, item.quantity + 1)}
                               className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-muted/80 transition-colors font-semibold text-foreground"
                             >
                               +
@@ -155,7 +159,7 @@ export default function Cart({ isOpen, onClose }) {
                               ${(item.price * item.quantity).toFixed(2)}
                             </div>
                             <button
-                              onClick={() => handleRemove(item.id)}
+                              onClick={() => handleRemove(item.id, item.size)}
                               className="text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1 mt-1"
                             >
                               <FiTrash2 className="w-4 h-4" />

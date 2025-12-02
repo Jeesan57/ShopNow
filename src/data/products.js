@@ -6,6 +6,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
     category: "Men",
     description: "A comfortable and versatile white t-shirt perfect for everyday wear. Made from premium cotton fabric, it offers a soft and breathable feel. Ideal for casual outings or layering under jackets.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
       "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
@@ -19,6 +20,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
     category: "Men",
     description: "High-quality denim jeans with a perfect fit and durable material.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400",
       "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=400",
@@ -32,6 +34,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     category: "Women",
     description: "A sophisticated black dress suitable for formal occasions or evening wear.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
@@ -45,6 +48,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
     category: "Accessories",
     description: "A stylish leather handbag with ample space and premium craftsmanship.",
+    sizes: ["One Size"],
     thumbnails: [
       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
@@ -58,6 +62,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     category: "Men",
     description: "Comfortable running sneakers designed for performance and style.",
+    sizes: ["7", "8", "9", "10", "11"],
     thumbnails: [
       "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
       "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400",
@@ -71,6 +76,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
     category: "Women",
     description: "A light and airy floral skirt perfect for summer outings.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
@@ -84,6 +90,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400",
     category: "Accessories",
     description: "A delicate gold necklace that adds elegance to any outfit.",
+    sizes: ["One Size"],
     thumbnails: [
       "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400",
       "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400",
@@ -97,6 +104,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400",
     category: "Men",
     description: "A cozy hoodie perfect for casual wear and layering.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400",
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
@@ -110,6 +118,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&q=80",
     category: "Kids",
     description: "Bright and comfortable t-shirt for active kids, made with soft cotton.",
+    sizes: ["XS", "S", "M", "L"],
     thumbnails: [
       "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&q=80",
       "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=400",
@@ -123,6 +132,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80",
     category: "Kids",
     description: "Stylish denim jacket perfect for kids' outdoor adventures.",
+    sizes: ["XS", "S", "M", "L"],
     thumbnails: [
       "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80",
       "https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=400&q=80",
@@ -136,6 +146,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1584735175097-719d848f8449?auto=format&fit=crop&w=400&q=80",
     category: "Kids",
     description: "Comfortable and durable sneakers for active kids.",
+    sizes: ["1", "2", "3", "4", "5"],
     thumbnails: [
       "https://images.unsplash.com/photo-1584735175097-719d848f8449?auto=format&fit=crop&w=400&q=80",
       "https://images.unsplash.com/photo-1521093470119-a3acdc43374a?auto=format&fit=crop&w=400&q=80",
@@ -149,6 +160,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
     category: "Kids",
     description: "Fun and practical backpack for school and travel.",
+    sizes: ["One Size"],
     thumbnails: [
       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
@@ -162,6 +174,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
     category: "Men",
     description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
       "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
@@ -175,6 +188,7 @@ export const products = [
     image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
     category: "Men",
     description: "A comfortable and versatile white t-shirt perfect for everyday wear.",
+    sizes: ["S", "M", "L", "XL"],
     thumbnails: [
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
       "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",

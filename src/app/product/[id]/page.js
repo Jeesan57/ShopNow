@@ -20,6 +20,7 @@ export default function ProductDetail() {
   const sliderRef = useRef(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [duplicatedProducts, setDuplicatedProducts] = useState([]);
+  const [selectedSize, setSelectedSize] = useState('');
 
   useEffect(() => {
     const productId = parseInt(params.id);
@@ -27,6 +28,7 @@ export default function ProductDetail() {
     if (foundProduct) {
       setProduct(foundProduct);
       setSelectedImage(foundProduct.image);
+      setSelectedSize(foundProduct.sizes ? foundProduct.sizes[0] : '');
       // Get suggested products from same category
       const suggested = products
         .filter(p => p.category === foundProduct.category && p.id !== productId)
@@ -54,11 +56,15 @@ export default function ProductDetail() {
   }, [duplicatedProducts.length, isAutoPlaying]);
 
   const handleAddToCart = async () => {
+    if (!selectedSize) {
+      alert('Please select a size before adding to cart.');
+      return;
+    }
     setIsAddingToCart(true);
     await new Promise(resolve => setTimeout(resolve, 800));
 
     for (let i = 0; i < quantity; i++) {
-      addToCart(product);
+      addToCart(product, selectedSize);
     }
 
     setIsAddingToCart(false);
@@ -202,6 +208,25 @@ export default function ProductDetail() {
               <p className="text-muted-foreground text-lg leading-relaxed">
                 {product.description}
               </p>
+            </div>
+
+            {/* Size Selection */}
+            <div>
+              <h3 className="text-xl font-semibold text-foreground mb-4">Size</h3>
+              <div className="flex flex-wrap gap-3">
+                {(product.sizes || []).map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all ${selectedSize === size
+                      ? 'bg-primary text-primary-foreground border-primary'
+                      : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
+                      }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Features */}

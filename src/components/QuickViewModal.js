@@ -7,14 +7,16 @@ import { FiX, FiChevronLeft, FiChevronRight, FiStar, FiCheck, FiPlus, FiMinus } 
 
 export default function QuickViewModal({ product, isOpen, onClose }) {
   const { addToCart } = useCart();
-  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [selectedSize, setSelectedSize] = useState('');
 
   useEffect(() => {
     if (product) {
       setSelectedImage(product.image);
       setQuantity(1);
+      setSelectedSize(product.sizes ? product.sizes[0] : '');
     }
   }, [product]);
 
@@ -35,13 +37,17 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   const handleAddToCart = async () => {
+    if (!selectedSize) {
+      alert('Please select a size before adding to cart.');
+      return;
+    }
     setIsAdding(true);
 
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 600));
 
     for (let i = 0; i < quantity; i++) {
-      addToCart(product);
+      addToCart(product, selectedSize);
     }
 
     setIsAdding(false);
@@ -76,13 +82,15 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
             <div className="relative p-8 bg-card dark:from-slate-700 dark:to-slate-800 border-r border-border">
               {/* Main Image */}
               <div className="relative aspect-square mb-6 rounded-2xl overflow-hidden group border border-border">
-                <Image
-                  src={selectedImage}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  priority
-                />
+                {selectedImage && (
+                  <Image
+                    src={selectedImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    priority
+                  />
+                )}
 
                 {/* Image Navigation Arrows */}
                 <button
@@ -169,6 +177,27 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                   <p className="text-muted-foreground leading-relaxed">
                     {product.description}
                   </p>
+                </div>
+
+                {/* Size Selection */}
+                <div className="bg-muted dark:bg-slate-700/50 rounded-2xl p-4">
+                  <label className="block text-sm font-semibold text-foreground dark:text-white mb-3">
+                    Size
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {(product.sizes || []).map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`px-4 py-2 rounded-xl border text-sm font-medium transition-all ${selectedSize === size
+                          ? 'bg-primary text-primary-foreground border-primary'
+                          : 'border-border dark:border-slate-500 text-muted-foreground hover:border-primary hover:text-primary'
+                          }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Quantity Selector */}

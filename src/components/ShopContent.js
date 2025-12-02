@@ -10,8 +10,22 @@ import ProductSkeleton from './ProductSkeleton';
 import QuickViewModal from './QuickViewModal';
 import { FiSearch, FiX, FiFilter, FiHeart, FiCheck, FiPackage, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
+// Add size state for each product
+const useProductSizes = () => {
+  const [selectedSizes, setSelectedSizes] = useState({});
+
+  const setSize = (productId, size) => {
+    setSelectedSizes(prev => ({ ...prev, [productId]: size }));
+  };
+
+  const getSize = (productId) => selectedSizes[productId];
+
+  return { selectedSizes, setSize, getSize };
+};
+
 export default function ShopContent() {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  const { selectedSizes, setSize, getSize } = useProductSizes();
   const searchParams = useSearchParams();
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -488,6 +502,27 @@ export default function ShopContent() {
                         {product.description}
                       </p>
 
+                      {/* Size Selection */}
+                      <div className="mb-4">
+                        <label className="block text-sm font-semibold text-foreground mb-2">
+                          Size
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {(product.sizes || []).map((size) => (
+                            <button
+                              key={size}
+                              onClick={() => setSize(product.id, size)}
+                              className={`px-3 py-1 rounded-lg border text-sm font-medium transition-all ${getSize(product.id) === size
+                                ? 'bg-primary text-primary-foreground border-primary'
+                                : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
+                                }`}
+                            >
+                              {size}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-foreground">
                           ${product.price}
@@ -495,7 +530,12 @@ export default function ShopContent() {
                         <button
                           onClick={(e) => {
                             e.preventDefault();
-                            addToCart(product);
+                            const selectedSize = getSize(product.id);
+                            if (!selectedSize) {
+                              alert('Please select a size before adding to cart.');
+                              return;
+                            }
+                            addToCart(product, selectedSize);
 
                             // Add to tracked products
                             setAddedProducts(prev => new Set(prev).add(product.id));
