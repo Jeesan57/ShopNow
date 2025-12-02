@@ -14,7 +14,14 @@ export default function Home() {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [selectedSizes, setSelectedSizes] = useState({});
   const trendingProducts = products.slice(0, 6);
+
+  const setSize = (productId, size) => {
+    setSelectedSizes(prev => ({ ...prev, [productId]: size }));
+  };
+
+  const getSize = (productId) => selectedSizes[productId];
 
   // Professional carousel slides data
   const slides = [
@@ -96,8 +103,8 @@ export default function Home() {
             <div
               key={slide.id}
               className={`absolute inset-0 transition-all duration-1000 ease-out ${index === currentSlide
-                  ? 'opacity-100'
-                  : 'opacity-0 pointer-events-none'
+                ? 'opacity-100'
+                : 'opacity-0 pointer-events-none'
                 }`}
             >
               {/* Parallax Background Image */}
@@ -222,8 +229,8 @@ export default function Home() {
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
-                  ? 'bg-white scale-125'
-                  : 'bg-white/50 hover:bg-white/75'
+                ? 'bg-white scale-125'
+                : 'bg-white/50 hover:bg-white/75'
                 }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -395,9 +402,37 @@ export default function Home() {
                     </div>
                   </div>
 
+                  {/* Size Selection */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-semibold text-foreground mb-2">
+                      Size
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {(product.sizes || []).map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setSize(product.id, size)}
+                          className={`px-3 py-1 rounded-lg border text-sm font-medium transition-all ${getSize(product.id) === size
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
+                            }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   <div className="space-y-3">
                     <button
-                      onClick={() => addToCart(product)}
+                      onClick={() => {
+                        const selectedSize = getSize(product.id);
+                        if (!selectedSize) {
+                          alert('Please select a size before adding to cart.');
+                          return;
+                        }
+                        addToCart(product, selectedSize);
+                      }}
                       className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-3 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-border"
                     >
                       Add to Cart
