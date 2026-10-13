@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { FiArrowUpRight, FiCheck, FiShoppingBag, FiTruck, FiMessageCircle, FiAward, FiHeart, FiFeather, FiZap, FiEye, FiStar } from 'react-icons/fi';
 
 export default function About() {
   return (
@@ -39,111 +40,77 @@ export default function About() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Mission Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
-          <div className="space-y-10">
-            <div>
-              <h2 className="text-4xl font-black text-foreground mb-6">Our Mission</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                At Auvora BD, we believe that quality products should be accessible to everyone. Our mission is to curate the finest collection of premium items, ensuring that every customer finds exactly what they&apos;re looking for.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-5">What Sets Us Apart</h3>
-              <ul className="space-y-4">
-                {[
-                  'Carefully curated premium products',
-                  'Exceptional customer service',
-                  'Fast and secure shipping',
-                  '30-day money-back guarantee',
-                  'Expert product recommendations'
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-4 text-muted-foreground">
-                    <div className="w-2.5 h-2.5 bg-primary rounded-full shrink-0"></div>
-                    <span>{item}</span>
-                  </li>
-                ))}
+        <section aria-labelledby="mission-title" className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-start mb-14">
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary mb-3">Why Auvora BD</p>
+            <h2 id="mission-title" className="text-[26px] sm:text-[32px] font-semibold tracking-tight text-foreground mb-4">Good products. Simple shopping.</h2>
+            <p className="text-[15px] sm:text-[17px] text-muted-foreground leading-7 max-w-xl">
+              Our mission is to make quality products accessible, with thoughtfully chosen collections and an easy shopping experience from browsing to delivery.
+            </p>
+            <div className="mt-6 border-t border-border pt-5">
+              <h3 className="text-[15px] font-semibold text-foreground mb-4">What sets us apart</h3>
+              <ul className="space-y-3">
+                {['Thoughtfully curated collections', 'Clear product details and prices', 'Easy size and color selection'].map(item => <li key={item} className="flex items-center gap-3 text-[15px] text-muted-foreground">
+                  <FiCheck className="w-4 h-4 shrink-0 text-primary" aria-hidden="true" /><span>{item}</span>
+                </li>)}
               </ul>
             </div>
+            <Link href="/shop" className="inline-flex items-center gap-2 mt-5 min-h-11 text-sm font-medium text-foreground hover:text-primary transition-colors">Explore the collection <FiArrowUpRight className="w-4 h-4" aria-hidden="true" /></Link>
           </div>
 
-          {/* Stats Cards */}
-          <div className="bg-linear-to-br from-gold-50/80 to-gold-50/70 dark:from-gold-900/20 dark:to-gold-900/20 backdrop-blur-sm border border-border/50 rounded-3xl p-10 shadow-xl">
-            <div className="grid grid-cols-2 gap-8">
-              <div className="text-center">
-                <div className="text-5xl font-black text-primary mb-2">10K+</div>
-                <div className="text-muted-foreground">Happy Customers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-black text-secondary mb-2">500+</div>
-                <div className="text-muted-foreground">Premium Products</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-black text-accent mb-2">COD</div>
-                <div className="text-muted-foreground">Cash on Delivery</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-black text-green-500 mb-2">24/7</div>
-                <div className="text-muted-foreground">Customer Support</div>
-              </div>
+          <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground mb-2">Shopping made easy</p>
+            <h3 className="text-lg font-semibold tracking-tight text-foreground mb-5">From your first click to your doorstep.</h3>
+            <div className="divide-y divide-border">
+              {[
+                { icon: FiShoppingBag, title: 'Cash on delivery', description: 'Order online and pay when your parcel arrives.' },
+                { icon: FiTruck, title: 'Delivery across Bangladesh', description: 'Select your district and see the delivery fee at checkout.' },
+                { icon: FiMessageCircle, title: 'Here to help', description: 'Get in touch for product questions or order support.' },
+              ].map(({ icon: Icon, title, description }) => <div key={title} className="flex items-start gap-3 py-4 first:pt-0 last:pb-0">
+                <div className="w-9 h-9 shrink-0 rounded-lg bg-primary/8 text-primary flex items-center justify-center"><Icon className="w-4 h-4" aria-hidden="true" /></div>
+                <div><h4 className="text-[15px] font-medium text-foreground">{title}</h4><p className="mt-1 text-sm leading-5 text-muted-foreground">{description}</p></div>
+              </div>)}
             </div>
-          </div>
-        </div>
-
-        {/* Core Values */}
-        <section className="mb-20">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-foreground mb-6">Our Core Values</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The principles that guide everything we do
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: '🏆', title: 'Quality First', desc: 'We never compromise on quality. Every product meets the highest standards.' },
-              { icon: '🤝', title: 'Customer Centric', desc: 'Your satisfaction is our priority. We listen, adapt, and exceed expectations.' },
-              { icon: '🌱', title: 'Sustainability', desc: 'We care about our planet and work with eco-friendly suppliers.' },
-              { icon: '🚀', title: 'Innovation', desc: 'We continuously evolve to provide the best shopping experience.' },
-              { icon: '💎', title: 'Transparency', desc: 'Honest pricing, clear policies, and genuine reviews.' },
-              { icon: '🌟', title: 'Excellence', desc: 'We strive for excellence in every aspect of our business.' },
-            ].map((value, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
-              >
-                <div className="text-5xl mb-5 group-hover:scale-110 transition-transform">{value.icon}</div>
-                <h3 className="text-2xl font-bold text-foreground mb-3">{value.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{value.desc}</p>
-              </div>
-            ))}
           </div>
         </section>
 
-        {/* CTA Section */}
-        <div className="text-center bg-linear-to-r from-primary/5 to-secondary/5 border border-border/50 rounded-3xl p-16 backdrop-blur-sm">
-          <h2 className="text-4xl font-black text-foreground mb-6">
-            Ready to Experience Premium Shopping?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust Auvora BD for their premium shopping needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link
-              href="/shop"
-              className="bg-primary text-primary-foreground px-10 py-5 rounded-xl font-bold hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-primary/30"
-            >
-              Start Shopping
-            </Link>
-            <Link
-              href="/contact"
-              className="border-2 border-border text-foreground px-10 py-5 rounded-xl font-semibold hover:bg-muted transition-all duration-300 hover:border-primary"
-            >
-              Contact Us
-            </Link>
+        <section aria-labelledby="values-title" className="mb-10 sm:mb-12">
+          <div className="mb-6">
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-primary mb-2">What we believe</p>
+              <h2 id="values-title" className="text-[26px] sm:text-[32px] font-semibold tracking-tight text-foreground">Our core values</h2>
+              <p className="mt-2 text-[15px] text-muted-foreground leading-6">The principles behind our products, our service, and your experience.</p>
+            </div>
           </div>
-        </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {[
+              { icon: FiAward, title: 'Quality first', desc: 'Thoughtfully chosen products, with attention to the details that matter.' },
+              { icon: FiHeart, title: 'Customer focused', desc: 'We listen to your feedback and put your shopping experience first.' },
+              { icon: FiFeather, title: 'Mindful choices', desc: 'We value thoughtful purchases and products that fit everyday life.' },
+              { icon: FiZap, title: 'Always improving', desc: 'We keep refining how you discover, choose, and order your products.' },
+              { icon: FiEye, title: 'Transparency', desc: 'Clear prices, useful product details, and delivery fees shown at checkout.' },
+              { icon: FiStar, title: 'Care in every detail', desc: 'From browsing to order support, we aim to make every step feel easy.' },
+            ].map(({ icon: Icon, title, desc }) => <article key={title} className="rounded-xl border border-border bg-card p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-9 h-9 shrink-0 rounded-lg bg-primary/8 text-primary flex items-center justify-center"><Icon className="w-4 h-4" aria-hidden="true" /></span>
+                <h3 className="text-[15px] font-semibold text-foreground">{title}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-6">{desc}</p>
+            </article>)}
+          </div>
+        </section>
+
+        <section aria-labelledby="explore-title" className="rounded-2xl border border-border bg-muted/40 p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="max-w-lg">
+            <h2 id="explore-title" className="text-[22px] sm:text-[26px] font-semibold tracking-tight text-foreground">Find your next everyday favourite.</h2>
+            <p className="mt-2 text-[15px] text-muted-foreground leading-6">Explore the collection, or get in touch if you need a hand choosing.</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link href="/shop" className="inline-flex items-center justify-center gap-2 min-h-11 px-5 rounded-lg bg-foreground text-background text-sm font-medium hover:opacity-85 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Explore products <FiArrowUpRight className="w-4 h-4" aria-hidden="true" /></Link>
+            <Link href="/contact" className="inline-flex items-center justify-center min-h-11 px-5 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-card transition-colors focus-visible:outline-2 focus-visible:outline-primary">Contact us</Link>
+          </div>
+        </section>
       </div>
     </div>
   );

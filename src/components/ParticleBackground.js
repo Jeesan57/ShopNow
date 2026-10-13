@@ -7,7 +7,7 @@ export default function ParticleBackground() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -94,9 +94,15 @@ export default function ParticleBackground() {
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    const updateVisibility = () => {
+      cancelAnimationFrame(animationId);
+      if (!document.hidden) animate();
+    };
+    document.addEventListener('visibilitychange', updateVisibility);
+    updateVisibility();
 
     return () => {
+      document.removeEventListener('visibilitychange', updateVisibility);
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationId);
     };
@@ -105,6 +111,7 @@ export default function ParticleBackground() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-0"
       style={{ background: 'transparent' }}
     />

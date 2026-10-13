@@ -67,7 +67,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Our Location</h3>
-                    <p className="text-muted-foreground mt-1">123 Shop Street, City, State 12345</p>
+                    <p className="text-muted-foreground mt-1">Bashundhara R/A, Dhaka, Bangladesh</p>
                   </div>
                 </div>
 
@@ -89,7 +89,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Email Address</h3>
-                    <p className="text-muted-foreground mt-1">contact@shopnow.com</p>
+                    <a href="mailto:auvorabd.official@gmail.com" className="inline-block text-muted-foreground mt-1 break-all hover:text-primary transition-colors">auvorabd.official@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -97,19 +97,9 @@ export default function Contact() {
               {/* Business Hours */}
               <div className="mt-8 pt-8 border-t border-border">
                 <h3 className="text-xl font-bold text-foreground mb-4">Business Hours</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center py-2 border-b border-border/50">
-                    <span className="text-muted-foreground">Monday - Friday</span>
-                    <span className="font-semibold text-foreground">9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-border/50">
-                    <span className="text-muted-foreground">Saturday</span>
-                    <span className="font-semibold text-foreground">10:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="text-muted-foreground">Sunday</span>
-                    <span className="font-semibold text-red-500">Closed</span>
-                  </div>
+                <div className="flex items-center gap-2 py-2">
+                  <span className="w-2 h-2 rounded-full bg-green-500" aria-hidden="true" />
+                  <span className="font-semibold text-foreground">Always open · 24/7</span>
                 </div>
               </div>
             </div>

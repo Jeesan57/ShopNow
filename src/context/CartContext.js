@@ -1,5 +1,6 @@
 'use client';
 
+import { matchesCartItem } from '../lib/productColors';
 import { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 
 const CartContext = createContext();
@@ -58,38 +59,39 @@ export function CartProvider({ children }) {
     localStorage.setItem('shopnow-wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems, hydrated]);
 
-  const addToCart = (product, size) => {
+  const addToCart = (product, size, color = product.colors?.[0] || '') => {
+    if (product.colors?.length && !product.colors.includes(color)) { alert('Choose an available color.'); return; }
     if (product.stock !== undefined && product.stock <= 0) { alert('This product is out of stock.'); return; }
     if (!size) {
       console.error('Size is required to add to cart');
       return;
     }
     setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id && item.size === size);
+      const existingItem = prevItems.find(item => matchesCartItem(item, product.id, size, color));
       if (existingItem) {
         return prevItems.map(item =>
-          item.id === product.id && item.size === size
+          matchesCartItem(item, product.id, size, color)
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevItems, { ...product, size, quantity: 1 }];
+        return [...prevItems, { ...product, size, color, quantity: 1 }];
       }
     });
   };
 
-  const removeFromCart = (productId, size) => {
-    setCartItems(prevItems => prevItems.filter(item => !(item.id === productId && item.size === size)));
+  const removeFromCart = (productId, size, color = '') => {
+    setCartItems(prevItems => prevItems.filter(item => !(matchesCartItem(item, productId, size, color))));
   };
 
-  const updateQuantity = (productId, size, quantity) => {
+  const updateQuantity = (productId, size, quantity, color = '') => {
     if (quantity <= 0) {
-      removeFromCart(productId, size);
+      removeFromCart(productId, size, color);
       return;
     }
     setCartItems(prevItems =>
       prevItems.map(item =>
-        item.id === productId && item.size === size ? { ...item, quantity } : item
+        matchesCartItem(item, productId, size, color) ? { ...item, quantity } : item
       )
     );
   };

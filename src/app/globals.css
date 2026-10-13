@@ -340,3 +340,10 @@ input::placeholder, textarea::placeholder { color: var(--muted-foreground); opac
 .dark { color-scheme: dark; }
 :root:not(.dark) { color-scheme: light; }
 .text-accent { color: var(--primary); }
+
+/* Hide carousel arrows only on devices that support precise hover. */
+@media (hover: hover) and (pointer: fine) {
+  .product-card-image-arrow { opacity: 0; }
+  .product-card:hover .product-card-image-arrow,
+  .product-card:focus-within .product-card-image-arrow { opacity: 1; }
+}

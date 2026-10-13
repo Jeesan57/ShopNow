@@ -1,5 +1,6 @@
 'use client';
 
+import { cartItemKey } from '../lib/productColors';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
@@ -15,19 +16,19 @@ export default function Cart({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleRemove = async (itemId, size) => {
-    const key = `${itemId}-${size}`;
+  const handleRemove = async (itemId, size, color) => {
+    const key = cartItemKey({id:itemId,size,color});
     setIsRemoving(key);
     await new Promise(resolve => setTimeout(resolve, 300));
-    removeFromCart(itemId, size);
+    removeFromCart(itemId, size, color);
     setIsRemoving(null);
   };
 
-  const handleQuantityChange = (itemId, size, newQuantity) => {
+  const handleQuantityChange = (itemId, size, newQuantity, color) => {
     if (newQuantity <= 0) {
-      handleRemove(itemId, size);
+      handleRemove(itemId, size, color);
     } else {
-      updateQuantity(itemId, size, newQuantity);
+      updateQuantity(itemId, size, newQuantity, color);
     }
   };
 
@@ -90,7 +91,7 @@ export default function Cart({ isOpen, onClose }) {
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-3">Your cart is empty</h3>
                 <p className="text-muted-foreground mb-6 max-w-sm">
-                  Looks like you haven't added any items to your cart yet. Start shopping to discover amazing products!
+                  Looks like you haven&apos;t added any items to your cart yet. Start shopping to discover amazing products!
                 </p>
                 <button
                   onClick={onClose}
@@ -104,8 +105,8 @@ export default function Cart({ isOpen, onClose }) {
               <div className="p-6 space-y-4">
                 {cartItems.map((item) => (
                   <div
-                    key={`${item.id}-${item.size}`}
-                    className={`bg-card rounded-2xl p-4 border border-border transition-all duration-300 ${isRemoving === `${item.id}-${item.size}` ? 'scale-95 opacity-50' : 'hover:border-primary hover:shadow-lg'
+                    key={cartItemKey(item)}
+                    className={`bg-card rounded-2xl p-4 border border-border transition-all duration-300 ${isRemoving === cartItemKey(item) ? 'scale-95 opacity-50' : 'hover:border-primary hover:shadow-lg'
                       }`}
                   >
                     <div className="flex items-center space-x-4">
@@ -130,7 +131,7 @@ export default function Cart({ isOpen, onClose }) {
                           {item.name}
                         </h3>
                         <p className="text-sm text-muted-foreground mb-1">
-                          Size: {item.size}
+                          Size: {item.size}{item.color ? ` · ${item.color}` : ''}
                         </p>
                         <p className="text-primary font-bold text-lg mb-2">
                           ৳{item.price}
@@ -140,7 +141,7 @@ export default function Cart({ isOpen, onClose }) {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3">
                             <button
-                              onClick={() => handleQuantityChange(item.id, item.size, item.quantity - 1)}
+                              onClick={() => handleQuantityChange(item.id, item.size, item.quantity - 1, item.color)}
                               className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-muted/80 transition-colors font-semibold text-foreground"
                             >
                               −
@@ -149,7 +150,7 @@ export default function Cart({ isOpen, onClose }) {
                               {item.quantity}
                             </span>
                             <button
-                              onClick={() => handleQuantityChange(item.id, item.size, item.quantity + 1)}
+                              onClick={() => handleQuantityChange(item.id, item.size, item.quantity + 1, item.color)}
                               className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-muted/80 transition-colors font-semibold text-foreground"
                             >
                               +
@@ -161,7 +162,7 @@ export default function Cart({ isOpen, onClose }) {
                               ৳{(item.price * item.quantity).toFixed(2)}
                             </div>
                             <button
-                              onClick={() => handleRemove(item.id, item.size)}
+                              onClick={() => handleRemove(item.id, item.size, item.color)}
                               className="text-red-500 hover:text-red-700 text-sm font-medium transition-colors duration-200 flex items-center gap-1 mt-1"
                             >
                               <FiTrash2 className="w-4 h-4" />

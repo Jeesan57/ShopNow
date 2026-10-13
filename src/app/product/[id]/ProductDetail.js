@@ -1,45 +1,29 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import ProductColorSelector from '../../../components/ProductColorSelector';
+import ProductDescription from '../../../components/ProductDescription';
 import { useCatalog } from '../../../context/CatalogContext';
 import { useCart } from '../../../context/CartContext';
-import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiPlus, FiMinus } from 'react-icons/fi';
+import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiHeart, FiPlus, FiMinus } from 'react-icons/fi';
 
 export default function ProductDetail({ initialProduct }) {
-  const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
-  const { addToCart } = useCart();
-  const params = useParams();
-  const [product, setProduct] = useState(initialProduct);
+  const { products, loading: catalogLoading } = useCatalog();
+  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  const product = products.find(item => item.id === initialProduct?.id) || initialProduct;
+  const suggestedProducts = products.filter(item => item.category === product?.category && item.id !== product?.id).slice(0, 8);
+  const duplicatedProducts = [...suggestedProducts, ...suggestedProducts, ...suggestedProducts];
   const [selectedImage, setSelectedImage] = useState(initialProduct?.image || '');
-  const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const sliderRef = useRef(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [duplicatedProducts, setDuplicatedProducts] = useState([]);
-  const [selectedSize, setSelectedSize] = useState('');
-
-  useEffect(() => {
-    const productId = parseInt(params.id);
-    const foundProduct = products.find(p => p.id === productId);
-    setProduct(foundProduct || null);
-    if (foundProduct) {
-      setProduct(foundProduct);
-      setSelectedImage(foundProduct.image);
-      setSelectedSize(foundProduct.sizes ? foundProduct.sizes[0] : '');
-      // Get suggested products from same category
-      const suggested = products
-        .filter(p => p.category === foundProduct.category && p.id !== productId)
-        .slice(0, 8);
-      setSuggestedProducts(suggested);
-      // Duplicate for infinite scroll
-      setDuplicatedProducts([...suggested, ...suggested, ...suggested]);
-    }
-  }, [params.id, products]);
+  const [colorChoice, setColorChoice] = useState(initialProduct?.colors?.[0] || '');
+  const selectedColor = (product?.colors || []).includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
+  const [selectedSize, setSelectedSize] = useState(initialProduct?.sizes?.[0] || '');
 
   // Continuous scroll functionality
   useEffect(() => {
@@ -66,13 +50,13 @@ export default function ProductDetail({ initialProduct }) {
     await new Promise(resolve => setTimeout(resolve, 800));
 
     for (let i = 0; i < quantity; i++) {
-      addToCart(product, selectedSize);
+      addToCart(product, selectedSize, selectedColor);
     }
 
     setIsAddingToCart(false);
   };
 
-  if (catalogLoading) return <div className="p-16 text-center">Loading product…</div>;
+  if (catalogLoading && !product) return <div className="p-16 text-center">Loading product…</div>;
   if (!product) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -94,12 +78,14 @@ export default function ProductDetail({ initialProduct }) {
     );
   }
 
+  const gallery = [...new Set([product.image, ...(product.thumbnails || [])].filter(Boolean))];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Breadcrumb */}
       <div className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
+          <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm text-muted-foreground" style={{ borderBottom: 'none' }}>
             <Link href="/" className="hover:text-foreground transition-colors">
               Home
             </Link>
@@ -113,215 +99,113 @@ export default function ProductDetail({ initialProduct }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Product Images - Enhanced */}
-          <div className="space-y-6">
-            {/* Main Image */}
-            <div className="relative aspect-square bg-muted rounded-3xl overflow-hidden group">
-              <Image
-                src={selectedImage}
-                alt={product.name}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                priority
-              />
-
-              {/* Image Navigation */}
-              <button
-                onClick={() => {
-                  const currentIndex = product.thumbnails.indexOf(selectedImage);
-                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : product.thumbnails.length - 1;
-                  setSelectedImage(product.thumbnails[prevIndex]);
-                }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-stone-900/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-stone-700"
-              >
-                <FiChevronLeft className="w-5 h-5 text-white" />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 lg:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-9 items-start">
+          <div className="flex gap-2.5 sm:gap-3 min-w-0 lg:sticky lg:top-28">
+            {gallery.length > 1 && <div className="flex flex-col gap-2 shrink-0 w-12 sm:w-14 max-h-[360px] sm:max-h-[460px] lg:max-h-[480px] overflow-y-auto py-0.5" aria-label="Product images">
+              {gallery.map((thumb, index) => <button key={thumb} type="button" aria-label={`View product image ${index + 1}`} aria-pressed={selectedImage === thumb}
+                onClick={() => setSelectedImage(thumb)}
+                className={`relative shrink-0 w-full aspect-[3/4] rounded-md bg-card border-2 overflow-hidden transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${selectedImage === thumb ? 'border-primary' : 'border-border hover:border-primary/50'}`}>
+                <Image src={thumb} alt={`${product.name} view ${index + 1}`} fill sizes="56px" className="object-contain p-1" />
+              </button>)}
+            </div>}
+            <div className="relative flex-1 min-w-0 h-[360px] sm:h-[460px] lg:h-[480px] rounded-xl bg-muted overflow-hidden group">
+              <Image src={selectedImage} alt={product.name} fill sizes="(max-width: 1024px) 80vw, 420px" className="object-contain" priority />
+              <button type="button" aria-label={`${isInWishlist(product.id) ? 'Remove from' : 'Add to'} favourites`} aria-pressed={isInWishlist(product.id)}
+                onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
+                className="absolute right-2 top-2 w-11 h-11 flex items-center justify-center rounded-full bg-background/80 text-foreground hover:bg-background transition-colors">
+                <FiHeart className="w-5 h-5" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
               </button>
-
-              <button
-                onClick={() => {
-                  const currentIndex = product.thumbnails.indexOf(selectedImage);
-                  const nextIndex = currentIndex < product.thumbnails.length - 1 ? currentIndex + 1 : 0;
-                  setSelectedImage(product.thumbnails[nextIndex]);
-                }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-stone-900/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-stone-700"
-              >
-                <FiChevronRight className="w-5 h-5 text-white" />
-              </button>
-            </div>
-
-            {/* Thumbnail Gallery */}
-            <div className="flex justify-center space-x-4">
-              {product.thumbnails.map((thumb, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(thumb)}
-                  className={`shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${selectedImage === thumb
-                    ? 'border-primary shadow-lg shadow-primary/25 scale-105'
-                    : 'border-border hover:border-input'
-                    }`}
-                >
-                  <Image
-                    src={thumb}
-                    alt={`${product.name} view ${index + 1}`}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
+              {gallery.length > 1 && <div className="absolute bottom-3 right-3 flex gap-1">
+                <button type="button" aria-label="Previous product image" onClick={() => setSelectedImage(gallery[(gallery.indexOf(selectedImage) - 1 + gallery.length) % gallery.length])} className="w-11 h-11 bg-background/80 flex items-center justify-center hover:bg-background"><FiChevronLeft className="w-5 h-5" /></button>
+                <button type="button" aria-label="Next product image" onClick={() => setSelectedImage(gallery[(gallery.indexOf(selectedImage) + 1) % gallery.length])} className="w-11 h-11 bg-background/80 flex items-center justify-center hover:bg-background"><FiChevronRight className="w-5 h-5" /></button>
+              </div>}
             </div>
           </div>
 
-          {/* Product Info - Enhanced */}
-          <div className="space-y-8">
-            {/* Header */}
-            <div>
-              <div className="mb-4">
-                <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-primary/10 text-primary">
-                  {product.category}
-                </span>
-              </div>
-
-              <h1 className="text-4xl lg:text-5xl font-black text-foreground mb-4 leading-tight">
-                {product.name}
-              </h1>
-
-              {/* Stock & Price */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex flex-col items-start gap-2">
-                  <span className="text-sm text-muted-foreground">{product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</span>
-                </div>
-
-                <div className="text-4xl font-black text-primary">
-                  ৳{product.price}
-                </div>
-              </div>
-            </div>
-
-            {/* Description */}
-            <div>
-              <h3 className="text-xl font-semibold text-foreground mb-4">Product Description</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                {product.description}
+          <div className="lg:pt-1 lg:max-w-md">
+            <Link href={`/shop?category=${encodeURIComponent(product.category)}`} className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground hover:text-primary">
+              {product.category}
+            </Link>
+            <h1 className="mt-3 text-[25px] sm:text-[28px] font-medium tracking-[-0.025em] text-foreground leading-[1.3] break-words">
+              {product.name}
+            </h1>
+            <div className="mt-4 flex items-baseline gap-2">
+              <p className="text-[26px] font-semibold tracking-tight text-foreground tabular-nums">
+                ৳{Number(product.price).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
+              <span className="text-[10px] tracking-wider text-muted-foreground">BDT</span>
             </div>
 
-            {/* Size Selection */}
-            <div>
-              <h3 className="text-xl font-semibold text-foreground mb-4">Size</h3>
-              <div className="flex flex-wrap gap-3">
-                {(product.sizes || []).map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all ${selectedSize === size
-                      ? 'bg-primary text-primary-foreground border-primary'
-                      : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
-                      }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Features */}
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { icon: '🚚', text: 'Free Shipping' },
-                { icon: '↩️', text: '30-Day Returns' },
-                { icon: '🛡️', text: '2-Year Warranty' },
-                { icon: '📦', text: 'In Stock' }
-              ].map((feature, index) => (
-                <div key={index} className="flex items-center space-x-3 text-muted-foreground">
-                  <span className="text-xl">{feature.icon}</span>
-                  <span className="text-sm font-medium">{feature.text}</span>
+            <div className="mt-6 border-t border-border pt-5 space-y-5">
+              <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={setColorChoice} />
+              <fieldset>
+                <legend className="text-xs font-medium text-foreground mb-3">Size <span className="text-muted-foreground font-normal ml-2">{selectedSize}</span></legend>
+                <div className="flex flex-wrap gap-2">
+                  {(product.sizes || []).map(size => (
+                    <button
+                      key={size}
+                      type="button"
+                      aria-pressed={selectedSize === size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`min-w-12 h-11 px-3 rounded-md border text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${selectedSize === size
+                        ? 'bg-foreground/5 text-foreground border-foreground ring-1 ring-foreground'
+                        : 'border-border text-foreground hover:border-primary hover:bg-primary/5'}`}
+                    >{size}</button>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </fieldset>
 
-            {/* Quantity & Add to Cart */}
-            <div className="space-y-6">
-              <div className="flex items-end justify-between flex-wrap gap-6">
-
-                {/* Quantity Section */}
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-3">
-                    Quantity
-                  </label>
-
-                  <div className="flex items-center space-x-4">
-                    <button
+              <div className="border-t border-border pt-5">
+                <div className="flex items-center justify-between mb-3 text-xs">
+                  <p id="quantity-label" className="font-medium text-foreground">Quantity</p>
+                  {quantity > 1 && <p className="text-muted-foreground" aria-live="polite">Total <span className="ml-1 font-semibold text-foreground tabular-nums">৳{(product.price * quantity).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>}
+                </div>
+                <div className="flex items-stretch gap-3">
+                  <div className="inline-flex shrink-0 items-center rounded-md border border-input overflow-hidden bg-background" role="group" aria-labelledby="quantity-label">
+                    <button type="button" aria-label="Decrease quantity" disabled={quantity <= 1}
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-12 h-12 bg-card border border-input rounded-xl flex items-center justify-center hover:bg-muted transition-colors font-semibold text-foreground"
-                    >
-                      <FiMinus className="w-6 h-6" />
+                      className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-35 disabled:cursor-not-allowed transition-colors">
+                      <FiMinus className="w-3.5 h-3.5" />
                     </button>
-
-                    <span className="text-2xl font-bold text-foreground w-16 text-center">
-                      {quantity}
-                    </span>
-
-                    <button
-                      onClick={() => setQuantity(quantity + 1)}
-                      className="w-12 h-12 bg-card border border-input rounded-xl flex items-center justify-center hover:bg-muted transition-colors font-semibold text-foreground"
-                    >
-                      <FiPlus className="w-6 h-6" />
+                    <span className="w-6 text-center text-xs font-semibold tabular-nums" aria-live="polite">{quantity}</span>
+                    <button type="button" aria-label="Increase quantity" disabled={product.stock <= quantity}
+                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                      className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-35 disabled:cursor-not-allowed transition-colors">
+                      <FiPlus className="w-3.5 h-3.5" />
                     </button>
                   </div>
+                  <button onClick={handleAddToCart} disabled={isAddingToCart || product.stock <= 0 || !selectedSize}
+                    className="flex-1 min-w-0 min-h-12 px-3 rounded-md text-xs sm:text-sm font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    {isAddingToCart ? <FiCheck className="w-4 h-4 shrink-0" /> : <FiShoppingBag className="w-4 h-4 shrink-0" />}
+                    {product.stock <= 0 ? 'Out of stock' : isAddingToCart ? 'Adding…' : 'Add to cart'}
+                  </button>
                 </div>
-
-                {/* Total Section */}
-                <div className="ml-auto text-lg font-semibold text-muted-foreground">
-                  Total: <span className="text-primary dark:text-gold-400">৳{(product.price * quantity).toFixed(2)}</span>
-                </div>
-
-
-              </div>
-
-              <div className="space-y-4">
-                <button
-                  onClick={handleAddToCart}
-                  disabled={isAddingToCart}
-                  className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 ${isAddingToCart
-                    ? 'bg-green-600 text-white scale-95 cursor-not-allowed'
-                    : 'bg-primary text-primary-foreground hover:bg-primary/90 border border-border hover:scale-101 active:scale-99'
-                    } shadow-lg hover:shadow-xl`}
-                >
-                  {isAddingToCart ? (
-                    <>
-                      <FiCheck className="w-6 h-6 animate-spin" />
-                      <span>Adding to Cart...</span>
-                    </>
-                  ) : (
-                    <>
-                      <FiPlus className="w-6 h-6" />
-                      <span>Add {quantity} to Cart</span>
-                    </>
-                  )}
-                </button>
-
-                <Link
-                  href="/shop"
-                  className="w-full py-3 px-6 border-2 border-border text-foreground rounded-xl font-semibold hover:border-input dark:hover:border-stone-500 hover:bg-muted hover:scale-101 active:scale-99 transition-all duration-300 text-center block"
-                >
-                  Continue Shopping
-                </Link>
               </div>
             </div>
+
+            <Link href="/shop" className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
+              <FiArrowLeft className="w-4 h-4" /> Continue shopping
+            </Link>
           </div>
         </div>
 
+        {product.description && <section aria-labelledby="product-description" className="mt-8 sm:mt-10 border-t border-border pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4 lg:gap-12">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">A closer look</p>
+            <h2 id="product-description" className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">Product description</h2>
+          </div>
+          <ProductDescription text={product.description} />
+        </section>}
+
         {/* Enhanced Suggested Products with PROPER Slider */}
         {suggestedProducts.length > 0 && (
-          <div className="mt-24">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-black text-foreground mb-4">
+          <div className="mt-12">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-semibold text-foreground mb-2">
                 You might also like
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
                 Discover more amazing products from our {product.category} collection
               </p>
             </div>

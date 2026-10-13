@@ -1,32 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import ProductCard from './ProductCard';
 import { useCatalog } from '../context/CatalogContext';
-import { useCart } from '../context/CartContext';
 import ProductSkeleton from './ProductSkeleton';
-import QuickViewModal from './QuickViewModal';
-import { FiSearch, FiX, FiFilter, FiHeart, FiCheck, FiPackage, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
-// Add size state for each product
-const useProductSizes = () => {
-  const [selectedSizes, setSelectedSizes] = useState({});
-
-  const setSize = (productId, size) => {
-    setSelectedSizes(prev => ({ ...prev, [productId]: size }));
-  };
-
-  const getSize = (productId) => selectedSizes[productId];
-
-  return { selectedSizes, setSize, getSize };
-};
+import dynamic from 'next/dynamic';
+const QuickViewModal = dynamic(() => import('./QuickViewModal'));
+import { FiSearch, FiX, FiFilter, FiPackage, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export default function ShopContent() {
   const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
-  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
-  const { selectedSizes, setSize, getSize } = useProductSizes();
   const searchParams = useSearchParams();
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -36,8 +21,8 @@ export default function ShopContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const closeQuickView = useCallback(() => { setIsQuickViewOpen(false); setQuickViewProduct(null); }, []);
   const [productsPerPage, setProductsPerPage] = useState(12);
-  const [addedProducts, setAddedProducts] = useState(new Set());
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
 
@@ -448,126 +433,7 @@ export default function ShopContent() {
                   <ProductSkeleton key={`skeleton-${index}`} />
                 ))
               ) : currentProducts.length > 0 ? (
-                currentProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="group bg-card rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl"
-                  >
-                    <div className="relative aspect-4/3 overflow-hidden rounded-t-2xl">
-                      <Link href={`/product/${product.id}`}>
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          width={400}
-                          height={300}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </Link>
-
-                      {/* Wishlist Button */}
-                      <button
-                        onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
-                        className={`absolute top-4 right-4 p-3 rounded-full backdrop-blur-sm transition-all duration-300 z-10 ${isInWishlist(product.id)
-                          ? 'bg-red-500 shadow-lg'
-                          : 'bg-card/90 hover:bg-card hover:shadow-md'
-                          }`}
-                      >
-                        <FiHeart className={`w-6 h-6 ${isInWishlist(product.id) ? 'text-white' : 'text-foreground'}`} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
-                      </button>
-
-                      {/* Quick View Overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-center p-4">
-                        <button
-                          onClick={() => handleQuickView(product)}
-                          className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 bg-background text-foreground px-4 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                        >
-                          Quick View
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="p-4">
-                      <div className="mb-3">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                          {product.category}
-                        </span>
-                      </div>
-
-                      <Link href={`/product/${product.id}`}>
-                        <h3 className="text-xl font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                          {product.name}
-                        </h3>
-                      </Link>
-
-                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">
-                        {product.description}
-                      </p>
-
-                      {/* Size Selection */}
-                      <div className="mb-4">
-                        <label className="block text-sm font-semibold text-foreground mb-2">
-                          Size
-                        </label>
-                        <div className="flex flex-wrap gap-2">
-                          {(product.sizes || []).map((size) => (
-                            <button
-                              key={size}
-                              onClick={() => setSize(product.id, size)}
-                              className={`px-3 py-1 rounded-lg border text-sm font-medium transition-all ${getSize(product.id) === size
-                                ? 'bg-primary text-primary-foreground border-primary'
-                                : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
-                                }`}
-                            >
-                              {size}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-foreground">
-                          ৳{product.price}
-                        </span>
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const selectedSize = getSize(product.id);
-                            if (!selectedSize) {
-                              alert('Please select a size before adding to cart.');
-                              return;
-                            }
-                            addToCart(product, selectedSize);
-
-                            // Add to tracked products
-                            setAddedProducts(prev => new Set(prev).add(product.id));
-
-                            // Reset after 2 seconds
-                            setTimeout(() => {
-                              setAddedProducts(prev => {
-                                const newSet = new Set(prev);
-                                newSet.delete(product.id);
-                                return newSet;
-                              });
-                            }, 2000);
-                          }}
-                          className={`px-4 py-2 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg min-w-[120px] flex items-center justify-center gap-2 ${addedProducts.has(product.id)
-                            ? 'bg-green-600 text-white scale-95'
-                            : ' bg-gold-600 dark:bg-gold-400 text-white  border-2 border-border dark:text-stone-950 hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 active:scale-95'
-                            }`}
-                        >
-                          {addedProducts.has(product.id) ? (
-                            <>
-                              <FiCheck className="w-4 h-4 animate-bounce" />
-                              Added!
-                            </>
-                          ) : (
-                            'Add to Cart'
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))
+                currentProducts.map(product => <ProductCard key={product.id} product={product} onQuickView={handleQuickView} />)
               ) : (
                 <div className="col-span-full text-center py-16">
                   <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">
@@ -712,14 +578,11 @@ export default function ShopContent() {
       </div>
 
       {/* Quick View Modal */}
-      <QuickViewModal
+      {isQuickViewOpen && <QuickViewModal
         product={quickViewProduct}
         isOpen={isQuickViewOpen}
-        onClose={() => {
-          setIsQuickViewOpen(false);
-          setQuickViewProduct(null);
-        }}
-      />
+        onClose={closeQuickView}
+      />}
     </div >
   );
 }

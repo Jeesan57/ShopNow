@@ -15,3 +15,9 @@ Run `npm run build`, then `npm start`. Run `node scripts/verify-seo.mjs http://l
 5. Monitor indexing and real-user Core Web Vitals. Create a Google Merchant Center product feed if desired.
 
 Account verification and sitemap submission require the site owner's account. Search rankings and rich-result display are determined by Google.
+
+## Mobile performance changes
+
+Hero and category images now use responsive Next.js image delivery. The first hero has high fetch priority; additional slides load when first selected. Quick view downloads only when opened. The browser reuses server catalog data during hydration and defers its first background refresh for 60 seconds. Particle effects are disabled on narrow screens and for reduced-motion preferences, and pause in hidden tabs. Carousel controls have 44-pixel touch targets and wishlist buttons expose accessible names.
+
+See SEO-AUDIT.md for the measured live baseline and local verification. These changes must be deployed before the public domain benefits.

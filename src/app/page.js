@@ -4,25 +4,25 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCatalog } from '../context/CatalogContext';
-import { useCart } from '../context/CartContext';
-import QuickViewModal from '../components/QuickViewModal';
-import { FiChevronRight, FiHeart, FiChevronLeft, FiStar, FiShoppingBag, FiShield } from 'react-icons/fi';
+import ProductCard from '../components/ProductCard';
+import dynamic from 'next/dynamic';
+const QuickViewModal = dynamic(() => import('../components/QuickViewModal'));
+import { FiChevronRight, FiChevronLeft, FiStar, FiShoppingBag, FiShield } from 'react-icons/fi';
 
 export default function Home() {
   const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
-  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const closeQuickView = useCallback(() => { setIsQuickViewOpen(false); setQuickViewProduct(null); }, []);
+  const [{ currentSlide, loadedSlides }, setCarousel] = useState({ currentSlide: 0, loadedSlides: [0] });
+  const setCurrentSlide = useCallback((update) => {
+    setCarousel(previous => {
+      const next = typeof update === 'function' ? update(previous.currentSlide) : update;
+      return { currentSlide: next, loadedSlides: previous.loadedSlides.includes(next) ? previous.loadedSlides : [...previous.loadedSlides, next] };
+    });
+  }, []);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [selectedSizes, setSelectedSizes] = useState({});
   const trendingProducts = [...products.filter(p => p.featured), ...products.filter(p => !p.featured)].slice(0, 6);
-
-  const setSize = (productId, size) => {
-    setSelectedSizes(prev => ({ ...prev, [productId]: size }));
-  };
-
-  const getSize = (productId) => selectedSizes[productId];
 
   // Professional carousel slides data
   const slides = [
@@ -69,22 +69,22 @@ export default function Home() {
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      if (!document.hidden) setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, slides.length]);
+  }, [isAutoPlaying, slides.length, setCurrentSlide]);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, [slides.length]);
+  }, [slides.length, setCurrentSlide]);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  }, [slides.length]);
+  }, [slides.length, setCurrentSlide]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -116,11 +116,15 @@ export default function Home() {
                   transition: 'transform 20s ease-out'
                 }}
               >
-                <img
+                {loadedSlides.includes(index) && <Image
                   src={slide.image}
-                  alt={`Slide ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  fetchPriority={index === 0 ? 'high' : 'low'}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  className="object-cover"
+                />}
               </div>
 
               {/* Enhanced Gradient Overlay for Better Text Visibility */}
@@ -229,12 +233,12 @@ export default function Home() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
-                ? 'bg-white scale-125'
-                : 'bg-white/50 hover:bg-white/75'
-                }`}
+              className="w-11 h-11 flex items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-white"
               aria-label={`Go to slide ${index + 1}`}
-            />
+              aria-current={index === currentSlide ? 'true' : undefined}
+            >
+              <span aria-hidden="true" className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'}`} />
+            </button>
           ))}
         </div>
 
@@ -273,31 +277,39 @@ export default function Home() {
                 {/* Category Image - Real Images */}
                 <div className="relative h-48 bg-muted flex items-center justify-center overflow-hidden">
                   {category === "Men" && (
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400&h=300&fit=crop"
                       alt="Men's Fashion"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
                   {category === "Women" && (
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=300&fit=crop"
                       alt="Women's Fashion"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
                   {category === "Kids" && (
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&h=300&q=80"
                       alt="Kids Fashion"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
                   {category === "Accessories" && (
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400&h=300&fit=crop"
                       alt="Accessories"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
 
@@ -361,94 +373,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {trendingProducts.map((product, index) => (
-              <div
-                key={product.id}
-                className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-border"
-              >
-                <div className="relative overflow-hidden">
-                  <Link href={`/product/${product.id}`}>
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={400}
-                      height={300}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                  </Link>
-
-                  {/* Wishlist button */}
-                  <button
-                    onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
-                    className={`absolute top-4 right-4 p-2 rounded-full backdrop-blur-sm transition-all duration-300 ${isInWishlist(product.id)
-                      ? 'bg-red-500 text-white shadow-lg'
-                      : 'bg-card/90 text-muted-foreground hover:bg-card hover:shadow-lg'
-                      }`}
-                  >
-                    <FiHeart className="w-6 h-6" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
-                  </button>
-                </div>
-
-                <div className="p-6">
-                  <Link href={`/product/${product.id}`}>
-                    <h3 className="font-bold text-lg text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                      {product.name}
-                    </h3>
-                  </Link>
-
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-black text-foreground">৳{product.price}</span>
-                  </div>
-
-                  {/* Size Selection */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                      Size
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {(product.sizes || []).map((size) => (
-                        <button
-                          key={size}
-                          onClick={() => setSize(product.id, size)}
-                          className={`px-3 py-1 rounded-lg border text-sm font-medium transition-all ${getSize(product.id) === size
-                              ? 'bg-primary text-primary-foreground border-primary'
-                              : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
-                            }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <button
-                      onClick={() => {
-                        const selectedSize = getSize(product.id);
-                        if (!selectedSize) {
-                          alert('Please select a size before adding to cart.');
-                          return;
-                        }
-                        addToCart(product, selectedSize);
-                      }}
-                      className="w-full bg-gold-600 dark:bg-gold-400 text-white dark:text-stone-900 py-3 rounded-xl font-bold hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-border"
-                    >
-                      Add to Cart
-                    </button>
-
-                    <button
-                      onClick={() => {
-                        setQuickViewProduct(product);
-                        setIsQuickViewOpen(true);
-                      }}
-                      className="w-full border-2 border-border text-foreground py-2 rounded-xl font-medium hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 active:scale-95"
-                    >
-                      Quick View
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+            {trendingProducts.map(product => <ProductCard key={product.id} product={product} onQuickView={item => { setQuickViewProduct(item); setIsQuickViewOpen(true); }} />)}
           </div>
 
           {/* View all products CTA */}
@@ -465,14 +390,11 @@ export default function Home() {
       </section>
 
       {/* Quick View Modal */}
-      <QuickViewModal
+      {isQuickViewOpen && <QuickViewModal
         product={quickViewProduct}
         isOpen={isQuickViewOpen}
-        onClose={() => {
-          setIsQuickViewOpen(false);
-          setQuickViewProduct(null);
-        }}
-      />
+        onClose={closeQuickView}
+      />}
 
     </div>
   );
