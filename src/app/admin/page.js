@@ -1,0 +1,96 @@
+'use client';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { getSupabase } from '../../lib/supabase';
+import './admin.css';
+const emptyProduct = { name: '', description: '', price: '', category: '', image: '', sizes: 'S, M, L, XL', thumbnails: '', stock: 0, active: false, featured: false };
+const money = n => '৳' + Number(n).toFixed(2);
+export default function Admin() {
+  const [session, setSession] = useState(null), [ready, setReady] = useState(false), [allowed, setAllowed] = useState(false);
+  const [tab, setTab] = useState('Overview'), [notice, setNotice] = useState(''), [busy, setBusy] = useState(false);
+  const [products, setProducts] = useState([]), [orders, setOrders] = useState([]), [messages, setMessages] = useState([]), [categories, setCategories] = useState([]);
+  const [search, setSearch] = useState(''), [editing, setEditing] = useState(null), [categoryName, setCategoryName] = useState('');
+  async function load() {
+    const db = getSupabase();
+    const results = await Promise.all([db.from('products').select('*').order('created_at', { ascending: false }), db.from('orders').select('*,order_items(*)').order('created_at', { ascending: false }), db.from('messages').select('*').order('created_at', { ascending: false }), db.from('categories').select('*').order('name')]);
+    const error = results.find(r => r.error)?.error;
+    if (error) throw error;
+    setProducts(results[0].data); setOrders(results[1].data); setMessages(results[2].data); setCategories(results[3].data);
+  }
+  useEffect(() => {
+    let alive = true;
+    let subscription;
+    try {
+      const db = getSupabase();
+      async function verify(nextSession) {
+        if (!alive) return;
+        setSession(nextSession); setReady(false); setAllowed(false);
+        try {
+          if (nextSession) {
+            const { data, error } = await db.from('admin_users').select('user_id').eq('user_id', nextSession.user.id).maybeSingle();
+            if (error) throw error;
+            if (alive) setAllowed(Boolean(data));
+            if (data) await load();
+          }
+        } catch (e) { if (alive) setNotice(e.message); }
+        finally { if (alive) setReady(true); }
+      }
+      db.auth.getSession().then(({ data }) => verify(data.session));
+      subscription = db.auth.onAuthStateChange((_event, nextSession) => { setTimeout(() => verify(nextSession), 0); }).data.subscription;
+    } catch (e) { setNotice(e.message); setReady(true); }
+    return () => { alive = false; subscription?.unsubscribe(); };
+  }, []);
+  async function action(fn, success) {
+    setBusy(true); setNotice('');
+    try { await fn(); await load(); setNotice(success); }
+    catch (e) { setNotice(e.message); }
+    finally { setBusy(false); }
+  }
+  async function login(e) {
+    e.preventDefault(); setBusy(true); setNotice('');
+    const form = new FormData(e.currentTarget);
+    try { const { error } = await getSupabase().auth.signInWithPassword({ email: form.get('email'), password: form.get('password') }); if (error) throw error; }
+    catch (e) { setNotice(e.message); }
+    finally { setBusy(false); }
+  }
+  async function saveProduct(e) {
+    e.preventDefault();
+    await action(async () => {
+      const payload = { ...editing, price: Number(editing.price), stock: Number(editing.stock), sizes: editing.sizes.split(',').map(s => s.trim()).filter(Boolean), thumbnails: editing.thumbnails.split('\n').map(s => s.trim()).filter(Boolean) };
+      delete payload.created_at; delete payload.id;
+      if (!payload.sizes.length) throw new Error('Enter at least one size.');
+      for (const url of [payload.image, ...payload.thumbnails]) {
+        const parsed = new URL(url);
+        if (parsed.protocol !== 'https:' || !['images.unsplash.com', 'stvokejqndakitzpracv.supabase.co'].includes(parsed.hostname)) throw new Error('Use an uploaded Supabase image or an Unsplash HTTPS URL.');
+      }
+      const query = editing.id ? getSupabase().from('products').update(payload).eq('id', editing.id) : getSupabase().from('products').insert(payload);
+      const { error } = await query; if (error) throw error; setEditing(null);
+    }, editing.active ? 'Product published. It is now visible on the storefront.' : 'Product saved as a draft. Enable Publish on storefront to make it visible to customers.');
+  }
+  async function upload(file) {
+    if (!file) return;
+    setBusy(true);
+    try {
+      if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 5242880) throw new Error('Choose a JPEG, PNG or WebP image under 5 MB.');
+      const path = `${crypto.randomUUID()}.${file.type.split('/')[1]}`;
+      const db = getSupabase(); const { error } = await db.storage.from('product-images').upload(path, file);
+      if (error) throw error;
+      setEditing(p => ({ ...p, image: db.storage.from('product-images').getPublicUrl(path).data.publicUrl }));
+    } catch (e) { setNotice(e.message); } finally { setBusy(false); }
+  }
+  if (!ready) return <div className="admin-login">Checking access…</div>;
+  if (!session || !allowed) return <div className="admin-login"><div className="admin-login-card"><Link href="/">ShopNow ↗</Link><p className="admin-eyebrow">STORE MANAGEMENT</p><h1>Your store, in control.</h1><p>Sign in with your approved administrator account.</p><p role="status">{notice}</p>{session ? <><p>This account does not have administrator access. Add its user ID to the admin_users table through Supabase.</p><button onClick={() => getSupabase().auth.signOut()}>Sign out</button></> : <form onSubmit={login}><label>Email<input name="email" type="email" autoComplete="username" required /></label><label>Password<input name="password" type="password" autoComplete="current-password" required /></label><button disabled={busy}>{busy ? 'Signing in…' : 'Sign in →'}</button></form>}</div></div>;
+  const visible = products.filter(p => `${p.name} ${p.category}`.toLowerCase().includes(search.toLowerCase()));
+  const customers = Object.values(orders.reduce((all, o) => { const c = all[o.phone] || { name: o.customer_name, email: o.email, phone: o.phone, count: 0, spent: 0 }; c.count++; if(o.status !== 'cancelled') c.spent += Number(o.total); all[o.phone] = c; return all; }, {}));
+  const revenue = orders.filter(o => o.status === 'delivered').reduce((sum, o) => sum + Number(o.total), 0);
+  const update = (table, id, patch) => action(async () => { const { error } = await getSupabase().from(table).update(patch).eq('id', id); if (error) throw error; }, 'Updated.');
+  const orderList = list => <div className="admin-stack">{list.length === 0 && <div className="admin-empty">No orders yet. New checkout orders will appear here.</div>}{list.map(o => <article className="admin-card" key={o.id}><div className="admin-row"><div><strong>{o.customer_name}</strong><p>{new Date(o.created_at).toLocaleString()} · #{o.id.slice(0,8)}</p></div><strong>{money(o.total)}</strong><select aria-label={`Status for order ${o.id}`} value={o.status} disabled={busy} onChange={e => update('orders',o.id,{status:e.target.value})}>{['pending','confirmed','shipped','delivered','cancelled'].map(s => <option key={s}>{s}</option>)}</select></div><details><summary>Order details</summary><p>{o.email} · {o.phone}</p><p>{o.address}</p>{o.district && <p>{o.area}, {o.district} · {o.delivery_zone === 'inside_dhaka' ? 'Inside Dhaka city' : 'Outside Dhaka city'}</p>}{o.delivery_notes && <p>Delivery notes: {o.delivery_notes}</p>}<p>Subtotal: {money(o.subtotal ?? o.total)} · Delivery: {money(o.delivery_charge || 0)}</p><p>Cash on delivery</p>{o.order_items.map(i => <p key={i.id}>{i.name} · {i.size} × {i.quantity} — {money(i.price * i.quantity)}</p>)}{o.status === 'cancelled' && <p>Restock returned items manually after confirming the return.</p>}</details></article>)}</div>;
+  return <div className="admin-shell"><aside className="admin-sidebar"><Link className="admin-brand" href="/">ShopNow<span>ADMINISTRATION</span></Link><nav>{['Overview','Products','Categories','Orders','Customers','Messages'].map(t => <button className={tab === t ? 'selected' : ''} key={t} onClick={() => {setTab(t);setSearch('');}}>{t}{t === 'Messages' && <span>{messages.filter(m=>!m.read).length}</span>}</button>)}</nav><div className="admin-sidebar-bottom"><small>{session.user.email}</small><Link href="/" target="_blank">View storefront ↗</Link><button onClick={() => getSupabase().auth.signOut()}>Sign out</button></div></aside><section className="admin-main"><header className="admin-row"><div><p className="admin-eyebrow">YOUR STORE / {tab.toUpperCase()}</p><h1>{tab}</h1></div><button className="admin-secondary" disabled={busy} onClick={() => action(async()=>{},'Data refreshed.')}>Refresh</button></header>{notice && <p className="admin-notice" role="status">{notice}</p>}
+  {tab === 'Overview' && <><div className="admin-stats">{[['Delivered revenue',money(revenue)],['Orders',orders.length],['Active products',products.filter(p=>p.active).length],['Low stock',products.filter(p=>p.stock<5).length]].map(([label,value])=><div className="admin-card" key={label}><p>{label}</p><h2>{value}</h2></div>)}</div><h2>Latest orders</h2>{orderList(orders.slice(0,5))}<h2>Inventory attention</h2><div className="admin-card">{products.filter(p=>p.stock<5).map(p=><p key={p.id}>{p.name} — {p.stock} remaining</p>)}{products.every(p=>p.stock>=5)&&<p>All products have sufficient stock.</p>}</div></>}
+  {tab === 'Products' && <><div className="admin-row"><input aria-label="Search products" placeholder="Search products or categories" value={search} onChange={e=>setSearch(e.target.value)}/><button onClick={()=>setEditing({...emptyProduct,category:categories[0]?.name||''})}>+ Add product</button></div><div className="admin-table-wrap"><table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Visibility</th><th>Action</th></tr></thead><tbody>{visible.map(p=><tr key={p.id}><td><strong>{p.name}</strong></td><td>{p.category}</td><td>{money(p.price)}</td><td>{p.stock}</td><td><span className={`admin-badge ${p.active?'live':''}`}>{p.active?'Published':'Draft'}</span></td><td><button className="admin-secondary" onClick={()=>setEditing({...p,sizes:p.sizes.join(', '),thumbnails:p.thumbnails.join('\n')})}>Edit</button></td></tr>)}</tbody></table>{!visible.length&&<div className="admin-empty">Add your first product to start selling.</div>}</div></>}
+  {tab === 'Categories' && <><form className="admin-row" onSubmit={e=>{e.preventDefault();action(async()=>{const {error}=await getSupabase().from('categories').insert({name:categoryName.trim()});if(error)throw error;setCategoryName('');},'Category created.');}}><input placeholder="New category name" aria-label="Category name" required maxLength={80} value={categoryName} onChange={e=>setCategoryName(e.target.value)}/><button disabled={busy}>Add category</button></form><div className="admin-card">{categories.map(c=><div className="admin-row" key={c.name}><strong>{c.name}</strong><span>{products.filter(p=>p.category===c.name).length} products</span><button className="admin-secondary" disabled={busy||products.some(p=>p.category===c.name)} onClick={()=>{if(window.confirm(`Delete ${c.name}?`))action(async()=>{const {error}=await getSupabase().from('categories').delete().eq('name',c.name);if(error)throw error;},'Category deleted.');}}>Delete</button></div>)}</div></>}
+  {tab === 'Orders' && <><input placeholder="Search orders by customer, email or order ID" aria-label="Search orders" value={search} onChange={e=>setSearch(e.target.value)}/>{orderList(orders.filter(o=>`${o.customer_name} ${o.email} ${o.id}`.toLowerCase().includes(search.toLowerCase())))}</>}
+  {tab === 'Customers' && <div className="admin-table-wrap"><table><thead><tr><th>Customer</th><th>Email</th><th>Phone</th><th>Orders</th><th>Ordered value</th></tr></thead><tbody>{customers.map(c=><tr key={c.phone}><td>{c.name}</td><td>{c.email}</td><td>{c.phone}</td><td>{c.count}</td><td>{money(c.spent)}</td></tr>)}</tbody></table>{!customers.length&&<div className="admin-empty">Customers appear after their first order.</div>}</div>}
+  {tab === 'Messages' && <div className="admin-stack">{!messages.length&&<div className="admin-empty">Your inbox is clear.</div>}{messages.map(m=><article className="admin-card" key={m.id}><div className="admin-row"><h2>{m.subject}</h2><span className="admin-badge">{m.read?'Read':'New'}</span></div><p>{m.name} · <a href={`mailto:${m.email}`}>{m.email}</a> · {new Date(m.created_at).toLocaleString()}</p><p style={{whiteSpace:'pre-wrap'}}>{m.message}</p><button className="admin-secondary" disabled={busy} onClick={()=>update('messages',m.id,{read:!m.read})}>Mark {m.read?'unread':'read'}</button></article>)}</div>}
+  </section>{editing&&<div className="admin-modal"><div className="admin-modal-card"><div className="admin-row"><h2>{editing.id?'Edit product':'New product'}</h2><button className="admin-secondary" onClick={()=>setEditing(null)}>Close</button></div><form onSubmit={saveProduct}><div className="admin-form-grid">{[['name','Product name','text'],['price','Price (BDT ৳)','number'],['stock','Stock quantity','number']].map(([key,label,type])=><label key={key}>{label}<input required type={type} min="0" step={key==='price'?'0.01':'1'} maxLength={200} value={editing[key]} onChange={e=>setEditing({...editing,[key]:e.target.value})}/></label>)}<label>Category<select required value={editing.category} onChange={e=>setEditing({...editing,category:e.target.value})}><option value="">Select category</option>{categories.map(c=><option key={c.name}>{c.name}</option>)}</select></label></div><label>Description<textarea value={editing.description} onChange={e=>setEditing({...editing,description:e.target.value})}/></label><label>Sizes, separated by commas<input required value={editing.sizes} onChange={e=>setEditing({...editing,sizes:e.target.value})}/></label><label>Main image URL<input required type="url" value={editing.image} onChange={e=>setEditing({...editing,image:e.target.value})}/></label><label>Upload product image<input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy} onChange={e=>upload(e.target.files[0])}/></label><label>Gallery URLs, one per line<textarea value={editing.thumbnails} onChange={e=>setEditing({...editing,thumbnails:e.target.value})}/></label><label className="admin-check"><input type="checkbox" checked={editing.active} onChange={e=>setEditing({...editing,active:e.target.checked})}/>Publish on storefront</label><label className="admin-check"><input type="checkbox" checked={editing.featured} onChange={e=>setEditing({...editing,featured:e.target.checked})}/>Feature on homepage (published products only)</label><p role="status">{notice}</p><div className="admin-row"><button disabled={busy}>{busy?'Saving…':'Save product'}</button>{editing.id&&<button type="button" className="admin-danger" disabled={busy} onClick={()=>{if(window.confirm('Delete this product permanently? Existing order history is retained.'))action(async()=>{const {error}=await getSupabase().from('products').delete().eq('id',editing.id);if(error)throw error;setEditing(null);},'Product deleted.');}}>Delete product</button>}</div></form></div></div>}</div>;
+}

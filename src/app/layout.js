@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import SiteChrome from "../components/SiteChrome";
 import ParticleBackground from "../components/ParticleBackground";
 import { CartProvider } from "../context/CartContext";
 
@@ -46,11 +45,7 @@ export default function RootLayout({ children }) {
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <ParticleBackground />
         <CartProvider>
-          <Navbar />
-          <main id="main-content" className="min-h-screen relative z-10">
-            {children}
-          </main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </CartProvider>
       </body>
     </html>

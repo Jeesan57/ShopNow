@@ -5,10 +5,11 @@ import { useState, useEffect, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Cart from './Cart';
 import { useCart } from '../context/CartContext';
-import { products } from '../data/products';
+import { useCatalog } from '../context/CatalogContext';
 import { FiSearch, FiChevronRight, FiHeart, FiSun, FiMoon, FiShoppingCart, FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
 
 export default function Navbar() {
+  const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
   const pathname = usePathname();
   const router = useRouter();
   const [cartOpen, setCartOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function Navbar() {
       setSearchResults([]);
       setShowSearchResults(false);
     }
-  }, [searchQuery]);
+  }, [searchQuery, products]);
 
   // Add this to your existing useEffect for closing search results
   useEffect(() => {
@@ -181,7 +182,7 @@ export default function Navbar() {
                             <div className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
                               {product.name}
                             </div>
-                            <div className="text-primary font-bold text-sm">${product.price}</div>
+                            <div className="text-primary font-bold text-sm">৳{product.price}</div>
                           </div>
                           <FiChevronRight className="w-4 h-4 text-muted group-hover:text-primary transform group-hover:translate-x-1 transition-all duration-300" />
                         </Link>
@@ -378,7 +379,7 @@ export default function Navbar() {
                                 {product.name}
                               </div>
                               <div className="text-primary font-bold text-xs">
-                                ${product.price}
+                                ৳{product.price}
                               </div>
                             </div>
                           </Link>

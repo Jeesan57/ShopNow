@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { getSupabase } from '../../lib/supabase';
 import { FiMapPin, FiPhone, FiMail, FiCheck, FiSend } from 'react-icons/fi';
 
 export default function Contact() {
@@ -10,6 +11,7 @@ export default function Contact() {
     subject: '',
     message: ''
   });
+  const [notice, setNotice] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -23,11 +25,14 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    // Handle form submission here
+    setNotice('');
+    try {
+      const { error } = await getSupabase().rpc('submit_message', { p_name: formData.name, p_email: formData.email, p_subject: formData.subject, p_message: formData.message });
+      if (error) throw error;
+      setNotice('Message sent. Our team will get back to you.');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (e) { setNotice(e.message); }
+    finally { setIsSubmitting(false); }
   };
 
   return (
@@ -40,8 +45,8 @@ export default function Contact() {
             <span className="text-sm font-semibold text-foreground uppercase tracking-wider">GET IN TOUCH</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-foreground mb-6">
-            Let's Talk About
-            <span className="block bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Your Needs</span>
+            Let's Talk About{' '}
+            <span className="inline bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Your Needs</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
             Have questions about our products? We're here to help and would love to hear from you.
@@ -112,9 +117,9 @@ export default function Contact() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4">
               {[
-                { number: '24h', label: 'Response Time' },
-                { number: '99%', label: 'Satisfaction' },
-                { number: '5★', label: 'Rating' }
+                { number: 'Email', label: 'Customer Support' },
+                { number: 'COD', label: 'Payment' },
+                { number: 'Online', label: 'Contact Form' }
               ].map((stat, index) => (
                 <div key={stat.label} className="text-center bg-card rounded-2xl p-4 shadow-lg border border-border">
                   <div className="text-2xl font-black text-blue-600 dark:text-blue-400 mb-1">{stat.number}</div>
@@ -129,7 +134,7 @@ export default function Contact() {
             <h2 className="text-3xl font-bold text-foreground mb-2">Send us a Message</h2>
             <p className="text-muted-foreground mb-8">Fill out the form below and we'll get back to you shortly.</p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <p role="status">{notice}</p><form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-3">

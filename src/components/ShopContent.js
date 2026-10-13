@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products, categories } from '../data/products';
+import { useCatalog } from '../context/CatalogContext';
 import { useCart } from '../context/CartContext';
 import ProductSkeleton from './ProductSkeleton';
 import QuickViewModal from './QuickViewModal';
@@ -24,6 +24,7 @@ const useProductSizes = () => {
 };
 
 export default function ShopContent() {
+  const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
   const { selectedSizes, setSize, getSize } = useProductSizes();
   const searchParams = useSearchParams();
@@ -101,7 +102,7 @@ export default function ShopContent() {
     }, 200);
 
     return () => clearTimeout(timer);
-  }, [selectedCategory, sortBy, searchQuery, currentPage, productsPerPage, priceRange]);
+  }, [selectedCategory, sortBy, searchQuery, currentPage, productsPerPage, priceRange, products]);
 
   // Update URL with current page
   useEffect(() => {
@@ -525,7 +526,7 @@ export default function ShopContent() {
 
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-foreground">
-                          ${product.price}
+                          ৳{product.price}
                         </span>
                         <button
                           onClick={(e) => {

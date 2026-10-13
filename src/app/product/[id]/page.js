@@ -4,11 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products } from '../../../data/products';
+import { useCatalog } from '../../../context/CatalogContext';
 import { useCart } from '../../../context/CartContext';
 import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiStar, FiCheck, FiPlus, FiMinus } from 'react-icons/fi';
 
 export default function ProductDetail() {
+  const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
   const { addToCart } = useCart();
   const params = useParams();
   const [product, setProduct] = useState(null);
@@ -25,6 +26,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const productId = parseInt(params.id);
     const foundProduct = products.find(p => p.id === productId);
+    setProduct(foundProduct || null);
     if (foundProduct) {
       setProduct(foundProduct);
       setSelectedImage(foundProduct.image);
@@ -37,7 +39,7 @@ export default function ProductDetail() {
       // Duplicate for infinite scroll
       setDuplicatedProducts([...suggested, ...suggested, ...suggested]);
     }
-  }, [params.id]);
+  }, [params.id, products]);
 
   // Continuous scroll functionality
   useEffect(() => {
@@ -70,6 +72,7 @@ export default function ProductDetail() {
     setIsAddingToCart(false);
   };
 
+  if (catalogLoading) return <div className="p-16 text-center">Loading product…</div>;
   if (!product) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -193,11 +196,11 @@ export default function ProductDetail() {
                       <FiStar key={i} className="w-5 h-5 fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm text-muted-foreground">4.8 (128 reviews)</span>
+                  <span className="text-sm text-muted-foreground">{product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</span>
                 </div>
 
                 <div className="text-4xl font-black text-primary">
-                  ${product.price}
+                  ৳{product.price}
                 </div>
               </div>
             </div>
@@ -277,7 +280,7 @@ export default function ProductDetail() {
 
                 {/* Total Section */}
                 <div className="ml-auto text-lg font-semibold text-muted-foreground">
-                  Total: <span className="text-primary dark:text-blue-400">${(product.price * quantity).toFixed(2)}</span>
+                  Total: <span className="text-primary dark:text-blue-400">৳{(product.price * quantity).toFixed(2)}</span>
                 </div>
 
 
@@ -374,7 +377,7 @@ export default function ProductDetail() {
 
                         <div className="flex items-center justify-between">
                           <span className="text-xl font-bold text-foreground">
-                            ${suggestedProduct.price}
+                            ৳{suggestedProduct.price}
                           </span>
                           <Link
                             href={`/product/${suggestedProduct.id}`}

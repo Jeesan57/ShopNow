@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import { FiShoppingCart, FiTrash2, FiX, FiSearch } from 'react-icons/fi';
@@ -8,6 +9,7 @@ import { FiShoppingCart, FiTrash2, FiX, FiSearch } from 'react-icons/fi';
 export default function Cart({ isOpen, onClose }) {
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
   const [isRemoving, setIsRemoving] = useState(null);
+  const router = useRouter();
   const total = getTotalPrice();
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -131,7 +133,7 @@ export default function Cart({ isOpen, onClose }) {
                           Size: {item.size}
                         </p>
                         <p className="text-primary font-bold text-lg mb-2">
-                          ${item.price}
+                          ৳{item.price}
                         </p>
 
                         {/* Quantity Controls */}
@@ -156,7 +158,7 @@ export default function Cart({ isOpen, onClose }) {
 
                           <div className="text-right">
                             <div className="font-bold text-foreground text-lg">
-                              ${(item.price * item.quantity).toFixed(2)}
+                              ৳{(item.price * item.quantity).toFixed(2)}
                             </div>
                             <button
                               onClick={() => handleRemove(item.id, item.size)}
@@ -182,27 +184,28 @@ export default function Cart({ isOpen, onClose }) {
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-muted-foreground">
                   <span>Subtotal</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>৳{total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between items-center text-muted-foreground">
                   <span>Shipping</span>
                   <span className="text-green-600 dark:text-green-400">Free</span>
                 </div>
                 <div className="flex justify-between items-center text-muted-foreground">
-                  <span>Tax</span>
-                  <span>${(total * 0.1).toFixed(2)}</span>
+                  <span>Payment</span>
+                  <span>Cash on delivery</span>
                 </div>
                 <div className="border-t border-border pt-3">
                   <div className="flex justify-between items-center text-xl font-black text-foreground">
-                    <span>Total</span>
-                    <span>${(total * 1.1).toFixed(2)}</span>
+                    <span>Subtotal</span>
+                    <span>৳{total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
 
+              <p className="text-xs text-muted-foreground mb-3">Delivery: ৳70 inside Dhaka city / ৳130 outside Dhaka city. Calculated at checkout.</p>
               {/* Action Buttons */}
               <div className="space-y-3">
-                <button className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg">
+                <button onClick={() => { onClose(); router.push('/checkout'); }} className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg">
                   Proceed to Checkout
                 </button>
                 <button

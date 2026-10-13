@@ -3,19 +3,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products, categories } from '../data/products';
+import { useCatalog } from '../context/CatalogContext';
 import { useCart } from '../context/CartContext';
 import QuickViewModal from '../components/QuickViewModal';
 import { FiChevronRight, FiHeart, FiChevronLeft, FiStar, FiShoppingBag, FiShield } from 'react-icons/fi';
 
 export default function Home() {
+  const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [selectedSizes, setSelectedSizes] = useState({});
-  const trendingProducts = products.slice(0, 6);
+  const trendingProducts = [...products.filter(p => p.featured), ...products.filter(p => !p.featured)].slice(0, 6);
 
   const setSize = (productId, size) => {
     setSelectedSizes(prev => ({ ...prev, [productId]: size }));
@@ -33,9 +34,9 @@ export default function Home() {
       badge: "New Collection",
       cta: "Shop Now",
       stats: [
-        { number: '10K+', label: 'Happy Customers', icon: FiStar },
-        { number: '500+', label: 'Premium Products', icon: FiShoppingBag },
-        { number: '24/7', label: 'Expert Support', icon: FiShield }
+        { number: String(products.length), label: 'Available Products', icon: FiStar },
+        { number: String(categories.length), label: 'Collections', icon: FiShoppingBag },
+        { number: 'COD', label: 'Cash on Delivery', icon: FiShield }
       ]
     },
     {
@@ -43,12 +44,12 @@ export default function Home() {
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       title: "LUXURY REDEFINED",
       subtitle: "Experience unparalleled craftsmanship and timeless elegance. Each piece tells a story of sophistication and style.",
-      badge: "Award Winning",
+      badge: "Curated Styles",
       cta: "Explore Luxury",
       stats: [
-        { number: '50K+', label: 'Satisfied Clients', icon: FiStar },
-        { number: '1000+', label: 'Designer Items', icon: FiShoppingBag },
-        { number: '5★', label: 'Customer Rating', icon: FiShield }
+        { number: String(products.length), label: 'Available Products', icon: FiStar },
+        { number: String(categories.length), label: 'Collections', icon: FiShoppingBag },
+        { number: 'COD', label: 'Cash on Delivery', icon: FiShield }
       ]
     },
     {
@@ -56,12 +57,12 @@ export default function Home() {
       image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       title: "MODERN ESSENTIALS",
       subtitle: "From casual wear to formal attire, find everything you need for your contemporary lifestyle. Comfort meets style.",
-      badge: "Sustainable Fashion",
+      badge: "Everyday Fashion",
       cta: "Discover More",
       stats: [
-        { number: '25K+', label: 'Eco-Friendly Items', icon: FiStar },
-        { number: '200+', label: 'Daily Arrivals', icon: FiShoppingBag },
-        { number: '99%', label: 'Satisfaction Rate', icon: FiShield }
+        { number: String(products.length), label: 'Available Products', icon: FiStar },
+        { number: String(categories.length), label: 'Collections', icon: FiShoppingBag },
+        { number: 'COD', label: 'Cash on Delivery', icon: FiShield }
       ]
     }
   ];
@@ -396,7 +397,7 @@ export default function Home() {
                   </Link>
 
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-black text-foreground">${product.price}</span>
+                    <span className="text-2xl font-black text-foreground">৳{product.price}</span>
                     <div className="flex items-center text-sm text-yellow-600">
                       ★★★★☆
                     </div>

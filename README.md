@@ -1,3 +1,7 @@
+## Supabase admin panel
+
+The store now includes `/admin` and cash-on-delivery `/checkout`. See [Supabase setup and launch instructions](supabase/README.md) for the database migration, administrator access and deployment configuration.
+
 # ShopNow Next.js Template
 
 ShopNow is a modern, responsive e-commerce template built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**.

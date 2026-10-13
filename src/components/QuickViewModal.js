@@ -166,7 +166,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                     </div>
 
                     <div className="text-4xl font-black text-foreground dark:text-white">
-                      ${product.price}
+                      ৳{product.price}
                     </div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                     </button>
 
                     <div className="ml-auto text-lg font-semibold text-muted-foreground">
-                      Total: <span className="text-primary dark:text-blue-400">${(product.price * quantity).toFixed(2)}</span>
+                      Total: <span className="text-primary dark:text-blue-400">৳{(product.price * quantity).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>

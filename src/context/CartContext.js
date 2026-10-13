@@ -7,6 +7,7 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const [hydrated, setHydrated] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     // Initialize darkMode from localStorage, default to light
     if (typeof window !== 'undefined') {
@@ -28,15 +29,13 @@ export function CartProvider({ children }) {
 
   // Load cart and wishlist on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('shopnow-cart');
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
-    }
-
-    const savedWishlist = localStorage.getItem('shopnow-wishlist');
-    if (savedWishlist) {
-      setWishlistItems(JSON.parse(savedWishlist));
-    }
+    try {
+      const savedCart = JSON.parse(localStorage.getItem('shopnow-cart') || '[]');
+      const savedWishlist = JSON.parse(localStorage.getItem('shopnow-wishlist') || '[]');
+      if (Array.isArray(savedCart)) setCartItems(savedCart);
+      if (Array.isArray(savedWishlist)) setWishlistItems(savedWishlist);
+    } catch { /* Ignore corrupt browser storage. */ }
+    setHydrated(true);
   }, []);
 
   // Apply theme changes to DOM synchronously
@@ -50,14 +49,17 @@ export function CartProvider({ children }) {
 
   // Save cart and wishlist to localStorage whenever they change
   useEffect(() => {
+    if (!hydrated) return;
     localStorage.setItem('shopnow-cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+  }, [cartItems, hydrated]);
 
   useEffect(() => {
+    if (!hydrated) return;
     localStorage.setItem('shopnow-wishlist', JSON.stringify(wishlistItems));
-  }, [wishlistItems]);
+  }, [wishlistItems, hydrated]);
 
   const addToCart = (product, size) => {
+    if (product.stock !== undefined && product.stock <= 0) { alert('This product is out of stock.'); return; }
     if (!size) {
       console.error('Size is required to add to cart');
       return;
@@ -136,6 +138,7 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider value={{
+      hydrated,
       cartItems,
       addToCart,
       removeFromCart,

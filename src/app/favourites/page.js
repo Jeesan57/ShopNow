@@ -99,7 +99,7 @@ export default function Favourites() {
 
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-bold text-foreground">
-                      ${product.price}
+                      ৳{product.price}
                     </span>
                     <button
                       onClick={() => addToCart(product)}
