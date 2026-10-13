@@ -94,7 +94,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* Enhanced Hero Carousel Section */}
       <section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+        className="relative min-h-[80svh] py-16 sm:py-12 flex items-center justify-center overflow-hidden bg-background"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
@@ -133,8 +133,8 @@ export default function Home() {
 
         {/* Subtle Animated Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-20 -right-20 w-60 h-60 bg-blue-500/5 rounded-full blur-2xl animate-pulse-slow"></div>
-          <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-purple-500/5 rounded-full blur-2xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute -top-20 -right-20 w-60 h-60 bg-gold-500/5 rounded-full blur-2xl animate-pulse-slow"></div>
+          <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gold-500/5 rounded-full blur-2xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
         </div>
 
         {/* Navigation Arrows */}
@@ -167,11 +167,11 @@ export default function Home() {
 
             {/* Main Heading */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              <span className="text-transparent bg-linear-to-r from-white to-gray-200 bg-clip-text drop-shadow-2xl">
+              <span className="text-white drop-shadow-2xl">
                 {slides[currentSlide].title.split(' ')[0]}
               </span>
               <br />
-              <span className="text-transparent bg-linear-to-r from-gray-200 to-gray-300 bg-clip-text drop-shadow-2xl">
+              <span className="text-gold-200 drop-shadow-2xl">
                 {slides[currentSlide].title.split(' ').slice(1).join(' ')}
               </span>
             </h1>
@@ -258,7 +258,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Shop By Category
             </h2>
-            <p className="text-lg text-muted max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover our carefully curated collections designed to meet your every need with style and quality.
             </p>
           </div>
@@ -315,7 +315,7 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {category} Collection
                   </h3>
-                  <p className="text-muted text-sm mb-4">
+                  <p className="text-muted-foreground text-sm mb-4">
                     Explore our premium {category.toLowerCase()} selection
                   </p>
 
@@ -335,7 +335,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link
               href="/shop"
-              className="inline-flex border border-input items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+              className="inline-flex border border-input items-center gap-2 bg-gold-600 dark:bg-gold-400 text-white dark:text-stone-900 px-8 py-4 rounded-lg font-semibold hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Browse All Categories
               <FiChevronRight className="w-4 h-4" />
@@ -355,7 +355,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Featured Products
             </h2>
-            <p className="text-lg text-muted max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Handpicked selections that combine exceptional quality with timeless design.
             </p>
           </div>
@@ -382,7 +382,7 @@ export default function Home() {
                     onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
                     className={`absolute top-4 right-4 p-2 rounded-full backdrop-blur-sm transition-all duration-300 ${isInWishlist(product.id)
                       ? 'bg-red-500 text-white shadow-lg'
-                      : 'bg-card/90 text-muted hover:bg-card hover:shadow-lg'
+                      : 'bg-card/90 text-muted-foreground hover:bg-card hover:shadow-lg'
                       }`}
                   >
                     <FiHeart className="w-6 h-6" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
@@ -398,9 +398,6 @@ export default function Home() {
 
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-2xl font-black text-foreground">৳{product.price}</span>
-                    <div className="flex items-center text-sm text-yellow-600">
-                      ★★★★☆
-                    </div>
                   </div>
 
                   {/* Size Selection */}
@@ -434,7 +431,7 @@ export default function Home() {
                         }
                         addToCart(product, selectedSize);
                       }}
-                      className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-3 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-border"
+                      className="w-full bg-gold-600 dark:bg-gold-400 text-white dark:text-stone-900 py-3 rounded-xl font-bold hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-border"
                     >
                       Add to Cart
                     </button>
@@ -444,7 +441,7 @@ export default function Home() {
                         setQuickViewProduct(product);
                         setIsQuickViewOpen(true);
                       }}
-                      className="w-full border-2 border-border text-foreground py-2 rounded-xl font-medium hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95"
+                      className="w-full border-2 border-border text-foreground py-2 rounded-xl font-medium hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 active:scale-95"
                     >
                       Quick View
                     </button>

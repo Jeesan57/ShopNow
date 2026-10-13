@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
-import { FiX, FiChevronLeft, FiChevronRight, FiStar, FiCheck, FiPlus, FiMinus } from 'react-icons/fi';
+import { FiX, FiChevronLeft, FiChevronRight, FiCheck, FiPlus, FiMinus } from 'react-icons/fi';
 
 export default function QuickViewModal({ product, isOpen, onClose }) {
   const { addToCart } = useCart();
@@ -66,20 +66,20 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
 
       {/* Modal Container */}
       <div className="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-        <div className="relative bg-card dark:bg-slate-800 rounded-3xl shadow-2xl max-w-6xl w-full mx-auto overflow-hidden transform transition-all duration-300 scale-95 sm:scale-100 group">
+        <div className="relative bg-card dark:bg-stone-800 rounded-3xl shadow-2xl max-w-6xl w-full mx-auto overflow-hidden transform transition-all duration-300 scale-95 sm:scale-100 group">
 
           {/* Premium Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 z-20 w-10 h-10 bg-white dark:bg-slate-700/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-600 hover:scale-110 transition-all duration-300 shadow-lg border border-gray-200 dark:border-slate-600"
+            className="absolute top-6 right-6 z-20 w-10 h-10 bg-white dark:bg-stone-700/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gray-50 dark:hover:bg-stone-600 hover:scale-110 transition-all duration-300 shadow-lg border border-gray-200 dark:border-stone-600"
             aria-label="Close modal"
           >
-            <FiX className="w-5 h-5 text-gray-700 dark:text-slate-300" />
+            <FiX className="w-5 h-5 text-gray-700 dark:text-stone-300" />
           </button>
 
           <div className="grid grid-cols-1 xl:grid-cols-2 min-h-[600px]">
             {/* Product Images Section - UPDATED FOR LIGHT THEME */}
-            <div className="relative p-8 bg-card dark:from-slate-700 dark:to-slate-800 border-r border-border">
+            <div className="relative p-8 bg-card dark:from-stone-700 dark:to-stone-800 border-r border-border">
               {/* Main Image */}
               <div className="relative aspect-square mb-6 rounded-2xl overflow-hidden group border border-border">
                 {selectedImage && (
@@ -99,9 +99,9 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                     const prevIndex = currentIndex > 0 ? currentIndex - 1 : product.thumbnails.length - 1;
                     setSelectedImage(product.thumbnails[prevIndex]);
                   }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-border"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/90 dark:bg-stone-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-border"
                 >
-                  <FiChevronLeft className="w-5 h-5 text-slate-300" />
+                  <FiChevronLeft className="w-5 h-5 text-stone-300" />
                 </button>
 
                 <button
@@ -110,9 +110,9 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                     const nextIndex = currentIndex < product.thumbnails.length - 1 ? currentIndex + 1 : 0;
                     setSelectedImage(product.thumbnails[nextIndex]);
                   }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-border"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/90 dark:bg-stone-800/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-border"
                 >
-                  <FiChevronRight className="w-5 h-5 text-slate-300" />
+                  <FiChevronRight className="w-5 h-5 text-stone-300" />
                 </button>
               </div>
 
@@ -145,7 +145,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                 {/* Header */}
                 <div>
                   <div className="flex items-start justify-between mb-3">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary dark:bg-blue-900/20 dark:text-blue-400">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary dark:bg-gold-900/20 dark:text-gold-400">
                       {product.category}
                     </span>
                   </div>
@@ -154,17 +154,8 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                     {product.name}
                   </h1>
 
-                  {/* Rating & Price */}
+                  {/* Price */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="flex text-yellow-400">
-                        {[...Array(5)].map((_, i) => (
-                          <FiStar key={i} className="w-5 h-5 fill-current" />
-                        ))}
-                      </div>
-                      <span className="text-sm text-muted-foreground">4.8 (128 reviews)</span>
-                    </div>
-
                     <div className="text-4xl font-black text-foreground dark:text-white">
                       ৳{product.price}
                     </div>
@@ -180,7 +171,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                 </div>
 
                 {/* Size Selection */}
-                <div className="bg-muted dark:bg-slate-700/50 rounded-2xl p-4">
+                <div className="bg-muted dark:bg-stone-700/50 rounded-2xl p-4">
                   <label className="block text-sm font-semibold text-foreground dark:text-white mb-3">
                     Size
                   </label>
@@ -191,7 +182,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                         onClick={() => setSelectedSize(size)}
                         className={`px-4 py-2 rounded-xl border text-sm font-medium transition-all ${selectedSize === size
                           ? 'bg-primary text-primary-foreground border-primary'
-                          : 'border-border dark:border-slate-500 text-muted-foreground hover:border-primary hover:text-primary'
+                          : 'border-border dark:border-stone-500 text-muted-foreground hover:border-primary hover:text-primary'
                           }`}
                       >
                         {size}
@@ -201,14 +192,14 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                 </div>
 
                 {/* Quantity Selector */}
-                <div className="bg-muted dark:bg-slate-700/50 rounded-2xl p-4">
+                <div className="bg-muted dark:bg-stone-700/50 rounded-2xl p-4">
                   <label className="block text-sm font-semibold text-foreground dark:text-white mb-3">
                     Quantity
                   </label>
                   <div className="flex items-center space-x-4">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-12 h-12 bg-card dark:bg-slate-600 border border-border dark:border-slate-500 rounded-xl flex items-center justify-center hover:bg-muted dark:hover:bg-slate-500 transition-colors font-semibold text-foreground dark:text-slate-300"
+                      className="w-12 h-12 bg-card dark:bg-stone-600 border border-border dark:border-stone-500 rounded-xl flex items-center justify-center hover:bg-muted dark:hover:bg-stone-500 transition-colors font-semibold text-foreground dark:text-stone-300"
                     >
                       <FiMinus className="w-5 h-5" />
                     </button>
@@ -219,13 +210,13 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
 
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      className="w-12 h-12 bg-card dark:bg-slate-600 border border-border dark:border-slate-500 rounded-xl flex items-center justify-center hover:bg-muted dark:hover:bg-slate-500 transition-colors font-semibold text-foreground dark:text-slate-300"
+                      className="w-12 h-12 bg-card dark:bg-stone-600 border border-border dark:border-stone-500 rounded-xl flex items-center justify-center hover:bg-muted dark:hover:bg-stone-500 transition-colors font-semibold text-foreground dark:text-stone-300"
                     >
                       <FiPlus className="w-5 h-5" />
                     </button>
 
                     <div className="ml-auto text-lg font-semibold text-muted-foreground">
-                      Total: <span className="text-primary dark:text-blue-400">৳{(product.price * quantity).toFixed(2)}</span>
+                      Total: <span className="text-primary dark:text-gold-400">৳{(product.price * quantity).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -238,7 +229,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                   disabled={isAdding}
                   className={`w-full py-4 px-6 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 ${isAdding
                     ? 'bg-green-600 text-white scale-95'
-                    : 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-slate-800 border border-border dark:hover:bg-gray-100 hover:scale-101 active:scale-99'
+                    : 'bg-primary text-primary-foreground hover:bg-primary/90 border border-border hover:scale-101 active:scale-99'
                     } shadow-lg hover:shadow-xl`}
                 >
                   {isAdding ? (
@@ -256,7 +247,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
 
                 <button
                   onClick={onClose}
-                  className="w-full py-3 px-6 border-2 border-border dark:border-slate-600 text-foreground dark:text-slate-300 rounded-2xl font-semibold hover:border-input dark:hover:border-slate-500 hover:bg-muted hover:scale-101 active:scale-99 transition-all duration-300"
+                  className="w-full py-3 px-6 border-2 border-border dark:border-stone-600 text-foreground dark:text-stone-300 rounded-2xl font-semibold hover:border-input dark:hover:border-stone-500 hover:bg-muted hover:scale-101 active:scale-99 transition-all duration-300"
                 >
                   Continue Shopping
                 </button>

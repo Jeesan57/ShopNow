@@ -50,7 +50,7 @@ export default function ParticleBackground() {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fillStyle = `rgba(186, 138, 40, ${this.opacity})`;
         ctx.fill();
       }
     }
@@ -64,6 +64,7 @@ export default function ParticleBackground() {
     }
 
     // Animation loop
+    let animationId;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -83,20 +84,21 @@ export default function ParticleBackground() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${(100 - distance) / 100 * 0.1})`;
+            ctx.strokeStyle = `rgba(186, 138, 40, ${(100 - distance) / 100 * 0.1})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         });
       });
 
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationId);
     };
   }, []);
 

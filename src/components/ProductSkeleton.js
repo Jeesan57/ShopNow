@@ -1,6 +1,6 @@
 export default function ProductSkeleton() {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-slate-700 animate-fade-in-up">
+    <div className="bg-white dark:bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-stone-700 animate-fade-in-up">
       <div className="relative overflow-hidden">
         <div className="w-full h-64 skeleton"></div>
       </div>

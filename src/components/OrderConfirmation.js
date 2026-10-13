@@ -18,7 +18,7 @@ export default function OrderConfirmation({ order }) {
 
   return (
     <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20" aria-labelledby="confirmation-title">
-      <div className="overflow-hidden bg-card border border-border rounded-3xl shadow-xl shadow-slate-900/5">
+      <div className="overflow-hidden bg-card border border-border rounded-3xl shadow-xl shadow-stone-900/5">
         <div className="relative px-6 sm:px-12 pt-10 sm:pt-12 pb-9 text-center border-b border-border bg-linear-to-b from-emerald-50/80 to-card dark:from-emerald-950/30">
           <div className="flex items-center justify-center w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-100 dark:bg-emerald-900/50 ring-8 ring-emerald-50 dark:ring-emerald-950/40">
             <FiCheck className="w-10 h-10 text-emerald-600 dark:text-emerald-400" strokeWidth={2.5} aria-hidden="true" />
@@ -48,7 +48,7 @@ export default function OrderConfirmation({ order }) {
 
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-9">
-            <Link href="/shop" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Continue shopping<FiArrowRight aria-hidden="true" /></Link>
+            <Link href="/shop" className="inline-flex items-center justify-center gap-2 bg-gold-600 hover:bg-gold-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600">Continue shopping<FiArrowRight aria-hidden="true" /></Link>
             <Link href="/contact" className="inline-flex items-center justify-center text-sm font-medium text-muted-foreground hover:text-foreground px-4 py-3 rounded-xl transition-colors">Need help? Contact us</Link>
           </div>
         </div>

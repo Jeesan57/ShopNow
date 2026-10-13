@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCatalog } from '../../../context/CatalogContext';
 import { useCart } from '../../../context/CartContext';
-import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiStar, FiCheck, FiPlus, FiMinus } from 'react-icons/fi';
+import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiPlus, FiMinus } from 'react-icons/fi';
 
 export default function ProductDetail() {
   const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
@@ -134,7 +134,7 @@ export default function ProductDetail() {
                   const prevIndex = currentIndex > 0 ? currentIndex - 1 : product.thumbnails.length - 1;
                   setSelectedImage(product.thumbnails[prevIndex]);
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-slate-900/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-slate-700"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-stone-900/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-stone-700"
               >
                 <FiChevronLeft className="w-5 h-5 text-white" />
               </button>
@@ -145,7 +145,7 @@ export default function ProductDetail() {
                   const nextIndex = currentIndex < product.thumbnails.length - 1 ? currentIndex + 1 : 0;
                   setSelectedImage(product.thumbnails[nextIndex]);
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-slate-900/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-slate-700"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-stone-900/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 border border-stone-700"
               >
                 <FiChevronRight className="w-5 h-5 text-white" />
               </button>
@@ -188,14 +188,9 @@ export default function ProductDetail() {
                 {product.name}
               </h1>
 
-              {/* Rating & Price */}
+              {/* Stock & Price */}
               <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-3">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <FiStar key={i} className="w-5 h-5 fill-current" />
-                    ))}
-                  </div>
+                <div className="flex flex-col items-start gap-2">
                   <span className="text-sm text-muted-foreground">{product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</span>
                 </div>
 
@@ -280,7 +275,7 @@ export default function ProductDetail() {
 
                 {/* Total Section */}
                 <div className="ml-auto text-lg font-semibold text-muted-foreground">
-                  Total: <span className="text-primary dark:text-blue-400">৳{(product.price * quantity).toFixed(2)}</span>
+                  Total: <span className="text-primary dark:text-gold-400">৳{(product.price * quantity).toFixed(2)}</span>
                 </div>
 
 
@@ -292,7 +287,7 @@ export default function ProductDetail() {
                   disabled={isAddingToCart}
                   className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 ${isAddingToCart
                     ? 'bg-green-600 text-white scale-95 cursor-not-allowed'
-                    : 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-slate-800 border border-border dark:hover:bg-gray-100 hover:scale-101 active:scale-99'
+                    : 'bg-primary text-primary-foreground hover:bg-primary/90 border border-border hover:scale-101 active:scale-99'
                     } shadow-lg hover:shadow-xl`}
                 >
                   {isAddingToCart ? (
@@ -310,7 +305,7 @@ export default function ProductDetail() {
 
                 <Link
                   href="/shop"
-                  className="w-full py-3 px-6 border-2 border-border text-foreground rounded-xl font-semibold hover:border-input dark:hover:border-slate-500 hover:bg-muted hover:scale-101 active:scale-99 transition-all duration-300 text-center block"
+                  className="w-full py-3 px-6 border-2 border-border text-foreground rounded-xl font-semibold hover:border-input dark:hover:border-stone-500 hover:bg-muted hover:scale-101 active:scale-99 transition-all duration-300 text-center block"
                 >
                   Continue Shopping
                 </Link>

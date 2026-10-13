@@ -103,7 +103,7 @@ export default function Favourites() {
                     </span>
                     <button
                       onClick={() => addToCart(product)}
-                      className="bg-slate-900 dark:bg-white border border-border text-white dark:text-slate-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors"
+                      className="bg-gold-600 dark:bg-gold-400 border border-border text-white dark:text-stone-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 dark:hover:bg-gold-300 transition-colors"
                     >
                       Add to Cart
                     </button>
@@ -121,7 +121,7 @@ export default function Favourites() {
             <p className="text-muted-foreground mb-6">Start adding items to your favourites by clicking the heart icon on products.</p>
             <Link
               href="/shop"
-              className="inline-flex items-center border border-border px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center border border-border px-8 py-3 bg-gold-600 dark:bg-gold-400 text-white dark:text-stone-900 rounded-xl font-semibold hover:bg-gold-700 dark:hover:bg-gold-300 transition-colors"
             >
               Browse Products
               <FiChevronRight className="w-4 h-4 ml-2" />

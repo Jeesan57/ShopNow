@@ -116,7 +116,7 @@ export default function Navbar() {
                         }`}
                     >
                       {item.label}
-                      <span className={`absolute bottom-0 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 transition-all duration-500 ${isActive
+                      <span className={`absolute bottom-0 h-0.5 bg-linear-to-r from-gold-500 to-gold-500 transition-all duration-500 ${isActive
                         ? 'w-1/2 left-1/4'
                         : 'w-0 left-1/2'
                         }`}></span>
@@ -139,7 +139,7 @@ export default function Navbar() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-64 px-6 py-3 pl-12 text-sm bg-card/80 text-foreground backdrop-blur-sm border border-input rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10"
                   />
-                  <FiSearch className="absolute left-4 top-3 w-5 h-5 text-muted transition-colors" />
+                  <FiSearch className="absolute left-4 top-3 w-5 h-5 text-muted-foreground transition-colors" />
 
                   {/* Animated search icon */}
                   <div className="absolute right-4 top-3">
@@ -172,14 +172,14 @@ export default function Navbar() {
                             </div>
                             <div className="text-primary font-bold text-sm">৳{product.price}</div>
                           </div>
-                          <FiChevronRight className="w-4 h-4 text-muted group-hover:text-primary transform group-hover:translate-x-1 transition-all duration-300" />
+                          <FiChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transform group-hover:translate-x-1 transition-all duration-300" />
                         </Link>
                       ))}
                     </div>
 
                     <Link
                       href={`/shop?search=${encodeURIComponent(searchQuery)}`}
-                      className="block p-4 text-center bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-primary font-semibold hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 rounded-b-2xl border-t border-border"
+                      className="block p-4 text-center bg-linear-to-r from-gold-50 to-gold-50 dark:from-gold-900/20 dark:to-gold-900/20 text-primary font-semibold hover:from-gold-100 hover:to-gold-100 dark:hover:from-gold-800/30 dark:hover:to-gold-800/30 transition-all duration-300 rounded-b-2xl border-t border-border"
                       onClick={() => {
                         setSearchQuery('');
                         setShowSearchResults(false);
@@ -217,10 +217,10 @@ export default function Navbar() {
                 {/* Enhanced Dark Mode Toggle - Hidden on mobile */}
                 <button
                   onClick={toggleDarkMode}
-                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-input text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group hidden lg:flex"
+                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-input text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-gold-500/20 group hidden lg:flex"
                   aria-label="Toggle dark mode"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-gold-500/10 to-gold-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   {mounted && darkMode ? (
                     <FiSun className="w-6 h-6 relative z-10" />
                   ) : (
@@ -231,10 +231,10 @@ export default function Navbar() {
                 {/* Enhanced Shopping Cart */}
                 <button
                   onClick={() => setCartOpen(true)}
-                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-input text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
+                  className="relative p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-input text-foreground hover:text-primary transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-gold-500/20 group"
                   aria-label="Open shopping cart"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-gold-500/10 to-gold-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <FiShoppingCart className="w-5 h-5 lg:w-6 lg:h-6 relative z-10" />
                   {mounted && getTotalItems() > 0 && (
                     <span className="absolute -top-2 -right-2 bg-linear-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg animate-bounce">
@@ -246,10 +246,10 @@ export default function Navbar() {
                 {/* Mobile Menu Button */}
                 <button
                   onClick={() => setMobileMenuOpen(true)}
-                  className="lg:hidden p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20 group"
+                  className="lg:hidden p-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border text-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-gold-500/20 group"
                   aria-label="Open mobile menu"
                 >
-                  <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-gold-500/10 to-gold-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <FiMenu className="w-5 h-5 relative z-10" />
                 </button>
               </div>
@@ -296,7 +296,7 @@ export default function Navbar() {
                         key={item.href}
                         href={item.href}
                         className={`block px-4 py-3 rounded-xl transition-all duration-300 font-semibold ${isActive
-                          ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
+                          ? 'bg-gold-50 text-gold-600 dark:bg-gold-900/20 dark:text-gold-400'
                           : 'text-foreground hover:bg-muted hover:text-primary'
                           }`}
                         onClick={() => setMobileMenuOpen(false)}
@@ -317,7 +317,7 @@ export default function Navbar() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full px-4 py-3 pl-12 text-sm bg-muted text-foreground border border-input rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
-                    <FiSearch className="absolute left-4 top-3.5 w-4 h-4 text-muted" />
+                    <FiSearch className="absolute left-4 top-3.5 w-4 h-4 text-muted-foreground" />
 
                     {/* Search button that appears when there's text */}
                     {searchQuery.trim() && (
@@ -327,7 +327,7 @@ export default function Navbar() {
                           router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
                           setSearchQuery('');
                         }}
-                        className="absolute right-4 top-3.5 p-1 text-primary hover:text-blue-600 transition-colors"
+                        className="absolute right-4 top-3.5 p-1 text-primary hover:text-gold-600 transition-colors"
                         aria-label="Search"
                       >
                         <FiArrowRight className="w-4 h-4" />
@@ -380,7 +380,7 @@ export default function Navbar() {
 
                   {/* No results message */}
                   {searchQuery.length > 0 && searchResults.length === 0 && (
-                    <div className="mt-2 p-3 text-center text-muted text-sm bg-muted rounded-xl">
+                    <div className="mt-2 p-3 text-center text-muted-foreground text-sm bg-muted rounded-xl">
                       No products found
                     </div>
                   )}
@@ -431,7 +431,7 @@ export default function Navbar() {
                     <FiShoppingCart className="w-6 h-6 mr-4" />
                     Cart
                     {mounted && getTotalItems() > 0 && (
-                      <span className="ml-auto bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                      <span className="ml-auto bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                         {getTotalItems()}
                       </span>
                     )}

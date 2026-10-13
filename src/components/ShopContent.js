@@ -198,12 +198,12 @@ export default function ShopContent() {
   return (
     <div className="min-h-screen bg-background">
       {/* Professional Header */}
-      <div className="relative bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden">
+      <div className="relative bg-linear-to-br from-stone-900 via-gold-900 to-stone-800 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-24 h-24 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gold-500/20 dark:bg-gold-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-24 h-24 bg-gold-500/20 dark:bg-gold-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-gold-500/10 dark:bg-gold-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
         </div>
 
         {/* Grid pattern overlay */}
@@ -213,13 +213,13 @@ export default function ShopContent() {
           <div className="text-center">
             {/* Main heading */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-1">
-              <span className="bg-linear-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              <span className="text-gold-100">
                 Shop Excellence
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-md md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-6">
+            <p className="text-md md:text-xl text-gold-100 max-w-3xl mx-auto leading-relaxed mb-6">
               Discover handpicked products where quality craftsmanship meets timeless design
             </p>
           </div>
@@ -368,11 +368,11 @@ export default function ShopContent() {
                     <div className="relative px-2">
                       <div className="relative h-8 flex items-center">
                         {/* Track Background */}
-                        <div className="absolute h-2 w-full bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+                        <div className="absolute h-2 w-full bg-stone-200 dark:bg-stone-600 rounded-full"></div>
 
                         {/* Filled Track Between Thumbs */}
                         <div
-                          className="absolute h-2 bg-blue-500 rounded-full"
+                          className="absolute h-2 bg-gold-500 rounded-full"
                           style={{
                             left: `${(priceRange.min / 200) * 100}%`,
                             right: `${100 - (priceRange.max / 200) * 100}%`,
@@ -389,7 +389,7 @@ export default function ShopContent() {
                             const value = Math.min(Number(e.target.value), priceRange.max - 1);
                             setPriceRange(prev => ({ ...prev, min: value }));
                           }}
-                          className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
+                          className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-gold-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-gold-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
                         />
 
                         {/* Max Slider */}
@@ -402,7 +402,7 @@ export default function ShopContent() {
                             const value = Math.max(Number(e.target.value), priceRange.min + 1);
                             setPriceRange(prev => ({ ...prev, max: value }));
                           }}
-                          className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
+                          className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-gold-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-gold-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
                         />
                       </div>
                     </div>
@@ -472,7 +472,7 @@ export default function ShopContent() {
                           : 'bg-card/90 hover:bg-card hover:shadow-md'
                           }`}
                       >
-                        <FiHeart className="w-6 h-6 text-white" fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
+                        <FiHeart className={`w-6 h-6 ${isInWishlist(product.id) ? 'text-white' : 'text-foreground'}`} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
                       </button>
 
                       {/* Quick View Overlay */}
@@ -552,7 +552,7 @@ export default function ShopContent() {
                           }}
                           className={`px-4 py-2 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg min-w-[120px] flex items-center justify-center gap-2 ${addedProducts.has(product.id)
                             ? 'bg-green-600 text-white scale-95'
-                            : ' bg-slate-900 dark:bg-white text-white  border-2 border-border dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95'
+                            : ' bg-gold-600 dark:bg-gold-400 text-white  border-2 border-border dark:text-stone-950 hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105 active:scale-95'
                             }`}
                         >
                           {addedProducts.has(product.id) ? (

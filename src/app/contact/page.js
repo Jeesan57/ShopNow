@@ -40,13 +40,13 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 glass border border-slate-300/50 dark:border-white/20 rounded-full px-6 py-2 mb-4">
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+          <div className="inline-flex items-center gap-2 glass border border-stone-300/50 dark:border-white/20 rounded-full px-6 py-2 mb-4">
+            <div className="w-2 h-2 bg-gold-500 rounded-full animate-pulse"></div>
             <span className="text-sm font-semibold text-foreground uppercase tracking-wider">GET IN TOUCH</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-foreground mb-6">
             Let's Talk About{' '}
-            <span className="inline bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Your Needs</span>
+            <span className="inline text-primary">Your Needs</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
             Have questions about our products? We're here to help and would love to hear from you.
@@ -62,8 +62,8 @@ export default function Contact() {
               <div className="space-y-6">
                 {/* Address */}
                 <div className="flex items-start space-x-4 group hover:scale-105 transition-transform duration-300">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-                    <FiMapPin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  <div className="w-12 h-12 bg-gold-100 dark:bg-gold-900/30 rounded-2xl flex items-center justify-center group-hover:bg-gold-200 dark:group-hover:bg-gold-900/50 transition-colors">
+                    <FiMapPin className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Our Location</h3>
@@ -84,8 +84,8 @@ export default function Contact() {
 
                 {/* Email */}
                 <div className="flex items-start space-x-4 group hover:scale-105 transition-transform duration-300">
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-900/50 transition-colors">
-                    <FiMail className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  <div className="w-12 h-12 bg-gold-100 dark:bg-gold-900/30 rounded-2xl flex items-center justify-center group-hover:bg-gold-200 dark:group-hover:bg-gold-900/50 transition-colors">
+                    <FiMail className="w-6 h-6 text-gold-600 dark:text-gold-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Email Address</h3>
@@ -122,7 +122,7 @@ export default function Contact() {
                 { number: 'Online', label: 'Contact Form' }
               ].map((stat, index) => (
                 <div key={stat.label} className="text-center bg-card rounded-2xl p-4 shadow-lg border border-border">
-                  <div className="text-2xl font-black text-blue-600 dark:text-blue-400 mb-1">{stat.number}</div>
+                  <div className="text-2xl font-black text-gold-600 dark:text-gold-400 mb-1">{stat.number}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
@@ -206,7 +206,7 @@ export default function Contact() {
                 disabled={isSubmitting}
                 className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-3 ${isSubmitting
                   ? 'bg-green-600 text-white scale-95 cursor-not-allowed'
-                  : 'bg-slate-900 dark:bg-white text-white border border-input dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-gray-100 hover:scale-105 active:scale-95'
+                  : 'bg-gold-600 dark:bg-gold-400 text-white border border-input dark:text-stone-950 hover:bg-gold-700 dark:hover:bg-gold-300 hover:scale-105 active:scale-95'
                   } shadow-lg hover:shadow-xl`}
               >
                 {isSubmitting ? (

@@ -1,48 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #3b82f6;
-  --secondary: #8b5cf6;
-  --accent: #f59e0b;
-  --muted: #f8fafc;
-  --muted-foreground: #64748b;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --popover: #ffffff;
-  --popover-foreground: #171717;
-  --border: #e2e8f0;
-  --input: #94a3b8;
-  --ring: #3b82f6;
-  --radius: 0.5rem;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  /* Glassmorphism */
-  --glass: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: rgba(0, 0, 0, 0.1);
+@theme {
+  --color-gold-50: #fcf8ec;
+  --color-gold-100: #f6edcf;
+  --color-gold-200: #eddaa0;
+  --color-gold-300: #e5c571;
+  --color-gold-400: #dcb04f;
+  --color-gold-500: #ba8a28;
+  --color-gold-600: #956514;
+  --color-gold-700: #795011;
+  --color-gold-800: #644216;
+  --color-gold-900: #493218;
+  --color-gold-950: #2c2112;
 }
 
-/* Dark mode variables */
-.dark {
-  --background: #0f172a;
-  --foreground: #f1f5f9;
-  --primary: #60a5fa;
-  --secondary: #a78bfa;
-  --accent: #fbbf24;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --card: #1e293b;
-  --card-foreground: #f1f5f9;
-  --popover: #1e293b;
-  --popover-foreground: #f1f5f9;
-  --border: #334155;
-  --input: #334155;
-  --ring: #60a5fa;
+@theme inline {
+  --color-blue-50: var(--color-gold-50);
+  --color-blue-100: var(--color-gold-100);
+  --color-blue-200: var(--color-gold-200);
+  --color-blue-300: var(--color-gold-300);
+  --color-blue-400: var(--color-gold-400);
+  --color-blue-500: var(--color-gold-500);
+  --color-blue-600: var(--color-gold-600);
+  --color-blue-700: var(--color-gold-700);
+  --color-blue-800: var(--color-gold-800);
+  --color-blue-900: var(--color-gold-900);
+  --color-blue-950: var(--color-gold-950);
+  --color-purple-50: var(--color-gold-50);
+  --color-purple-100: var(--color-gold-100);
+  --color-purple-200: var(--color-gold-200);
+  --color-purple-300: var(--color-gold-300);
+  --color-purple-400: var(--color-gold-400);
+  --color-purple-500: var(--color-gold-500);
+  --color-purple-600: var(--color-gold-600);
+  --color-purple-700: var(--color-gold-700);
+  --color-purple-800: var(--color-gold-800);
+  --color-purple-900: var(--color-gold-900);
+  --color-purple-950: var(--color-gold-950);
+  --color-indigo-50: var(--color-gold-50);
+  --color-indigo-100: var(--color-gold-100);
+  --color-indigo-200: var(--color-gold-200);
+  --color-indigo-300: var(--color-gold-300);
+  --color-indigo-400: var(--color-gold-400);
+  --color-indigo-500: var(--color-gold-500);
+  --color-indigo-600: var(--color-gold-600);
+  --color-indigo-700: var(--color-gold-700);
+  --color-indigo-800: var(--color-gold-800);
+  --color-indigo-900: var(--color-gold-900);
+  --color-indigo-950: var(--color-gold-950);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
 
-  /* Glassmorphism */
-  --glass: rgba(15, 23, 42, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
+:root {
+  --background: #fbf9f3;
+  --foreground: #26221b;
+  --primary: #956514;
+  --primary-foreground: #ffffff;
+  --secondary: #795011;
+  --secondary-foreground: #ffffff;
+  --accent: #dcb04f;
+  --muted: #f4f0e6;
+  --muted-foreground: #746b5b;
+  --card: #ffffff;
+  --card-foreground: #26221b;
+  --popover: #ffffff;
+  --popover-foreground: #26221b;
+  --border: #e7dfce;
+  --input: #c5b89d;
+  --ring: #ba8a28;
+  --radius: 0.75rem;
+  --glass: rgba(255, 252, 244, 0.75);
+  --glass-border: rgba(186, 138, 40, 0.18);
+  --glass-shadow: rgba(67, 49, 19, 0.06);
+}
+
+.dark {
+  --background: #151411;
+  --foreground: #f6f1e5;
+  --primary: #e5c571;
+  --primary-foreground: #26221b;
+  --secondary: #dcb04f;
+  --secondary-foreground: #26221b;
+  --accent: #eddaa0;
+  --muted: #24221d;
+  --muted-foreground: #b5ac99;
+  --card: #201e19;
+  --card-foreground: #f6f1e5;
+  --popover: #24221d;
+  --popover-foreground: #f6f1e5;
+  --border: #3e3729;
+  --input: #5e5038;
+  --ring: #dcb04f;
+  --glass: rgba(32, 30, 25, 0.85);
+  --glass-border: rgba(229, 197, 113, 0.16);
   --glass-shadow: rgba(0, 0, 0, 0.3);
 }
 
@@ -56,79 +123,6 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Utility classes using CSS variables */
-.bg-background {
-  background-color: var(--background);
-}
-
-.bg-foreground {
-  background-color: var(--foreground);
-}
-
-.bg-primary {
-  background-color: var(--primary);
-}
-
-.bg-secondary {
-  background-color: var(--secondary);
-}
-
-.bg-accent {
-  background-color: var(--accent);
-}
-
-.bg-muted {
-  background-color: var(--muted);
-}
-
-.bg-card {
-  background-color: var(--card);
-}
-
-.bg-popover {
-  background-color: var(--popover);
-}
-
-.text-foreground {
-  color: var(--foreground);
-}
-
-.text-primary {
-  color: var(--primary);
-}
-
-.text-secondary {
-  color: var(--secondary);
-}
-
-.text-accent {
-  color: var(--accent);
-}
-
-.text-muted {
-  color: var(--muted-foreground);
-}
-
-.text-card {
-  color: var(--card-foreground);
-}
-
-.text-popover {
-  color: var(--popover-foreground);
-}
-
-.border-border {
-  border-color: var(--border);
-}
-
-.border-input {
-  border-color: var(--input);
-}
-
-.ring-ring {
-  --tw-ring-color: var(--ring);
 }
 
 /* Glassmorphism utilities */
@@ -145,7 +139,7 @@ body {
 }
 
 .glass-dark {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(32, 30, 25, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -328,6 +322,21 @@ a:focus-visible {
 }
 
 .dark .skeleton {
-  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background: linear-gradient(90deg, #302c24 25%, #443d2e 50%, #302c24 75%);
   background-size: 200% 100%;
 }
+
+/* Auvora's warm metal accents stay subtle against ivory and charcoal. */
+::selection { background: #eddaa0; color: #26221b; }
+nav { border-bottom: 1px solid var(--border); }
+button, a { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Native controls use the same gold accent as our buttons. */
+input, select, textarea { accent-color: var(--primary); color: var(--foreground); }
+input::placeholder, textarea::placeholder { color: var(--muted-foreground); opacity: 1; }
+.dark { color-scheme: dark; }
+:root:not(.dark) { color-scheme: light; }
+.text-accent { color: var(--primary); }

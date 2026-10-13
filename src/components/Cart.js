@@ -35,7 +35,7 @@ export default function Cart({ isOpen, onClose }) {
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Enhanced Backdrop */}
       <div
-        className="absolute inset-0 bg-slate-900/70 backdrop-blur-xl transition-opacity duration-300"
+        className="absolute inset-0 bg-stone-900/70 backdrop-blur-xl transition-opacity duration-300"
         onClick={onClose}
       />
 
@@ -44,10 +44,10 @@ export default function Cart({ isOpen, onClose }) {
         <div className="flex flex-col h-full bg-card shadow-2xl border-l border-border">
 
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-border bg-linear-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800">
+          <div className="flex items-center justify-between p-6 border-b border-border bg-linear-to-r from-stone-50 to-white dark:from-stone-700 dark:to-stone-800">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gold-600 rounded-xl flex items-center justify-center">
                   <FiShoppingCart className="w-5 h-5 text-white" />
                 </div>
                 {itemCount > 0 && (
@@ -57,8 +57,8 @@ export default function Cart({ isOpen, onClose }) {
                 )}
               </div>
               <div>
-                <h2 className="text-2xl font-black text-slate-900 dark:text-white">Your Cart</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
+                <h2 className="text-2xl font-black text-stone-900 dark:text-white">Your Cart</h2>
+                <p className="text-sm text-stone-600 dark:text-stone-400">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
               </div>
             </div>
 
@@ -94,7 +94,7 @@ export default function Cart({ isOpen, onClose }) {
                 </p>
                 <button
                   onClick={onClose}
-                  className="inline-flex items-center gap-2 bg-slate-900 dark:bg-white border border-border text-white dark:text-slate-900 px-8 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center gap-2 bg-gold-600 dark:bg-gold-400 border border-border text-white dark:text-stone-900 px-8 py-4 rounded-xl font-bold hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-300 hover:scale-105"
                 >
                   <FiSearch className="w-5 h-5" />
                   Start Shopping
@@ -179,7 +179,7 @@ export default function Cart({ isOpen, onClose }) {
 
           {/* Footer */}
           {cartItems.length > 0 && (
-            <div className="border-t border-border bg-linear-to-r from-slate-50 to-white dark:from-slate-700 dark:to-slate-800 p-6 space-y-4">
+            <div className="border-t border-border bg-linear-to-r from-stone-50 to-white dark:from-stone-700 dark:to-stone-800 p-6 space-y-4">
               {/* Order Summary */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-muted-foreground">
@@ -205,12 +205,12 @@ export default function Cart({ isOpen, onClose }) {
               <p className="text-xs text-muted-foreground mb-3">Delivery: ৳70 inside Dhaka city / ৳130 outside Dhaka city. Calculated at checkout.</p>
               {/* Action Buttons */}
               <div className="space-y-3">
-                <button onClick={() => { onClose(); router.push('/checkout'); }} className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg">
+                <button onClick={() => { onClose(); router.push('/checkout'); }} className="w-full bg-gold-600 dark:bg-gold-400 text-white dark:text-stone-900 py-4 rounded-xl font-bold hover:bg-gold-700 dark:hover:bg-gold-300 transition-all duration-200 shadow-md hover:shadow-lg">
                   Proceed to Checkout
                 </button>
                 <button
                   onClick={onClose}
-                  className="w-full border-2 border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white py-3 rounded-xl font-semibold hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300"
+                  className="w-full border-2 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white py-3 rounded-xl font-semibold hover:border-stone-400 dark:hover:border-stone-500 hover:bg-stone-50 dark:hover:bg-stone-700 transition-all duration-300"
                 >
                   Continue Shopping
                 </button>
