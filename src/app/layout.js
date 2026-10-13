@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { getServerCatalog } from "../lib/serverCatalog";
+import { SITE_URL, pageMetadata, jsonLd } from "../lib/seo";
 import SiteChrome from "../components/SiteChrome";
 import ParticleBackground from "../components/ParticleBackground";
 import { CartProvider } from "../context/CartContext";
@@ -15,14 +17,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Auvora BD",
-  description: "Your one-stop shop for everything",
+  metadataBase: new URL(SITE_URL),
+  ...pageMetadata('Auvora BD | Online Shopping in Bangladesh', 'Shop the latest collections at Auvora BD. Browse products, check prices in BDT, and order with cash on delivery across Bangladesh.', '/'),
+  title: { default: 'Auvora BD | Online Shopping in Bangladesh', template: '%s | Auvora BD' },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  let initialCatalog;
+  try { initialCatalog = await getServerCatalog(); } catch { /* Client retries temporary catalog failures. */ }
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({ '@context': 'https://schema.org', '@graph': [
+          { '@type': 'Organization', '@id': `${SITE_URL}/#organization`, name: 'Auvora BD', url: SITE_URL, logo: `${SITE_URL}/LOGO.png` },
+          { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, name: 'Auvora BD', url: SITE_URL, publisher: { '@id': `${SITE_URL}/#organization` } },
+        ] }) }} />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -45,7 +55,7 @@ export default function RootLayout({ children }) {
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <ParticleBackground />
         <CartProvider>
-          <SiteChrome>{children}</SiteChrome>
+          <SiteChrome initialCatalog={initialCatalog}>{children}</SiteChrome>
         </CartProvider>
       </body>
     </html>

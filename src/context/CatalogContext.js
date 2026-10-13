@@ -2,8 +2,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getSupabase } from '../lib/supabase';
 const CatalogContext = createContext({ products: [], categories: [], loading: true, error: '' });
-export function CatalogProvider({ children }) {
-  const [state, setState] = useState({ products: [], categories: [], loading: true, error: '' });
+export function CatalogProvider({ children, initialCatalog }) {
+  const [state, setState] = useState(initialCatalog || { products: [], categories: [], loading: true, error: '' });
   useEffect(() => {
     let alive = true;
     async function load() {
