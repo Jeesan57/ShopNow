@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Cart from './Cart';
+import BrandLogo from './BrandLogo';
 import { useCart } from '../context/CartContext';
 import { useCatalog } from '../context/CatalogContext';
 import { FiSearch, FiChevronRight, FiHeart, FiSun, FiMoon, FiShoppingCart, FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
@@ -91,20 +92,7 @@ export default function Navbar() {
             {/* Logo/Brand - LEFT SIDE - FIXED */}
             <div className="flex items-center shrink-0">
               <Link href="/" className="flex items-center space-x-2 lg:space-x-3 group">
-                <div className="relative">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-500 group-hover:scale-105">
-                    <span className="text-white font-bold text-xs lg:text-sm">SN</span>
-                    {/* Animated ring */}
-                    <div className="absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse-slow"></div>
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  {/* Fixed ShopNow text - removed bg-clip-text issue */}
-                  <span className="text-xl lg:text-2xl font-black text-foreground group-hover:text-primary transition-all duration-500">
-                    ShopNow
-                  </span>
-                  <span className="text-xs text-muted font-medium -mt-1">PREMIUM COLLECTION</span>
-                </div>
+                <BrandLogo priority className="lg:w-56 lg:h-14" />
               </Link>
             </div>
 
@@ -283,15 +271,7 @@ export default function Navbar() {
             <div className="flex flex-col h-full bg-card">
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-border">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-sm">SN</span>
-                  </div>
-                  {/* Fixed mobile ShopNow text */}
-                  <span className="text-xl font-black text-foreground">
-                    ShopNow
-                  </span>
-                </div>
+                <Link href="/" onClick={() => setMobileMenuOpen(false)}><BrandLogo /></Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 rounded-lg hover:bg-muted transition-colors"

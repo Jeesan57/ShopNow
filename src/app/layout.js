@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "ShopNow",
+  title: "Auvora BD",
   description: "Your one-stop shop for everything",
 };
 

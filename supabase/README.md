@@ -1,4 +1,4 @@
-# ShopNow launch setup
+# Auvora BD launch setup
 
 The storefront and `/admin` use Supabase Auth, Postgres, and Storage. No demo products are loaded. Currency is Bangladeshi taka (BDT, ৳) and checkout supports cash on delivery; card payments are not integrated.
 

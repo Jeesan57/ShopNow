@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import BrandLogo from './BrandLogo';
 import { FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 
 export default function Footer() {
@@ -7,9 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4 bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              ShopNow
-            </h3>
+            <Link href="/" className="inline-block mb-4"><BrandLogo className="w-56 h-14" /></Link>
             <p className="text-slate-300 mb-4 max-w-md">
               Your premier destination for quality products at unbeatable prices.
               Discover the latest trends and find everything you need in one place.
@@ -43,9 +43,9 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="/" className="text-slate-300 hover:text-blue-400 transition-colors">Home</a></li>
-              <li><a href="/shop" className="text-slate-300 hover:text-blue-400 transition-colors">Shop</a></li>
-              <li><a href="/contact" className="text-slate-300 hover:text-blue-400 transition-colors">Contact</a></li>
+              <li><Link href="/" className="text-slate-300 hover:text-blue-400 transition-colors">Home</Link></li>
+              <li><Link href="/shop" className="text-slate-300 hover:text-blue-400 transition-colors">Shop</Link></li>
+              <li><Link href="/contact" className="text-slate-300 hover:text-blue-400 transition-colors">Contact</Link></li>
               <li><a href="#" className="text-slate-300 hover:text-blue-400 transition-colors">About Us</a></li>
             </ul>
           </div>
@@ -65,7 +65,7 @@ export default function Footer() {
         <div className="border-t border-slate-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-slate-400 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} ShopNow. All rights reserved by TechNova.
+              © {new Date().getFullYear()} Auvora BD. All rights reserved by TechNova.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors">Privacy Policy</a>

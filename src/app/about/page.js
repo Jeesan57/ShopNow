@@ -46,7 +46,7 @@ export default function About() {
             <div>
               <h2 className="text-4xl font-black text-foreground mb-6">Our Mission</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                At ShopNow, we believe that quality products should be accessible to everyone. Our mission is to curate the finest collection of premium items, ensuring that every customer finds exactly what they&apos;re looking for.
+                At Auvora BD, we believe that quality products should be accessible to everyone. Our mission is to curate the finest collection of premium items, ensuring that every customer finds exactly what they&apos;re looking for.
               </p>
             </div>
 
@@ -127,7 +127,7 @@ export default function About() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-foreground mb-6">Meet Our Team</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The passionate people behind ShopNow
+              The passionate people behind Auvora BD
             </p>
           </div>
 
@@ -136,7 +136,7 @@ export default function About() {
               {
                 name: 'Sarah Johnson',
                 role: 'Founder & CEO',
-                bio: 'With over 10 years in e-commerce, Sarah founded ShopNow with a vision to revolutionize online shopping through innovative technology and customer-centric solutions.',
+                bio: 'With over 10 years in e-commerce, Sarah founded Auvora BD with a vision to revolutionize online shopping through innovative technology and customer-centric solutions.',
                 expertise: 'E-commerce Strategy & Business Development'
               },
               {
@@ -217,7 +217,7 @@ export default function About() {
             Ready to Experience Premium Shopping?
           </h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust ShopNow for their premium shopping needs.
+            Join thousands of satisfied customers who trust Auvora BD for their premium shopping needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link

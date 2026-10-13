@@ -2,9 +2,9 @@
 
 The store now includes `/admin` and cash-on-delivery `/checkout`. See [Supabase setup and launch instructions](supabase/README.md) for the database migration, administrator access and deployment configuration.
 
-# ShopNow Next.js Template
+# Auvora BD Next.js Template
 
-ShopNow is a modern, responsive e-commerce template built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**.
+Auvora BD is a modern, responsive e-commerce template built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**.
 It includes shop, product, favourites, and contact pages with a working cart system.
 Perfect for online stores, fashion boutiques, and startups.
 
