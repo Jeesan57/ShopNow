@@ -1,4 +1,5 @@
 'use client';
+import { normalizeProduct } from '../lib/pricing';
 import { createContext, useContext, useEffect, useState } from 'react';
 const CatalogContext = createContext({ products: [], categories: [], loading: true, error: '' });
 export function CatalogProvider({ children, initialCatalog }) {
@@ -11,7 +12,7 @@ export function CatalogProvider({ children, initialCatalog }) {
         const db = getSupabase();
         const [catalog, categories] = await Promise.all([db.from('products').select('*').eq('active', true).order('created_at', { ascending: false }), db.from('categories').select('name').order('name')]);
         if (catalog.error || categories.error) throw catalog.error || categories.error;
-        if (alive) setState({ products: catalog.data.map(p => ({ ...p, price: Number(p.price) })), categories: categories.data.map(c => c.name), loading: false, error: '' });
+        if (alive) setState({ products: catalog.data.map(normalizeProduct), categories: categories.data.map(c => c.name), loading: false, error: '' });
       } catch (e) { if (alive) setState({ products: [], categories: [], loading: false, error: e.message }); }
     }
     // Use server-rendered data during hydration; refresh once its cache window expires.

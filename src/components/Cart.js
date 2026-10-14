@@ -1,5 +1,7 @@
 'use client';
 
+import { useCatalog } from '../context/CatalogContext';
+import ProductPrice from './ProductPrice';
 import { cartItemKey } from '../lib/productColors';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -8,10 +10,12 @@ import Image from 'next/image';
 import { FiShoppingCart, FiTrash2, FiX, FiSearch } from 'react-icons/fi';
 
 export default function Cart({ isOpen, onClose }) {
-  const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
+  const { cartItems: savedCartItems, removeFromCart, updateQuantity, clearCart } = useCart();
   const [isRemoving, setIsRemoving] = useState(null);
   const router = useRouter();
-  const total = getTotalPrice();
+  const { products } = useCatalog();
+  const cartItems = savedCartItems.map(item => ({ ...item, ...(products.find(product => product.id === item.id) || {}), color: item.color, size: item.size, quantity: item.quantity }));
+  const total = Math.round(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100) / 100;
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   if (!isOpen) return null;
@@ -134,7 +138,7 @@ export default function Cart({ isOpen, onClose }) {
                           Size: {item.size}{item.color ? ` · ${item.color}` : ''}
                         </p>
                         <p className="text-primary font-bold text-lg mb-2">
-                          ৳{item.price}
+                          <ProductPrice product={item} />
                         </p>
 
                         {/* Quantity Controls */}

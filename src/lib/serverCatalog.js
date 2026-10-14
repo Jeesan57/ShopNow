@@ -1,3 +1,4 @@
+import { normalizeProduct } from './pricing';
 import { cache } from 'react';
 
 async function readTable(table, query) {
@@ -16,10 +17,10 @@ export const getServerCatalog = cache(async () => {
     readTable('products', 'select=*&active=eq.true&order=created_at.desc'),
     readTable('categories', 'select=name&order=name.asc'),
   ]);
-  return { products: products.map(p => ({ ...p, price: Number(p.price) })), categories: categories.map(c => c.name), loading: false, error: '' };
+  return { products: products.map(normalizeProduct), categories: categories.map(c => c.name), loading: false, error: '' };
 });
 export const getServerProduct = cache(async (id) => {
   if (!/^\d+$/.test(String(id))) return null;
   const products = await readTable('products', `select=*&active=eq.true&id=eq.${id}&limit=1`);
-  return products[0] ? { ...products[0], price: Number(products[0].price) } : null;
+  return products[0] ? normalizeProduct(products[0]) : null;
 });

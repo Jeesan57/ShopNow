@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useId } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
+import ProductPrice from './ProductPrice';
 import ProductColorSelector from './ProductColorSelector';
 import { useCart } from '../context/CartContext';
 import { FiX, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiArrowUpRight, FiPlus, FiMinus } from 'react-icons/fi';
@@ -82,7 +83,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
           <div className="p-5 sm:p-6 md:pt-10 min-w-0">
             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{product.category}</p>
             <h2 id={titleId} className="mt-2 pr-6 text-xl sm:text-2xl font-medium leading-[1.3] tracking-tight text-foreground break-words">{product.name}</h2>
-            <p className="mt-3 text-2xl font-semibold text-foreground tabular-nums">{money(product.price)}</p>
+            <p className="mt-3 text-2xl font-semibold text-foreground tabular-nums"><ProductPrice product={product} /></p>
             {product.description && <p className="mt-3 text-xs leading-5 text-muted-foreground line-clamp-2">{product.description.replace(/[#*]/g, '')}</p>}
 
             <div className="mt-5 pt-4 border-t border-border space-y-4">

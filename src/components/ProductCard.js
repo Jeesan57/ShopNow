@@ -1,4 +1,5 @@
 'use client';
+import ProductPrice from './ProductPrice';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -61,7 +62,7 @@ export default function ProductCard({ product, onQuickView }) {
         <h3 className="text-sm font-semibold leading-5 min-h-10 line-clamp-2">{product.name}</h3>
       </Link>
       <div className="flex items-center justify-between gap-2 mt-2">
-        <p className="text-xl font-semibold tracking-tight text-foreground tabular-nums">৳{Number(product.price).toLocaleString('en-BD', { maximumFractionDigits: 2 })}</p>
+        <p className="text-xl font-semibold tracking-tight text-foreground tabular-nums"><ProductPrice product={product} /></p>
         {!!product.colors?.length && <div className="flex items-center gap-1" aria-label={`${product.colors.length} available colors`}>
           {product.colors.slice(0, 4).map(color => <span key={color} title={color} className="w-3 h-3 rounded-full border border-black/15" style={{backgroundColor:colorHex(color)}} />)}
           {product.colors.length > 4 && <span className="text-[10px] text-muted-foreground">+{product.colors.length - 4}</span>}

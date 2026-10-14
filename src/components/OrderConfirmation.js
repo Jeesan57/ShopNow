@@ -47,6 +47,7 @@ export default function OrderConfirmation({ order }) {
 
 
 
+          {typeof order.total === 'number' && <div className="mt-6 rounded-xl border border-border p-4"><p className="flex justify-between font-semibold"><span>Total payable on delivery</span><span>৳{order.total.toFixed(2)}</span></p>{order.discount>0 && <p className="mt-2 text-sm text-muted-foreground">Coupon {order.coupon_code} saved you ৳{order.discount.toFixed(2)}.</p>}</div>}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-9">
             <Link href="/shop" className="inline-flex items-center justify-center gap-2 bg-gold-600 hover:bg-gold-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600">Continue shopping<FiArrowRight aria-hidden="true" /></Link>
             <Link href="/contact" className="inline-flex items-center justify-center text-sm font-medium text-muted-foreground hover:text-foreground px-4 py-3 rounded-xl transition-colors">Need help? Contact us</Link>

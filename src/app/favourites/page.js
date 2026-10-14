@@ -6,11 +6,15 @@ export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../context/CartContext';
+import { useCatalog } from '../../context/CatalogContext';
+import ProductPrice from '../../components/ProductPrice';
 import ProductSkeleton from '../../components/ProductSkeleton';
 import { FiHeart, FiChevronRight } from 'react-icons/fi';
 
 export default function Favourites() {
-  const { wishlistItems, addToCart, removeFromWishlist, isInWishlist } = useCart();
+  const { wishlistItems: savedWishlistItems, addToCart, removeFromWishlist } = useCart();
+  const { products } = useCatalog();
+  const wishlistItems = savedWishlistItems.map(item => products.find(product => product.id === item.id) || item);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -99,10 +103,10 @@ export default function Favourites() {
 
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-bold text-foreground">
-                      ৳{product.price}
+                      <ProductPrice product={product} />
                     </span>
                     <button
-                      onClick={() => addToCart(product)}
+                      onClick={() => addToCart(product, product.sizes?.[0])}
                       className="bg-gold-600 dark:bg-gold-400 border border-border text-white dark:text-stone-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 dark:hover:bg-gold-300 transition-colors"
                     >
                       Add to Cart

@@ -1,5 +1,6 @@
 'use client';
 
+import { normalizeProduct } from '../lib/pricing';
 import { matchesCartItem } from '../lib/productColors';
 import { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 
@@ -71,11 +72,11 @@ export function CartProvider({ children }) {
       if (existingItem) {
         return prevItems.map(item =>
           matchesCartItem(item, product.id, size, color)
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, ...normalizeProduct(product), color, size, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevItems, { ...product, size, color, quantity: 1 }];
+        return [...prevItems, { ...normalizeProduct(product), size, color, quantity: 1 }];
       }
     });
   };

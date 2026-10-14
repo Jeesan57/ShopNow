@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import ProductPrice from '../../../components/ProductPrice';
 import ProductColorSelector from '../../../components/ProductColorSelector';
 import ProductDescription from '../../../components/ProductDescription';
 import { useCatalog } from '../../../context/CatalogContext';
@@ -132,7 +133,7 @@ export default function ProductDetail({ initialProduct }) {
             </h1>
             <div className="mt-4 flex items-baseline gap-2">
               <p className="text-[26px] font-semibold tracking-tight text-foreground tabular-nums">
-                ৳{Number(product.price).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                <ProductPrice product={product} />
               </p>
               <span className="text-[10px] tracking-wider text-muted-foreground">BDT</span>
             </div>
@@ -256,7 +257,7 @@ export default function ProductDetail({ initialProduct }) {
 
                         <div className="flex items-center justify-between">
                           <span className="text-xl font-bold text-foreground">
-                            ৳{suggestedProduct.price}
+                            <ProductPrice product={suggestedProduct} />
                           </span>
                           <Link
                             href={`/product/${suggestedProduct.id}`}

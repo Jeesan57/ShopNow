@@ -87,3 +87,11 @@
 .admin-size-more summary{font-size:12px}
 .admin-product-sizes .admin-size-group-title{font-size:11px;color:#807360;margin:14px 0 8px}
 .admin-product-sizes .admin-size-required{color:#a72d35;font-size:12px;margin:12px 0 0}
+
+.admin-shell button.admin-delete-action{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;font-size:12px;border:1px solid #f0d4d4;background:#fff7f7;color:#a72d35;min-height:36px}
+.admin-shell button.admin-delete-action:hover{background:#ffeded;border-color:#dfb4b4}
+.admin-shell button.admin-delete-action:disabled{opacity:.45;cursor:not-allowed}
+
+.admin-shell .admin-actions-column{width:1%;white-space:nowrap;vertical-align:middle}
+.admin-table-actions{display:inline-flex;align-items:center;gap:8px;flex-wrap:nowrap}
+.admin-shell .admin-table-actions button{min-height:36px;padding:9px 12px;font-size:12px}
