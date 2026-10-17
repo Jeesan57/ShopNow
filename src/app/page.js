@@ -12,7 +12,7 @@ const QuickViewModal = dynamic(() => import('../components/QuickViewModal'));
 import { FiChevronRight, FiChevronLeft, FiStar, FiShoppingBag, FiShield } from 'react-icons/fi';
 
 export default function Home() {
-  const { products, categories, loading: catalogLoading, error: catalogError } = useCatalog();
+  const { products, categories, categoryImages = {}, loading: catalogLoading, error: catalogError } = useCatalog();
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const closeQuickView = useCallback(() => { setIsQuickViewOpen(false); setQuickViewProduct(null); }, []);
@@ -276,44 +276,15 @@ export default function Home() {
                 href={`/shop?category=${encodeURIComponent(category)}`}
                 className="home-category-card group bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-border"
               >
-                {/* Category Image - Real Images */}
+                {/* Uploaded category cover */}
                 <div className="relative h-48 bg-muted flex items-center justify-center overflow-hidden">
-                  {category === "Men" && (
-                    <Image
-                      src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400&h=300&fit=crop"
-                      alt="Men's Fashion"
-                      fill
-                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
-                  {category === "Women" && (
-                    <Image
-                      src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=300&fit=crop"
-                      alt="Women's Fashion"
-                      fill
-                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
-                  {category === "Kids" && (
-                    <Image
-                      src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=400&h=300&q=80"
-                      alt="Kids Fashion"
-                      fill
-                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
-                  {category === "Accessories" && (
-                    <Image
-                      src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400&h=300&fit=crop"
-                      alt="Accessories"
-                      fill
-                      sizes="(max-width: 768px) 384px, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
+                  {categoryImages[category] && <Image
+                    src={categoryImages[category]}
+                    alt={`${category} collection`}
+                    fill
+                    sizes="284px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />}
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>

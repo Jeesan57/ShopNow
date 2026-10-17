@@ -15,9 +15,9 @@ async function readTable(table, query) {
 export const getServerCatalog = cache(async () => {
   const [products, categories] = await Promise.all([
     readTable('products', 'select=*&active=eq.true&order=created_at.desc'),
-    readTable('categories', 'select=name&order=name.asc'),
+    readTable('categories', 'select=*&order=name.asc'),
   ]);
-  return { products: products.map(normalizeProduct), categories: categories.map(c => c.name), loading: false, error: '' };
+  return { products: products.map(normalizeProduct), categories: categories.map(c => c.name), categoryImages: Object.fromEntries(categories.map(c => [c.name, c.image || ''])), loading: false, error: '' };
 });
 export const getServerProduct = cache(async (id) => {
   if (!/^\d+$/.test(String(id))) return null;

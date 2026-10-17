@@ -10,9 +10,9 @@ export function CatalogProvider({ children, initialCatalog }) {
       try {
         const { getSupabase } = await import('../lib/supabase');
         const db = getSupabase();
-        const [catalog, categories] = await Promise.all([db.from('products').select('*').eq('active', true).order('created_at', { ascending: false }), db.from('categories').select('name').order('name')]);
+        const [catalog, categories] = await Promise.all([db.from('products').select('*').eq('active', true).order('created_at', { ascending: false }), db.from('categories').select('*').order('name')]);
         if (catalog.error || categories.error) throw catalog.error || categories.error;
-        if (alive) setState({ products: catalog.data.map(normalizeProduct), categories: categories.data.map(c => c.name), loading: false, error: '' });
+        if (alive) setState({ products: catalog.data.map(normalizeProduct), categories: categories.data.map(c => c.name), categoryImages: Object.fromEntries(categories.data.map(c => [c.name, c.image || ''])), loading: false, error: '' });
       } catch (e) { if (alive) setState({ products: [], categories: [], loading: false, error: e.message }); }
     }
     // Use server-rendered data during hydration; refresh once its cache window expires.
