@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import ProductImageViewer from '../../../components/ProductImageViewer';
 import ProductPrice from '../../../components/ProductPrice';
 import ComboSizeSelector from '../../../components/ComboSizeSelector';
 import { selectedComboSize, selectedComboColor, hasComboItemColors } from '../../../lib/comboSizing';
@@ -10,7 +11,7 @@ import ProductColorSelector from '../../../components/ProductColorSelector';
 import ProductDescription from '../../../components/ProductDescription';
 import { useCatalog } from '../../../context/CatalogContext';
 import { useCart } from '../../../context/CartContext';
-import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiHeart, FiPlus, FiMinus } from 'react-icons/fi';
+import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiHeart, FiPlus, FiMinus, FiZoomIn } from 'react-icons/fi';
 
 export default function ProductDetail({ initialProduct }) {
   const { products, loading: catalogLoading } = useCatalog();
@@ -19,6 +20,7 @@ export default function ProductDetail({ initialProduct }) {
   const suggestedProducts = products.filter(item => item.category === product?.category && item.id !== product?.id).slice(0, 8);
   const duplicatedProducts = [...suggestedProducts, ...suggestedProducts, ...suggestedProducts];
   const [selectedImage, setSelectedImage] = useState(initialProduct?.image || '');
+  const [imageViewerOpen, setImageViewerOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -90,6 +92,7 @@ export default function ProductDetail({ initialProduct }) {
 
   return (
     <div className="min-h-screen bg-background">
+      {imageViewerOpen && <ProductImageViewer images={gallery} initialIndex={Math.max(0,gallery.indexOf(selectedImage))} name={product.name} onClose={() => setImageViewerOpen(false)}/>}
       {/* Breadcrumb */}
       <div className="border-b border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
@@ -118,7 +121,10 @@ export default function ProductDetail({ initialProduct }) {
               </button>)}
             </div>}
             <div className="relative flex-1 min-w-0 h-[360px] sm:h-[460px] lg:h-[480px] rounded-xl bg-muted overflow-hidden group">
-              <Image src={selectedImage} alt={product.name} fill sizes="(max-width: 1024px) 80vw, 420px" className="object-contain" priority />
+              <button type="button" aria-label={`Enlarge image of ${product.name}`} aria-haspopup="dialog" onClick={() => setImageViewerOpen(true)} className="absolute inset-0 w-full h-full cursor-zoom-in focus-visible:outline-2 focus-visible:outline-primary focus-visible:-outline-offset-2">
+                <Image src={selectedImage} alt={product.name} fill sizes="(max-width: 1024px) 80vw, 420px" className="object-contain" priority />
+                <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-md bg-background/90 px-2 py-1.5 text-[11px] text-foreground"><FiZoomIn aria-hidden="true"/>Zoom image</span>
+              </button>
               <button type="button" aria-label={`${isInWishlist(product.id) ? 'Remove from' : 'Add to'} favourites`} aria-pressed={isInWishlist(product.id)}
                 onClick={() => isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product)}
                 className="absolute right-2 top-2 w-11 h-11 flex items-center justify-center rounded-full bg-background/80 text-foreground hover:bg-background transition-colors">
