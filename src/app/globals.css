@@ -358,3 +358,6 @@ input::placeholder, textarea::placeholder { color: var(--muted-foreground); opac
 .home-category-track.is-slider::-webkit-scrollbar{display:none}
 
 .home-category-set{display:flex;flex:0 0 auto;gap:24px;align-items:stretch}
+
+.home-featured-card{flex:0 0 auto;width:min(100%,400px);min-width:0}
+.home-featured-track.is-slider .home-featured-card{width:min(calc(100vw - 48px),400px)}

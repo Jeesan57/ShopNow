@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import CollectionSlider from '../../../components/CollectionSlider';
 import ProductCard from '../../../components/ProductCard';
 import ProductImageViewer from '../../../components/ProductImageViewer';
 import ProductPrice from '../../../components/ProductPrice';
@@ -204,9 +205,9 @@ export default function ProductDetail({ initialProduct }) {
             <h2 id="related-products-heading" className="text-2xl font-semibold text-foreground mb-2">You might also like</h2>
             <p className="text-sm text-muted-foreground">More from our {product.category} collection.</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {suggestedProducts.map(item => <div key={item.id} className="w-full max-w-[440px] min-w-0"><ProductCard product={item} onQuickView={setQuickViewProduct}/></div>)}
-          </div>
+          <CollectionSlider count={suggestedProducts.length} variant="products" label="Related products">
+            {suggestedProducts.map(item => <div key={item.id} className="home-featured-card"><ProductCard product={item} onQuickView={setQuickViewProduct}/></div>)}
+          </CollectionSlider>
         </section>}
 
       </div>

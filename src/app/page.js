@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCatalog } from '../context/CatalogContext';
+import CollectionSlider from '../components/CollectionSlider';
 import CategoryCollection from '../components/CategoryCollection';
 import ProductCard from '../components/ProductCard';
 import dynamic from 'next/dynamic';
@@ -359,7 +360,7 @@ export default function Home() {
 
       {/* Featured Products Section */}
       <section className="py-20 bg-muted/50">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 text-primary text-sm font-semibold uppercase tracking-wider mb-4">
               <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
@@ -373,9 +374,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid justify-center gap-4" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 440px), 440px))'}}>
-            {trendingProducts.map(product => <ProductCard key={product.id} product={product} onQuickView={item => { setQuickViewProduct(item); setIsQuickViewOpen(true); }} />)}
-          </div>
+          <CollectionSlider count={trendingProducts.length} variant="products">
+            {trendingProducts.map(product => <div key={product.id} className="home-featured-card"><ProductCard product={product} onQuickView={item => { setQuickViewProduct(item); setIsQuickViewOpen(true); }}/></div>)}
+          </CollectionSlider>
 
           {/* View all products CTA */}
           <div className="text-center mt-12">
