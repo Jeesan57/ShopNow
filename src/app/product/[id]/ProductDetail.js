@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import ProductCard from '../../../components/ProductCard';
 import ProductImageViewer from '../../../components/ProductImageViewer';
 import ProductPrice from '../../../components/ProductPrice';
 import ComboSizeSelector from '../../../components/ComboSizeSelector';
@@ -13,19 +15,19 @@ import { useCatalog } from '../../../context/CatalogContext';
 import { useCart } from '../../../context/CartContext';
 import { FiUser, FiArrowLeft, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiHeart, FiPlus, FiMinus, FiZoomIn } from 'react-icons/fi';
 
+const QuickViewModal = dynamic(() => import('../../../components/QuickViewModal'));
+
 export default function ProductDetail({ initialProduct }) {
   const { products, loading: catalogLoading } = useCatalog();
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
   const product = products.find(item => item.id === initialProduct?.id) || initialProduct;
-  const suggestedProducts = products.filter(item => item.category === product?.category && item.id !== product?.id).slice(0, 8);
-  const duplicatedProducts = [...suggestedProducts, ...suggestedProducts, ...suggestedProducts];
+  const suggestedProducts = [...new Map(products.filter(item => item.category === product?.category && String(item.id) !== String(product?.id)).map(item => [String(item.id),item])).values()].slice(0,8);
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const closeQuickView = useCallback(() => setQuickViewProduct(null), []);
   const [selectedImage, setSelectedImage] = useState(initialProduct?.image || '');
   const [imageViewerOpen, setImageViewerOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const sliderRef = useRef(null);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [colorChoice, setColorChoice] = useState(initialProduct?.colors?.[0] || '');
 
   const [selectedSize, setSelectedSize] = useState(initialProduct?.sizes?.[0] || '');
@@ -34,22 +36,6 @@ export default function ProductDetail({ initialProduct }) {
   const perItemColors = hasComboItemColors(product);
   const selectedColor = perItemColors ? selectedComboColor(product,comboColors) : (product?.colors || []).includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
   const resolvedSize = product?.is_combo ? selectedComboSize(product,comboSelection) : selectedSize;
-
-  // Continuous scroll functionality
-  useEffect(() => {
-    if (duplicatedProducts.length === 0 || !isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      setScrollPosition((prev) => {
-        const newPos = prev + 2; // Move 2px at a time for smooth scroll
-        const productWidth = 320; // Approximate width of each product card
-        const resetPoint = (duplicatedProducts.length / 3) * productWidth; // Reset after one set
-        return newPos >= resetPoint ? 0 : newPos;
-      });
-    }, 50); // Update every 50ms for smooth scroll
-
-    return () => clearInterval(interval);
-  }, [duplicatedProducts.length, isAutoPlaying]);
 
   const handleAddToCart = async () => {
     if (!resolvedSize || selectedColor === null) {
@@ -93,6 +79,7 @@ export default function ProductDetail({ initialProduct }) {
   return (
     <div className="min-h-screen bg-background">
       {imageViewerOpen && <ProductImageViewer images={gallery} initialIndex={Math.max(0,gallery.indexOf(selectedImage))} name={product.name} onClose={() => setImageViewerOpen(false)}/>}
+      {quickViewProduct && <QuickViewModal product={quickViewProduct} isOpen={true} onClose={closeQuickView}/>}
       {/* Breadcrumb */}
       <div className="border-b border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
@@ -212,81 +199,16 @@ export default function ProductDetail({ initialProduct }) {
           <ProductDescription text={product.description} />
         </section>}
 
-        {/* Enhanced Suggested Products with PROPER Slider */}
-        {suggestedProducts.length > 0 && (
-          <div className="mt-12">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-semibold text-foreground mb-2">
-                You might also like
-              </h2>
-              <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                Discover more amazing products from our {product.category} collection
-              </p>
-            </div>
-
-            {/* Continuous Slider Container */}
-            <div
-              className="relative overflow-hidden"
-              onMouseEnter={() => setIsAutoPlaying(false)}
-              onMouseLeave={() => setIsAutoPlaying(true)}
-            >
-
-              {/* Slider Track */}
-              <div
-                ref={sliderRef}
-                className="flex"
-                style={{ transform: `translateX(-${scrollPosition}px)` }}
-              >
-                {duplicatedProducts.map((suggestedProduct, index) => (
-                  <div
-                    key={`${suggestedProduct.id}-${index}`}
-                    className="shrink-0 w-80 px-4" // Fixed width for continuous scroll
-                  >
-                    <div className="group bg-card rounded-2xl border border-border hover:border-primary transition-all duration-500 hover:shadow-2xl overflow-hidden">
-                      <Link href={`/product/${suggestedProduct.id}`} className="block">
-                        <div className="relative aspect-square overflow-hidden">
-                          <Image
-                            src={suggestedProduct.image}
-                            alt={suggestedProduct.name}
-                            width={400}
-                            height={400}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                        </div>
-                      </Link>
-
-                      <div className="p-6">
-                        <div className="mb-3">
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                            {suggestedProduct.category}
-                          </span>
-                        </div>
-
-                        <Link href={`/product/${suggestedProduct.id}`}>
-                          <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors leading-tight">
-                            {suggestedProduct.name}
-                          </h3>
-                        </Link>
-
-                        <div className="flex items-center justify-between">
-                          <span className="text-xl font-bold text-foreground">
-                            <ProductPrice product={suggestedProduct} />
-                          </span>
-                          <Link
-                            href={`/product/${suggestedProduct.id}`}
-                            className="text-primary hover:text-primary/80 font-medium text-sm"
-                          >
-                            View Details →
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        {suggestedProducts.length > 0 && <section aria-labelledby="related-products-heading" className="mt-12">
+          <div className="text-center mb-6">
+            <h2 id="related-products-heading" className="text-2xl font-semibold text-foreground mb-2">You might also like</h2>
+            <p className="text-sm text-muted-foreground">More from our {product.category} collection.</p>
           </div>
-        )}
+          <div className="flex flex-wrap justify-center gap-4">
+            {suggestedProducts.map(item => <div key={item.id} className="w-full max-w-[440px] min-w-0"><ProductCard product={item} onQuickView={setQuickViewProduct}/></div>)}
+          </div>
+        </section>}
+
       </div>
     </div>
   );

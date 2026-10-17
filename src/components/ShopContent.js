@@ -436,7 +436,7 @@ export default function ShopContent() {
             </div>
 
             {/* Product Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid justify-start gap-4" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 440px), 440px))'}}>
               {isLoading ? (
                 Array.from({ length: productsPerPage }, (_, index) => (
                   <ProductSkeleton key={`skeleton-${index}`} />

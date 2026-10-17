@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCatalog } from '../context/CatalogContext';
+import CategoryCollection from '../components/CategoryCollection';
 import ProductCard from '../components/ProductCard';
 import dynamic from 'next/dynamic';
 const QuickViewModal = dynamic(() => import('../components/QuickViewModal'));
@@ -267,12 +268,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+          <CategoryCollection count={categories.length}>
             {categories.map((category, index) => (
               <Link
                 key={category}
-                href={`/shop?category=${category}`}
-                className="group w-full max-w-sm bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-border"
+                href={`/shop?category=${encodeURIComponent(category)}`}
+                className="home-category-card group bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-border"
               >
                 {/* Category Image - Real Images */}
                 <div className="relative h-48 bg-muted flex items-center justify-center overflow-hidden">
@@ -341,7 +342,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
+          </CategoryCollection>
 
           {/* Bottom CTA */}
           <div className="text-center mt-12">
@@ -372,7 +373,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid justify-center gap-4" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 440px), 440px))'}}>
             {trendingProducts.map(product => <ProductCard key={product.id} product={product} onQuickView={item => { setQuickViewProduct(item); setIsQuickViewOpen(true); }} />)}
           </div>
 
