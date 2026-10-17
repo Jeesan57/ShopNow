@@ -5,6 +5,8 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductPrice from './ProductPrice';
+import ComboSizeSelector from './ComboSizeSelector';
+import { selectedComboSize, selectedComboColor, hasComboItemColors } from '../lib/comboSizing';
 import ProductColorSelector from './ProductColorSelector';
 import { useCart } from '../context/CartContext';
 import { FiX, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiArrowUpRight, FiPlus, FiMinus } from 'react-icons/fi';
@@ -16,11 +18,15 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
   const [added, setAdded] = useState(false);
   const [colorChoice, setColorChoice] = useState('');
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || '');
+  const [comboSelection, setComboSelection] = useState({});
+  const [comboColors, setComboColors] = useState({});
+  const perItemColors = hasComboItemColors(product);
+  const resolvedSize = product?.is_combo ? selectedComboSize(product,comboSelection) : selectedSize;
   const panelRef = useRef(null);
   const titleId = useId();
   const quantityId = useId();
   const productId = product?.id;
-  const selectedColor = product?.colors?.includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
+  const selectedColor = perItemColors ? selectedComboColor(product,comboColors) : product?.colors?.includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
 
   useEffect(() => {
     if (!isOpen) return;
@@ -55,8 +61,8 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
     setSelectedImage(gallery[(gallery.indexOf(selectedImage) + direction + gallery.length) % gallery.length]);
   }
   function add() {
-    if (!selectedSize || product.stock <= 0) return;
-    for (let index = 0; index < quantity; index++) addToCart(product, selectedSize, selectedColor);
+    if (!resolvedSize || selectedColor === null || product.stock <= 0) return;
+    for (let index = 0; index < quantity; index++) addToCart(product, resolvedSize, selectedColor);
     setAdded(true);
   }
 
@@ -87,11 +93,11 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
             {product.description && <p className="mt-3 text-xs leading-5 text-muted-foreground line-clamp-2">{product.description.replace(/[#*]/g, '')}</p>}
 
             <div className="mt-5 pt-4 border-t border-border space-y-4">
-              <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={color => { setColorChoice(color); setAdded(false); }} />
-              <fieldset>
+              {!perItemColors && <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={color => { setColorChoice(color); setAdded(false); }} />}
+              {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={selection => { setComboColors(selection); setAdded(false); }} product={product} value={comboSelection} onChange={selection => { setComboSelection(selection); setAdded(false); }}/> : <>              <fieldset>
                 <legend className="text-xs font-medium text-foreground mb-3">Size <span className="ml-2 text-muted-foreground font-normal">{selectedSize}</span></legend>
                 <div className="flex flex-wrap gap-2">{(product.sizes || []).map(size => <button key={size} type="button" aria-pressed={selectedSize === size} onClick={() => { setSelectedSize(size); setAdded(false); }} className={`min-w-11 h-11 px-3 rounded-md border text-xs font-medium focus-visible:outline-2 focus-visible:outline-primary ${selectedSize === size ? 'bg-foreground/5 border-foreground ring-1 ring-foreground' : 'border-border hover:border-primary'}`}>{size}</button>)}</div>
-              </fieldset>
+              </fieldset></>}
               <div className="border-t border-border pt-4">
                 <div className="flex justify-between mb-3 text-xs"><p id={quantityId} className="font-medium">Quantity</p>{quantity > 1 && <p className="text-muted-foreground">Total <span className="font-semibold text-foreground tabular-nums">{money(product.price * quantity)}</span></p>}</div>
                 <div className="flex gap-3">
@@ -100,7 +106,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                     <span className="w-6 text-center text-xs font-semibold tabular-nums" aria-live="polite">{quantity}</span>
                     <button type="button" aria-label="Increase quantity" disabled={quantity >= product.stock} onClick={() => { setQuantity(value => Math.min(product.stock, value + 1)); setAdded(false); }} className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-30"><FiPlus className="w-3.5 h-3.5" /></button>
                   </div>
-                  <button type="button" onClick={add} disabled={!selectedSize || product.stock <= 0} className="flex-1 min-w-0 min-h-12 px-2 rounded-md text-xs font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-40 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <button type="button" onClick={add} disabled={!resolvedSize || selectedColor === null || product.stock <= 0} className="flex-1 min-w-0 min-h-12 px-2 rounded-md text-xs font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-40 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                     {added ? <FiCheck className="w-4 h-4 shrink-0" /> : <FiShoppingBag className="w-4 h-4 shrink-0" />}{product.stock <= 0 ? 'Out of stock' : added ? 'Add again' : 'Add to cart'}
                   </button>
                 </div>

@@ -95,3 +95,31 @@
 .admin-shell .admin-actions-column{width:1%;white-space:nowrap;vertical-align:middle}
 .admin-table-actions{display:inline-flex;align-items:center;gap:8px;flex-wrap:nowrap}
 .admin-shell .admin-table-actions button{min-height:36px;padding:9px 12px;font-size:12px}
+
+.admin-combo-sizing{border:0;padding:0;margin:20px 0;min-width:0}
+.admin-combo-sizing h3{font-size:13px;font-weight:600;margin-bottom:12px}
+.admin-combo-note{font-size:12px;line-height:1.7;color:#807360;margin:12px 0}
+.admin-combo-chart{margin:16px 0}
+.admin-combo-chart summary{font-size:13px;min-height:32px}
+.admin-shell .admin-combo-chart th,.admin-shell .admin-combo-chart td{padding:8px;font-size:11px}
+.admin-shell .admin-combo-chart input{min-width:85px;padding:8px;font-size:12px}
+.admin-combo-item{border:1px solid #e8dfd0;border-radius:10px;padding:16px;margin:14px 0;min-width:0}
+.admin-combo-item>.admin-row h3{margin:0}
+.admin-combo-entry{display:flex;gap:8px;align-items:end;margin:12px 0}
+.admin-combo-entry label{flex:1;min-width:0;margin:0}
+.admin-combo-entry button{flex-shrink:0}
+.admin-combo-columns{display:flex;flex-wrap:wrap;gap:6px}
+.admin-shell .admin-combo-columns button{font-size:11px;padding:6px 8px}
+@media(max-width:480px){.admin-combo-item{padding:12px}.admin-combo-entry{flex-wrap:wrap}}
+.admin-combo-intro h3{margin:0 0 6px;font-size:14px}
+.admin-combo-intro p{margin:0;font-size:12px;line-height:1.7;color:#807360}
+.admin-combo-item>.admin-row h3{display:flex;align-items:center;gap:8px}
+.admin-combo-step{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#f3ecde;color:#946510;font-size:11px}
+.admin-combo-size-picker{border:0;padding:0;margin:14px 0;min-width:0}
+.admin-combo-size-picker legend{font-size:12px;font-weight:600;margin-bottom:10px}
+.admin-combo-size-picker legend span,.admin-combo-chart summary span{font-weight:400;color:#807360;font-size:11px;margin-left:8px}
+.admin-combo-more{margin:12px 0}
+.admin-combo-more>summary{font-size:12px;color:#807360;cursor:pointer;padding:6px 0;min-height:32px}
+.admin-combo-more[open]>.admin-size-options{margin-top:10px}
+.admin-combo-chart{padding-top:12px;border-top:1px solid #ece5da;margin-bottom:0}
+.admin-combo-chart>summary{cursor:pointer}

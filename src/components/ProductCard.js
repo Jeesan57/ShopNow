@@ -5,10 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiHeart, FiShoppingBag, FiCheck, FiEye, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
+import { getComboItems, hasComboItemColors } from '../lib/comboSizing';
 import { colorHex } from '../lib/productColors';
 
 export default function ProductCard({ product, onQuickView }) {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
+  const displayColors = hasComboItemColors(product) ? [...new Set(getComboItems(product).flatMap(item => item.colors || []))] : product.colors || [];
   const [sizeChoice, setSizeChoice] = useState(product.sizes?.[0] || '');
   const [added, setAdded] = useState(false);
   const [imageChoice, setImageChoice] = useState(product.image);
@@ -63,19 +65,19 @@ export default function ProductCard({ product, onQuickView }) {
       </Link>
       <div className="flex items-center justify-between gap-2 mt-2">
         <p className="text-xl font-semibold tracking-tight text-foreground tabular-nums"><ProductPrice product={product} /></p>
-        {!!product.colors?.length && <div className="flex items-center gap-1" aria-label={`${product.colors.length} available colors`}>
-          {product.colors.slice(0, 4).map(color => <span key={color} title={color} className="w-3 h-3 rounded-full border border-black/15" style={{backgroundColor:colorHex(color)}} />)}
-          {product.colors.length > 4 && <span className="text-[10px] text-muted-foreground">+{product.colors.length - 4}</span>}
+        {!!displayColors.length && <div className="flex items-center gap-1" aria-label={`${displayColors.length} available colors`}>
+          {displayColors.slice(0, 4).map(color => <span key={color} title={color} className="w-3 h-3 rounded-full border border-black/15" style={{backgroundColor:colorHex(color)}} />)}
+          {displayColors.length > 4 && <span className="text-[10px] text-muted-foreground">+{displayColors.length - 4}</span>}
         </div>}
       </div>
-      <fieldset className="mt-3">
+      {product.is_combo ? <p className="mt-3 text-xs leading-5 text-muted-foreground">Combo · choose options for each item.</p> : <>      <fieldset className="mt-3">
         <legend className="text-[11px] text-muted-foreground mb-1">Size</legend>
         <div className="flex flex-wrap gap-1.5">{(product.sizes || []).map(size => <button key={size} type="button" aria-pressed={selectedSize === size} onClick={() => { setSizeChoice(size); setAdded(false); }} className={`min-w-11 h-11 px-2 rounded-md border text-xs transition-colors focus-visible:outline-2 focus-visible:outline-primary ${selectedSize === size ? 'border-foreground bg-foreground/5 text-foreground font-medium' : 'border-border text-muted-foreground hover:border-primary'}`}>{size}</button>)}</div>
-      </fieldset>
+      </fieldset></>}
       <div className="mt-auto pt-4 grid grid-cols-[1fr_44px] gap-2">
-        <button type="button" disabled={!selectedSize || product.stock <= 0} onClick={() => { addToCart(product, selectedSize); setAdded(true); }} className="min-h-11 px-3 rounded-md bg-foreground text-background text-xs font-medium hover:opacity-85 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <button type="button" disabled={(!product.is_combo && !selectedSize) || product.stock <= 0} onClick={() => { if(product.is_combo) {onQuickView(product);return;} addToCart(product, selectedSize); setAdded(true); }} className="min-h-11 px-3 rounded-md bg-foreground text-background text-xs font-medium hover:opacity-85 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           {added ? <FiCheck className="w-4 h-4" /> : <FiShoppingBag className="w-4 h-4" />}
-          {product.stock <= 0 ? 'Out of stock' : added ? 'Added to cart' : 'Add to cart'}
+          {product.stock <= 0 ? 'Out of stock' : product.is_combo ? 'Choose sizes' : added ? 'Added to cart' : 'Add to cart'}
         </button>
         <button type="button" data-quick-view-id={product.id} aria-label={`Quick view: ${product.name}`} title="Quick view" onClick={() => onQuickView(product)} className="w-11 min-h-11 rounded-md border border-border flex items-center justify-center text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"><FiEye className="w-[18px] h-[18px]" /></button>
       </div>

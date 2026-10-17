@@ -24,7 +24,12 @@ export default function ShopContent() {
   const closeQuickView = useCallback(() => { setIsQuickViewOpen(false); setQuickViewProduct(null); }, []);
   const [productsPerPage, setProductsPerPage] = useState(12);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
+  const [priceFilter, setPriceRange] = useState({ min: 0, max: null });
+  const priceLimit = Math.max(1, Math.ceil(products.reduce((highest, product) => Math.max(highest, Number(product.price) || 0), 0)));
+  const priceRange = {
+    min: Math.min(priceFilter.min, priceLimit - 1),
+    max: priceFilter.max === null ? priceLimit : Math.min(priceFilter.max, priceLimit),
+  };
 
   // Handle URL search params
   useEffect(() => {
@@ -87,7 +92,7 @@ export default function ShopContent() {
     }, 200);
 
     return () => clearTimeout(timer);
-  }, [selectedCategory, sortBy, searchQuery, currentPage, productsPerPage, priceRange, products]);
+  }, [selectedCategory, sortBy, searchQuery, currentPage, productsPerPage, priceRange.min, priceRange.max, products]);
 
   // Update URL with current page
   useEffect(() => {
@@ -320,31 +325,33 @@ export default function ShopContent() {
                     {/* Min & Max Inputs */}
                     <div className="flex gap-3">
                       <div className="flex-1">
-                        <label className="block text-sm text-muted-foreground mb-1">Min Price</label>
+                        <label className="block text-sm text-muted-foreground mb-1">Min Price (৳)</label>
                         <input
                           type="number"
+                          aria-label="Minimum price"
                           value={priceRange.min}
                           onChange={(e) => {
-                            const value = Math.min(Number(e.target.value), priceRange.max - 1);
+                            const value = Math.max(0, Math.min(Number(e.target.value), priceRange.max - 1));
                             setPriceRange(prev => ({ ...prev, min: value }));
                           }}
                           className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground"
                           min="0"
-                          max="200"
+                          max={priceLimit}
                         />
                       </div>
                       <div className="flex-1">
-                        <label className="block text-sm text-muted-foreground mb-1">Max Price</label>
+                        <label className="block text-sm text-muted-foreground mb-1">Max Price (৳)</label>
                         <input
                           type="number"
+                          aria-label="Maximum price"
                           value={priceRange.max}
                           onChange={(e) => {
-                            const value = Math.max(Number(e.target.value), priceRange.min + 1);
-                            setPriceRange(prev => ({ ...prev, max: value }));
+                            const value = Math.min(priceLimit, Math.max(Number(e.target.value), priceRange.min + 1));
+                            setPriceRange(prev => ({ ...prev, max: value >= priceLimit ? null : value }));
                           }}
                           className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground"
                           min="0"
-                          max="200"
+                          max={priceLimit}
                         />
                       </div>
                     </div>
@@ -359,19 +366,20 @@ export default function ShopContent() {
                         <div
                           className="absolute h-2 bg-gold-500 rounded-full"
                           style={{
-                            left: `${(priceRange.min / 200) * 100}%`,
-                            right: `${100 - (priceRange.max / 200) * 100}%`,
+                            left: `${(priceRange.min / priceLimit) * 100}%`,
+                            right: `${100 - (priceRange.max / priceLimit) * 100}%`,
                           }}
                         ></div>
 
                         {/* Min Slider */}
                         <input
                           type="range"
+                          aria-label="Minimum price slider"
                           min="0"
-                          max="200"
+                          max={priceLimit}
                           value={priceRange.min}
                           onChange={(e) => {
-                            const value = Math.min(Number(e.target.value), priceRange.max - 1);
+                            const value = Math.max(0, Math.min(Number(e.target.value), priceRange.max - 1));
                             setPriceRange(prev => ({ ...prev, min: value }));
                           }}
                           className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-gold-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-gold-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
@@ -380,12 +388,13 @@ export default function ShopContent() {
                         {/* Max Slider */}
                         <input
                           type="range"
+                          aria-label="Maximum price slider"
                           min="0"
-                          max="200"
+                          max={priceLimit}
                           value={priceRange.max}
                           onChange={(e) => {
-                            const value = Math.max(Number(e.target.value), priceRange.min + 1);
-                            setPriceRange(prev => ({ ...prev, max: value }));
+                            const value = Math.min(priceLimit, Math.max(Number(e.target.value), priceRange.min + 1));
+                            setPriceRange(prev => ({ ...prev, max: value >= priceLimit ? null : value }));
                           }}
                           className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-gold-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-gold-500 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0"
                         />

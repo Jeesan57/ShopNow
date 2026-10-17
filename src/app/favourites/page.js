@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 export const dynamic = 'force-dynamic';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useCart } from '../../context/CartContext';
 import { useCatalog } from '../../context/CatalogContext';
@@ -12,6 +13,7 @@ import ProductSkeleton from '../../components/ProductSkeleton';
 import { FiHeart, FiChevronRight } from 'react-icons/fi';
 
 export default function Favourites() {
+  const router = useRouter();
   const { wishlistItems: savedWishlistItems, addToCart, removeFromWishlist } = useCart();
   const { products } = useCatalog();
   const wishlistItems = savedWishlistItems.map(item => products.find(product => product.id === item.id) || item);
@@ -106,10 +108,10 @@ export default function Favourites() {
                       <ProductPrice product={product} />
                     </span>
                     <button
-                      onClick={() => addToCart(product, product.sizes?.[0])}
+                      onClick={() => product.is_combo ? router.push(`/product/${product.id}`) : addToCart(product, product.sizes?.[0])}
                       className="bg-gold-600 dark:bg-gold-400 border border-border text-white dark:text-stone-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 dark:hover:bg-gold-300 transition-colors"
                     >
-                      Add to Cart
+                      {product.is_combo ? 'Choose sizes' : 'Add to Cart'}
                     </button>
                   </div>
                 </div>

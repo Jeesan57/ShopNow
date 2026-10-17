@@ -1,6 +1,7 @@
 'use client';
 
 import { normalizeProduct } from '../lib/pricing';
+import { hasComboItemColors } from '../lib/comboSizing';
 import { matchesCartItem } from '../lib/productColors';
 import { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 
@@ -60,11 +61,11 @@ export function CartProvider({ children }) {
     localStorage.setItem('shopnow-wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems, hydrated]);
 
-  const addToCart = (product, size, color = product.colors?.[0] || '') => {
-    if (product.colors?.length && !product.colors.includes(color)) { alert('Choose an available color.'); return; }
+  const addToCart = (product, size, color = hasComboItemColors(product) ? '' : product.colors?.[0] || '') => {
+    if (product.colors?.length ? !product.colors.includes(color) : Boolean(color)) { alert('Choose an available color.'); return; }
     if (product.stock !== undefined && product.stock <= 0) { alert('This product is out of stock.'); return; }
-    if (!size) {
-      console.error('Size is required to add to cart');
+    if (!size || !product.sizes?.includes(size)) {
+      alert('Choose an available size for each item.');
       return;
     }
     setCartItems(prevItems => {

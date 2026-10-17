@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductPrice from '../../../components/ProductPrice';
+import ComboSizeSelector from '../../../components/ComboSizeSelector';
+import { selectedComboSize, selectedComboColor, hasComboItemColors } from '../../../lib/comboSizing';
 import ProductColorSelector from '../../../components/ProductColorSelector';
 import ProductDescription from '../../../components/ProductDescription';
 import { useCatalog } from '../../../context/CatalogContext';
@@ -23,8 +25,13 @@ export default function ProductDetail({ initialProduct }) {
   const sliderRef = useRef(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [colorChoice, setColorChoice] = useState(initialProduct?.colors?.[0] || '');
-  const selectedColor = (product?.colors || []).includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
+
   const [selectedSize, setSelectedSize] = useState(initialProduct?.sizes?.[0] || '');
+  const [comboSelection, setComboSelection] = useState({});
+  const [comboColors, setComboColors] = useState({});
+  const perItemColors = hasComboItemColors(product);
+  const selectedColor = perItemColors ? selectedComboColor(product,comboColors) : (product?.colors || []).includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
+  const resolvedSize = product?.is_combo ? selectedComboSize(product,comboSelection) : selectedSize;
 
   // Continuous scroll functionality
   useEffect(() => {
@@ -43,15 +50,15 @@ export default function ProductDetail({ initialProduct }) {
   }, [duplicatedProducts.length, isAutoPlaying]);
 
   const handleAddToCart = async () => {
-    if (!selectedSize) {
-      alert('Please select a size before adding to cart.');
+    if (!resolvedSize || selectedColor === null) {
+      alert('Please choose an available size and color for each piece.');
       return;
     }
     setIsAddingToCart(true);
     await new Promise(resolve => setTimeout(resolve, 800));
 
     for (let i = 0; i < quantity; i++) {
-      addToCart(product, selectedSize, selectedColor);
+      addToCart(product, resolvedSize, selectedColor);
     }
 
     setIsAddingToCart(false);
@@ -139,8 +146,8 @@ export default function ProductDetail({ initialProduct }) {
             </div>
 
             <div className="mt-6 border-t border-border pt-5 space-y-5">
-              <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={setColorChoice} />
-              <fieldset>
+              {!perItemColors && <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={setColorChoice} />}
+              {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={setComboColors} product={product} value={comboSelection} onChange={setComboSelection}/> : <>              <fieldset>
                 <legend className="text-xs font-medium text-foreground mb-3">Size <span className="text-muted-foreground font-normal ml-2">{selectedSize}</span></legend>
                 <div className="flex flex-wrap gap-2">
                   {(product.sizes || []).map(size => (
@@ -155,7 +162,7 @@ export default function ProductDetail({ initialProduct }) {
                     >{size}</button>
                   ))}
                 </div>
-              </fieldset>
+              </fieldset></>}
 
               <div className="border-t border-border pt-5">
                 <div className="flex items-center justify-between mb-3 text-xs">
@@ -176,7 +183,7 @@ export default function ProductDetail({ initialProduct }) {
                       <FiPlus className="w-3.5 h-3.5" />
                     </button>
                   </div>
-                  <button onClick={handleAddToCart} disabled={isAddingToCart || product.stock <= 0 || !selectedSize}
+                  <button onClick={handleAddToCart} disabled={isAddingToCart || product.stock <= 0 || !resolvedSize || selectedColor === null}
                     className="flex-1 min-w-0 min-h-12 px-3 rounded-md text-xs sm:text-sm font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                     {isAddingToCart ? <FiCheck className="w-4 h-4 shrink-0" /> : <FiShoppingBag className="w-4 h-4 shrink-0" />}
                     {product.stock <= 0 ? 'Out of stock' : isAddingToCart ? 'Adding…' : 'Add to cart'}
