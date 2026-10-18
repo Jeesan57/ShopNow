@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { FiPlus, FiTrash2, FiRefreshCw } from 'react-icons/fi';
 import { getSupabase } from '../lib/supabase';
+import StockColorSelect from './StockColorSelect';
+import { PRODUCT_COLORS } from '../lib/productColors';
 import { stockTotal } from '../lib/sizeStock';
 import { getComboItems } from '../lib/comboSizing';
 
@@ -18,6 +20,11 @@ export default function StockNotepad({ products = [] }) {
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
   const [notice, setNotice] = useState('');
+  const colorChoices = [...new Set([
+    ...PRODUCT_COLORS.map(color => color.name),
+    ...products.flatMap(product => product.is_combo ? getComboItems(product).flatMap(piece => piece.colors || []) : product.colors || []),
+    ...rows.map(row => row.color).filter(Boolean),
+  ])];
   const total = rows.reduce((sum, row) => sum + Number(row.quantity || 0), 0);
   async function refresh() {
     const { data, error } = await getSupabase().from('stock_notes').select('*').order('updated_at', { ascending: false });
@@ -122,7 +129,7 @@ export default function StockNotepad({ products = [] }) {
           <tbody>{rows.map((row, index) => <tr key={row.key}>
             <td><input required aria-label={`Item ${index + 1}`} maxLength={200} placeholder="e.g. Polo shirt" value={row.item} onChange={event => edit(row.key, 'item', event.target.value)}/></td>
             <td><input aria-label={`Size ${index + 1}`} maxLength={1000} placeholder="M or 32" value={row.size} onChange={event => edit(row.key, 'size', event.target.value)}/></td>
-            <td><input aria-label={`Color ${index + 1}`} maxLength={40} placeholder="e.g. Black" value={row.color} onChange={event => edit(row.key, 'color', event.target.value)}/></td>
+            <td><StockColorSelect label={`Color ${index + 1}`} colors={colorChoices} value={row.color} disabled={busy} onChange={color=>edit(row.key, 'color', color)}/></td>
             <td><input required aria-label={`Stock quantity ${index + 1}`} type="number" inputMode="numeric" min="0" max="1000000" step="1" placeholder="0" value={row.quantity} onChange={event => edit(row.key, 'quantity', event.target.value)}/></td>
             <td><button type="button" className="cost-delete" aria-label={`Remove row ${index + 1}`} disabled={rows.length === 1} onClick={() => { setRows(rows.filter(item => item.key !== row.key)); setDirty(true); }}><FiTrash2 aria-hidden="true"/></button></td>
           </tr>)}</tbody>
