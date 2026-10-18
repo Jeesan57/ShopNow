@@ -57,3 +57,40 @@ test traffic or creating live orders.
 References:
 - https://developers.google.com/analytics/devguides/collection/ga4/views
 - https://developers.google.com/analytics/devguides/collection/ga4/ecommerce
+
+## Traffic reports inside Admin
+
+Open **Admin → Traffic** for visitors, sessions, page views, engagement,
+realtime visitors, sources, popular pages, devices and locations. Choose the
+last 7, 28 or 90 days. Reports include today in the property's time zone and
+are cached for one minute. Google processing can delay recent data.
+
+Reading reports requires a separate server connection:
+
+1. In Google Analytics, open **Admin → Property details** and copy the numeric
+   **Property ID**. `G-S832ZPVY7K` is the Measurement ID; the Stream ID is also
+   a different identifier. Neither works as the Property ID.
+2. In Google Cloud, enable **Google Analytics Data API** and create a service
+   account. Create a JSON key for that account.
+3. In Google Analytics **Admin → Property access management**, add the service
+   account's `client_email` with **Viewer** access.
+4. Set these server environment variables in your hosting settings, or in
+   `.env.local` for local development:
+
+   ```dotenv
+   GOOGLE_ANALYTICS_PROPERTY_ID=your_numeric_property_id
+   GOOGLE_ANALYTICS_CLIENT_EMAIL=your_service_account_email
+   GOOGLE_ANALYTICS_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+   ```
+
+Use `client_email` and `private_key` from the downloaded JSON. Keep the key
+private; do not paste it into chat, commit it, or prefix these variables with
+`NEXT_PUBLIC_`. Restart locally or redeploy after setting them.
+
+Traffic reports verify the signed-in user's Admin membership before contacting
+Google or returning cached reports. Missing configuration displays setup
+instructions rather than invented visitor numbers. A realtime API failure
+leaves realtime unavailable while the other reports remain usable.
+
+Official reporting setup:
+https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart
