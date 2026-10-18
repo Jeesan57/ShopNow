@@ -1,11 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FiGrid, FiPlus, FiSearch, FiTrash2, FiPackage, FiArrowUpRight } from 'react-icons/fi';
+import { readAllOrders } from '../../lib/adminData';
 import { productPrice } from '../../lib/pricing';
 import { getSupabase } from '../../lib/supabase';
 import './admin.css';
 import BrandLogo from '../../components/BrandLogo';
+import AdminDashboard from '../../components/AdminDashboard';
 import AdminCoupons from '../../components/AdminCoupons';
 import AdminComboSizing from '../../components/AdminComboSizing';
 import { comboItemColors, comboColorCombinationCount, comboItemSizes, comboCombinationCount, getComboItems, createClothingCombo } from '../../lib/comboSizing';
@@ -25,13 +27,13 @@ export default function Admin() {
   const [tab, setTab] = useState('Overview'), [notice, setNotice] = useState(''), [busy, setBusy] = useState(false);
   const [products, setProducts] = useState([]), [orders, setOrders] = useState([]), [messages, setMessages] = useState([]), [categories, setCategories] = useState([]);
   const [search, setSearch] = useState(''), [editing, setEditing] = useState(null), [categoryName, setCategoryName] = useState(''), [categoryImage, setCategoryImage] = useState('');
-  async function load() {
+  const load = useCallback(async () => {
     const db = getSupabase();
-    const results = await Promise.all([db.from('products').select('*').order('created_at', { ascending: false }), db.from('orders').select('*,order_items(*)').order('created_at', { ascending: false }), db.from('messages').select('*').order('created_at', { ascending: false }), db.from('categories').select('*').order('name')]);
+    const results = await Promise.all([db.from('products').select('*').order('created_at', { ascending: false }), readAllOrders(db), db.from('messages').select('*').order('created_at', { ascending: false }), db.from('categories').select('*').order('name')]);
     const error = results.find(r => r.error)?.error;
     if (error) throw error;
     setProducts(results[0].data); setOrders(results[1].data); setMessages(results[2].data); setCategories(results[3].data);
-  }
+  }, []);
   useEffect(() => {
     let alive = true;
     let subscription;
@@ -54,7 +56,7 @@ export default function Admin() {
       subscription = db.auth.onAuthStateChange((_event, nextSession) => { setTimeout(() => verify(nextSession), 0); }).data.subscription;
     } catch (e) { setNotice(e.message); setReady(true); }
     return () => { alive = false; subscription?.unsubscribe(); };
-  }, []);
+  }, [load]);
   async function action(fn, success) {
     setBusy(true); setNotice('');
     try { await fn(); await load(); setNotice(success); }
@@ -137,7 +139,6 @@ export default function Admin() {
   if (!session || !allowed) return <div className="admin-login"><div className="admin-login-card"><Link href="/"><BrandLogo /></Link><p className="admin-eyebrow">STORE MANAGEMENT</p><h1>Your store, in control.</h1><p>Sign in with your approved administrator account.</p><p role="status">{notice}</p>{session ? <><p>This account does not have administrator access. Add its user ID to the admin_users table through Supabase.</p><button onClick={() => getSupabase().auth.signOut()}>Sign out</button></> : <form onSubmit={login}><label>Email<input name="email" type="email" autoComplete="username" required /></label><label>Password<input name="password" type="password" autoComplete="current-password" required /></label><button disabled={busy}>{busy ? 'Signing in…' : 'Sign in →'}</button></form>}</div></div>;
   const visible = products.filter(p => `${p.name} ${p.category}`.toLowerCase().includes(search.toLowerCase()));
   const customers = Object.values(orders.filter(order => !order.customer_hidden).reduce((all, o) => { const c = all[o.phone] || { name: o.customer_name, email: o.email, phone: o.phone, count: 0, spent: 0 }; c.count++; if(o.status !== 'cancelled') c.spent += Number(o.total); all[o.phone] = c; return all; }, {}));
-  const revenue = orders.filter(o => o.status === 'delivered').reduce((sum, o) => sum + Number(o.total), 0);
   const update = (table, id, patch) => action(async () => { const { error } = await getSupabase().from(table).update(patch).eq('id', id); if (error) throw error; }, 'Updated.');
   async function deleteProduct(product) {
     if (!window.confirm(`Permanently delete ${product.name}? Existing order history will be retained.`)) return;
@@ -165,7 +166,7 @@ export default function Admin() {
   }
   const orderList = list => <div className="admin-stack">{list.length === 0 && <div className="admin-empty">No orders yet. New checkout orders will appear here.</div>}{list.map(o => <article className="admin-card" key={o.id}><div className="admin-row"><div><strong>{o.customer_name}</strong><p>{new Date(o.created_at).toLocaleString()} · #{o.id.slice(0,8)}</p></div><strong>{money(o.total)}</strong><select aria-label={`Status for order ${o.id}`} value={o.status} disabled={busy} onChange={e => update('orders',o.id,{status:e.target.value})}>{['pending','confirmed','shipped','delivered','cancelled'].map(s => <option key={s}>{s}</option>)}</select><button type="button" className="admin-danger admin-delete-action" disabled={busy} aria-label={`Delete order ${o.id}`} onClick={()=>deleteOrder(o)}><FiTrash2 aria-hidden="true"/>Delete</button></div><details><summary>Order details</summary><p>{o.email} · {o.phone}</p><p>{o.address}</p>{o.district && <p>{o.area}, {o.district} · {o.delivery_zone === 'inside_dhaka' ? 'Inside Dhaka city' : 'Outside Dhaka city'}</p>}{o.delivery_notes && <p>Delivery notes: {o.delivery_notes}</p>}<p>Subtotal: {money(o.subtotal ?? o.total)} · Delivery: {money(o.delivery_charge || 0)}</p>{Number(o.discount_amount)>0 && <p>Coupon {o.coupon_code}: −{money(o.discount_amount)}</p>}<p>Cash on delivery</p>{o.order_items.map(i => <p key={i.id}>{i.name} · {i.size}{i.color ? ` · ${i.color}` : ''} × {i.quantity} — {money(i.price * i.quantity)}</p>)}{o.status === 'cancelled' && <p>Restock returned items manually after confirming the return.</p>}</details></article>)}</div>;
   return <div className="admin-shell"><aside className="admin-sidebar"><Link className="admin-brand" href="/"><BrandLogo className="w-44 h-11" /><span>ADMINISTRATION</span></Link><nav>{['Overview','Products','Stocks','Categories','Orders','Customers','Coupons','Messages','Stock Notepad','Costs Notepad'].map(t => <button className={tab === t ? 'selected' : ''} key={t} onClick={() => {if(t==='Stock Notepad')setStockNotepadOpened(true);setTab(t);setSearch('');}}>{t}{t === 'Messages' && <span>{messages.filter(m=>!m.read).length}</span>}</button>)}</nav><div className="admin-sidebar-bottom"><small>{session.user.email}</small><Link href="/" target="_blank">View storefront ↗</Link><button onClick={() => getSupabase().auth.signOut()}>Sign out</button></div></aside><section className="admin-main"><header className="admin-row"><div><p className="admin-eyebrow">YOUR STORE / {tab.toUpperCase()}</p><h1>{tab}</h1></div>{tab !== 'Stocks' && <button className="admin-secondary" disabled={busy} onClick={() => action(async()=>{},'Data refreshed.')}>Refresh</button>}</header>{notice && <p className="admin-notice" role="status">{notice}</p>}
-  {tab === 'Overview' && <><div className="admin-stats">{[['Delivered revenue',money(revenue)],['Orders',orders.length],['Active products',products.filter(p=>p.active).length],['Low stock',products.filter(p=>p.stock<5).length]].map(([label,value])=><div className="admin-card" key={label}><p>{label}</p><h2>{value}</h2></div>)}</div><h2>Latest orders</h2>{orderList(orders.slice(0,5))}<h2>Inventory attention</h2><div className="admin-card">{products.filter(p=>p.stock<5).map(p=><p key={p.id}>{p.name} — {p.stock} remaining</p>)}{products.every(p=>p.stock>=5)&&<p>All products have sufficient stock.</p>}</div></>}
+  {tab === 'Overview' && <AdminDashboard orders={orders} products={products} onNavigate={tab=>{setTab(tab);setSearch('');}}/>}
   {tab === 'Products' && <><div className="admin-row admin-products-toolbar"><div className="admin-products-search"><FiSearch aria-hidden="true"/><input aria-label="Search products" placeholder="Search products or categories" value={search} onChange={e=>setSearch(e.target.value)}/></div><button type="button" className="admin-add-product" onClick={()=>setEditing({...emptyProduct,category:categories[0]?.name||''})}><FiPlus aria-hidden="true"/><span>Add product</span></button></div><div className="admin-table-wrap"><table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Visibility</th><th className="admin-actions-column">Action</th></tr></thead><tbody>{visible.map(p=><tr key={p.id}><td><strong>{p.name}</strong></td><td>{p.category}</td><td>{Number(p.discount_percent)>0 ? <><strong>{money(productPrice(p))}</strong><br/><del>{money(p.price)}</del><span> · {p.discount_percent}% off</span></> : money(p.price)}</td><td>{p.stock}</td><td><span className={`admin-badge ${p.active?'live':''}`}>{p.active?'Published':'Draft'}</span></td><td className="admin-actions-column"><div className="admin-table-actions"><button type="button" className="admin-secondary" disabled={busy} onClick={()=>setEditing({...p,sizes:p.sizes || [],thumbnails:[...new Set(p.thumbnails || [])].filter(url=>url !== p.image),colors:p.colors || []})}>Edit</button><button type="button" className="admin-danger admin-delete-action" disabled={busy} aria-label={`Delete product ${p.name}`} onClick={()=>deleteProduct(p)}><FiTrash2 aria-hidden="true"/>Delete</button></div></td></tr>)}</tbody></table>{!visible.length&&<div className="admin-empty">Add your first product to start selling.</div>}</div></>}
   {tab === 'Categories' && <div className="category-manager">
     <div className="category-intro"><p>Organize your catalog into collections customers can explore.</p><span>{categories.length} {categories.length === 1 ? 'category' : 'categories'}</span></div>
