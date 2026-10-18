@@ -1,16 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiPlus, FiTrash2, FiRefreshCw } from 'react-icons/fi';
 import { getSupabase } from '../lib/supabase';
 import StockColorSelect from './StockColorSelect';
 import { PRODUCT_COLORS } from '../lib/productColors';
-import { stockTotal } from '../lib/sizeStock';
 import { getComboItems } from '../lib/comboSizing';
 
 const blankRow = () => ({ key: crypto.randomUUID(), item: '', size: '', color: '', quantity: '' });
 export default function StockNotepad({ products = [] }) {
-  const [selectedProductId, setSelectedProductId] = useState('');
-  const selectedProduct = products.find(product => String(product.id) === selectedProductId);
+  const noteEditor = useRef(null);
   const [sheets, setSheets] = useState([]);
   const [current, setCurrent] = useState(null);
   const [title, setTitle] = useState('');
@@ -69,6 +67,7 @@ export default function StockNotepad({ products = [] }) {
     const existing = rows.filter(row => row.item || row.size || row.color || row.quantity !== '');
     if (existing.length + additions.length > 200) { setNotice('A note can contain up to 200 rows.'); return; }
     setRows([...existing, ...additions]); setDirty(true); setNotice(`${product.name} quantities copied into this note.`);
+    requestAnimationFrame(()=>noteEditor.current?.scrollIntoView({behavior:'smooth',block:'start'}));
   }
   async function save(event) {
     event.preventDefault(); setBusy(true); setNotice('');
@@ -98,28 +97,17 @@ export default function StockNotepad({ products = [] }) {
   }
   if (loading) return <p role="status">Loading stock notes…</p>;
   return <div className="cost-notepad stock-notepad">
-    <p className="stock-notepad-intro">Keep stock counts, delivery checks, and restock notes together. Product inventory is updated in Products.</p>
+    <p className="stock-notepad-intro">Save stock counts and restock reminders. Monitor current inventory in Stocks.</p>
     <div className="cost-toolbar">
       <select aria-label="Open saved stock note" disabled={busy} value={current?.id || ''} onChange={event => open(sheets.find(sheet => sheet.id === event.target.value))}><option value="">New stock note</option>{sheets.map(sheet => <option key={sheet.id} value={sheet.id}>{sheet.title}</option>)}</select>
       <button type="button" className="admin-secondary" disabled={busy} onClick={() => open(null)}><FiPlus aria-hidden="true"/>New note</button>
       <button type="button" className="admin-secondary" aria-label="Refresh saved stock notes" disabled={busy} onClick={async () => { setBusy(true); try { await refresh(); setNotice('Saved notes refreshed.'); } catch (error) { setNotice(error.message); } finally { setBusy(false); } }}><FiRefreshCw aria-hidden="true"/></button>
       {current && <button type="button" className="cost-delete" disabled={busy} aria-label="Delete stock note" onClick={remove}><FiTrash2 aria-hidden="true"/></button>}
     </div>
-    <form className="cost-editor" onSubmit={save}>
+    <form ref={noteEditor} className="cost-editor" onSubmit={save}>
       <fieldset disabled={busy}>
         <label className="cost-title-label">Note title<input required maxLength={120} placeholder="e.g. October stock count" value={title} onChange={event => { setTitle(event.target.value); setDirty(true); }}/></label>
-        <section className="stock-product-list" aria-label="Stock by product">
-          <h2>Stock by product <span>{products.length} products</span></h2>
-          <label className="stock-product-select">Product<select aria-label="Choose product stock" value={selectedProductId} onChange={event=>setSelectedProductId(event.target.value)}><option value="">Choose a product</option>{products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}</select></label>
-          {selectedProduct && <div className="stock-product-preview" key={selectedProduct.id}>
-            <h3>{selectedProduct.name}<span>{selectedProduct.stock || 0} {selectedProduct.is_combo ? 'sets' : 'pieces'}</span></h3>
-            <div className="stock-product-content">
-              {selectedProduct.is_combo && selectedProduct.combo_stock != null ? getComboItems(selectedProduct).map(piece => <StockBreakdown key={piece.id} name={piece.name} sizes={piece.sizes} quantities={selectedProduct.combo_stock[piece.id] || {}}/>) : selectedProduct.size_stock != null ? <StockBreakdown name={selectedProduct.name} sizes={selectedProduct.sizes} quantities={selectedProduct.size_stock}/> : <p className="stock-product-shared">Shared stock: <strong>{selectedProduct.stock || 0}</strong>. Individual size quantities have not been configured for this product.</p>}
-              <button type="button" className="admin-secondary" onClick={() => addProduct(selectedProduct)}>Copy {selectedProduct.name} to note</button>
-            </div>
-          </div>}
-          {!products.length && <p className="stock-product-shared">Add products to see their stock here.</p>}
-        </section>
+        <label className="stock-note-copy">Copy product quantities<select aria-label="Copy product stock" value="" onChange={event=>{const product=products.find(item=>String(item.id)===event.target.value);if(product)addProduct(product);}}><option value="">Choose a product (optional)</option>{products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}</select></label>
         <div className="stock-record-toolbar"><h3 className="stock-record-heading">Stock note items</h3><button type="button" className="admin-danger stock-delete-all" disabled={busy || !rows.some(row=>row.item || row.size || row.color || row.quantity !== '')} onClick={()=>{
           if (!window.confirm('Delete all items from this stock note? Save the note to apply this change.')) return;
           setRows([blankRow()]); setDirty(true); setNotice('All items cleared. Add an item before saving.');
@@ -141,13 +129,4 @@ export default function StockNotepad({ products = [] }) {
       <p className="cost-status" role="status">{notice || (dirty ? 'Unsaved changes' : current ? 'Saved' : 'Add items and quantities to begin.')}</p>
     </form>
   </div>;
-}
-
-function StockBreakdown({ name, sizes = [], quantities }) {
-  return <section className="stock-piece-breakdown" aria-label={`${name} stock`}>
-    <h3>{name}<span>{stockTotal(sizes,quantities)} pieces</span></h3>
-    <table><caption className="sr-only">{name} stock by size</caption><thead><tr><th scope="col">Size / waist</th><th scope="col">Stock quantity</th></tr></thead>
-      <tbody>{sizes.map(size => <tr key={size}><th scope="row">{size}</th><td>{quantities[size] || 0}</td></tr>)}</tbody>
-    </table>
-  </section>;
 }
