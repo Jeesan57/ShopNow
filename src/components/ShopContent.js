@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { analyticsEvent, safeSearchTerm } from '../lib/analytics';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ProductCard from './ProductCard';
@@ -30,6 +31,15 @@ export default function ShopContent() {
     min: Math.min(priceFilter.min, priceLimit - 1),
     max: priceFilter.max === null ? priceLimit : Math.min(priceFilter.max, priceLimit),
   };
+
+  const lastTrackedSearch = useRef('');
+  useEffect(() => {
+    const term = safeSearchTerm(searchQuery);
+    if (!term) { lastTrackedSearch.current=''; return; }
+    if (term === lastTrackedSearch.current) return;
+    const timer = setTimeout(() => { if (analyticsEvent('search',{search_term:term})) lastTrackedSearch.current=term; },800);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   // Handle URL search params
   useEffect(() => {

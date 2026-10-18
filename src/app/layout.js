@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { getServerCatalog } from "../lib/serverCatalog";
 import { SITE_URL, pageMetadata, jsonLd } from "../lib/seo";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 import SiteChrome from "../components/SiteChrome";
 import ParticleBackground from "../components/ParticleBackground";
 import { CartProvider } from "../context/CartContext";
@@ -54,6 +55,7 @@ export default async function RootLayout({ children }) {
       >
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <ParticleBackground />
+        <GoogleAnalytics />
         <CartProvider>
           <SiteChrome initialCatalog={initialCatalog}>{children}</SiteChrome>
         </CartProvider>

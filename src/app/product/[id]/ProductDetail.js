@@ -1,5 +1,6 @@
 'use client';
 
+import useProductAnalytics from '../../../lib/useProductAnalytics';
 import { sizeStock, availableSize } from '../../../lib/sizeStock';
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -23,6 +24,7 @@ export default function ProductDetail({ initialProduct }) {
   const { products, loading: catalogLoading } = useCatalog();
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useCart();
   const product = products.find(item => item.id === initialProduct?.id) || initialProduct;
+  useProductAnalytics(product);
   const suggestedProducts = [...new Map(products.filter(item => item.category === product?.category && String(item.id) !== String(product?.id)).map(item => [String(item.id),item])).values()].slice(0,8);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const closeQuickView = useCallback(() => setQuickViewProduct(null), []);
@@ -48,9 +50,7 @@ export default function ProductDetail({ initialProduct }) {
     setIsAddingToCart(true);
     await new Promise(resolve => setTimeout(resolve, 800));
 
-    for (let i = 0; i < Math.min(quantity, availableStock); i++) {
-      addToCart(product, resolvedSize, selectedColor);
-    }
+    addToCart(product, resolvedSize, selectedColor, Math.min(quantity, availableStock));
 
     setIsAddingToCart(false);
   };

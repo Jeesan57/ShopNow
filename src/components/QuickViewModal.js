@@ -1,5 +1,6 @@
 'use client';
 
+import useProductAnalytics from '../lib/useProductAnalytics';
 import { sizeStock, availableSize } from '../lib/sizeStock';
 import { useState, useEffect, useRef, useId } from 'react';
 import { createPortal } from 'react-dom';
@@ -14,6 +15,7 @@ import { FiX, FiChevronLeft, FiChevronRight, FiCheck, FiShoppingBag, FiArrowUpRi
 
 export default function QuickViewModal({ product, isOpen, onClose }) {
   const { addToCart } = useCart();
+  useProductAnalytics(product,isOpen,'Quick view');
   const [selectedImage, setSelectedImage] = useState(product?.image || '');
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
@@ -65,7 +67,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
   }
   function add() {
     if (!resolvedSize || selectedColor === null || availableStock <= 0) return;
-    for (let index = 0; index < orderQuantity; index++) addToCart(product, resolvedSize, selectedColor);
+    addToCart(product, resolvedSize, selectedColor, orderQuantity);
     setAdded(true);
   }
 

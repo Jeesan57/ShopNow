@@ -1,15 +1,17 @@
 'use client';
 
+import { analyticsEcommerce } from '../lib/analytics';
 import { sizeStock, cartRemainingStock } from '../lib/sizeStock';
 import { normalizeProduct } from '../lib/pricing';
 import { hasComboItemColors } from '../lib/comboSizing';
 import { matchesCartItem } from '../lib/productColors';
-import { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useLayoutEffect, useRef } from 'react';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  const cart = useRef([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [hydrated, setHydrated] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -36,7 +38,7 @@ export function CartProvider({ children }) {
     try {
       const savedCart = JSON.parse(localStorage.getItem('shopnow-cart') || '[]');
       const savedWishlist = JSON.parse(localStorage.getItem('shopnow-wishlist') || '[]');
-      if (Array.isArray(savedCart)) setCartItems(savedCart);
+      if (Array.isArray(savedCart)) {cart.current=savedCart;setCartItems(savedCart);}
       if (Array.isArray(savedWishlist)) setWishlistItems(savedWishlist);
     } catch { /* Ignore corrupt browser storage. */ }
     setHydrated(true);
@@ -62,7 +64,8 @@ export function CartProvider({ children }) {
     localStorage.setItem('shopnow-wishlist', JSON.stringify(wishlistItems));
   }, [wishlistItems, hydrated]);
 
-  const addToCart = (product, size, color = hasComboItemColors(product) ? '' : product.colors?.[0] || '') => {
+  const addToCart = (product, size, color = hasComboItemColors(product) ? '' : product.colors?.[0] || '', quantity = 1) => {
+    if (!Number.isInteger(quantity) || quantity < 1) return;
     if (product.colors?.length ? !product.colors.includes(color) : Boolean(color)) { alert('Choose an available color.'); return; }
     if (product.stock !== undefined && product.stock <= 0) { alert('This product is out of stock.'); return; }
     if (!size || !product.sizes?.includes(size)) {
@@ -70,35 +73,34 @@ export function CartProvider({ children }) {
       return;
     }
     if (sizeStock(product, size) <= 0) { alert('This size is out of stock.'); return; }
-    setCartItems(prevItems => {
-      if (cartRemainingStock(prevItems, product, size) <= 0) return prevItems;
-      const existingItem = prevItems.find(item => matchesCartItem(item, product.id, size, color));
-      if (existingItem) {
-        return prevItems.map(item =>
-          matchesCartItem(item, product.id, size, color)
-            ? { ...item, ...normalizeProduct(product), color, size, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevItems, { ...normalizeProduct(product), size, color, quantity: 1 }];
-      }
-    });
+    const previous = cart.current;
+    const amount = Math.min(quantity,cartRemainingStock(previous, product, size));
+    if (amount <= 0) return;
+    const normalized = normalizeProduct(product);
+    const existing = previous.find(item => matchesCartItem(item, product.id, size, color));
+    const next = existing ? previous.map(item => matchesCartItem(item, product.id, size, color) ? { ...item, ...normalized, size, color, quantity: item.quantity + amount } : item) : [...previous, { ...normalized, size, color, quantity: amount }];
+    cart.current = next; setCartItems(next);
+    analyticsEcommerce('add_to_cart',[{...normalized,size,color,quantity:amount}]);
   };
 
   const removeFromCart = (productId, size, color = '') => {
-    setCartItems(prevItems => prevItems.filter(item => !(matchesCartItem(item, productId, size, color))));
+    const item = cart.current.find(item => matchesCartItem(item, productId, size, color));
+    const next = cart.current.filter(item => !matchesCartItem(item, productId, size, color));
+    cart.current = next; setCartItems(next);
+    if (item) analyticsEcommerce('remove_from_cart',[item]);
   };
 
   const updateQuantity = (productId, size, quantity, color = '') => {
-    if (quantity <= 0) {
-      removeFromCart(productId, size, color);
-      return;
-    }
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        matchesCartItem(item, productId, size, color) ? { ...item, quantity: Math.max(1, Math.min(quantity, cartRemainingStock(prevItems.filter(other => other !== item), item, size))) } : item
-      )
-    );
+    if (quantity <= 0) { removeFromCart(productId,size,color); return; }
+    const previous = cart.current;
+    const item = previous.find(item => matchesCartItem(item, productId, size, color));
+    if (!item) return;
+    const nextQuantity = Math.max(1,Math.min(quantity,cartRemainingStock(previous.filter(other=>other!==item),item,size)));
+    const difference = nextQuantity-item.quantity;
+    if (!difference) return;
+    const next = previous.map(other=>matchesCartItem(other,productId,size,color)?{...other,quantity:nextQuantity}:other);
+    cart.current=next; setCartItems(next);
+    analyticsEcommerce(difference>0?'add_to_cart':'remove_from_cart',[{...item,quantity:Math.abs(difference)}]);
   };
 
   const getTotalItems = () => {
@@ -110,12 +112,12 @@ export function CartProvider({ children }) {
   };
 
   const clearCart = () => {
+    cart.current = [];
     setCartItems([]);
   };
 
   const addToWishlist = (product) => {
     setWishlistItems(prevItems => {
-      if (cartRemainingStock(prevItems, product, size) <= 0) return prevItems;
       const existingItem = prevItems.find(item => item.id === product.id);
       if (!existingItem) {
         return [...prevItems, product];

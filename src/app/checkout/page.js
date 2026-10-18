@@ -6,6 +6,7 @@ import { FiArrowLeft, FiMapPin, FiTruck, FiShoppingBag, FiArrowRight } from 'rea
 import { useCart } from '../../context/CartContext';
 import { useCatalog } from '../../context/CatalogContext';
 import { cartItemKey } from '../../lib/productColors';
+import { analyticsEcommerce, analyticsPurchase } from '../../lib/analytics';
 import { getSupabase } from '../../lib/supabase';
 import { districts, normalizeBangladeshPhone } from '../../lib/bangladesh';
 const money = value => '৳' + Number(value).toFixed(2);
@@ -49,6 +50,12 @@ export default function Checkout() {
   const couponReady = !coupon || coupon.signature === signature;
   const discount = coupon && couponReady ? Number(coupon.discount) : 0;
   const payable = deliveryFee === null ? null : Math.round((subtotal - discount + deliveryFee)*100)/100;
+  const checkoutTracked = useRef(false);
+  useEffect(() => {
+    if (checkoutTracked.current || !hydrated || !confirmationReady || loading || !cartItems.length || unavailable) return;
+    const currentItems = cartItems.map(item=>({...products.find(product=>product.id===item.id),size:item.size,color:item.color,quantity:item.quantity}));
+    if (analyticsEcommerce('begin_checkout',currentItems)) checkoutTracked.current=true;
+  }, [hydrated,confirmationReady,loading,cartItems,products,unavailable]);
   async function applyCoupon() {
     const code = couponInput.trim().toUpperCase();
     if (!code) {setCouponError('Enter a coupon code.');return;}
@@ -80,6 +87,7 @@ export default function Checkout() {
       if(error) throw error;
       const confirmation = { id: data, name: form.get('name').trim(), phone, area: form.get('area').trim(), district, total:payable, discount, coupon_code:coupon?.coupon_code || '' };
       try { sessionStorage.setItem('shopnow-last-order', JSON.stringify(confirmation)); } catch { /* Checkout still succeeds when browser storage is unavailable. */ }
+      analyticsPurchase({id:data,products:cartItems.map(item=>({...products.find(product=>product.id===item.id),size:item.size,color:item.color,quantity:item.quantity})),discount,shipping:deliveryFee,coupon:coupon?.coupon_code || ''});
       setOrder(confirmation); clearCart();
     } catch(e) {setError(e.message);} finally {setBusy(false);}
   }
