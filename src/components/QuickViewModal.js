@@ -1,5 +1,6 @@
 'use client';
 
+import { sizeStock, availableSize } from '../lib/sizeStock';
 import { useState, useEffect, useRef, useId } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
@@ -17,11 +18,12 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [colorChoice, setColorChoice] = useState('');
-  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || '');
+  const [selectedSize, setSelectedSize] = useState(availableSize(product));
   const [comboSelection, setComboSelection] = useState({});
   const [comboColors, setComboColors] = useState({});
   const perItemColors = hasComboItemColors(product);
   const resolvedSize = product?.is_combo ? selectedComboSize(product,comboSelection) : selectedSize;
+  const availableStock = sizeStock(product, resolvedSize);
   const panelRef = useRef(null);
   const titleId = useId();
   const quantityId = useId();
@@ -55,14 +57,15 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
   }, [isOpen, onClose, productId]);
 
   if (!isOpen || !product) return null;
+  const orderQuantity = Math.min(quantity, availableStock);
   const gallery = [...new Set([product.image, ...(product.thumbnails || [])].filter(Boolean))];
   const money = value => '৳' + Number(value).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   function changeImage(direction) {
     setSelectedImage(gallery[(gallery.indexOf(selectedImage) + direction + gallery.length) % gallery.length]);
   }
   function add() {
-    if (!resolvedSize || selectedColor === null || product.stock <= 0) return;
-    for (let index = 0; index < quantity; index++) addToCart(product, resolvedSize, selectedColor);
+    if (!resolvedSize || selectedColor === null || availableStock <= 0) return;
+    for (let index = 0; index < orderQuantity; index++) addToCart(product, resolvedSize, selectedColor);
     setAdded(true);
   }
 
@@ -94,23 +97,23 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
 
             <div className="mt-5 pt-4 border-t border-border space-y-4">
               {!perItemColors && <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={color => { setColorChoice(color); setAdded(false); }} />}
-              {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={selection => { setComboColors(selection); setAdded(false); }} product={product} value={comboSelection} onChange={selection => { setComboSelection(selection); setAdded(false); }}/> : <>              <fieldset>
+              {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={selection => { setComboColors(selection); setAdded(false); }} product={product} value={comboSelection} onChange={selection => { setComboSelection(selection); setQuantity(1); setAdded(false); }}/> : <>              <fieldset>
                 <legend className="text-xs font-medium text-foreground mb-3">Size <span className="ml-2 text-muted-foreground font-normal">{selectedSize}</span></legend>
-                <div className="flex flex-wrap gap-2">{(product.sizes || []).map(size => <button key={size} type="button" aria-pressed={selectedSize === size} onClick={() => { setSelectedSize(size); setAdded(false); }} className={`min-w-11 h-11 px-3 rounded-md border text-xs font-medium focus-visible:outline-2 focus-visible:outline-primary ${selectedSize === size ? 'bg-foreground/5 border-foreground ring-1 ring-foreground' : 'border-border hover:border-primary'}`}>{size}</button>)}</div>
+                <div className="flex flex-wrap gap-2">{(product.sizes || []).map(size => <button key={size} type="button" disabled={sizeStock(product,size) <= 0} aria-pressed={selectedSize === size} onClick={() => { setSelectedSize(size); setQuantity(1); setAdded(false); }} className={`disabled:opacity-30 disabled:cursor-not-allowed min-w-11 h-11 px-3 rounded-md border text-xs font-medium focus-visible:outline-2 focus-visible:outline-primary ${selectedSize === size ? 'bg-foreground/5 border-foreground ring-1 ring-foreground' : 'border-border hover:border-primary'}`}>{size}</button>)}</div>
               </fieldset></>}
               <div className="border-t border-border pt-4">
-                <div className="flex justify-between mb-3 text-xs"><p id={quantityId} className="font-medium">Quantity</p>{quantity > 1 && <p className="text-muted-foreground">Total <span className="font-semibold text-foreground tabular-nums">{money(product.price * quantity)}</span></p>}</div>
+                <div className="flex justify-between mb-3 text-xs"><p id={quantityId} className="font-medium">Quantity</p>{quantity > 1 && <p className="text-muted-foreground">Total <span className="font-semibold text-foreground tabular-nums">{money(product.price * Math.min(quantity, availableStock))}</span></p>}</div>
                 <div className="flex gap-3">
                   <div role="group" aria-labelledby={quantityId} className="flex shrink-0 items-center border border-input rounded-md overflow-hidden">
                     <button type="button" aria-label="Decrease quantity" disabled={quantity <= 1} onClick={() => { setQuantity(value => Math.max(1, value - 1)); setAdded(false); }} className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-30"><FiMinus className="w-3.5 h-3.5" /></button>
-                    <span className="w-6 text-center text-xs font-semibold tabular-nums" aria-live="polite">{quantity}</span>
-                    <button type="button" aria-label="Increase quantity" disabled={quantity >= product.stock} onClick={() => { setQuantity(value => Math.min(product.stock, value + 1)); setAdded(false); }} className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-30"><FiPlus className="w-3.5 h-3.5" /></button>
+                    <span className="w-6 text-center text-xs font-semibold tabular-nums" aria-live="polite">{Math.min(quantity, Math.max(1, availableStock))}</span>
+                    <button type="button" aria-label="Increase quantity" disabled={quantity >= availableStock} onClick={() => { setQuantity(value => Math.min(availableStock, value + 1)); setAdded(false); }} className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-30"><FiPlus className="w-3.5 h-3.5" /></button>
                   </div>
-                  <button type="button" onClick={add} disabled={!resolvedSize || selectedColor === null || product.stock <= 0} className="flex-1 min-w-0 min-h-12 px-2 rounded-md text-xs font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-40 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                    {added ? <FiCheck className="w-4 h-4 shrink-0" /> : <FiShoppingBag className="w-4 h-4 shrink-0" />}{product.stock <= 0 ? 'Out of stock' : added ? 'Add again' : 'Add to cart'}
+                  <button type="button" onClick={add} disabled={!resolvedSize || selectedColor === null || availableStock <= 0} className="flex-1 min-w-0 min-h-12 px-2 rounded-md text-xs font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-40 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    {added ? <FiCheck className="w-4 h-4 shrink-0" /> : <FiShoppingBag className="w-4 h-4 shrink-0" />}{!resolvedSize ? 'Choose sizes' : availableStock <= 0 ? 'Out of stock' : added ? 'Add again' : 'Add to cart'}
                   </button>
                 </div>
-                <p role="status" className="min-h-5 mt-2 text-xs text-primary">{added ? `${quantity} ${quantity === 1 ? 'item' : 'items'} added to your cart.` : ''}</p>
+                <p role="status" className="min-h-5 mt-2 text-xs text-primary">{added ? `${Math.min(quantity, Math.max(1, availableStock))} ${quantity === 1 ? 'item' : 'items'} added to your cart.` : ''}</p>
               </div>
             </div>
             <Link href={`/product/${product.id}`} onClick={onClose} className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground">View full product details <FiArrowUpRight className="w-3.5 h-3.5" /></Link>

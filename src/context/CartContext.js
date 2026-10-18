@@ -1,5 +1,6 @@
 'use client';
 
+import { sizeStock, cartRemainingStock } from '../lib/sizeStock';
 import { normalizeProduct } from '../lib/pricing';
 import { hasComboItemColors } from '../lib/comboSizing';
 import { matchesCartItem } from '../lib/productColors';
@@ -68,7 +69,9 @@ export function CartProvider({ children }) {
       alert('Choose an available size for each item.');
       return;
     }
+    if (sizeStock(product, size) <= 0) { alert('This size is out of stock.'); return; }
     setCartItems(prevItems => {
+      if (cartRemainingStock(prevItems, product, size) <= 0) return prevItems;
       const existingItem = prevItems.find(item => matchesCartItem(item, product.id, size, color));
       if (existingItem) {
         return prevItems.map(item =>
@@ -93,7 +96,7 @@ export function CartProvider({ children }) {
     }
     setCartItems(prevItems =>
       prevItems.map(item =>
-        matchesCartItem(item, productId, size, color) ? { ...item, quantity } : item
+        matchesCartItem(item, productId, size, color) ? { ...item, quantity: Math.max(1, Math.min(quantity, cartRemainingStock(prevItems.filter(other => other !== item), item, size))) } : item
       )
     );
   };
@@ -112,6 +115,7 @@ export function CartProvider({ children }) {
 
   const addToWishlist = (product) => {
     setWishlistItems(prevItems => {
+      if (cartRemainingStock(prevItems, product, size) <= 0) return prevItems;
       const existingItem = prevItems.find(item => item.id === product.id);
       if (!existingItem) {
         return [...prevItems, product];

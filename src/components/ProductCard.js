@@ -1,4 +1,5 @@
 'use client';
+import { availableSize } from '../lib/sizeStock';
 import ProductPrice from './ProductPrice';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
@@ -32,7 +33,7 @@ export default function ProductCard({ product, onQuickView }) {
       moveImage(dx < 0 ? 1 : -1);
     }
   }
-  const selectedSize = product.sizes?.[0] || '';
+  const selectedSize = availableSize(product);
   const needsOptions = product.is_combo || product.sizes?.length > 1 || product.colors?.length > 1;
   const favourite = isInWishlist(product.id);
   return <article className="product-card group relative grid grid-cols-[128px_minmax(0,1fr)] sm:grid-cols-[160px_minmax(0,1fr)] min-h-[240px] w-full max-w-[440px] mx-auto h-full overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">

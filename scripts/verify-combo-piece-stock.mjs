@@ -1,0 +1,67 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { productPrice, normalizeProduct } from '../src/lib/pricing.js';
+const { PGlite } = await import(process.argv[2] || '@electric-sql/pglite');
+const db = new PGlite();
+try {
+  await db.exec(`
+    create role anon; create role authenticated;
+    create function public.is_admin() returns boolean language sql as $$ select false $$;
+    create table products(id bigint primary key,name text,price numeric,image text,sizes text[],stock integer,active boolean);
+    create table orders(id uuid primary key default gen_random_uuid(),customer_name text,email text,phone text,address text,total numeric,subtotal numeric,delivery_charge numeric,district text,area text,delivery_zone text,delivery_notes text);
+    create table order_items(id bigint generated always as identity,order_id uuid,product_id bigint,name text,size text,quantity integer,price numeric);
+    create table bd_districts(name text); insert into bd_districts values('Dhaka');
+    create table delivery_zones(code text,fee numeric); insert into delivery_zones values('inside_dhaka',70),('outside_dhaka',130);
+    insert into products values(1,'Color product',100,'image',array['M'],100,true),(2,'Plain product',1.15,'image',array['M'],100,true);
+  `);
+  for (const name of ['004_product_colors','005_discounts_coupons']) await db.exec(await readFile(new URL(`../supabase/migrations/${name}.sql`, import.meta.url),'utf8'));
+  await db.exec(await readFile(new URL('../supabase/migrations/011_size_stock.sql', import.meta.url),'utf8'));
+  const quote = async items => db.query('select quote_checkout($1::jsonb)',[JSON.stringify(items)]);
+  const order = async items => db.query("select place_order_bd('Test','','01712345678','Test address',$1::jsonb,'Dhaka','Mirpur','inside_dhaka','')",[JSON.stringify(items)]);
+  const item = (size, quantity, color='Black') => ({id:1,size,quantity,color});
+  await db.exec(`update products set sizes=array['S','M','L'],colors=array['Black','White'],size_stock='{"S":0,"M":2,"L":5}' where id=1`);
+  assert.equal((await db.query('select stock from products where id=1')).rows[0].stock,7);
+  await assert.rejects(quote([item('S',1)]),/selected size/);
+  await assert.rejects(quote([item('M',2),item('M',1,'White')]),/selected size/);
+  await assert.rejects(order([item('M',3)]),/selected size/);
+  assert.equal((await db.query('select count(*)::int n from orders')).rows[0].n,0);
+  await order([item('M',1),item('L',2)]);
+  assert.deepEqual((await db.query('select stock,size_stock from products where id=1')).rows[0],{stock:4,size_stock:{S:0,M:1,L:3}});
+  await order([item('M',1)]);
+  await assert.rejects(order([item('M',1)]),/selected size/);
+  await assert.rejects(db.exec(`update products set size_stock='{"M":-1}' where id=1`),/whole numbers/);
+  await assert.rejects(db.exec(`update products set size_stock='{"M":1.5}' where id=1`),/whole numbers/);
+  await db.exec("update products set sizes=array['M','XL'] where id=1");
+  assert.deepEqual((await db.query('select size_stock from products where id=1')).rows[0].size_stock,{M:0,XL:0});
+  await order([{id:2,size:'M',quantity:2}]);
+  assert.equal((await db.query('select stock from products where id=2')).rows[0].stock,98);
+  const comboM = 'Pants: 30 · Shirt: M';
+  const comboL = 'Pants: 32 · Shirt: L';
+  await db.query('update products set sizes=$1::text[],size_stock=$2::jsonb where id=2', [[comboM,comboL],JSON.stringify({[comboM]:2,[comboL]:0})]);
+  await order([{id:2,size:comboM,quantity:1}]);
+  assert.deepEqual((await db.query('select size_stock,stock from products where id=2')).rows[0],{size_stock:{[comboM]:1,[comboL]:0},stock:1});
+  await assert.rejects(order([{id:2,size:comboL,quantity:1}]),/selected size/);
+  for (const name of ['007_combo_sizing','008_universal_combos','009_combo_colors','012_combo_piece_stock']) await db.exec(await readFile(new URL(`../supabase/migrations/${name}.sql`, import.meta.url),'utf8'));
+  const pieces = [
+    {id:'pants',name:'Pants',sizes:['30','32'],colors:[],measurements:[],chart:{},unit:'in'},
+    {id:'shirt',name:'Shirt',sizes:['M','L'],colors:[],measurements:[],chart:{},unit:'in'},
+  ];
+  await db.query('update products set is_combo=true,combo_items=$1::jsonb,combo_stock=$2::jsonb where id=2', [JSON.stringify(pieces),JSON.stringify({pants:{30:2,32:6},shirt:{M:3,L:7}})]);
+  assert.deepEqual((await db.query('select stock,size_stock from products where id=2')).rows[0],{stock:8,size_stock:null});
+  const pieceItem = (pants,shirt,quantity) => ({id:2,size:`Pants: ${pants} · Shirt: ${shirt}`,quantity});
+  await assert.rejects(quote([pieceItem('30','M',2),pieceItem('30','L',1)]),/Insufficient stock for Pants size 30/);
+  await assert.rejects(order([pieceItem('30','M',2),pieceItem('32','M',2)]),/Insufficient stock for Shirt size M/);
+  const before = (await db.query('select combo_stock from products where id=2')).rows[0].combo_stock;
+  await order([pieceItem('30','M',1),pieceItem('32','M',1)]);
+  assert.deepEqual((await db.query('select stock,combo_stock from products where id=2')).rows[0],{stock:6,combo_stock:{pants:{30:1,32:5},shirt:{M:1,L:7}}});
+  await order([pieceItem('30','M',1)]);
+  await assert.rejects(order([pieceItem('30','L',1)]),/Insufficient stock/);
+  assert.equal((await db.query('select combo_stock from products where id=2')).rows[0].combo_stock.shirt.L,before.shirt.L);
+  await assert.rejects(db.exec(`update products set combo_stock='{"pants":{"30":-1}}' where id=2`),/whole numbers/);
+  await db.exec("update products set stock=999 where id=2");
+  assert.equal((await db.query('select stock from products where id=2')).rows[0].stock,5);
+  pieces[0].sizes=['32','34'];
+  await db.query('update products set combo_items=$1::jsonb where id=2',[JSON.stringify(pieces)]);
+  assert.deepEqual((await db.query('select combo_stock from products where id=2')).rows[0].combo_stock.pants,{'32':5,'34':0});
+  console.log('Verified individual combo piece stock, aggregate demand across combinations, independent deductions, rollback, totals, invalid quantities, new/removed sizes, and legacy regular inventory.');
+} finally {await db.close();}

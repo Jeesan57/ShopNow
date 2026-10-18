@@ -1,5 +1,6 @@
 'use client';
 
+import { sizeStock, availableSize } from '../../../lib/sizeStock';
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -31,12 +32,13 @@ export default function ProductDetail({ initialProduct }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [colorChoice, setColorChoice] = useState(initialProduct?.colors?.[0] || '');
 
-  const [selectedSize, setSelectedSize] = useState(initialProduct?.sizes?.[0] || '');
+  const [selectedSize, setSelectedSize] = useState(availableSize(initialProduct));
   const [comboSelection, setComboSelection] = useState({});
   const [comboColors, setComboColors] = useState({});
   const perItemColors = hasComboItemColors(product);
   const selectedColor = perItemColors ? selectedComboColor(product,comboColors) : (product?.colors || []).includes(colorChoice) ? colorChoice : product?.colors?.[0] || '';
   const resolvedSize = product?.is_combo ? selectedComboSize(product,comboSelection) : selectedSize;
+  const availableStock = sizeStock(product, resolvedSize);
 
   const handleAddToCart = async () => {
     if (!resolvedSize || selectedColor === null) {
@@ -46,7 +48,7 @@ export default function ProductDetail({ initialProduct }) {
     setIsAddingToCart(true);
     await new Promise(resolve => setTimeout(resolve, 800));
 
-    for (let i = 0; i < quantity; i++) {
+    for (let i = 0; i < Math.min(quantity, availableStock); i++) {
       addToCart(product, resolvedSize, selectedColor);
     }
 
@@ -141,16 +143,16 @@ export default function ProductDetail({ initialProduct }) {
 
             <div className="mt-6 border-t border-border pt-5 space-y-5">
               {!perItemColors && <ProductColorSelector colors={product.colors || []} selectedColor={selectedColor} onChange={setColorChoice} />}
-              {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={setComboColors} product={product} value={comboSelection} onChange={setComboSelection}/> : <>              <fieldset>
+              {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={setComboColors} product={product} value={comboSelection} onChange={selection=>{setComboSelection(selection);setQuantity(1);}}/> : <>              <fieldset>
                 <legend className="text-xs font-medium text-foreground mb-3">Size <span className="text-muted-foreground font-normal ml-2">{selectedSize}</span></legend>
                 <div className="flex flex-wrap gap-2">
                   {(product.sizes || []).map(size => (
                     <button
                       key={size}
                       type="button"
-                      aria-pressed={selectedSize === size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`min-w-12 h-11 px-3 rounded-md border text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${selectedSize === size
+                      disabled={sizeStock(product,size) <= 0} aria-pressed={selectedSize === size}
+                      onClick={() => {setSelectedSize(size);setQuantity(1);}}
+                      className={`disabled:opacity-30 disabled:cursor-not-allowed min-w-12 h-11 px-3 rounded-md border text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${selectedSize === size
                         ? 'bg-foreground/5 text-foreground border-foreground ring-1 ring-foreground'
                         : 'border-border text-foreground hover:border-primary hover:bg-primary/5'}`}
                     >{size}</button>
@@ -161,7 +163,7 @@ export default function ProductDetail({ initialProduct }) {
               <div className="border-t border-border pt-5">
                 <div className="flex items-center justify-between mb-3 text-xs">
                   <p id="quantity-label" className="font-medium text-foreground">Quantity</p>
-                  {quantity > 1 && <p className="text-muted-foreground" aria-live="polite">Total <span className="ml-1 font-semibold text-foreground tabular-nums">৳{(product.price * quantity).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>}
+                  {quantity > 1 && <p className="text-muted-foreground" aria-live="polite">Total <span className="ml-1 font-semibold text-foreground tabular-nums">৳{(product.price * Math.min(quantity, availableStock)).toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>}
                 </div>
                 <div className="flex items-stretch gap-3">
                   <div className="inline-flex shrink-0 items-center rounded-md border border-input overflow-hidden bg-background" role="group" aria-labelledby="quantity-label">
@@ -170,17 +172,17 @@ export default function ProductDetail({ initialProduct }) {
                       className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-35 disabled:cursor-not-allowed transition-colors">
                       <FiMinus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="w-6 text-center text-xs font-semibold tabular-nums" aria-live="polite">{quantity}</span>
-                    <button type="button" aria-label="Increase quantity" disabled={product.stock <= quantity}
-                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                    <span className="w-6 text-center text-xs font-semibold tabular-nums" aria-live="polite">{Math.min(quantity, Math.max(1, availableStock))}</span>
+                    <button type="button" aria-label="Increase quantity" disabled={availableStock <= quantity}
+                      onClick={() => setQuantity(Math.min(availableStock, quantity + 1))}
                       className="w-11 min-h-12 flex items-center justify-center hover:bg-muted disabled:opacity-35 disabled:cursor-not-allowed transition-colors">
                       <FiPlus className="w-3.5 h-3.5" />
                     </button>
                   </div>
-                  <button onClick={handleAddToCart} disabled={isAddingToCart || product.stock <= 0 || !resolvedSize || selectedColor === null}
+                  <button onClick={handleAddToCart} disabled={isAddingToCart || availableStock <= 0 || !resolvedSize || selectedColor === null}
                     className="flex-1 min-w-0 min-h-12 px-3 rounded-md text-xs sm:text-sm font-medium bg-foreground text-background hover:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                     {isAddingToCart ? <FiCheck className="w-4 h-4 shrink-0" /> : <FiShoppingBag className="w-4 h-4 shrink-0" />}
-                    {product.stock <= 0 ? 'Out of stock' : isAddingToCart ? 'Adding…' : 'Add to cart'}
+                    {!resolvedSize ? 'Choose sizes' : availableStock <= 0 ? 'Out of stock' : isAddingToCart ? 'Adding…' : 'Add to cart'}
                   </button>
                 </div>
               </div>

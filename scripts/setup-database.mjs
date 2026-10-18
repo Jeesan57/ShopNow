@@ -10,7 +10,7 @@ const client = new pg.Client({ host: 'db.stvokejqndakitzpracv.supabase.co', port
 try {
   await client.connect();
   await client.query('create table if not exists public.shopnow_migrations (name text primary key, applied_at timestamptz not null default now()); alter table public.shopnow_migrations enable row level security;');
-  for (const name of ['001_shop', '002_bangladesh_checkout', '003_cost_notes', '004_product_colors', '005_discounts_coupons', '006_customer_list', '007_combo_sizing', '008_universal_combos', '009_combo_colors', '010_category_images']) {
+  for (const name of ['001_shop', '002_bangladesh_checkout', '003_cost_notes', '004_product_colors', '005_discounts_coupons', '006_customer_list', '007_combo_sizing', '008_universal_combos', '009_combo_colors', '010_category_images', '011_size_stock', '012_combo_piece_stock']) {
     const { rows } = await client.query('select name from public.shopnow_migrations where name=$1', [name]);
     if (rows.length) { console.log(`${name}: already applied.`); continue; }
     const sql = (await readFile(new URL(`../supabase/migrations/${name}.sql`, import.meta.url), 'utf8')).replace(/^begin;\s*/i, '').replace(/commit;\s*$/i, '');
