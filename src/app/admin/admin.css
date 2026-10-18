@@ -259,8 +259,14 @@
 /* Keep desktop navigation in place while the workspace scrolls independently. */
 @media(min-width:851px){
   .admin-shell{position:fixed;inset:0;height:100vh;height:100dvh;min-height:0;overflow:hidden;align-items:stretch}
-  .admin-sidebar{height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin}
-  .admin-sidebar>.admin-brand,.admin-sidebar>nav,.admin-sidebar>.admin-sidebar-bottom{flex-shrink:0}
+  .admin-sidebar{height:100%;min-height:0;overflow:hidden;padding-block:clamp(12px,2.5dvh,32px)}
+  .admin-sidebar>.admin-brand,.admin-sidebar>.admin-sidebar-bottom{flex-shrink:0}
+  .admin-sidebar>nav{flex:1;min-height:0;grid-template-rows:repeat(11,minmax(0,1fr));gap:clamp(2px,.7dvh,8px);margin-top:clamp(12px,3dvh,36px);margin-bottom:12px;padding-bottom:14px}
+  .admin-sidebar nav button{min-height:0;padding-block:clamp(0px,.8dvh,11px);align-items:center;font-size:clamp(11px,1.6dvh,16px)}
+  .admin-sidebar-bottom{padding-top:clamp(10px,2dvh,24px);gap:clamp(8px,1.5dvh,18px)}
+  .admin-sidebar-bottom small{font-size:11px}
+  .admin-sidebar-bottom>a{font-size:14px}
+  .admin-sidebar-bottom>button{padding-block:clamp(6px,1.1dvh,11px)}
   .admin-main{height:100%;min-height:0;max-width:none;margin-inline:0;padding:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-gutter:stable}
   .admin-content{width:100%;max-width:1500px;margin-inline:auto;padding:38px 44px}
 }
