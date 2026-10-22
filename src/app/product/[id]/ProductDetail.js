@@ -10,7 +10,8 @@ import CollectionSlider from '../../../components/CollectionSlider';
 import ProductCard from '../../../components/ProductCard';
 import ProductImageViewer from '../../../components/ProductImageViewer';
 import ProductPrice from '../../../components/ProductPrice';
-import ComboSizeSelector from '../../../components/ComboSizeSelector';
+import { singleSizeChart } from '../../../lib/sizeChartTemplates';
+import ComboSizeSelector, { SizeChart } from '../../../components/ComboSizeSelector';
 import { selectedComboSize, selectedComboColor, hasComboItemColors } from '../../../lib/comboSizing';
 import ProductColorSelector from '../../../components/ProductColorSelector';
 import ProductDescription from '../../../components/ProductDescription';
@@ -158,7 +159,7 @@ export default function ProductDetail({ initialProduct }) {
                     >{size}</button>
                   ))}
                 </div>
-              </fieldset></>}
+              </fieldset><SizeChart item={singleSizeChart(product)}/></>}
 
               <div className="border-t border-border pt-5">
                 <div className="flex items-center justify-between mb-3 text-xs">

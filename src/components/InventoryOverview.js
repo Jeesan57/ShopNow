@@ -23,11 +23,7 @@ export default function InventoryOverview({ products, onRefresh, onEdit, onCopy,
   products.forEach(product => counts[inventoryStatus(product)]++);
   const visible = products.filter(product => `${product.name} ${product.category}`.toLowerCase().includes(query.toLowerCase()) && (filter === 'all' || inventoryStatus(product) === filter));
   const product = visible.find(item => String(item.id) === selectedId) || visible[0];
-  const groups = product ? inventoryGroups(product) : [];
-  const sizeRows = groups.flatMap(group => group.rows);
-  const low = sizeRows.filter(row => row.quantity > 0 && row.quantity < 5).length;
-  const soldOut = sizeRows.filter(row => row.quantity <= 0).length;
-  const isIndividualCombo = product?.is_combo && product.combo_stock != null;
+  const displayedProducts = selectedId === '' ? visible : product ? [product] : [];
 
   async function refresh() {
     setRefreshing(true); setNotice('');
@@ -54,8 +50,8 @@ export default function InventoryOverview({ products, onRefresh, onEdit, onCopy,
     <div className="inventory-panel">
       <div className="inventory-controls">
         <label className="inventory-product-select">Select product
-          <select aria-label="Choose product stock" value={product?.id || ''} onChange={event => setSelectedId(event.target.value)}>
-            {!visible.length && <option value="">No matching products</option>}
+          <select aria-label="Choose product stock" value={selectedId === '' ? '' : product?.id || ''} onChange={event => setSelectedId(event.target.value)}>
+            <option value="">All products</option>
             {visible.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
           </select>
         </label>
@@ -69,7 +65,20 @@ export default function InventoryOverview({ products, onRefresh, onEdit, onCopy,
         </label>
       </div>
 
-      {product ? <>
+      {displayedProducts.length ? displayedProducts.map(item => <InventoryProductStock key={item.id} product={item} attentionOnly={attentionOnly} setAttentionOnly={setAttentionOnly} disabled={disabled} onCopy={onCopy} onEdit={onEdit}/>) : <div className="inventory-empty"><FiPackage aria-hidden="true"/><h3>{products.length ? 'No products match your filters' : 'Your inventory is empty'}</h3><p>{products.length ? 'Try another product name or choose a different stock status.' : 'Add a product to start tracking stock.'}</p>{products.length > 0 && <button type="button" className="admin-secondary" onClick={() => { setQuery(''); setFilter('all'); }}>Clear filters</button>}</div>}
+    </div>
+    <p className="inventory-update" role="status">{notice || 'Refresh stock to load the latest order deductions.'}</p>
+  </section>;
+}
+
+function InventoryProductStock({ product, attentionOnly, setAttentionOnly, disabled, onCopy, onEdit }) {
+  const groups = product ? inventoryGroups(product) : [];
+  const sizeRows = groups.flatMap(group => group.rows);
+  const low = sizeRows.filter(row => row.quantity > 0 && row.quantity < 5).length;
+  const soldOut = sizeRows.filter(row => row.quantity <= 0).length;
+  const isIndividualCombo = product?.is_combo && product.combo_stock != null;
+
+  return <article className="inventory-product-stock">
         <div className="inventory-product-header">
           <div className="inventory-product-image">{product.image ? <Image src={product.image} alt="" fill sizes="64px" className="object-cover"/> : <FiPackage aria-hidden="true"/>}</div>
           <div className="inventory-product-title">
@@ -108,8 +117,6 @@ export default function InventoryOverview({ products, onRefresh, onEdit, onCopy,
           <p><FiRefreshCw aria-hidden="true"/><span>{isIndividualCombo ? 'Orders deduct from each selected piece and size.' : product.size_stock != null ? 'Orders deduct from the selected size.' : 'Orders deduct from shared product stock.'}<small>Low stock is 1–4. Colors share stock for each size.</small></span></p>
           <div>{onCopy && <button type="button" className="admin-secondary" disabled={disabled} onClick={() => onCopy(product)}><FiClipboard aria-hidden="true"/>Copy to note</button>}<button type="button" className="inventory-edit" disabled={disabled} onClick={() => onEdit(product)}>Edit stock<FiArrowUpRight aria-hidden="true"/></button></div>
         </div>
-      </> : <div className="inventory-empty"><FiPackage aria-hidden="true"/><h3>{products.length ? 'No products match your filters' : 'Your inventory is empty'}</h3><p>{products.length ? 'Try another product name or choose a different stock status.' : 'Add a product to start tracking stock.'}</p>{products.length > 0 && <button type="button" className="admin-secondary" onClick={() => { setQuery(''); setFilter('all'); }}>Clear filters</button>}</div>}
-    </div>
-    <p className="inventory-update" role="status">{notice || 'Refresh stock to load the latest order deductions.'}</p>
-  </section>;
+
+  </article>;
 }

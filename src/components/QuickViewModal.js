@@ -7,7 +7,8 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductPrice from './ProductPrice';
-import ComboSizeSelector from './ComboSizeSelector';
+import { singleSizeChart } from '../lib/sizeChartTemplates';
+import ComboSizeSelector, { SizeChart } from './ComboSizeSelector';
 import { selectedComboSize, selectedComboColor, hasComboItemColors } from '../lib/comboSizing';
 import ProductColorSelector from './ProductColorSelector';
 import { useCart } from '../context/CartContext';
@@ -102,7 +103,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
               {product.is_combo ? <ComboSizeSelector colors={comboColors} onColorChange={selection => { setComboColors(selection); setAdded(false); }} product={product} value={comboSelection} onChange={selection => { setComboSelection(selection); setQuantity(1); setAdded(false); }}/> : <>              <fieldset>
                 <legend className="text-xs font-medium text-foreground mb-3">Size <span className="ml-2 text-muted-foreground font-normal">{selectedSize}</span></legend>
                 <div className="flex flex-wrap gap-2">{(product.sizes || []).map(size => <button key={size} type="button" disabled={sizeStock(product,size) <= 0} aria-pressed={selectedSize === size} onClick={() => { setSelectedSize(size); setQuantity(1); setAdded(false); }} className={`disabled:opacity-30 disabled:cursor-not-allowed min-w-11 h-11 px-3 rounded-md border text-xs font-medium focus-visible:outline-2 focus-visible:outline-primary ${selectedSize === size ? 'bg-foreground/5 border-foreground ring-1 ring-foreground' : 'border-border hover:border-primary'}`}>{size}</button>)}</div>
-              </fieldset></>}
+              </fieldset><SizeChart item={singleSizeChart(product)}/></>}
               <div className="border-t border-border pt-4">
                 <div className="flex justify-between mb-3 text-xs"><p id={quantityId} className="font-medium">Quantity</p>{quantity > 1 && <p className="text-muted-foreground">Total <span className="font-semibold text-foreground tabular-nums">{money(product.price * Math.min(quantity, availableStock))}</span></p>}</div>
                 <div className="flex gap-3">

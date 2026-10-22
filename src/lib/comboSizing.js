@@ -2,7 +2,7 @@ export const SWEATER_SIZES = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4
 export const DENIM_SIZES = Array.from({length: 23}, (_, index) => String(index + 26));
 export const SIZE_MEASUREMENTS = {
   sweater: [['chest', 'Chest width (flat)'], ['shoulder', 'Shoulder'], ['length', 'Body length'], ['sleeve', 'Sleeve length']],
-  denim: [['waist', 'Waist circumference'], ['hip', 'Hip circumference'], ['inseam', 'Inseam'], ['thigh', 'Thigh width (flat)'], ['opening', 'Leg opening (flat)']],
+  denim: [['waist', 'Waist circumference'], ['length', 'Length'], ['hip', 'Hip circumference'], ['inseam', 'Inseam'], ['thigh', 'Thigh width (flat)'], ['opening', 'Leg opening (flat)']],
 };
 export const comboSizeLabel = (sweater, denim) => `Sweater: ${sweater} · Denim: ${denim}`;
 export function comboSizes(sweaters = [], denims = []) {
@@ -40,7 +40,7 @@ export function selectedComboSize(product, selection) {
 export function createClothingCombo() {
   return [
     {id:'pants',name:'Pants',colors:[],sizes:[],measurements:['Waist circumference','Length'],unit:'in',chart:{}},
-    {id:'top',name:'T-shirt',colors:[],sizes:[],measurements:['Chest width (flat)','Body length','Sleeve length'],unit:'in',chart:{}},
+    {id:'top',name:'T-shirt',colors:[],sizes:[],measurements:['Chest width (flat)','Body length'],unit:'in',chart:{}},
   ];
 }
 

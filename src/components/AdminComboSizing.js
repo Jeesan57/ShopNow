@@ -3,10 +3,11 @@ import { getComboItems, comboCombinationCount, DENIM_SIZES, SWEATER_SIZES, isPan
 
 import { stockTotal } from '../lib/sizeStock';
 import AdminSizeStock from './AdminSizeStock';
+import AdminChartTemplate from './AdminChartTemplate';
 import AdminProductColors from './AdminProductColors';
 
 const TYPES = ['Pants','Denim','T-shirt','Sweater','Hoodie','Shirt','Jacket','Kurti'];
-const standardMeasurements = name => isPants(name) ? ['Waist circumference','Length'] : ['Chest width (flat)','Body length','Sleeve length'];
+const standardMeasurements = name => isPants(name) ? ['Waist circumference','Length'] : ['Chest width (flat)','Body length'];
 
 function ComboItemEditor({ item, index, products, onChange, onRemove, stock, onStockChange }) {
   const [customSize, setCustomSize] = useState('');
@@ -48,7 +49,7 @@ function ComboItemEditor({ item, index, products, onChange, onRemove, stock, onS
     </details>
     <details className="admin-combo-chart">
       <summary>Measurements & size chart <span>Optional</span></summary>
-      <p className="admin-combo-note">Enter actual measurements for the selected sizes. Leave unknown values blank.</p>
+      <AdminChartTemplate item={item} products={products} onChange={onChange}/><p className="admin-combo-note">Enter actual measurements for the selected sizes. Leave unknown values blank.</p>
       {!item.sizes.length && <p className="admin-combo-note">Select available sizes above first.</p>}
       <label>Unit<select value={item.unit} onChange={event => onChange({...item,unit:event.target.value})}><option value="in">Inches</option><option value="cm">Centimetres</option></select></label>
       {!item.measurements.length && <button type="button" className="admin-secondary" onClick={() => onChange({...item,measurements:standardMeasurements(item.name)})}>Add standard measurements</button>}

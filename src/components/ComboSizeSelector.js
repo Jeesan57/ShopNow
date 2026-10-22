@@ -1,7 +1,7 @@
 import ProductColorSelector from './ProductColorSelector';
 import { getComboItems, isPants, comboItemSize, comboItemColor } from '../lib/comboSizing';
 
-function SizeChart({ item }) {
+export function SizeChart({ item }) {
   const rows = item.sizes.filter(size => item.measurements.some(label => typeof item.chart?.[size]?.[label] === 'number'));
   if (!rows.length) return null;
   return <details className="mt-3 rounded-lg border border-border px-3 py-2">
