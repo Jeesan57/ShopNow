@@ -7,6 +7,7 @@ import { useCatalog } from '../context/CatalogContext';
 import CollectionSlider from '../components/CollectionSlider';
 import CategoryCollection from '../components/CategoryCollection';
 import ProductCard from '../components/ProductCard';
+import ClothingRail from '../components/ClothingRail';
 import dynamic from 'next/dynamic';
 const QuickViewModal = dynamic(() => import('../components/QuickViewModal'));
 import { FiChevronRight, FiChevronLeft, FiStar, FiShoppingBag, FiShield } from 'react-icons/fi';
@@ -252,6 +253,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <ClothingRail products={products}/>
 
       {/* Minimal Categories Section */}
       <section className="py-20 bg-background">
