@@ -9,7 +9,7 @@ export function applySizeChartTemplate(item, template) {
 }
 export function singleSizeChart(product) {
   const kind=product.size_charts?.denim && !product.size_charts?.sweater?'denim':Object.keys(product.size_charts?.denim||{}).length?'denim':'sweater';
-  const fields=SIZE_MEASUREMENTS[kind].filter(([key])=>(kind==='denim'?['waist','length']:['chest','length']).includes(key)||Object.values(product.size_charts?.[kind]||{}).some(row=>Number.isFinite(row[key])));
+  const fields=SIZE_MEASUREMENTS[kind].filter(([key])=>(kind==='denim'?['waist','length']:['chest','length']).includes(key)||(kind==='denim'&&Object.values(product.size_charts?.[kind]||{}).some(row=>Number.isFinite(row[key]))));
   return {id:kind,name:kind==='denim'?'Pants':'Product',sizes:product.sizes||[],unit:'in',measurements:fields.map(([,label])=>label),chart:Object.fromEntries(Object.entries(product.size_charts?.[kind]||{}).map(([size,row])=>[size,Object.fromEntries(fields.filter(([key])=>Number.isFinite(row[key])).map(([key,label])=>[label,row[key]]))]))};
 }
 export function storeSingleChart(item) {

@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { getComboItems, comboCombinationCount, DENIM_SIZES, SWEATER_SIZES, isPants } from '../lib/comboSizing';
+import { getComboItems, comboCombinationCount, DENIM_SIZES, SWEATER_SIZES, isPants, usesTopSizeChart } from '../lib/comboSizing';
 
 import { stockTotal } from '../lib/sizeStock';
 import AdminSizeStock from './AdminSizeStock';
@@ -54,11 +54,11 @@ function ComboItemEditor({ item, index, products, onChange, onRemove, stock, onS
       <label>Unit<select value={item.unit} onChange={event => onChange({...item,unit:event.target.value})}><option value="in">Inches</option><option value="cm">Centimetres</option></select></label>
       {!item.measurements.length && <button type="button" className="admin-secondary" onClick={() => onChange({...item,measurements:standardMeasurements(item.name)})}>Add standard measurements</button>}
       {item.sizes.length > 0 && item.measurements.length > 0 && <div className="admin-table-wrap"><table><thead><tr><th>Size</th>{item.measurements.map(label => <th key={label}>{label} ({item.unit})</th>)}</tr></thead><tbody>{item.sizes.map(size => <tr key={size}><th scope="row">{size}</th>{item.measurements.map(label => <td key={label}><input aria-label={`${item.name} ${size} ${label} (${item.unit})`} type="number" min="0.01" max="1000" step="0.01" placeholder="—" value={item.chart?.[size]?.[label] ?? ''} onChange={event => updateMeasurement(size,label,event.target.value)}/></td>)}</tr>)}</tbody></table></div>}
-      <details className="admin-combo-more"><summary>Customise chart columns</summary>
+      {!usesTopSizeChart(item.name) && <details className="admin-combo-more"><summary>Customise chart columns</summary>
         <p className="admin-combo-note">Use “flat” or “circumference” in labels where needed. Changing units does not convert values.</p>
         <div className="admin-combo-entry"><label>Measurement name<input maxLength={60} value={measurement} placeholder="e.g. Shoulder width" onChange={event => setMeasurement(event.target.value)} onKeyDown={event => {if(event.key === 'Enter') {event.preventDefault();addMeasurement();}}}/></label><button type="button" className="admin-secondary" disabled={!measurement.trim() || item.measurements.length >= 8} onClick={addMeasurement}>Add</button></div>
         <div className="admin-combo-columns">{item.measurements.map(label => <button key={label} type="button" className="admin-secondary" aria-label={`Remove ${label} column`} onClick={() => onChange({...item,measurements:item.measurements.filter(value => value !== label),chart:Object.fromEntries(Object.entries(item.chart || {}).map(([size,row]) => [size,Object.fromEntries(Object.entries(row).filter(([key]) => key !== label))]))})}>{label} ×</button>)}</div>
-      </details>
+      </details>}
     </details>
   </section>;
 }

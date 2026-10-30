@@ -8,16 +8,28 @@ export const comboSizeLabel = (sweater, denim) => `Sweater: ${sweater} · Denim:
 export function comboSizes(sweaters = [], denims = []) {
   return [...new Set(sweaters)].flatMap(sweater => [...new Set(denims)].map(denim => comboSizeLabel(sweater, denim)));
 }
+export const TOP_CHART_MEASUREMENTS = ['Chest width (flat)', 'Body length'];
+export const usesTopSizeChart = name => /sweater|hoodie|knit|t[- ]?shirt|polo|shirt|^top$/i.test(name || '');
+export function normalizeTopSizeChart(item) {
+  if (!usesTopSizeChart(item.name)) return item;
+  return {
+    ...item,
+    measurements: [...TOP_CHART_MEASUREMENTS],
+    chart: Object.fromEntries(Object.entries(item.chart || {}).map(([size, row]) => [size,
+      Object.fromEntries(TOP_CHART_MEASUREMENTS.filter(label => Number.isFinite(row?.[label])).map(label => [label, row[label]])),
+    ])),
+  };
+}
 // Legacy products remain readable while the universal migration is being applied.
 export function getComboItems(product) {
-  if (product.combo_items?.length) return product.combo_items;
+  if (product.combo_items?.length) return product.combo_items.map(normalizeTopSizeChart);
   if (!product.sweater_sizes?.length && !product.denim_sizes?.length) return [];
   return [['sweater','Sweater'],['denim','Denim']].map(([id,name]) => ({
     id, name, sizes: product[`${id}_sizes`] || [], unit: 'in',
     measurements: SIZE_MEASUREMENTS[id].map(([,label]) => label),
     chart: Object.fromEntries(Object.entries(product.size_charts?.[id] || {}).map(([size,row]) =>
       [size,Object.fromEntries(SIZE_MEASUREMENTS[id].filter(([key]) => typeof row[key] === 'number').map(([key,label]) => [label,row[key]]))])),
-  }));
+  })).map(normalizeTopSizeChart);
 }
 export function comboItemSizes(items) {
   if (!items.length || items.some(item => !item.name.trim() || !item.sizes.length)) return [];
